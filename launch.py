@@ -13,6 +13,7 @@ import sys
 import threading
 import time
 import stepper
+import experiments
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 ROOT = pathlib.Path(__file__).resolve().parent
@@ -135,7 +136,9 @@ class Handler(BaseHTTPRequestHandler):
         try:
             body = json.loads(self.rfile.read(int(self.headers.get('Content-Length', 0))))
             with lock:
-                if body.get('action') == 'save':
+                if body.get('action') in ('experiments','experiment-input','results','save-result','open-result'):
+                    result = experiments.run(LOGS, body)
+                elif body.get('action') == 'save':
                     name = f'token-session-{time.time_ns()}.json'
                     (LOGS / name).write_text(json.dumps(body['session'], ensure_ascii=False, indent=2))
                     result = {'saved': str(LOGS / name)}

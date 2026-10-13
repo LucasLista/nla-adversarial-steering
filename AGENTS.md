@@ -1,0 +1,2 @@
+# Private experiment inputs
+Agents must not open, read, search, watch, summarize, or inspect anything under `runs/experiments/*/inputs/`. Do not include these folders in recursive searches or logs. Only the human user may review or edit their contents. Application code may load them at the user's request. Do not copy their contents into commits or agent messages. Explicit subsequent user authorization is required for agent access.
