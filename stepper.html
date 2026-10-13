@@ -18,13 +18,37 @@
 <script>
 let s={tokens:[],generated:[],history:[]},busy=false,looping=false,stopRequested=false,remaining=0,awaitingToken=false,viewIndex=null;
 const $=id=>document.getElementById(id);
+const settings=['prompt','editor','instruction','mode','token-mode','steps'];
+let sessionDB=null,restoring=true;
+function saveSession(){
+ if(restoring||!sessionDB)return;
+ try{
+  const tx=sessionDB.transaction('sessions','readwrite');
+  tx.objectStore('sessions').put({s:JSON.parse(JSON.stringify(s)),settings:Object.fromEntries(settings.map(id=>[id,$(id).value])),viewIndex},'latest');
+  tx.onerror=()=>status('Autosave failed. Export to keep this session.');
+ }catch(e){status('Autosave unavailable. Export to keep this session.');}
+}
+async function initSession(){
+ busy=true;controls();
+ try{
+  const saved=await new Promise((resolve,reject)=>{
+   const request=indexedDB.open('nla-stepper',1);
+   request.onupgradeneeded=()=>request.result.createObjectStore('sessions');
+   request.onerror=()=>reject(request.error);
+   request.onsuccess=()=>{sessionDB=request.result;const read=sessionDB.transaction('sessions').objectStore('sessions').get('latest');read.onsuccess=()=>resolve(read.result);read.onerror=()=>reject(read.error)};
+  });
+  if(saved){s=saved.s;s.pending=false;for(const id of settings)if(saved.settings[id]!==undefined)$(id).value=saved.settings[id];viewIndex=Number.isInteger(saved.viewIndex)&&saved.viewIndex<s.history.length?saved.viewIndex:null;status('Restored. Ready to continue.');}
+ }catch(e){status('Autosave unavailable. Export to keep this session.');}
+ finally{restoring=false;busy=false;show();}
+}
+for(const id of settings)$(id).addEventListener('input',saveSession);
 function status(t){$('status').textContent=t;$('editor-status').textContent=t}
-function controls(){document.querySelectorAll('button').forEach(b=>b.disabled=busy);$('inspect').disabled=busy||!s.tokens.length||s.ended;$('explain').disabled=busy||!s.h||!!s.text;$('compare').disabled=busy||looping||!s.reconstruction;$('loop').disabled=busy||looping||!s.tokens.length||s.ended;$('approve').disabled=busy||viewIndex!==null||!s.pending;$('stop').disabled=!looping&&!s.pending;document.querySelectorAll('#distributions button').forEach(b=>b.disabled=busy||viewIndex!==null||(looping&&!awaitingToken));for(const id of ['token-mode','editor','edited','mode','instruction','steps','prompt','import','example'])$(id).disabled=busy||(looping&&id!=='edited');if(awaitingToken)$('edited').disabled=true;if(viewIndex!==null){for(const id of ['inspect','explain','compare','loop','edited'])$(id).disabled=true;}if(looping){$('start').disabled=true;$('inspect').disabled=true;$('explain').disabled=true;} }
-async function task(fn){busy=true;controls();try{await fn()}catch(e){status('Error: '+e.message)}finally{busy=false;controls()}}
+function controls(){document.querySelectorAll('button').forEach(b=>b.disabled=busy);document.querySelectorAll('#history button').forEach(b=>b.disabled=false);$('inspect').disabled=busy||!s.tokens.length||s.ended;$('explain').disabled=busy||!s.h||!!s.text;$('compare').disabled=busy||looping||!s.reconstruction;$('loop').disabled=busy||looping||!s.tokens.length||s.ended;$('approve').disabled=busy||viewIndex!==null||!s.pending;$('stop').disabled=!looping&&!s.pending;document.querySelectorAll('#distributions button').forEach(b=>b.disabled=busy||viewIndex!==null||(looping&&!awaitingToken));for(const id of ['token-mode','editor','edited','mode','instruction','steps','prompt','import','example'])$(id).disabled=busy||(looping&&id!=='edited');if(awaitingToken)$('edited').disabled=true;if(viewIndex!==null){for(const id of ['inspect','explain','compare','loop','edited'])$(id).disabled=true;}if(looping){$('start').disabled=true;$('inspect').disabled=true;$('explain').disabled=true;} }
+async function task(fn){busy=true;controls();try{await fn()}catch(e){status('Error: '+e.message)}finally{busy=false;controls();saveSession()}}
 async function api(action,extra={}){const r=await fetch('/stepper-api',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action,tokens:s.tokens,...extra})});const d=await r.json();if(!r.ok||typeof d.error==='string')throw Error(d.error||r.statusText);return d}
-function show(){ const v=viewIndex===null?s:s.history[viewIndex]; $('generated').textContent=s.display||'';$('position').textContent=s.tokens.length?'Context tokens: '+s.tokens.length+' · intervention position: '+(s.tokens.length-1)+(s.ended?' · End of sequence':''):'';$('original').textContent=v.text||'';$('edited').value=v.edited??v.text??'';$('metrics').textContent=v.metrics?JSON.stringify(v.metrics,null,2):'';$('view-label').textContent=viewIndex===null?'Live':'Step '+(viewIndex+1)+' · '+(v.chosen?.variant||'');renderHistory();render();controls()}
+function show(){ const v=viewIndex===null?s:s.history[viewIndex]; $('generated').textContent=s.display||'';$('position').textContent=s.tokens.length?'Context tokens: '+s.tokens.length+' · intervention position: '+(s.tokens.length-1)+(s.ended?' · End of sequence':''):'';$('original').textContent=v.text||'';$('edited').value=v.edited??v.text??'';$('metrics').textContent=v.metrics?JSON.stringify(v.metrics,null,2):'';$('view-label').textContent=viewIndex===null?'Live':'Step '+(viewIndex+1)+' · '+(v.chosen?.variant||'');renderHistory();render();controls();saveSession()}
 function render(){const root=$('distributions');root.replaceChildren();const v=viewIndex===null?s:s.history[viewIndex];const variants=v.comparison|| (v.baseline?{original:v.baseline}:{});for(const [key,v] of Object.entries(variants)){if(!v.completion_probabilities)continue;const block=document.createElement('div');block.className='card';const title=document.createElement('h3');title.textContent=({original:'Original',roundtrip:'Reconstructed',edited_raw:'Edited',edited_corrected:'Edited + error'})[key];block.append(title);const rows=v.completion_probabilities[0]?.top_logprobs||[];const table=document.createElement('table');let mass=0;for(const row of rows){const p=Math.exp(row.logprob);mass+=p;const tr=document.createElement('tr');if(viewIndex!==null&&s.history[viewIndex].chosen?.id===row.id&&s.history[viewIndex].chosen?.variant===key)tr.className='selected';const text=document.createElement('td');text.textContent=JSON.stringify(row.token);const prob=document.createElement('td');prob.textContent=(100*p).toFixed(3)+'%';prob.style.background=`linear-gradient(to right,#315679 ${p*100}%,transparent ${p*100}%)`;const cell=document.createElement('td');const b=document.createElement('button');b.textContent='Choose';b.onclick=()=>task(()=>selectToken(row.id,key));cell.append(b);tr.append(text,prob,cell);table.append(tr)}block.append(table);const foot=document.createElement('small');foot.textContent='Other: '+(100*Math.max(0,1-mass)).toFixed(3)+'%';block.append(foot);root.append(block)}}
-async function choose(id,variant){viewIndex=null;s.history.push({tokens:[...s.tokens],h:s.h,text:s.text,edited:s.edited,reconstruction:s.reconstruction,error:s.error,metrics:s.metrics,comparison:s.comparison,baseline:s.baseline,proposal:s.proposal,approval:s.approval,chosen:{id,variant,text:(s.comparison?.[variant]||s.baseline)?.completion_probabilities?.[0]?.top_logprobs?.find(t=>t.id===id)?.token}});s.tokens.push(id);s.generated.push(id);s.ended=[151643,151645].includes(id);s.display=(await api('decode',{tokens:s.generated})).content;for(const k of ['h','text','edited','reconstruction','error','metrics','comparison','baseline','proposal','approval','pending'])delete s[k];show();status(s.ended?'End of sequence. Export your session.':'Token added.')}
+async function choose(id,variant){const display=(await api('decode',{tokens:[...s.generated,id]})).content;s.history.push({tokens:[...s.tokens],h:s.h,text:s.text,edited:s.edited,reconstruction:s.reconstruction,error:s.error,metrics:s.metrics,comparison:s.comparison,baseline:s.baseline,proposal:s.proposal,approval:s.approval,chosen:{id,variant,text:(s.comparison?.[variant]||s.baseline)?.completion_probabilities?.[0]?.top_logprobs?.find(t=>t.id===id)?.token}});s.tokens.push(id);s.generated.push(id);s.ended=[151643,151645].includes(id);s.display=display;for(const k of ['h','text','edited','reconstruction','error','metrics','comparison','baseline','proposal','approval','pending'])delete s[k];show();status(s.ended?'End of sequence. Export your session.':'Token added.')}
 
 function renderHistory(){const root=$('history');root.replaceChildren();s.history.forEach((h,i)=>{const b=document.createElement('button');b.textContent=(i+1)+': '+JSON.stringify(h.chosen?.text??h.chosen?.id);b.title='Inspect step '+(i+1);b.className=viewIndex===i?'selected':'';b.onclick=()=>{viewIndex=i;show()};root.append(b)});const live=document.createElement('button');live.textContent='Live';live.className=viewIndex===null?'selected':'';live.onclick=()=>{viewIndex=null;show()};root.append(live)}
 async function selectToken(id,variant){if(viewIndex!==null)throw Error('Return to Live to choose a token.');const resume=looping&&awaitingToken;awaitingToken=false;await choose(id,variant);if(resume){remaining--;try{await continueLoop()}catch(e){looping=false;s.pending=false;throw e}}}
@@ -32,11 +56,11 @@ $('example').onchange=()=>{$('prompt').value=$('example').value};
 $('start').onclick=()=>task(async()=>{status('Tokenizing…');const prompt=$('prompt').value;const d=await api('start',{prompt});viewIndex=null;awaitingToken=false;s={tokens:d.tokens,prompt,generated:[],history:[]};show();status('Ready.')});
 $('inspect').onclick=()=>task(async()=>{status('Extracting activation and computing baseline…');Object.assign(s,await api('inspect'));show();status('Choose a token or explain.')});
 $('explain').onclick=()=>task(async()=>{status('Explaining…');Object.assign(s,await api('explain',{h:s.h}));s.edited=s.text;show();status('Edit, then compare.')});
-$('edited').oninput=()=>{s.edited=$('edited').value;delete s.comparison;render();controls()};
+$('edited').oninput=()=>{s.edited=$('edited').value;delete s.comparison;render();controls();saveSession()};
 $('compare').onclick=()=>task(async()=>{status('Comparing…');const d=await api('compare',{edited:s.edited,reconstruction:s.reconstruction});s.comparison=d;s.error=d.error;s.metrics=d.metrics;show();status('Choose a token below.')});
 async function prepareProposal(){
- if(!s.h){status('Loop: extracting next activation…');Object.assign(s,await api('inspect'));if(stopRequested)return;}
- if(!s.text){status('Loop: explaining and reconstructing…');Object.assign(s,await api('explain',{h:s.h}));if(stopRequested)return;}
+ if(!s.h){status('Loop: extracting next activation…');Object.assign(s,await api('inspect'));saveSession();if(stopRequested)return;}
+ if(!s.text){status('Loop: explaining and reconstructing…');Object.assign(s,await api('explain',{h:s.h}));saveSession();if(stopRequested)return;}
  status('Loop: asking the selected editor for an edit…');
  s.proposal=await api('propose',{text:s.text,instruction:$('instruction').value,editor:$('editor').value});
  if(stopRequested)return;
@@ -66,5 +90,6 @@ $('loop').onclick=()=>task(async()=>{remaining=Number($('steps').value);if(!Numb
 $('approve').onclick=()=>task(async()=>{try{await applyProposal('manual');if(!awaitingToken)await continueLoop()}catch(e){looping=false;s.pending=false;throw e}});
 $('stop').onclick=()=>{stopRequested=true;awaitingToken=false;s.pending=false;looping=false;$('proposal').textContent='Proposal rejected / loop stopping.';status('Stopping after the current request.');controls()};
 $('export').onclick=()=>task(async()=>{const session={version:1,model:'Qwen2.5-7B-Instruct-Q4_K_M',layer:20,semantics:'one-position context-recompute',...s};const saved=await api('save',{session});status('Session saved on model host: '+saved.saved+'; browser download also requested.');const blob=new Blob([JSON.stringify(session,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='nla-token-session-'+Date.now()+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)});
-$('import').onchange=()=>task(async()=>{const v=JSON.parse(await $('import').files[0].text());if(v.version!==1||v.layer!==20||v.model!=='Qwen2.5-7B-Instruct-Q4_K_M'||!Array.isArray(v.tokens)||!Array.isArray(v.history))throw Error('Unsupported session');s=v;s.pending=false;looping=false;awaitingToken=false;viewIndex=null;$('prompt').value=s.prompt;show();status('Session restored.')});show();
+$('import').onchange=()=>task(async()=>{const v=JSON.parse(await $('import').files[0].text());if(v.version!==1||v.layer!==20||v.model!=='Qwen2.5-7B-Instruct-Q4_K_M'||!Array.isArray(v.tokens)||!Array.isArray(v.history))throw Error('Unsupported session');s=v;s.pending=false;looping=false;awaitingToken=false;viewIndex=null;$('prompt').value=s.prompt;show();status('Session restored.')});
+initSession();
 </script></html>
