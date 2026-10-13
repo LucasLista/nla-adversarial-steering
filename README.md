@@ -213,10 +213,11 @@ an editor (no external service). Set an editing instruction, choose **Review eve
 edit** or **Auto-apply edits**, and choose a limit of 1–20 tokens.
 
 In review mode the loop pauses after proposing an edit. You can change the proposed
-text in **Edit NLA text**, approve it, or reject/stop. Approval runs the comparison,
-chooses the edited-plus-error branch's greedy next token, then prepares the next
-proposal. Auto mode does these steps without individual approvals, until its limit,
-EOS, an error, or Stop. Stop waits for the current model request to return and
+text in **Edit NLA text**, approve it, or reject/stop. Apply edit runs the comparison and, by default, pauses at the token distributions.
+Choose a token from any branch to continue. The separate Tokens selector can enable
+automatic greedy selection from the edited-plus-error branch. Edit approval and
+token selection are independent; both default to manual. The loop stops at its
+limit, EOS, an error, or Stop. Stop waits for the current model request to return and
 prevents subsequent application/generation. It does not kill a model subprocess.
 Each completed step records the proposed text, editing instruction, actual applied
 text, manual/automatic approval, distributions, activation vectors and selected ID.
@@ -298,3 +299,10 @@ Windows NVIDIA driver; the launcher prioritizes the WSL CUDA driver bridge.
 time. Use fewer layers if VRAM is insufficient, or omit the flag for the CPU
 backend. `--build-dir /path/to/build` selects an explicit backend build.
 The GPU accelerates local inference; Sol editing still runs through Codex.
+
+### Generation history
+
+Click a numbered token under Generated text to inspect that step’s saved original
+NLA, edit, error metrics, and distributions. The chosen token is highlighted.
+History is read-only: click Live to resume choosing tokens. Viewing history does
+not truncate or regenerate the sequence. Export/import includes the history.

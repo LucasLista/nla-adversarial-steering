@@ -19,13 +19,14 @@ function setup(mode,stop=false){
    if(b.action==='decode')data={content:'x'.repeat(b.tokens.length)};
    return {ok:true,json:async()=>data};
  }});
- vm.runInContext(source,ctx);get('mode').value=mode;get('steps').value='2';get('instruction').value='test edit';get('prompt').value='test';
- return {get,calls,state:()=>JSON.parse(vm.runInContext('JSON.stringify(s)',ctx))};
+ vm.runInContext(source,ctx);get('mode').value=mode;get('token-mode').value='manual';get('steps').value='2';get('instruction').value='test edit';get('prompt').value='test';
+ return {get,calls,select:()=>vm.runInContext("selectToken(2,'edited_corrected')",ctx),view:i=>vm.runInContext('viewIndex='+JSON.stringify(i)+';show()',ctx),state:()=>JSON.parse(vm.runInContext('JSON.stringify(s)',ctx))};
 }
 let a=setup('review');await a.get('start').onclick();await a.get('loop').onclick();
 assert.equal(a.calls.includes('compare'),false);assert.equal(a.state().tokens.length,1);assert.equal(a.get('approve').disabled,false);
-await a.get('approve').onclick();assert.equal(a.state().history.length,1);assert.equal(a.state().history[0].approval.mode,'manual');assert.equal(a.state().tokens.length,2);assert.equal(a.state().pending,true);
-a.get('stop').onclick();assert.equal(a.state().pending,false);
-a=setup('auto');await a.get('start').onclick();await a.get('loop').onclick();assert.equal(a.state().history.length,2);assert.equal(a.calls.filter(x=>x==='compare').length,2);assert.equal(a.state().history[0].approval.mode,'automatic');
-a=setup('auto',true);await a.get('start').onclick();await a.get('loop').onclick();assert.equal(a.calls.includes('compare'),false);assert.equal(a.state().history.length,0);
-console.log('PASS: manual gating, edited history, two-step auto limit, stop before injection');
+await a.get('approve').onclick();assert.equal(a.state().history.length,0);assert.equal(a.state().tokens.length,1);await a.select();assert.equal(a.state().history.length,1);assert.equal(a.state().history[0].approval.mode,'manual');assert.equal(a.state().tokens.length,2);assert.equal(a.state().pending,true);
+a.view(0);await assert.rejects(a.select(),/Live/);assert.equal(a.get('edited').value,'edited');assert.equal(a.get('compare').disabled,true);assert.equal(a.state().tokens.length,2);a.view(null);a.get('stop').onclick();assert.equal(a.state().pending,false);
+a=setup('auto');a.get('token-mode').value='auto';await a.get('start').onclick();await a.get('loop').onclick();assert.equal(a.state().history.length,2);assert.equal(a.calls.filter(x=>x==='compare').length,2);assert.equal(a.state().history[0].approval.mode,'automatic');
+a=setup('auto',true);a.get('token-mode').value='auto';await a.get('start').onclick();await a.get('loop').onclick();assert.equal(a.calls.includes('compare'),false);assert.equal(a.state().history.length,0);
+a=setup('auto');await a.get('start').onclick();await a.get('loop').onclick();assert.equal(a.state().history.length,0);assert.equal(a.calls.filter(x=>x==='compare').length,1);await a.select();assert.equal(a.state().history.length,1);assert.equal(a.calls.filter(x=>x==='compare').length,2);
+console.log('PASS: manual token selection, read-only history, auto-edit pause,  manual gating, edited history, two-step auto limit, stop before injection');
