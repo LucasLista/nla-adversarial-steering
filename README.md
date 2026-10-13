@@ -306,3 +306,50 @@ Click a numbered token under Generated text to inspect that step’s saved origi
 NLA, edit, error metrics, and distributions. The chosen token is highlighted.
 History is read-only: click Live to resume choosing tokens. Viewing history does
 not truncate or regenerate the sequence. Export/import includes the history.
+
+### Four independent trajectories on DTU HPC
+
+`hpc/server.lsf` requests one exclusive V100 for four hours, builds CUDA 12.4
+for architecture 70, and launches the backend. Submit from the repository
+on HPC after running `uv run --locked download.py`; all weights stay on HPC.
+The server uses a per-job authentication token for cluster-network access.
+Job output, CUDA device information and build/backend logs are saved in `runs/`.
+
+Run `hpc_control.py` on your signed-in laptop with `--job`, `--ssh-host`,
+`--ssh-socket`, `--remote-root`, `--output`, `--prompt`, and `--instruction`.
+It waits for the allocation and verified models, opens an SSH tunnel and local
+relay, then uses the existing `codex_editor.py` subscription editor locally.
+Your laptop must remain awake and connected during the run. No Codex login
+or credentials are needed on HPC.
+
+The four branches are original, reconstructed (`roundtrip`), edited
+(`edited_raw`), and edited plus reconstruction error (`edited_corrected`).
+Each uses its own generated prefix and greedily chooses its own next token.
+The reconstructed branch uses the original explanation without calling the
+editor. Responses can coincide; no difference is forced. The intervention remains
+one position per step, without replaying earlier activation edits in KV caches.
+
+Every successful API stage is atomically saved and reused on resume, including
+requests, complete returned vectors, explanations, errors, metrics, edits,
+distributions and timing. Backend distributions contain top 30 tokens rather
+than the whole vocabulary. Failed stages write separate error records. Each token
+updates its branch state; `responses.json` collects the responses and stop reasons.
+Rerun with the same arguments and output directory to resume. Completed stage
+artifacts are saved before subsequent requests. Artifacts are copied back to HPC
+when generation completes or fails. `python -m unittest test_trajectories` checks
+independent prefixes, resume behavior, error records and EOS stopping.
+
+Authenticated HPC launches also enable server-side API auditing: request and
+response JSON files are written under `runs/api/` before replies are sent. This
+preserves GPU results even when a client disconnects. `--audit-log` enables the
+same logging for a loopback launcher. The laptop relay routes interactive Codex
+editing requests locally too, so the subscription dropdown works without logging
+Codex into HPC. An optional `--connect-script` reuses your existing local SSH
+login helper after transient connection errors.
+
+For a browser session, add `--keep-serving`; otherwise the controller closes
+its relay and tunnel when the four trajectories finish. The cluster job remains
+reserved until its walltime expires or you stop it with `bkill JOB_ID`.
+The batch script pins the same GCC compiler for C++ and CUDA, reconfigures a
+stale compiler cache, and requests 6 GB RAM per CPU slot with a 7 GB process limit
+compatible with DTU's submission rules.
