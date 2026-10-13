@@ -135,3 +135,90 @@ are not independently fact-checked by this repository.
 The wrapper/setup code here is MIT-licensed. Development and packaging used AI
 assistance. No upstream authorship is claimed. The build, model downloads, and
 runtime logs are intentionally excluded from Git.
+
+## Token-by-token activation laboratory
+
+Open `http://127.0.0.1:18090/stepper` after starting the launcher.
+
+1. Enter a prompt and press **Start / reset**, then **Inspect**. This extracts the
+   last context token's residual after block 20 and shows the next-token top 30.
+2. **Explain and reconstruct** generates the NLA text and saves the complete
+   reconstruction error vector. Edit the text if desired.
+3. **Compare** evaluates original activation, original-text reconstruction,
+   edited-text reconstruction, and edited reconstruction plus the original error.
+4. **Choose** a token from any distribution, then inspect again. Exact token IDs
+   are appended, avoiding lossy decode/re-tokenize cycles. EOS ends generation.
+5. **Export** saves a JSON copy in the model host’s `runs/` directory and requests a browser download containing tokens, choices, explanations, activation vectors, error vectors,
+   metrics and distributions as JSON. Import restores that session.
+
+For original activation `h`, original explanation `t`, and edited text `t'`:
+
+```
+r = AR(t)
+e = h - r
+raw round trip = r
+raw edit = AR(t')
+error-preserving edit = AR(t') + e = h + AR(t') - AR(t)
+```
+
+The original and reconstructed vectors use their native units; there is no norm
+matching. The backend's normalized steering API is compensated with
+`alpha = ||target-h|| / ||h||`, `direction = target-h`, to inject the actual delta.
+Floating-point arithmetic and quantization can introduce small numerical differences.
+With unchanged text the error-preserving branch should reproduce the baseline.
+The full residual error is saved alongside L2, relative L2, MSE and cosine similarity.
+
+Distributions are the model's raw softmax probabilities, before temperature or
+sampling filters, obtained by continuing through the remaining blocks. The UI
+shows top 30 and remaining probability mass; it does not claim to show the full
+vocabulary. It is not a layer-20 logit lens. Generation is manual token selection.
+
+**Intervention scope:** one position per step. Each new step recomputes the full
+context from token IDs without replaying earlier activation edits. Earlier choices
+persist as tokens, but edited KV states do not persist. This is a context-recompute
+experiment, not continuous generation with a patched KV cache. CPU model swapping
+can take minutes per explain/compare cycle. Stay below 1900 context tokens.
+
+Run `python3 test_stepper_live.py` against the running launcher to check the
+unchanged-text control, an edited distribution, vector dimensions, error identity,
+and the next generation step. Results go to `runs/stepper-validation.json`.
+
+### Refusal probes
+
+The dropdown includes political questions, candidate witness-intimidation and
+illegal-drug-sale requests, and a benign drug-health question. They are original
+probe wording, not extracted benchmark items; responses depend on the checkpoint,
+quantization, context and system prompt. A drug-related topic alone is not a refusal
+criterion. Record actual outputs and distinguish refusal from omission, factual
+error, redirection and normal answers. For broader evaluation, see
+[SORRY-Bench](https://sorry-bench.github.io/) and
+[OR-Bench](https://raw.githubusercontent.com/mlresearch/v267/main/assets/cui25a/cui25a.pdf) for refusal and over-refusal methodology.
+
+### Model-assisted editing loop
+
+The stepper's **Model-assisted editing loop** uses the local base Qwen model as
+an editor (no external service). Set an editing instruction, choose **Review every
+edit** or **Auto-apply edits**, and choose a limit of 1–20 tokens.
+
+In review mode the loop pauses after proposing an edit. You can change the proposed
+text in **Edit NLA text**, approve it, or reject/stop. Approval runs the comparison,
+chooses the edited-plus-error branch's greedy next token, then prepares the next
+proposal. Auto mode does these steps without individual approvals, until its limit,
+EOS, an error, or Stop. Stop waits for the current model request to return and
+prevents subsequent application/generation. It does not kill a model subprocess.
+Each completed step records the proposed text, editing instruction, actual applied
+text, manual/automatic approval, distributions, activation vectors and selected ID.
+The model may propose ineffective edits or decline an instruction; proposals are
+experimental hypotheses, not guaranteed semantic changes.
+
+Verified local probes are saved in `examples/refusal-probes.json` (100-token
+responses, so some end mid-sentence). Both the witness-intimidation and illegal
+sales prompts produced explicit refusals in this Q4 setup. These are examples,
+not a refusal-rate estimate. The numerical round-trip control is recorded in
+`examples/stepper-validation-summary.json`.
+
+For the approval-loop regression checks (no models required), run
+`node test_loop.mjs`. These check that review mode does not inject before approval,
+that approval is recorded, that auto mode stops at its token limit, and that a stop
+request before application prevents injection. Node is only needed for this test,
+not to run the playground.

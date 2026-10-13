@@ -12,6 +12,7 @@ import signal
 import sys
 import threading
 import time
+import stepper
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 ROOT = pathlib.Path(__file__).resolve().parent
@@ -81,11 +82,30 @@ def ensure(role):
     stop()
     raise RuntimeError('Model loading timed out')
 
+def backend_call(role, endpoint, body):
+    ensure(role)
+    conn = http.client.HTTPConnection('127.0.0.1', BACKEND_PORT, timeout=1200)
+    try:
+        conn.request('POST', endpoint, json.dumps(body), {'Content-Type':'application/json'})
+        response = conn.getresponse()
+        result = json.loads(response.read())
+        if response.status != 200:
+            raise RuntimeError(str(result))
+        return result
+    finally:
+        conn.close()
+
 class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
         if self.path == '/favicon.ico':
             self.send_response(204)
             self.end_headers()
+        elif self.path in ('/stepper', '/stepper.html'):
+            data = (ROOT / 'stepper.html').read_bytes()
+            self.send_response(200)
+            self.send_header('Content-Type', 'text/html; charset=utf-8')
+            self.end_headers()
+            self.wfile.write(data)
         elif self.path in ('/', '/index.html'):
             data = (RUNTIME / 'frontend.html').read_bytes()
             self.send_response(200)
@@ -104,7 +124,24 @@ class Handler(BaseHTTPRequestHandler):
             self.proxy()
 
     def do_POST(self):
-        self.proxy()
+        if self.path != '/stepper-api':
+            return self.proxy()
+        try:
+            body = json.loads(self.rfile.read(int(self.headers.get('Content-Length', 0))))
+            with lock:
+                if body.get('action') == 'save':
+                    name = f'token-session-{time.time_ns()}.json'
+                    (LOGS / name).write_text(json.dumps(body['session'], ensure_ascii=False, indent=2))
+                    result = {'saved': str(LOGS / name)}
+                else:
+                    result = stepper.run(body, backend_call, (RUNTIME / 'frontend.html').read_text())
+            self.send_response(200)
+        except Exception as exc:
+            result = {'error':str(exc)}
+            self.send_response(400)
+        self.send_header('Content-Type', 'application/json')
+        self.end_headers()
+        self.wfile.write(json.dumps(result).encode())
 
     def proxy(self):
         role = 'av' if self.path == '/explain' else 'ar' if self.path in (
