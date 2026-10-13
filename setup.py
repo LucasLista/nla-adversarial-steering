@@ -66,7 +66,7 @@ def main():
     prepare_frontend()
     if not args.skip_download:
         run(sys.executable, str(ROOT / 'download.py'))
-    print('Ready. Run: python3 launch.py', flush=True)
+    print('Ready. Run: uv run --locked launch.py', flush=True)
 
 if __name__ == '__main__':
     main()
