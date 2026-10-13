@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
-"""Loopback-only NLA proxy. Loads one model at a time to limit laptop RAM use."""
+"""NLA proxy with optional authenticated HPC access. Loads one model at a time."""
 import atexit
+import hmac
 import argparse
 import os
 import socket
@@ -24,6 +25,17 @@ BACKEND_PORT = 18089
 THREADS = min(8, os.cpu_count() or 4)
 GPU_LAYERS = 0
 BUILD_DIR = RUNTIME / 'build'
+AUTH_TOKEN = None
+AUDIT_LOG = False
+
+def audit(path, value):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    tmp = path.with_suffix('.tmp')
+    with tmp.open('w') as out:
+        json.dump(value, out, ensure_ascii=False, allow_nan=False)
+        out.flush()
+        os.fsync(out.fileno())
+    tmp.replace(path)
 FILES = {
     'base': ('Qwen2.5-7B-Instruct-Q4_K_M.gguf', 4683074240),
     'av': ('nla-qwen2.5-7b-L20-av-Q4_K_M.gguf', 4683073728),
@@ -102,7 +114,16 @@ def backend_call(role, endpoint, body):
         conn.close()
 
 class Handler(BaseHTTPRequestHandler):
+    def authenticated(self):
+        if AUTH_TOKEN is None or hmac.compare_digest(self.headers.get('Authorization', ''), 'Bearer ' + AUTH_TOKEN):
+            return True
+        self.send_response(401)
+        self.end_headers()
+        return False
+
     def do_GET(self):
+        if not self.authenticated():
+            return
         if self.path == '/favicon.ico':
             self.send_response(204)
             self.end_headers()
@@ -130,10 +151,16 @@ class Handler(BaseHTTPRequestHandler):
             self.proxy()
 
     def do_POST(self):
+        if not self.authenticated():
+            return
         if self.path != '/stepper-api':
             return self.proxy()
+        started = time.time()
+        record = LOGS / 'api' / str(time.time_ns())
         try:
             body = json.loads(self.rfile.read(int(self.headers.get('Content-Length', 0))))
+            if AUDIT_LOG:
+                audit(record.with_suffix('.request.json'), {'request':body, 'started_at':started})
             with lock:
                 if body.get('action') == 'save':
                     name = f'token-session-{time.time_ns()}.json'
@@ -141,10 +168,14 @@ class Handler(BaseHTTPRequestHandler):
                     result = {'saved': str(LOGS / name)}
                 else:
                     result = stepper.run(body, backend_call, (RUNTIME / 'frontend.html').read_text())
-            self.send_response(200)
+            status = 200
         except Exception as exc:
             result = {'error':str(exc)}
-            self.send_response(400)
+            status = 400
+        if AUDIT_LOG:
+            audit(record.with_suffix('.response.json'), {'response':result, 'status':status,
+                                                       'finished_at':time.time()})
+        self.send_response(status)
         self.send_header('Content-Type', 'application/json')
         self.end_headers()
         self.wfile.write(json.dumps(result).encode())
@@ -183,12 +214,22 @@ class Handler(BaseHTTPRequestHandler):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--listen-host', default='127.0.0.1')
+    parser.add_argument('--auth-token-file', type=pathlib.Path)
+    parser.add_argument('--audit-log', action='store_true', help='Save every stepper API request and response before sending it')
     parser.add_argument('--port', type=int, default=18090)
     parser.add_argument('--backend-port', type=int, default=18089)
     parser.add_argument('--threads', type=int, default=THREADS)
     parser.add_argument('--gpu-layers', type=int, default=0, help='GPU-offloaded layers; 99 offloads all layers')
     parser.add_argument('--build-dir', type=pathlib.Path, help='Backend build directory (defaults to .runtime/build)')
     args = parser.parse_args()
+    AUDIT_LOG = args.audit_log or args.auth_token_file is not None
+    if args.auth_token_file:
+        AUTH_TOKEN = args.auth_token_file.read_text().strip()
+        if len(AUTH_TOKEN) < 32:
+            parser.error('Use an authentication token with at least 32 characters')
+    if args.listen_host != '127.0.0.1' and AUTH_TOKEN is None:
+        parser.error('Non-loopback listeners require --auth-token-file')
     GPU_LAYERS = args.gpu_layers
     BUILD_DIR = args.build_dir.resolve() if args.build_dir else RUNTIME / ('build-cuda' if GPU_LAYERS else 'build')
     if GPU_LAYERS < 0:
@@ -207,6 +248,6 @@ if __name__ == '__main__':
     LOGS.mkdir(exist_ok=True)
     print(f'NLA playground: http://127.0.0.1:{PORT}', flush=True)
     try:
-        ThreadingHTTPServer(('127.0.0.1', PORT), Handler).serve_forever()
+        ThreadingHTTPServer((args.listen_host, PORT), Handler).serve_forever()
     except KeyboardInterrupt:
         pass
