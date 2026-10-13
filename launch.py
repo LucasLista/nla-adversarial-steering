@@ -80,7 +80,7 @@ def ensure(role):
     process = subprocess.Popen([
         str(BUILD_DIR / 'bin/llama-server'), '-m', str(path),
         '--host', '127.0.0.1', '--port', str(BACKEND_PORT), '-ngl', str(GPU_LAYERS),
-        '-c', '2048' if role == 'base' else '1024', '-np', '1',
+        '-c', os.environ.get('NLA_CONTEXT_SIZE','2048') if role == 'base' else '1024', '-np', '1',
         '-t', str(THREADS), '--cache-ram', '0',
     ], stdout=logfile, stderr=subprocess.STDOUT, env=child_env)
     for _ in range(240):

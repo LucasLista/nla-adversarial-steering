@@ -353,3 +353,14 @@ reserved until its walltime expires or you stop it with `bkill JOB_ID`.
 The batch script pins the same GCC compiler for C++ and CUDA, reconfigures a
 stale compiler cache, and requests 6 GB RAM per CPU slot with a 7 GB process limit
 compatible with DTU's submission rules.
+
+For multiple private experiment configs, the controller also accepts
+`--configs runs/experiments/run-1/inputs/config.json ...` instead of inline
+`--prompt` and `--instruction`. It loads prompts at runtime without printing
+those inputs. `--max-tokens 10000` is a safety cap; EOS still stops each branch.
+Branches and experiments run sequentially, with stage checkpoints on the laptop.
+`--port 18095` (the default) keeps the PC interface on port 18090 available.
+Set `NLA_CONTEXT_SIZE=16384` in the HPC server environment for long runs;
+otherwise the original 2048-token context remains the default. The backend
+reserves 148 context positions. Walltime can interrupt any stage; resume from
+the same output directory. Model download/build time counts against walltime.

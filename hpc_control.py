@@ -23,12 +23,15 @@ def main():
     p.add_argument('--connect-script',type=Path,help='Optional existing local SSH authentication helper')
     p.add_argument('--remote-root',required=True)
     p.add_argument('--output',required=True,type=Path)
-    p.add_argument('--prompt',required=True)
-    p.add_argument('--instruction',required=True)
+    p.add_argument('--prompt')
+    p.add_argument('--configs',nargs='+',type=Path)
+    p.add_argument('--port',type=int,default=18095)
+    p.add_argument('--instruction')
     p.add_argument('--max-tokens',type=int,default=64)
     p.add_argument('--keep-serving',action='store_true',help='Keep the browser relay open while the HPC job is running')
     args=p.parse_args()
-    if not 1<=args.max_tokens<=256: p.error('Token limit must be 1–256')
+    if not args.configs and (not args.prompt or not args.instruction): p.error('Provide --configs or --prompt and --instruction')
+    if not 1<=args.max_tokens<=10000: p.error('Token limit must be 1–10000')
     ssh=['ssh','-S',args.ssh_socket,'-o','BatchMode=yes']
     def remote(cmd):
         for attempt in range(5):
@@ -77,7 +80,7 @@ def main():
             finally: conn.close()
         do_GET=relay
         do_POST=relay
-    server=ThreadingHTTPServer(('127.0.0.1',18090),Relay)
+    server=ThreadingHTTPServer(('127.0.0.1',args.port),Relay)
     server.daemon_threads=True
     threading.Thread(target=server.serve_forever,daemon=True).start()
     def cleanup():
@@ -86,10 +89,10 @@ def main():
         subprocess.run(ssh+['-O','cancel','-L',f'127.0.0.1:19090:{host}:18090',args.ssh_host],
                        capture_output=True,timeout=15)
     atexit.register(cleanup)
-    print('HPC stepper ready at http://127.0.0.1:18090/stepper',flush=True)
+    print(f'HPC stepper ready at http://127.0.0.1:{args.port}/stepper',flush=True)
     while True:
         try:
-            with urllib.request.urlopen('http://127.0.0.1:18090/setup-status',timeout=10) as r: status=json.load(r)
+            with urllib.request.urlopen(f'http://127.0.0.1:{args.port}/setup-status',timeout=10) as r: status=json.load(r)
             if all(v['bytes']==v['expected'] for v in status.values()): break
             print('Waiting for verified HPC model downloads',flush=True)
         except OSError: pass
@@ -105,7 +108,22 @@ def main():
             'editor_model':codex_editor.MODEL,'variants':list(trajectories.VARIANTS),
             'policy':'independent prefixes; greedy; one-position intervention; no KV-edit replay'}
     try:
-        trajectories.generate(config,args.output,trajectories.API('http://127.0.0.1:18090'),codex_editor.propose)
+        inputs=args.configs or [None]
+        for path in inputs:
+            cfg=dict(config)
+            destination=args.output
+            if path:
+                private=json.loads(path.read_text())
+                if not private.get('prompt','').strip() or not private.get('instruction','').strip():
+                    raise ValueError('Empty experiment prompt or editor instruction')
+                cfg.update(prompt=private['prompt'],instruction=private['instruction'])
+                destination=args.output/path.parent.parent.name
+            api=trajectories.API(f'http://127.0.0.1:{args.port}')
+            editor=codex_editor.propose
+            if path and private.get('editor')=='local':
+                editor=lambda instruction,text: api('propose',tokens=[1],editor='local',instruction=instruction,text=text)
+                cfg['editor_model']='Qwen2.5-7B-Instruct-Q4_K_M'
+            trajectories.generate(cfg,destination,api,editor)
     finally:
         # Copy every completed stage to HPC as well, including after failures.
         subprocess.run(['rsync','-a','-e',shlex.join(ssh),str(args.output)+'/',

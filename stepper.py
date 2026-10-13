@@ -1,5 +1,6 @@
 """Single-position, one-token NLA interventions using the pinned backend."""
 import math
+import os
 import re
 import codex_editor
 
@@ -32,8 +33,8 @@ def run(body, call, frontend):
         prompt = '<|im_start|>system\nYou are a helpful assistant.<|im_end|>\n<|im_start|>user\n' + body['prompt'] + '<|im_end|>\n<|im_start|>assistant\n'
         return {'tokens':call('base','/tokenize',{'content':prompt,'add_special':False,'parse_special':True})['tokens']}
     tokens = body['tokens']
-    if not isinstance(tokens,list) or not tokens or len(tokens)>1900 or any(type(t) is not int for t in tokens):
-        raise ValueError('Expected 1–1900 token IDs')
+    if not isinstance(tokens,list) or not tokens or len(tokens)>int(os.environ.get("NLA_CONTEXT_SIZE","2048"))-148 or any(type(t) is not int for t in tokens):
+        raise ValueError('Token context exceeds configured limit (148 tokens reserved)')
     def predict(target=None, h=None):
         req = {'prompt':tokens, 'n_predict':1, 'temperature':0, 'seed':42,
                'cache_prompt':False, 'n_probs':30, 'post_sampling_probs':False,

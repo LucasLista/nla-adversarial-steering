@@ -124,8 +124,8 @@ def main():
     p.add_argument('--max-tokens', type=int, default=64)
     p.add_argument('--output', type=Path, required=True)
     args = p.parse_args()
-    if not 1 <= args.max_tokens <= 256:
-        p.error('--max-tokens must be between 1 and 256')
+    if not 1 <= args.max_tokens <= 10000:
+        p.error('--max-tokens must be between 1 and 10000')
     config = {'prompt': args.prompt, 'instruction': args.instruction, 'max_tokens': args.max_tokens,
               'editor_model': codex_editor.MODEL, 'variants': list(VARIANTS),
               'policy': 'independent prefixes; greedy; one-position intervention; no KV-edit replay'}
