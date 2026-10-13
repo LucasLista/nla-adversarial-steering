@@ -1,0 +1,34 @@
+name: Checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v10
+        with:
+          version: "0.13.0"
+      - run: uv python install
+      - run: uv sync --locked
+      - name: Check Python scripts without downloading models
+        run: |
+          uv run --locked python --version
+          uv run --locked python -m compileall -q setup.py download.py launch.py stepper.py smoke_test.py test_stepper_live.py
+          uv run --locked python -c 'import setup, download, launch, stepper, smoke_test, test_stepper_live'
+          uv run --locked setup.py --help
+          uv run --locked launch.py --help
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: node test_loop.mjs

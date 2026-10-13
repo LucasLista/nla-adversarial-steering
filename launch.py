@@ -185,7 +185,7 @@ if __name__ == '__main__':
     if THREADS < 1 or PORT == BACKEND_PORT:
         parser.error('Use positive threads and distinct ports')
     if not (RUNTIME / 'build/bin/llama-server').exists() or not (RUNTIME / 'frontend.html').exists():
-        parser.error('Run python3 setup.py first')
+        parser.error('Run uv run --locked setup.py first')
     # Refuse an occupied model-server port, rather than attaching to an unrelated server.
     with socket.socket() as probe:
         try:

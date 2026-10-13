@@ -11,7 +11,7 @@ It does not train an NLA or claim a new steering method.
 
 ## Requirements
 
-- Python 3.10+, Git, curl, CMake 3.20+, and a C++17 compiler.
+- uv, Python 3.15 (managed by uv), Git, curl, CMake 3.20+, and a C++17 compiler.
 - **16 GB RAM recommended as a practical starting point**; close heavy apps.
   8 GB machines are not a supported target. Memory depends on the backend and OS.
 - **30 GB free disk** for the first setup, including temporary downloads/builds.
@@ -31,27 +31,39 @@ Clone this repository, then change into it. On Ubuntu/WSL install prerequisites:
 
 ```sh
 sudo apt update
-sudo apt install -y python3 git curl cmake build-essential
+sudo apt install -y git curl cmake build-essential
 ```
 
 On macOS, install Apple's command-line tools (`xcode-select --install`),
-Python 3, and CMake. If you already use Homebrew: `brew install python cmake`.
+CMake and uv. If you already use Homebrew: `brew install uv cmake`.
 On Windows, run all commands inside Ubuntu WSL2, and keep the project in the
 Linux filesystem, such as `~/nla-playground`, rather than `/mnt/c`.
 
+Install [uv](https://docs.astral.sh/uv/getting-started/installation/) if needed,
+then run:
+
 ```sh
-python3 setup.py
-python3 launch.py
+uv python install 3.15
+uv sync --locked
+uv run --locked setup.py
+uv run --locked launch.py
 ```
+
+`.python-version` selects Python 3.15, and `uv.lock` records the project environment.
+The Python scripts use only the standard library, so there are no Python package
+dependencies. uv creates `.venv` automatically; no activation is required.
+`setup.py` builds the pinned C++ backend and downloads models; uv manages the
+Python environment. To build without downloading models, use
+`uv run --locked setup.py --skip-download`.
 
 Open **http://127.0.0.1:18090** in your browser. Leave the terminal open.
 Ctrl+C stops the launcher and the model process it owns. Models remain on disk.
 Setup can be rerun; downloads resume from completed 16 MB chunks and each final
 file is checked against its pinned SHA-256 hash. No weights are committed here.
 
-Optional: `python3 launch.py --threads 4 --port 18090 --backend-port 18089`.
+Optional: `uv run --locked launch.py --threads 4 --port 18090 --backend-port 18089`.
 Use distinct unused ports; fewer threads may keep the laptop more responsive.
-Run `python3 smoke_test.py` while the launcher is open to exercise all model roles.
+Run `uv run --locked smoke_test.py` while the launcher is open to exercise all model roles.
 Its report is saved in `runs/smoke-results.json`.
 
 ## First experiment
@@ -179,7 +191,7 @@ persist as tokens, but edited KV states do not persist. This is a context-recomp
 experiment, not continuous generation with a patched KV cache. CPU model swapping
 can take minutes per explain/compare cycle. Stay below 1900 context tokens.
 
-Run `python3 test_stepper_live.py` against the running launcher to check the
+Run `uv run --locked test_stepper_live.py` against the running launcher to check the
 unchanged-text control, an edited distribution, vector dimensions, error identity,
 and the next generation step. Results go to `runs/stepper-validation.json`.
 
