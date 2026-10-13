@@ -234,3 +234,46 @@ For the approval-loop regression checks (no models required), run
 that approval is recorded, that auto mode stops at its token limit, and that a stop
 request before application prevents injection. Node is only needed for this test,
 not to run the playground.
+
+### GPT-6.1 Sol through your ChatGPT subscription
+
+Select **GPT-6.1 Sol · ChatGPT subscription via Codex** in the editor dropdown.
+It works with both review and auto modes. Only the NLA description and editing
+instruction are sent to OpenAI; vectors and the underlying conversation are not
+included. Proposals record the exact model `gpt-6.1-sol` and provider.
+
+Install the official [Codex CLI](https://developers.openai.com/codex/cli), run
+`codex login` using ChatGPT, and confirm `codex login status` reports ChatGPT.
+If Codex is installed and signed in on the same machine as `launch.py`, no further
+configuration is necessary. The adapter uses `codex exec`, ephemeral sessions,
+a temporary working directory, a read-only sandbox, and structured output. It
+requires ChatGPT authentication and never falls back to API-key billing or another
+model. Normal subscription limits and model availability apply. Jonathan should
+use his own account; do not share auth files.
+
+For a model server on a separate PC, run on the signed-in laptop:
+
+```
+python3 codex_editor.py --serve
+ssh -N -R 127.0.0.1:18094:127.0.0.1:18094 YOUR_MODEL_HOST
+```
+
+Then start the model host with:
+
+```
+NLA_CODEX_EDITOR_URL=http://127.0.0.1:18094 python3 launch.py
+```
+
+Both bridge and reverse tunnel bind loopback only. Keep them running while using
+Sol. If the SSH server runs in Windows but the model launcher runs in WSL, use
+`NLA_CODEX_EDITOR_TRANSPORT=windows-curl` as well; this uses Windows' loopback
+through its bundled curl.exe. The helper runs Codex on the laptop, so ChatGPT
+credentials stay there. All three processes must be restarted after a reboot.
+
+The bridge rejects browser-origin requests and accepts server-to-server JSON only.
+The CLI is instructed to perform a text rewrite without tools. No shell command
+is constructed from model output or user text. Timeout, authentication, and access
+errors stop the loop instead of applying a missing proposal.
+
+Official references: [authentication](https://developers.openai.com/codex/auth),
+[non-interactive mode](https://developers.openai.com/codex/noninteractive).

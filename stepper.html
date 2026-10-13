@@ -9,17 +9,17 @@
 <p><button id="inspect">1. Inspect next-token distribution</button><button id="explain">2. Explain and reconstruct</button><button id="compare">3. Compare all interventions</button></p>
 <div class="grid"><div class="card"><h3>Original NLA text</h3><pre id="original"></pre></div><div class="card"><h3>Edit NLA text</h3><textarea id="edited"></textarea><small>Comparison uses the complete text above. Recompare after every edit.</small></div><div class="card"><h3>Reconstruction error</h3><pre id="metrics"></pre><small>e = h − AR(original)<br>Corrected edit = AR(edited) + e<br>AR output uses its native scale; no norm matching.</small></div></div>
 <div class="card"><h2>Model-assisted editing loop</h2>
-<label for="instruction">Editing instruction</label><textarea id="instruction">Rewrite the description to emphasize a playful rhyme about a mouse and cheese. Preserve unrelated details.</textarea>
+<p><label>Editor <select id="editor"><option value="local">Local Qwen</option><option value="codex">GPT-6.1 Sol · ChatGPT subscription via Codex</option></select></label></p><small>Sol sends the NLA description and editing instruction to OpenAI and consumes your Codex subscription allowance. Each user signs in with their own account. Activation vectors stay on the model host.</small><br><label for="instruction">Editing instruction</label><textarea id="instruction">Rewrite the description to emphasize a playful rhyme about a mouse and cheese. Preserve unrelated details.</textarea>
 <p><label>Mode <select id="mode"><option value="review">Review every edit</option><option value="auto">Auto-apply edits</option></select></label>
 <label>Maximum tokens <input id="steps" type="number" min="1" max="20" value="3" style="width:60px"></label></p>
 <button id="loop">Run editing loop</button><button id="approve" disabled>Approve edit and generate one token</button><button id="stop" disabled>Stop loop / reject proposal</button>
-<pre id="proposal"></pre><small>The local Qwen model proposes each edit. Review mode pauses before injection; edit the NLA text above before approving if needed. Auto mode uses the edited + saved-error branch and chooses its most probable token. Stop takes effect after the current model request. Maximum 20 tokens per run. No external API or recurring job.</small></div>
+<pre id="proposal"></pre><small>The selected model proposes each edit. Review mode pauses before injection; edit the NLA text above before approving if needed. Auto mode uses the edited + saved-error branch and chooses its most probable token. Stop takes effect after the current model request. Maximum 20 tokens per run. No external API or recurring job.</small></div>
 <h2>Next-token distributions</h2><p><small>Top 30 tokens by raw model probability, before sampling filters. “Choose” appends that exact token ID. Context is recomputed every step; previous hidden-state edits are not replayed. Greedy picks can be selected from the first row. EOS ends generation.</small></p><div id="distributions" class="grid"></div>
 <script>
 let s={tokens:[],generated:[],history:[]},busy=false,looping=false,stopRequested=false,remaining=0;
 const $=id=>document.getElementById(id);
 function status(t){$('status').textContent=t}
-function controls(){document.querySelectorAll('button').forEach(b=>b.disabled=busy);$('inspect').disabled=busy||!s.tokens.length||s.ended;$('explain').disabled=busy||!s.h||!!s.text;$('compare').disabled=busy||looping||!s.reconstruction;$('loop').disabled=busy||looping||!s.tokens.length||s.ended;$('approve').disabled=busy||!s.pending;$('stop').disabled=!looping&&!s.pending;document.querySelectorAll('#distributions button').forEach(b=>b.disabled=busy||looping);for(const id of ['edited','mode','instruction','steps','prompt','import','example'])$(id).disabled=busy||(looping&&id!=='edited');if(looping){$('start').disabled=true;$('inspect').disabled=true;$('explain').disabled=true;} }
+function controls(){document.querySelectorAll('button').forEach(b=>b.disabled=busy);$('inspect').disabled=busy||!s.tokens.length||s.ended;$('explain').disabled=busy||!s.h||!!s.text;$('compare').disabled=busy||looping||!s.reconstruction;$('loop').disabled=busy||looping||!s.tokens.length||s.ended;$('approve').disabled=busy||!s.pending;$('stop').disabled=!looping&&!s.pending;document.querySelectorAll('#distributions button').forEach(b=>b.disabled=busy||looping);for(const id of ['editor','edited','mode','instruction','steps','prompt','import','example'])$(id).disabled=busy||(looping&&id!=='edited');if(looping){$('start').disabled=true;$('inspect').disabled=true;$('explain').disabled=true;} }
 async function task(fn){busy=true;controls();try{await fn()}catch(e){status('Error: '+e.message)}finally{busy=false;controls()}}
 async function api(action,extra={}){const r=await fetch('/stepper-api',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action,tokens:s.tokens,...extra})});const d=await r.json();if(!r.ok||typeof d.error==='string')throw Error(d.error||r.statusText);return d}
 function show(){ $('generated').textContent=s.display||'';$('position').textContent=s.tokens.length?'Context tokens: '+s.tokens.length+' · intervention position: '+(s.tokens.length-1)+(s.ended?' · End of sequence':''):'';$('original').textContent=s.text||'';$('edited').value=s.edited??s.text??'';$('metrics').textContent=s.metrics?JSON.stringify(s.metrics,null,2):'';render();controls()}
@@ -34,8 +34,8 @@ $('compare').onclick=()=>task(async()=>{status('Reconstructing edited text and e
 async function prepareProposal(){
  if(!s.h){status('Loop: extracting next activation…');Object.assign(s,await api('inspect'));if(stopRequested)return;}
  if(!s.text){status('Loop: explaining and reconstructing…');Object.assign(s,await api('explain',{h:s.h}));if(stopRequested)return;}
- status('Loop: asking the local model for an edit…');
- s.proposal=await api('propose',{text:s.text,instruction:$('instruction').value});
+ status('Loop: asking the selected editor for an edit…');
+ s.proposal=await api('propose',{text:s.text,instruction:$('instruction').value,editor:$('editor').value});
  if(stopRequested)return;
  s.edited=s.proposal.proposal;s.pending=true;show();
  $('proposal').textContent='Proposed edit ('+remaining+' steps remaining):\n'+s.edited;
