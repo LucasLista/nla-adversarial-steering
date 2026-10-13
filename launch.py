@@ -22,6 +22,8 @@ LOGS = ROOT / 'runs'
 PORT = 18090
 BACKEND_PORT = 18089
 THREADS = min(8, os.cpu_count() or 4)
+GPU_LAYERS = 0
+BUILD_DIR = RUNTIME / 'build'
 FILES = {
     'base': ('Qwen2.5-7B-Instruct-Q4_K_M.gguf', 4683074240),
     'av': ('nla-qwen2.5-7b-L20-av-Q4_K_M.gguf', 4683073728),
@@ -58,12 +60,16 @@ def ensure(role):
         raise RuntimeError(f'{name} is still downloading. Try again after setup completes.')
     stop()
     logfile = open(LOGS / f'{role}.log', 'a')
+    child_env = os.environ.copy()
+    # WSL must use the Windows driver's CUDA bridge, not a Linux libcuda stub.
+    if GPU_LAYERS and pathlib.Path('/usr/lib/wsl/lib/libcuda.so.1').exists():
+        child_env['LD_LIBRARY_PATH'] = '/usr/lib/wsl/lib:' + child_env.get('LD_LIBRARY_PATH', '')
     process = subprocess.Popen([
-        str(RUNTIME / 'build/bin/llama-server'), '-m', str(path),
-        '--host', '127.0.0.1', '--port', str(BACKEND_PORT), '-ngl', '0',
+        str(BUILD_DIR / 'bin/llama-server'), '-m', str(path),
+        '--host', '127.0.0.1', '--port', str(BACKEND_PORT), '-ngl', str(GPU_LAYERS),
         '-c', '2048' if role == 'base' else '1024', '-np', '1',
         '-t', str(THREADS), '--cache-ram', '0',
-    ], stdout=logfile, stderr=subprocess.STDOUT)
+    ], stdout=logfile, stderr=subprocess.STDOUT, env=child_env)
     for _ in range(240):
         if process.poll() is not None:
             raise RuntimeError(f'{role} failed to start; see {role}.log')
@@ -180,11 +186,17 @@ if __name__ == '__main__':
     parser.add_argument('--port', type=int, default=18090)
     parser.add_argument('--backend-port', type=int, default=18089)
     parser.add_argument('--threads', type=int, default=THREADS)
+    parser.add_argument('--gpu-layers', type=int, default=0, help='GPU-offloaded layers; 99 offloads all layers')
+    parser.add_argument('--build-dir', type=pathlib.Path, help='Backend build directory (defaults to .runtime/build)')
     args = parser.parse_args()
+    GPU_LAYERS = args.gpu_layers
+    BUILD_DIR = args.build_dir.resolve() if args.build_dir else RUNTIME / ('build-cuda' if GPU_LAYERS else 'build')
+    if GPU_LAYERS < 0:
+        parser.error('GPU layers must be nonnegative')
     PORT, BACKEND_PORT, THREADS = args.port, args.backend_port, args.threads
     if THREADS < 1 or PORT == BACKEND_PORT:
         parser.error('Use positive threads and distinct ports')
-    if not (RUNTIME / 'build/bin/llama-server').exists() or not (RUNTIME / 'frontend.html').exists():
+    if not (BUILD_DIR / 'bin/llama-server').exists() or not (RUNTIME / 'frontend.html').exists():
         parser.error('Run uv run --locked setup.py first')
     # Refuse an occupied model-server port, rather than attaching to an unrelated server.
     with socket.socket() as probe:

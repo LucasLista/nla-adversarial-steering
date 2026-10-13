@@ -277,3 +277,24 @@ errors stop the loop instead of applying a missing proposal.
 
 Official references: [authentication](https://developers.openai.com/codex/auth),
 [non-interactive mode](https://developers.openai.com/codex/noninteractive).
+
+### NVIDIA GPU acceleration
+
+CPU remains the default. Build CUDA into a separate directory to keep the CPU
+fallback available:
+
+```
+uv run --locked setup.py --cuda --cuda-arch 61 --skip-download --jobs 2
+uv run --locked launch.py --gpu-layers 99
+```
+
+`61` targets a GTX 1070 Ti (Pascal). This GPU needs CUDA 12.x, not CUDA 13.
+Use an appropriate architecture for other cards (default `native`). Install a
+compatible CUDA toolkit and host compiler first. With CUDA 12.0 and GCC 13 on
+Ubuntu, set `CUDAHOSTCXX=/usr/bin/g++-12` for the setup command. Under WSL, keep the
+Windows NVIDIA driver; the launcher prioritizes the WSL CUDA driver bridge.
+
+`--gpu-layers 99` offloads all available model layers. Models still load one at a
+time. Use fewer layers if VRAM is insufficient, or omit the flag for the CPU
+backend. `--build-dir /path/to/build` selects an explicit backend build.
+The GPU accelerates local inference; Sol editing still runs through Codex.

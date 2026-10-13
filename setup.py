@@ -40,7 +40,10 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--skip-download', action='store_true')
     parser.add_argument('--jobs', type=int, default=min(4, os.cpu_count() or 2))
+    parser.add_argument('--cuda', action='store_true', help='Build the NVIDIA GPU backend')
+    parser.add_argument('--cuda-arch', default='native', help='CUDA architecture; 61 for GTX 1070 Ti')
     args = parser.parse_args()
+    build = RUNTIME / ('build-cuda' if args.cuda else 'build')
     if sys.platform == 'win32':
         parser.error('Use Ubuntu under WSL on Windows; see README.md')
     if args.jobs < 1:
@@ -59,14 +62,15 @@ def main():
         parser.error('Existing backend has another revision; move .runtime/nla.cpp aside before retrying')
     if subprocess.check_output(['git', '-C', str(SOURCE), 'status', '--porcelain'], text=True).strip():
         parser.error('Backend source has local edits; preserve them before rebuilding a verified setup')
-    run('cmake', '-S', str(SOURCE), '-B', str(RUNTIME / 'build'),
-        '-DCMAKE_BUILD_TYPE=Release', '-DGGML_CUDA=OFF', '-DGGML_METAL=OFF',
+    run('cmake', '-S', str(SOURCE), '-B', str(build),
+        '-DCMAKE_BUILD_TYPE=Release', f'-DGGML_CUDA={"ON" if args.cuda else "OFF"}',
+        f'-DCMAKE_CUDA_ARCHITECTURES={args.cuda_arch}', '-DGGML_METAL=OFF',
         '-DLLAMA_CURL=OFF', '-DLLAMA_BUILD_TESTS=OFF', '-DLLAMA_BUILD_EXAMPLES=OFF')
-    run('cmake', '--build', str(RUNTIME / 'build'), '-j', str(args.jobs), '--target', 'llama-server')
+    run('cmake', '--build', str(build), '-j', str(args.jobs), '--target', 'llama-server')
     prepare_frontend()
     if not args.skip_download:
         run(sys.executable, str(ROOT / 'download.py'))
-    print('Ready. Run: uv run --locked launch.py', flush=True)
+    print('Ready. Run: uv run --locked launch.py' + (' --gpu-layers 99' if args.cuda else ''), flush=True)
 
 if __name__ == '__main__':
     main()

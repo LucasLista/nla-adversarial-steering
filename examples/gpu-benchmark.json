@@ -1,0 +1,41 @@
+{
+  "gpu": "NVIDIA GeForce GTX 1070 Ti 8GB",
+  "cuda_toolkit": "12.0.140",
+  "architecture": "61",
+  "model": "Qwen2.5-7B-Instruct-Q4_K_M",
+  "n_predict": 64,
+  "temperature": 0,
+  "seed": 42,
+  "cpu": {
+    "wall_seconds": 23.69842544401763,
+    "timings": {
+      "cache_n": 0,
+      "prompt_n": 19,
+      "prompt_ms": 774.014,
+      "prompt_per_token_ms": 40.73757894736842,
+      "prompt_per_second": 24.547359608482534,
+      "predicted_n": 64,
+      "predicted_ms": 10305.548,
+      "predicted_per_token_ms": 161.0241875,
+      "predicted_per_second": 6.210247140666367
+    },
+    "content": "The sky appears blue because of a process called Rayleigh scattering. When sunlight enters the Earth's atmosphere, it collides with molecules and small particles in the air. Sunlight is made up of different colors, each with a different wavelength. Blue light has a shorter wavelength and gets scattered more by the gases and particles in"
+  },
+  "gpu_result": {
+    "wall_seconds": 6.577784113003872,
+    "timings": {
+      "cache_n": 0,
+      "prompt_n": 19,
+      "prompt_ms": 65.772,
+      "prompt_per_token_ms": 3.461684210526316,
+      "prompt_per_second": 288.87672565833486,
+      "predicted_n": 64,
+      "predicted_ms": 1739.461,
+      "predicted_per_token_ms": 27.179078125,
+      "predicted_per_second": 36.79300656927634
+    },
+    "content": "The sky appears blue because of a process called Rayleigh scattering. When sunlight enters the Earth's atmosphere, it collides with molecules and small particles in the air. Sunlight is made up of different colors, each with a different wavelength. Blue light has shorter, more frequent waves compared to other colors like red or yellow"
+  },
+  "generation_speedup": 5.9245639884998855,
+  "note": "Single short prompt, cache disabled. Wall time includes cold model loading; throughput excludes loading. Not a full NLA-loop benchmark."
+}
