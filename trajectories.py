@@ -60,7 +60,7 @@ class API:
                 result = json.load(r)
         except urllib.error.HTTPError as exc:
             raise RuntimeError(f'Backend HTTP {exc.code}: {exc.read().decode()}') from exc
-        if 'error' in result:
+        if isinstance(result.get('error'), str):
             raise RuntimeError(result['error'])
         return result
 

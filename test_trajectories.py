@@ -2,13 +2,22 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
-from unittest.mock import Mock
+from unittest.mock import Mock, patch
+import io
 import trajectories as t
 
 def prediction(token):
     return {'completion_probabilities': [{'id': token, 'top_logprobs': [{'id': token, 'logprob': 0}]}]}
 
 class TrajectoryTests(unittest.TestCase):
+    def test_api_preserves_numeric_reconstruction_error(self):
+        payload={'text':'explanation','reconstruction':[.9],'error':[.1]}
+        with patch('urllib.request.urlopen',return_value=io.BytesIO(json.dumps(payload).encode())):
+            self.assertEqual(t.API('http://localhost')('explain',tokens=[1],h=[1.]),payload)
+        with patch('urllib.request.urlopen',return_value=io.BytesIO(b'{"error":"model unavailable"}')):
+            with self.assertRaisesRegex(RuntimeError,'model unavailable'):
+                t.API('http://localhost')('inspect',tokens=[1])
+
     def test_independent_prefixes_checkpoint_and_resume(self):
         seen = []
         def api(action, **kwargs):
