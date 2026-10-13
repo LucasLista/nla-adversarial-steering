@@ -1,0 +1,23 @@
+[
+  {
+    "repo": "bartowski/Qwen2.5-7B-Instruct-GGUF",
+    "file": "Qwen2.5-7B-Instruct-Q4_K_M.gguf",
+    "size": 4683074240,
+    "sha256": "65b8fcd92af6b4fefa935c625d1ac27ea29dcb6ee14589c55a8f115ceaaa1423",
+    "revision": "8911e8a47f92bac19d6f5c64a2e2095bd2f7d031"
+  },
+  {
+    "repo": "thomasgauthier/nla-qwen2.5-7b-L20-av-GGUF",
+    "file": "nla-qwen2.5-7b-L20-av-Q4_K_M.gguf",
+    "size": 4683073728,
+    "sha256": "24c8ca77ee6ff3a61034e7006c7f3ed78e15c2b986c8fd1eb8a38b0a5de4d9e0",
+    "revision": "5c41ccff417f53f294cf504b07ee222040c1e795"
+  },
+  {
+    "repo": "thomasgauthier/nla-qwen2.5-7b-L20-ar-GGUF",
+    "file": "nla-qwen2.5-7b-L20-ar-Q4_K_M.gguf",
+    "size": 3412340480,
+    "sha256": "f22fb45f9712a233f0d25a613f1db666dad7662ea618a8340af2b8afb34df22a",
+    "revision": "70c28786aa3ebfe465e276fa0e81dc3874f925cd"
+  }
+]
