@@ -24,8 +24,9 @@ jobs:
       - name: Check Python scripts without downloading models
         run: |
           uv run --locked python --version
-          uv run --locked python -m compileall -q setup.py download.py launch.py stepper.py smoke_test.py test_stepper_live.py
+          uv run --locked python -m compileall -q setup.py download.py launch.py stepper.py codex_editor.py test_editor.py smoke_test.py test_stepper_live.py
           uv run --locked python -c 'import setup, download, launch, stepper, smoke_test, test_stepper_live'
+          uv run --locked python test_editor.py
           uv run --locked setup.py --help
           uv run --locked launch.py --help
       - uses: actions/setup-node@v4
