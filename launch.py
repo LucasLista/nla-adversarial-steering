@@ -47,9 +47,19 @@ lock = threading.Lock()
 process = None
 active = None
 logfile = None
+RESIDENT = os.environ.get('NLA_RESIDENT_MODELS') == '1'
+resident = {}
 
 def stop():
     global process, active, logfile
+    handles = list(resident.values()) + ([(process, logfile)] if process is not None else [])
+    resident.clear()
+    for child, log in handles:
+        if child is not process:
+            child.terminate()
+            try: child.wait(timeout=10)
+            except subprocess.TimeoutExpired: child.kill(); child.wait()
+            if log: log.close()
     if process is not None:
         process.terminate()
         try:
@@ -65,14 +75,25 @@ atexit.register(stop)
 signal.signal(signal.SIGTERM, lambda signum, frame: sys.exit(0))
 
 def ensure(role):
-    global process, active, logfile
+    global process, active, logfile, BACKEND_PORT
+    if RESIDENT:
+        if active and process:
+            resident[active] = (process, logfile)
+        BACKEND_PORT = {'base':18089, 'av':18087, 'ar':18088}[role]
+        if role in resident:
+            process, logfile = resident[role]
+            active = role
+            if process.poll() is None: return
+            if logfile: logfile.close()
+            del resident[role]
+        process, logfile, active = None, None, None
     if active == role and process and process.poll() is None:
         return
     name, size = FILES[role]
     path = MODELS / name
     if not path.exists() or path.stat().st_size != size:
         raise RuntimeError(f'{name} is still downloading. Try again after setup completes.')
-    stop()
+    if not RESIDENT: stop()
     logfile = open(LOGS / f'{role}.log', 'a')
     child_env = os.environ.copy()
     # WSL must use the Windows driver's CUDA bridge, not a Linux libcuda stub.

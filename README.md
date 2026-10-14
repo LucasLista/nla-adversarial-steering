@@ -418,3 +418,10 @@ branches. `publish_run.py` exports the latest atomic branch checkpoints without
 displaying their response text; `stop_reason: in_progress` marks partial output.
 It commits only when snapshot files changed, so unchanged checks produce no
 new commits. Pass `--max-tokens` for experiments using a limit other than 256.
+HPC now sets `NLA_RESIDENT_MODELS=1`: base, AV and AR stay in separate
+loopback backend processes instead of reloading on every role change. This
+requires enough VRAM for all three models plus their contexts. The V100 job
+uses shared CUDA compute mode with an exclusive GPU allocation so all three
+processes can use that GPU. Laptop/PC defaults remain single-model mode.
+Network errors retry checkpointed generation; authentication expiry still
+requires a human login. Each allocation writes its own provenance file.

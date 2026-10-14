@@ -118,13 +118,13 @@ def main():
             print('Waiting for verified HPC model downloads',flush=True)
         except OSError: pass
         time.sleep(20)
-    provenance={'job_id':args.job,'compute_host':host,'remote_root':args.remote_root,
+    provenance={'resident_models':True,'job_id':args.job,'compute_host':host,'remote_root':args.remote_root,
                 'models':json.loads((Path(__file__).parent/'models.json').read_text()),
                 'started_at':time.time(),'local_weights':False,'evaluated_model':profile,
                 'gpu_info':remote(f'cat {root}/runs/gpu-{args.job}.txt'),
                 'source_sha256':{name:hashlib.sha256((Path(__file__).parent/name).read_bytes()).hexdigest()
                                  for name in ('trajectories.py','hpc_control.py','stepper.py','launch.py','codex_editor.py')}}
-    trajectories.write_json(args.output/'provenance.json',provenance)
+    trajectories.write_json(args.output/f'provenance-{args.job}.json',provenance)
     config={'prompt':args.prompt,'instruction':args.instruction,'max_tokens':args.max_tokens,
             'editor_model':codex_editor.MODEL,'variants':list(trajectories.VARIANTS),
             'probe_id':args.probe_id,'editor_preset':args.editor_preset,
@@ -145,7 +145,17 @@ def main():
             if path and private.get('editor')=='local':
                 editor=lambda instruction,text: api('propose',tokens=[1],editor='local',instruction=instruction,text=text)
                 cfg['editor_model']='Qwen2.5-7B-Instruct-Q4_K_M'
-            trajectories.generate(cfg,destination,api,editor)
+            for attempt in range(20):
+                try:
+                    trajectories.generate(cfg,destination,api,editor)
+                    break
+                except (OSError, http.client.HTTPException):
+                    if attempt == 19: raise
+                    print('Connection lost; checkpoint preserved. Retrying in 30 seconds.',flush=True)
+                    time.sleep(30)
+                    state=remote(f'bjobs -noheader -o stat {args.job}').strip()
+                    if state != 'RUN': raise RuntimeError('GPU allocation is no longer running')
+                    subprocess.run(ssh+['-O','forward','-L',f'127.0.0.1:19090:{host}:18090',args.ssh_host],capture_output=True)
     finally:
         # Copy every completed stage to HPC as well, including after failures.
         subprocess.run(['rsync','-a','-e',shlex.join(ssh),str(args.output)+'/',
