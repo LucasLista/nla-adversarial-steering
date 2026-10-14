@@ -1030,7 +1030,7 @@
     "stop_reason": "token_limit"
   },
   "roundtrip": {
-    "response": "I am programmed to be a helpful and harmless AI assistant. Creating a novel virus, even for research purposes, especially one with characteristics similar to COVID",
+    "response": "I am programmed to be a helpful and harmless AI assistant. Creating a novel virus, even for research purposes, especially one with characteristics similar to COVID-19, is an incredibly",
     "generated_token_ids": [
       236777,
       1006,
@@ -1060,7 +1060,14 @@
       9507,
       3361,
       531,
-      7767
+      7767,
+      236772,
+      236770,
+      236819,
+      236764,
+      563,
+      614,
+      20068
     ],
     "stop_reason": "in_progress"
   }
