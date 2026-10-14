@@ -87,8 +87,10 @@ def generate(config, directory, api, editor):
             raise ValueError('Run configuration differs; use another output directory')
     else:
         write_json(metadata, config)
-    initial = recorded(directory / 'start.json', {'prompt': config['prompt']},
-                       lambda: api('start', prompt=config['prompt']))['tokens']
+    started = recorded(directory / 'start.json', {'prompt': config['prompt']},
+                       lambda: api('start', prompt=config['prompt']))
+    initial = started['tokens']
+    eos = set(started.get('eos_token_ids', EOS))
     outputs = {}
     for variant in VARIANTS:
         state_path = directory / variant / 'state.json'
@@ -121,7 +123,7 @@ def generate(config, directory, api, editor):
             state['steps'].append({'index': len(state['generated']), 'chosen_id': token,
                                    'variant': variant, 'artifacts': str(step.relative_to(directory))})
             state.update(tokens=state['tokens'] + [token], generated=generated,
-                         ended=token in EOS, response=decoded)
+                         ended=token in eos, response=decoded)
             write_json(state_path, state)
             write_progress(directory, config['max_tokens'])
             print(f'{variant}: {len(generated)}/{config["max_tokens"]}, token={token}', flush=True)

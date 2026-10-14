@@ -439,3 +439,29 @@ Downloads resume partial files, verify LFS SHA-256 and size, and report only
 file counts through `.runtime/hf-models/MODEL/download-progress.json`.
 Staging checkpoints does not mean that a model backend is validated or that
 private evaluation has started.
+
+### Candidate HF backend for other NLA families
+
+`hf_backend.py` reads each AV/AR sidecar, checks extraction layer/dimension and
+injection-token neighbors, hooks the post-scaled embedding output, and loads
+the AR's native value head without final normalization. It applies the chosen
+activation at the last context position and recomputes context for every step.
+The four trajectories use EOS IDs supplied by that model's generation config.
+
+`hpc/hf-server.lsf` runs the separate Python 3.12/Torch 2.6 CUDA runtime on two
+V100s. Weights use NF4 double quantization with FP32 compute/nonquantized tensors.
+This is a separate quantization path from Qwen's GGUF Q4_K_M; precision is saved
+in run provenance. CPU/disk offloading is rejected rather than assumed viable.
+Larger families require a measured resource plan; this two-GPU job is initially
+for Gemma-3-12B only.
+
+Before serving private API calls, `hf_server.py` runs a benign synthetic prompt
+and requires a finite, correctly sized reconstruction plus an unchanged-text
+corrected-distribution control. Only numeric validation metadata is exposed,
+under `.runtime/hf-validation-MODEL-JOB.json`. Failure leaves private inference
+disabled. Use `hpc_control.py --hf-backend --model MODEL --port 18096
+--tunnel-port 19092` with the normal job/SSH/preset arguments after validation.
+The HF server currently exposes the automated API, not the Qwen-specific UI.
+
+This backend is a candidate until its live GPU validation passes; synthetic
+contract tests alone do not establish checkpoint compatibility or quality.

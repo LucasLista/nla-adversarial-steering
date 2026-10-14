@@ -26,6 +26,8 @@ def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--job',required=True,type=int)
     p.add_argument('--model',default='qwen2.5-7b',help='Evaluated model family from evaluation_models.json')
+    p.add_argument('--hf-backend',action='store_true',help='Require validated model-specific HF backend')
+    p.add_argument('--tunnel-port',type=int,default=19090)
     p.add_argument('--ssh-host',required=True)
     p.add_argument('--ssh-socket',required=True)
     p.add_argument('--connect-script',type=Path,help='Optional existing local SSH authentication helper')
@@ -43,7 +45,7 @@ def main():
     models=json.loads((Path(__file__).parent/'evaluation_models.json').read_text())
     profile=next((item for item in models if item['id']==args.model),None)
     if profile is None: p.error('Unknown evaluated model family')
-    if profile['runtime'] != 'gguf-qwen':
+    if not args.hf_backend and profile['runtime'] != 'gguf-qwen':
         p.error('This model requires a validated model-specific backend adapter; run model_preflight.py')
     if args.probe_id:
         if args.prompt or args.configs: p.error('--probe-id cannot be combined with --prompt or --configs')
@@ -76,10 +78,10 @@ def main():
         print(f'Job {args.job}: {state}; waiting for backend build',flush=True)
         time.sleep(30)
     server_port=int(remote(f'cat {root}/runs/port-{args.job}.txt'))
-    subprocess.run(ssh+['-O','forward','-L',f'127.0.0.1:19090:{host}:{server_port}',args.ssh_host],check=True,capture_output=True)
+    subprocess.run(ssh+['-O','forward','-L',f'127.0.0.1:{args.tunnel_port}:{host}:{server_port}',args.ssh_host],check=True,capture_output=True)
     class Relay(BaseHTTPRequestHandler):
         def relay(self):
-            conn=http.client.HTTPConnection('127.0.0.1',19090,timeout=1200)
+            conn=http.client.HTTPConnection('127.0.0.1',args.tunnel_port,timeout=1200)
             try:
                 body=self.rfile.read(int(self.headers.get('Content-Length',0)))
                 if self.command == 'POST' and self.path == '/stepper-api':
@@ -108,21 +110,36 @@ def main():
     def cleanup():
         server.shutdown()
         server.server_close()
-        subprocess.run(ssh+['-O','cancel','-L',f'127.0.0.1:19090:{host}:{server_port}',args.ssh_host],
+        subprocess.run(ssh+['-O','cancel','-L',f'127.0.0.1:{args.tunnel_port}:{host}:{server_port}',args.ssh_host],
                        capture_output=True,timeout=15)
     atexit.register(cleanup)
-    print(f'HPC stepper ready at http://127.0.0.1:{args.port}/stepper',flush=True)
+    print(f'HPC API ready at http://127.0.0.1:{args.port}' if args.hf_backend else f'HPC stepper ready at http://127.0.0.1:{args.port}/stepper',flush=True)
     while True:
         try:
             with urllib.request.urlopen(f'http://127.0.0.1:{args.port}/setup-status',timeout=10) as r: status=json.load(r)
             if all(v['bytes']==v['expected'] for v in status.values()): break
             print('Waiting for verified HPC model downloads',flush=True)
         except OSError: pass
+        if remote(f'bjobs -noheader -o stat {args.job}').strip()!='RUN':
+            raise RuntimeError('HPC allocation stopped before backend readiness')
+        if args.hf_backend:
+            health=remote(f'test -f {root}/.runtime/hf-job-{args.job}.json && cat {root}/.runtime/hf-job-{args.job}.json || true')
+            if health:
+                health=json.loads(health)
+                if health.get('phase')=='validation_failed':
+                    raise RuntimeError('HF validation failed: '+health.get('error_type','unknown'))
         time.sleep(20)
-    provenance={'resident_models':True,'job_id':args.job,'compute_host':host,'remote_root':args.remote_root,
-                'models':json.loads((Path(__file__).parent/'models.json').read_text()),
+    hf_status=None
+    if args.hf_backend:
+        with urllib.request.urlopen(f'http://127.0.0.1:{args.port}/model-status',timeout=30) as response:
+            hf_status=json.load(response)
+        if not hf_status.get('passed') or hf_status.get('model')!=args.model or hf_status.get('layer')!=profile['layer'] or hf_status.get('dimension')!=profile['dimension']:
+            raise ValueError('HF model backend did not pass the required synthetic validation')
+    provenance={'resident_models':not args.hf_backend,'job_id':args.job,'compute_host':host,'remote_root':args.remote_root,
+                'models':profile['roles'] if args.hf_backend else json.loads((Path(__file__).parent/'models.json').read_text()),
+                'hf_validation':hf_status,
                 'started_at':time.time(),'local_weights':False,'evaluated_model':profile,
-                'gpu_info':remote(f'cat {root}/runs/gpu-{args.job}.txt'),
+                'gpu_info':hf_status.get('cuda_devices') if args.hf_backend else remote(f'cat {root}/runs/gpu-{args.job}.txt'),
                 'source_sha256':{name:hashlib.sha256((Path(__file__).parent/name).read_bytes()).hexdigest()
                                  for name in ('trajectories.py','hpc_control.py','stepper.py','launch.py','codex_editor.py')}}
     trajectories.write_json(args.output/f'provenance-{args.job}.json',provenance)
@@ -130,6 +147,8 @@ def main():
             'editor_model':codex_editor.MODEL,'variants':list(trajectories.VARIANTS),
             'probe_id':args.probe_id,'editor_preset':args.editor_preset,
             'policy':'independent prefixes; greedy; one-position intervention; no KV-edit replay'}
+    if args.hf_backend:
+        config.update(evaluated_model=args.model,precision=hf_status['precision'])
     try:
         inputs=args.configs or [None]
         for path in inputs:
@@ -156,7 +175,7 @@ def main():
                     time.sleep(30)
                     state=remote(f'bjobs -noheader -o stat {args.job}').strip()
                     if state != 'RUN': raise RuntimeError('GPU allocation is no longer running')
-                    subprocess.run(ssh+['-O','forward','-L',f'127.0.0.1:19090:{host}:{server_port}',args.ssh_host],capture_output=True)
+                    subprocess.run(ssh+['-O','forward','-L',f'127.0.0.1:{args.tunnel_port}:{host}:{server_port}',args.ssh_host],capture_output=True)
     finally:
         # Copy every completed stage to HPC as well, including after failures.
         subprocess.run(['rsync','-a','-e',shlex.join(ssh),str(args.output)+'/',

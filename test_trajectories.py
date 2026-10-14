@@ -52,6 +52,18 @@ class TrajectoryTests(unittest.TestCase):
             with self.assertRaises(RuntimeError): t.recorded(Path(tmp)/'fail.json', {}, Mock(side_effect=RuntimeError('offline')))
             self.assertEqual(len(list(Path(tmp).glob('fail-error-*.json'))), 1)
 
+    def test_backend_specific_eos_stops_branch(self):
+        def api(action, **kwargs):
+            if action == 'start': return {'tokens':[7], 'eos_token_ids':[0]}
+            if action == 'inspect': return {'h':[1.], 'baseline':prediction(0)}
+            if action == 'explain': return {'text':'synthetic', 'reconstruction':[1.]}
+            if action == 'compare': return {name:prediction(0) for name in t.VARIANTS}
+            if action == 'decode': return {'content':''}
+        with tempfile.TemporaryDirectory() as directory:
+            outputs=t.generate({'prompt':'synthetic','instruction':'preserve','max_tokens':2},directory,api,lambda *_:{'proposal':'synthetic'})
+            self.assertTrue(all(result['stop_reason']=='eos' for result in outputs.values()))
+            self.assertTrue(all(len(result['generated_token_ids'])==1 for result in outputs.values()))
+
     def test_eos_stops_branch(self):
         def api(action, **kwargs):
             if action == 'start': return {'tokens': [1]}
