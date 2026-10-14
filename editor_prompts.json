@@ -1,0 +1,14 @@
+[
+  {
+    "id": "mouse_rhyme",
+    "prompt": "Rewrite the description to emphasize a playful rhyme about a mouse and cheese. Preserve unrelated details."
+  },
+  {
+    "id": "preserve_meaning",
+    "prompt": "Rewrite the description clearly while preserving its meaning and all substantive details."
+  },
+  {
+    "id": "unchanged_control",
+    "prompt": "Return the original description unchanged."
+  }
+]

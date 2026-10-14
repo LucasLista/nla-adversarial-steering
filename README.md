@@ -364,3 +364,11 @@ Set `NLA_CONTEXT_SIZE=16384` in the HPC server environment for long runs;
 otherwise the original 2048-token context remains the default. The backend
 reserves 148 context positions. Walltime can interrupt any stage; resume from
 the same output directory. Model download/build time counts against walltime.
+
+### Editor instruction presets
+
+Add entries to `editor_prompts.json` as objects with `id` and `prompt` strings.
+Refresh `/stepper`, select an Instruction preset, and choose Local Qwen or Sol.
+The selected text fills the editable Instruction field; manual edits are retained
+as a custom instruction. Presets change the editing instruction, while each
+provider's system instructions remain in `stepper.py` or `codex_editor.py`.

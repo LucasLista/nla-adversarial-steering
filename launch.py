@@ -15,6 +15,7 @@ import threading
 import time
 import stepper
 import experiments
+import prompt_catalog
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 ROOT = pathlib.Path(__file__).resolve().parent
@@ -128,6 +129,18 @@ class Handler(BaseHTTPRequestHandler):
         if self.path == '/favicon.ico':
             self.send_response(204)
             self.end_headers()
+        elif self.path in ('/prompt-catalog', '/editor-prompt-catalog'):
+            try:
+                filename = 'editor_prompts.json' if self.path == '/editor-prompt-catalog' else 'prompts.json'
+                data = json.dumps(prompt_catalog.load(ROOT / filename)).encode()
+            except ValueError:
+                self.send_error(500, 'Invalid prompt catalog')
+                return
+            self.send_response(200)
+            self.send_header('Content-Type', 'application/json')
+            self.send_header('Cache-Control', 'no-store')
+            self.end_headers()
+            self.wfile.write(data)
         elif self.path in ('/stepper', '/stepper.html'):
             data = (ROOT / 'stepper.html').read_bytes()
             self.send_response(200)

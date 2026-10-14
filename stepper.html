@@ -25,7 +25,7 @@ nav button.agree{background:#374151;color:#9ca3af}#edited{width:100%;min-height:
 <p><button id="inspect">Inspect</button><button id="explain">Explain</button><button id="compare">Compare</button></p>
 <div class="grid"><div class="card"><h3>Original</h3><pre id="original"></pre></div><div class="card"><h3>Edit</h3><textarea id="edited"></textarea><small></small></div><div class="card"><details><summary>Error metrics</summary><pre id="metrics"></pre></details></div></div>
 <div class="card"><h2>Editor</h2>
-<p><label>Editor <select id="editor"><option value="local">Local Qwen</option><option value="codex">Sol 6.1 · subscription</option></select></label></p><small>Sol sends the edit instruction and NLA text to OpenAI; subscription limits apply.</small><br><label for="instruction">Instruction</label><textarea id="instruction">Rewrite the description to emphasize a playful rhyme about a mouse and cheese. Preserve unrelated details.</textarea>
+<p><label>Editor <select id="editor"><option value="local">Local Qwen</option><option value="codex">Sol 6.1 · subscription</option></select></label></p><small>Sol sends the edit instruction and NLA text to OpenAI; subscription limits apply.</small><br><p><label>Instruction preset <select id="editor-preset"><option value="">Custom instruction</option></select></label></p><label for="instruction">Instruction</label><textarea id="instruction">Rewrite the description to emphasize a playful rhyme about a mouse and cheese. Preserve unrelated details.</textarea>
 <p><label>Mode <select id="mode"><option value="review">Review edits</option><option value="auto">Auto edits</option></select></label>
 <label>Tokens <select id="token-mode"><option value="manual">Choose myself</option><option value="auto">Auto · most likely</option></select></label>
 <label>Steps <input id="steps" type="number" min="1" max="20" value="3" style="width:60px"></label></p>
@@ -60,7 +60,7 @@ async function initSession(){
 }
 for(const id of settings)$(id).addEventListener('input',saveSession);
 function status(t){$('status').textContent=t;$('editor-status').textContent=t}
-function controls(){document.querySelectorAll('button').forEach(b=>b.disabled=busy);document.querySelectorAll('#history button').forEach(b=>b.disabled=false);$('inspect').disabled=busy||!s.tokens.length||s.ended;$('explain').disabled=busy||!s.h||!!s.text;$('compare').disabled=busy||looping||!s.reconstruction;$('loop').disabled=busy||looping||!s.tokens.length||s.ended;$('approve').disabled=busy||viewIndex!==null||!s.pending;$('stop').disabled=!looping&&!s.pending;document.querySelectorAll('#distributions button').forEach(b=>b.disabled=busy||viewIndex!==null||(looping&&!awaitingToken));for(const id of ['token-mode','editor','edited','mode','instruction','steps','prompt','import','example'])$(id).disabled=busy||(looping&&id!=='edited');if(awaitingToken)$('edited').disabled=true;if(viewIndex!==null){for(const id of ['inspect','explain','compare','loop','edited'])$(id).disabled=true;}for(const id of ['load-input','open-result'])$(id).disabled=busy||looping;if(looping){$('start').disabled=true;$('inspect').disabled=true;$('explain').disabled=true;} }
+function controls(){document.querySelectorAll('button').forEach(b=>b.disabled=busy);document.querySelectorAll('#history button').forEach(b=>b.disabled=false);$('inspect').disabled=busy||!s.tokens.length||s.ended;$('explain').disabled=busy||!s.h||!!s.text;$('compare').disabled=busy||looping||!s.reconstruction;$('loop').disabled=busy||looping||!s.tokens.length||s.ended;$('approve').disabled=busy||viewIndex!==null||!s.pending;$('stop').disabled=!looping&&!s.pending;document.querySelectorAll('#distributions button').forEach(b=>b.disabled=busy||viewIndex!==null||(looping&&!awaitingToken));for(const id of ['token-mode','editor','editor-preset','edited','mode','instruction','steps','prompt','import','example'])$(id).disabled=busy||(looping&&id!=='edited');if(awaitingToken)$('edited').disabled=true;if(viewIndex!==null){for(const id of ['inspect','explain','compare','loop','edited'])$(id).disabled=true;}for(const id of ['load-input','open-result'])$(id).disabled=busy||looping;if(looping){$('start').disabled=true;$('inspect').disabled=true;$('explain').disabled=true;} }
 async function task(fn){busy=true;controls();try{await fn()}catch(e){status('Error: '+e.message)}finally{busy=false;controls();saveSession()}}
 async function api(action,extra={}){const r=await fetch('/stepper-api',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action,tokens:s.tokens,...extra})});const d=await r.json();if(!r.ok||typeof d.error==='string')throw Error(d.error||r.statusText);return d}
 function show(){ const v=viewIndex===null?s:s.history[viewIndex]; $('generated').textContent=s.display||'';$('position').textContent=s.tokens.length?'Context tokens: '+s.tokens.length+' · intervention position: '+(s.tokens.length-1)+(s.ended?' · End of sequence':''):'';$('original').textContent=v.text||'';$('edited').value=v.edited??v.text??'';$('metrics').textContent=v.metrics?JSON.stringify(v.metrics,null,2):'';$('view-label').textContent=viewIndex===null?'Live':'Step '+(viewIndex+1)+' · '+(v.chosen?.variant||'');renderHistory();render();controls();saveSession()}
@@ -116,5 +116,36 @@ $('load-input').onclick=()=>task(async()=>{const v=await api('experiment-input',
 $('save-result').onclick=()=>task(async()=>{const v=await api('save-result',{...experimentBody(),session:sessionSnapshot()});status('Saved '+v.saved);});
 $('list-results').onclick=()=>task(async()=>{const v=await api('results',experimentBody());$('result-list').replaceChildren();for(const name of v.results){const o=document.createElement('option');o.value=name;o.textContent=name;$('result-list').append(o);}status(v.results.length+' saved runs');});
 $('open-result').onclick=()=>task(async()=>{restoreResult(await api('open-result',{...experimentBody(),result:$('result-list').value}));status('Run opened.');});
-initSession();
+$('editor-preset').onchange=()=>{
+ if($('editor-preset').value){$('instruction').value=$('editor-preset').value;saveSession();}
+};
+$('instruction').addEventListener('input',()=>{$('editor-preset').value=''});
+async function loadEditorPresets(){
+ try{
+  const response=await fetch('/editor-prompt-catalog');
+  if(!response.ok)throw Error('Editor presets unavailable');
+  const entries=await response.json();
+  for(const entry of entries){
+   const option=document.createElement('option');
+   option.textContent=entry.id;option.value=entry.prompt;
+   $('editor-preset').append(option);
+  }
+  if(entries.some(entry=>entry.prompt===$('instruction').value))$('editor-preset').value=$('instruction').value;
+ }catch(e){status('Could not load editor instruction presets.');}
+}
+async function loadProbes(){
+ try{
+  const response=await fetch('/prompt-catalog');
+  if(!response.ok)throw Error('Prompt catalog unavailable');
+  const entries=await response.json();
+  for(const entry of entries){
+   const option=document.createElement('option');
+   option.textContent=entry.id;
+   option.value=entry.prompt;
+   $('example').append(option);
+  }
+ }catch(e){status('Could not load prompts.json presets.');}
+}
+loadProbes();
+initSession().then(loadEditorPresets);
 </script></html>
