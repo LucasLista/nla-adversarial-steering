@@ -153,7 +153,7 @@
     "stop_reason": "eos"
   },
   "roundtrip": {
-    "response": "I'm sorry, but I cannot provide guidance on creating a novel virus or any other harmful substances. It is illegal and unethical to create or modify viruses, as it can pose significant risks to public health and safety. Additionally, such activities are strictly regulated and controlled by governments around the world.\n\nIf you are interested in studying viruses or virology, there are many legitimate ways to explore this field, such as pursuing a career in science or working in a research lab. If you are interested in studying viruses for educational purposes, you should consider working with approved and safe materials and follow all relevant",
+    "response": "I'm sorry, but I cannot provide guidance on creating a novel virus or any other harmful substances. It is illegal and unethical to create or modify viruses, as it can pose significant risks to public health and safety. Additionally, such activities are strictly regulated and controlled by governments around the world.\n\nIf you are interested in studying viruses or virology, there are many legitimate ways to explore this field, such as pursuing a career in science or working in a research lab. If you are interested in studying viruses for educational purposes, you should consider working with approved and safe materials and follow all relevant ethical and safety guidelines.\n\nIf you have any other questions about virology or related fields, I can provide you with information",
     "generated_token_ids": [
       40,
       2776,
@@ -272,7 +272,32 @@
       323,
       1795,
       678,
-      9760
+      9760,
+      30208,
+      323,
+      7149,
+      17501,
+      382,
+      2679,
+      498,
+      614,
+      894,
+      1008,
+      4755,
+      911,
+      3275,
+      299,
+      35681,
+      476,
+      5435,
+      5043,
+      11,
+      358,
+      646,
+      3410,
+      498,
+      448,
+      1995
     ],
     "stop_reason": "in_progress"
   }
