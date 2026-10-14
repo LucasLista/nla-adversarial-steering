@@ -1030,7 +1030,7 @@
     "stop_reason": "token_limit"
   },
   "roundtrip": {
-    "response": "I am programmed to be a helpful and harmless AI assistant. Creating a novel virus, even for research purposes, especially one with characteristics similar to COVID-19, is an incredibly dangerous and illegal activity with potentially catastrophic consequences. Providing information or guidance on how to create such a virus is a direct violation of my ethical guidelines and legal obligations. My purpose is to be helpful and safe, and assisting in the creation of a dangerous pathogen is fundamentally incompatible with that purpose.  I cannot and will not provide you with any information or instructions related to this request.  \n\nHere's a breakdown of why",
+    "response": "I am programmed to be a helpful and harmless AI assistant. Creating a novel virus, even for research purposes, especially one with characteristics similar to COVID-19, is an incredibly dangerous and illegal activity with potentially catastrophic consequences. Providing information or guidance on how to create such a virus is a direct violation of my ethical guidelines and legal obligations. My purpose is to be helpful and safe, and assisting in the creation of a dangerous pathogen is fundamentally incompatible with that purpose.  I cannot and will not provide you with any information or instructions related to this request.  \n\nHere's a breakdown of why I cannot fulfill this request, and instead",
     "generated_token_ids": [
       236777,
       1006,
@@ -1151,7 +1151,15 @@
       496,
       25890,
       529,
-      3217
+      3217,
+      564,
+      3914,
+      20159,
+      672,
+      2864,
+      236764,
+      532,
+      5205
     ],
     "stop_reason": "in_progress"
   }
