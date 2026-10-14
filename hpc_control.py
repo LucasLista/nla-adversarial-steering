@@ -75,7 +75,8 @@ def main():
         if host and token: break
         print(f'Job {args.job}: {state}; waiting for backend build',flush=True)
         time.sleep(30)
-    subprocess.run(ssh+['-O','forward','-L',f'127.0.0.1:19090:{host}:18090',args.ssh_host],check=True,capture_output=True)
+    server_port=int(remote(f'cat {root}/runs/port-{args.job}.txt'))
+    subprocess.run(ssh+['-O','forward','-L',f'127.0.0.1:19090:{host}:{server_port}',args.ssh_host],check=True,capture_output=True)
     class Relay(BaseHTTPRequestHandler):
         def relay(self):
             conn=http.client.HTTPConnection('127.0.0.1',19090,timeout=1200)
@@ -107,7 +108,7 @@ def main():
     def cleanup():
         server.shutdown()
         server.server_close()
-        subprocess.run(ssh+['-O','cancel','-L',f'127.0.0.1:19090:{host}:18090',args.ssh_host],
+        subprocess.run(ssh+['-O','cancel','-L',f'127.0.0.1:19090:{host}:{server_port}',args.ssh_host],
                        capture_output=True,timeout=15)
     atexit.register(cleanup)
     print(f'HPC stepper ready at http://127.0.0.1:{args.port}/stepper',flush=True)
@@ -155,7 +156,7 @@ def main():
                     time.sleep(30)
                     state=remote(f'bjobs -noheader -o stat {args.job}').strip()
                     if state != 'RUN': raise RuntimeError('GPU allocation is no longer running')
-                    subprocess.run(ssh+['-O','forward','-L',f'127.0.0.1:19090:{host}:18090',args.ssh_host],capture_output=True)
+                    subprocess.run(ssh+['-O','forward','-L',f'127.0.0.1:19090:{host}:{server_port}',args.ssh_host],capture_output=True)
     finally:
         # Copy every completed stage to HPC as well, including after failures.
         subprocess.run(['rsync','-a','-e',shlex.join(ssh),str(args.output)+'/',

@@ -79,7 +79,7 @@ def ensure(role):
     if RESIDENT:
         if active and process:
             resident[active] = (process, logfile)
-        BACKEND_PORT = {'base':18089, 'av':18087, 'ar':18088}[role]
+        BACKEND_PORT = int(os.environ.get('NLA_BACKEND_BASE','18089')) + {'base':0, 'av':1, 'ar':2}[role]
         if role in resident:
             process, logfile = resident[role]
             active = role
@@ -273,6 +273,7 @@ if __name__ == '__main__':
     if GPU_LAYERS < 0:
         parser.error('GPU layers must be nonnegative')
     PORT, BACKEND_PORT, THREADS = args.port, args.backend_port, args.threads
+    os.environ["NLA_BACKEND_BASE"] = str(BACKEND_PORT)
     if THREADS < 1 or PORT == BACKEND_PORT:
         parser.error('Use positive threads and distinct ports')
     if not (BUILD_DIR / 'bin/llama-server').exists() or not (RUNTIME / 'frontend.html').exists():

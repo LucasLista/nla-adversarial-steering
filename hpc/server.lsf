@@ -32,7 +32,11 @@ export NLA_RESIDENT_MODELS=1
 export NLA_CONTEXT_SIZE=16384
 uv sync --locked
 uv run --locked setup.py --cuda --cuda-arch 70 --skip-download --jobs 4
+# Allocate a per-job port range to avoid unrelated services on shared nodes.
+server_port=$((30000 + (LSB_JOBID % 5000) * 4))
+backend_port=$((server_port + 1))
+printf '%s\n' "$server_port" > "runs/port-${LSB_JOBID}.txt"
 hostname -f > "runs/host-${LSB_JOBID}.txt"
 umask 077
 uv run --locked python -c 'import secrets; print(secrets.token_hex(32))' > "runs/token-${LSB_JOBID}.txt"
-exec uv run --locked launch.py --gpu-layers 99 --threads 4 --listen-host 0.0.0.0 --auth-token-file "runs/token-${LSB_JOBID}.txt" --audit-log
+exec uv run --locked launch.py --port "$server_port" --backend-port "$backend_port" --gpu-layers 99 --threads 4 --listen-host 0.0.0.0 --auth-token-file "runs/token-${LSB_JOBID}.txt" --audit-log
