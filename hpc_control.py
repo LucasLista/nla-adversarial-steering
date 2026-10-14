@@ -132,7 +132,7 @@ def main():
     try:
         inputs=args.configs or [None]
         for path in inputs:
-            cfg=dict(config)
+            cfg={k:v for k,v in config.items() if k not in ('probe_id','editor_preset') or v is not None}
             destination=args.output
             if path:
                 private=json.loads(path.read_text())
