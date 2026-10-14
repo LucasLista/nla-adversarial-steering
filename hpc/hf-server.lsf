@@ -4,7 +4,7 @@
 #BSUB -n 8
 #BSUB -gpu "num=2:mode=exclusive_process"
 #BSUB -R "span[hosts=1] rusage[mem=8GB]"
-#BSUB -M 10GB
+#BSUB -M 9GB
 #BSUB -W 4:00
 #BSUB -o runs/hf-%J.out
 #BSUB -e runs/hf-%J.err
