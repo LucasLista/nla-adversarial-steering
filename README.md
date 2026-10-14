@@ -425,3 +425,17 @@ uses shared CUDA compute mode with an exclusive GPU allocation so all three
 processes can use that GPU. Laptop/PC defaults remain single-model mode.
 Network errors retry checkpointed generation; authentication expiry still
 requires a human login. Each allocation writes its own provenance file.
+
+### HPC Hugging Face snapshot staging
+
+`hf_stage.py --model gemma3-12b --ssh-host HOST --ssh-socket SOCKET
+--remote-root ROOT` streams pinned snapshots into
+`ROOT/.runtime/hf-models/MODEL/{base,av,ar}` on HPC. The local gateway
+authenticates to Hugging Face; an SSH reverse tunnel carries file bytes to
+the HPC downloader. Neither the HF credential nor model weights are stored
+on the other side: the credential stays local and weights stay on HPC.
+
+Downloads resume partial files, verify LFS SHA-256 and size, and report only
+file counts through `.runtime/hf-models/MODEL/download-progress.json`.
+Staging checkpoints does not mean that a model backend is validated or that
+private evaluation has started.
