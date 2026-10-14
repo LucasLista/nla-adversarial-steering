@@ -83,8 +83,17 @@ def generate(config, directory, api, editor):
     directory = Path(directory)
     metadata = directory / 'config.json'
     if metadata.exists():
-        if json.loads(metadata.read_text()) != config:
-            raise ValueError('Run configuration differs; use another output directory')
+        previous = json.loads(metadata.read_text())
+        if previous != config:
+            old_limit = previous.get('max_tokens', 0)
+            new_limit = config.get('max_tokens', 0)
+            old_settings = {k:v for k,v in previous.items() if k != 'max_tokens'}
+            new_settings = {k:v for k,v in config.items() if k != 'max_tokens'}
+            if old_settings != new_settings or new_limit <= old_limit:
+                raise ValueError('Run configuration differs; only increasing the token limit is supported')
+            write_json(metadata, config)
+            (directory / 'complete.json').unlink(missing_ok=True)
+            write_progress(directory, new_limit)
     else:
         write_json(metadata, config)
     started = recorded(directory / 'start.json', {'prompt': config['prompt']},

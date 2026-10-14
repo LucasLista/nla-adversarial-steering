@@ -41,6 +41,16 @@ class TrajectoryTests(unittest.TestCase):
             saved = json.loads((Path(tmp)/'edited_raw/step-0000/explain.json').read_text())
             self.assertEqual(saved['response']['error'], [.1])
             self.assertIn('duration_seconds', saved)
+            extended = dict(config, max_tokens=3)
+            with patch('sys.stdout', new=io.StringIO()):
+                longer = t.generate(extended, tmp, api, editor)
+            self.assertTrue(all(len(v['generated_token_ids']) == 3 for v in longer.values()))
+            self.assertEqual(editor.call_count, 6)
+            with self.assertRaises(ValueError):
+                t.generate(config, tmp, api, editor)
+            with self.assertRaises(ValueError):
+                t.generate(dict(extended, instruction='changed'), tmp, api, editor)
+
 
     def test_failure_preserves_successful_stage(self):
         with tempfile.TemporaryDirectory() as tmp:
