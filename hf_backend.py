@@ -7,6 +7,7 @@ import gc
 import json
 from pathlib import Path
 import re
+from stepper import metrics
 
 
 def injection_position(ids, metadata):
@@ -204,8 +205,10 @@ class Backend:
             reconstruction = self.reconstruct(text)
             original = torch.tensor(body['h'], dtype=torch.float32)
             error = original-reconstruction
+            if not torch.isfinite(error).all():
+                raise ValueError('Nonfinite reconstruction error')
             return {'text':text, 'reconstruction':reconstruction.tolist(), 'error':error.tolist(),
-                    'metrics':{'l2':float(error.norm()),'relative_l2':float(error.norm()/original.norm())}}
+                    'metrics':metrics(original.tolist(),reconstruction.tolist())}
         if action == 'compare':
             original_reconstruction = torch.tensor(body['reconstruction'], dtype=torch.float32)
             edited_reconstruction = self.reconstruct(body['edited'])
@@ -213,10 +216,15 @@ class Backend:
             if original.shape != original_reconstruction.shape or original.shape != edited_reconstruction.shape:
                 raise ValueError('Wrong reconstruction shape')
             corrected = original+(edited_reconstruction-original_reconstruction)
+            if not torch.isfinite(corrected).all():
+                raise ValueError('Nonfinite corrected activation')
             return {'original':baseline, 'roundtrip':self.predict(ids, original_reconstruction)[1],
                     'edited_raw':self.predict(ids, edited_reconstruction)[1],
                     'edited_corrected':self.predict(ids, corrected)[1],
-                    'error':(original-original_reconstruction).tolist()}
+                    'error':(original-original_reconstruction).tolist(),
+                    'edited_reconstruction':edited_reconstruction.tolist(),
+                    'corrected_activation':corrected.tolist(),
+                    'metrics':metrics(original.tolist(),original_reconstruction.tolist())}
         raise ValueError('Unknown HF backend action')
 
     def validate(self):

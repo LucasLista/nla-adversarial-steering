@@ -12,15 +12,21 @@ ROOT = Path(__file__).resolve().parent
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--pid-file',type=Path,help='Separate process marker for another model controller')
+    parser.add_argument('--log-file',type=Path,help='Separate unread controller log')
     parser.add_argument('controller_args', nargs=argparse.REMAINDER)
-    args = parser.parse_args().controller_args
+    options = parser.parse_args()
+    args = options.controller_args
     if args and args[0] == '--':
         args = args[1:]
     if not args:
         parser.error('Pass hpc_control.py arguments after --')
     runs = ROOT / 'runs'
     runs.mkdir(exist_ok=True)
-    pid_file = runs / 'controller.pid'
+    pid_file = options.pid_file or runs / 'controller.pid'
+    log_file = options.log_file or runs / 'controller.log'
+    pid_file.parent.mkdir(parents=True,exist_ok=True)
+    log_file.parent.mkdir(parents=True,exist_ok=True)
     if pid_file.exists():
         try:
             os.kill(int(pid_file.read_text().strip()), 0)
@@ -28,7 +34,7 @@ def main():
             pass
         else:
             parser.error('Recorded controller process is still alive; check process metadata first')
-    with (runs / 'controller.log').open('ab') as log:
+    with log_file.open('ab') as log:
         process = subprocess.Popen([sys.executable, str(ROOT / 'hpc_control.py'), *args],
                                    cwd=ROOT, stdin=subprocess.DEVNULL,
                                    stdout=log, stderr=log, start_new_session=True)
