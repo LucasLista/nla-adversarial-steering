@@ -27,7 +27,19 @@ def check(profile, token=None):
             with urllib.request.urlopen(urllib.request.Request(url, headers=headers), timeout=20) as response:
                 access[role] = {'accessible': response.status == 200, 'http_status': response.status}
         except urllib.error.HTTPError as error:
-            access[role] = {'accessible': False, 'http_status': error.code}
+            # An expired cached token can reject otherwise public checkpoints.
+            # Retry public access; gated repositories still enforce their access rules.
+            if token and error.code == 401:
+                try:
+                    with urllib.request.urlopen(url, timeout=20) as response:
+                        access[role] = {'accessible': response.status == 200,
+                                        'http_status': response.status, 'public_access': True}
+                except urllib.error.HTTPError as public_error:
+                    access[role] = {'accessible': False, 'http_status': public_error.code}
+                except OSError:
+                    access[role] = {'accessible': False, 'reason': 'network_unavailable'}
+            else:
+                access[role] = {'accessible': False, 'http_status': error.code}
         except OSError:
             access[role] = {'accessible': False, 'reason': 'network_unavailable'}
     return {'model': profile['id'], 'layer': profile['layer'], 'dimension': profile['dimension'],
