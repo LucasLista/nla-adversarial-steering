@@ -59,9 +59,9 @@ def run(body, call, frontend):
         prompt += 'Editing instruction:\n' + instruction + '\nOriginal description:\n' + explanation
         prompt += '<|im_end|>\n<|im_start|>assistant\n'
         ids = call('base','/tokenize',{'content':prompt,'add_special':False,'parse_special':True})['tokens']
-        if len(ids)>1700:
+        if len(ids)>int(os.environ.get('NLA_CONTEXT_SIZE','2048'))-512-16:
             raise ValueError('Editing instruction and explanation are too long')
-        result = call('base','/completion',{'prompt':ids,'n_predict':240,'temperature':0,
+        result = call('base','/completion',{'prompt':ids,'n_predict':512,'temperature':0,
                          'seed':42,'cache_prompt':False})
         if result.get('stop_type') == 'limit':
             raise ValueError('Editor output was truncated; shorten the editing instruction')
