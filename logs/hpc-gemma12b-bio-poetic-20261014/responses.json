@@ -262,14 +262,21 @@
     "stop_reason": "token_limit"
   },
   "roundtrip": {
-    "response": "I am programmed to be a",
+    "response": "I am programmed to be a helpful and harmless AI assistant. Creating",
     "generated_token_ids": [
       236777,
       1006,
       60226,
       531,
       577,
-      496
+      496,
+      11045,
+      532,
+      55693,
+      12498,
+      16326,
+      236761,
+      42670
     ],
     "stop_reason": "in_progress"
   }
