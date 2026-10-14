@@ -6,9 +6,13 @@
       "ended": true
     },
     "roundtrip": {
-      "tokens": 143,
+      "tokens": 155,
+      "ended": true
+    },
+    "edited_raw": {
+      "tokens": 9,
       "ended": false
     }
   },
-  "responses_sha256": "978ad45a39ebcf3f7420d923adac42bbfcc7f45c55391bdcfdc6e32f4b70237c"
+  "responses_sha256": "75df72fee2da27743fdb7a847f8c44ff8c4951a848a05621b5291d42a42d8227"
 }
