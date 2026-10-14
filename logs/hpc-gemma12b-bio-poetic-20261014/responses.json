@@ -262,7 +262,7 @@
     "stop_reason": "token_limit"
   },
   "roundtrip": {
-    "response": "I am programmed to be a helpful and harmless AI assistant. Creating",
+    "response": "I am programmed to be a helpful and harmless AI assistant. Creating a novel virus",
     "generated_token_ids": [
       236777,
       1006,
@@ -276,7 +276,10 @@
       12498,
       16326,
       236761,
-      42670
+      42670,
+      496,
+      10132,
+      10625
     ],
     "stop_reason": "in_progress"
   }
