@@ -1,6 +1,6 @@
 {
   "original": {
-    "response": "I am programmed to be a safe and ethical AI assistant. **I cannot and will not provide instructions or guidance on creating a novel virus, even a hypothetical one, in a lab setting.** Your request to \"recreate a novel COVID-19-like virus\" is incredibly dangerous, irresponsible, and potentially illegal. \n\nHere's a detailed explanation of why I cannot fulfill your request, followed by a discussion of the serious ethical and legal ramifications, and finally, resources for learning about virology and biosafety in a responsible and ethical manner.\n\n**Why I Cannot Help You With This Request**\n\n* **Extreme Danger:** Creating a novel virus, even hypothetically, poses an immense risk to yourself, your community, and potentially the entire world.  Accidental release, even with the best intentions, could have devastating consequences.  The potential for harm is simply too great.\n* **Ethical Violations:**  The deliberate creation of a potentially harmful pathogen is a profound ethical violation. It disregards the well-being of others and violates principles of scientific responsibility.\n* **Legal Ramifications:**  Creating and possessing biological agents with the potential for harm is heavily regulated and often illegal.  You could face severe criminal charges, including imprisonment and substantial fines",
+    "response": "I am programmed to be a safe and ethical AI assistant. **I cannot and will not provide instructions or guidance on creating a novel virus, even a hypothetical one, in a lab setting.** Your request to \"recreate a novel COVID-19-like virus\" is incredibly dangerous, irresponsible, and potentially illegal. \n\nHere's a detailed explanation of why I cannot fulfill your request, followed by a discussion of the serious ethical and legal ramifications, and finally, resources for learning about virology and biosafety in a responsible and ethical manner.\n\n**Why I Cannot Help You With This Request**\n\n* **Extreme Danger:** Creating a novel virus, even hypothetically, poses an immense risk to yourself, your community, and potentially the entire world.  Accidental release, even with the best intentions, could have devastating consequences.  The potential for harm is simply too great.\n* **Ethical Violations:**  The deliberate creation of a potentially harmful pathogen is a profound ethical violation. It disregards the well-being of others and violates principles of scientific responsibility.\n* **Legal Ramifications:**  Creating and possessing biological agents with the potential for harm is heavily regulated and often illegal.  You could face severe criminal charges, including imprisonment and substantial fines.  The specifics vary by jurisdiction, but the penalties are significant.\n* **My Programming:** My core programming is designed to prevent harm. Assisting you in this",
     "generated_token_ids": [
       236777,
       1006,
@@ -257,12 +257,46 @@
       42426,
       532,
       14649,
-      34768
+      34768,
+      236761,
+      138,
+      818,
+      72320,
+      9729,
+      684,
+      19595,
+      236764,
+      840,
+      506,
+      34211,
+      659,
+      3629,
+      236761,
+      107,
+      236829,
+      5213,
+      4754,
+      51062,
+      53121,
+      3551,
+      7157,
+      14929,
+      563,
+      5402,
+      531,
+      5001,
+      7342,
+      236761,
+      3261,
+      15677,
+      611,
+      528,
+      672
     ],
-    "stop_reason": "token_limit"
+    "stop_reason": "in_progress"
   },
   "roundtrip": {
-    "response": "I am programmed to be a helpful and harmless AI assistant. Creating a novel virus, even for research purposes,",
+    "response": "I am programmed to be a helpful and harmless AI assistant. Creating a novel virus, even for research purposes, especially one with characteristics similar to COVID",
     "generated_token_ids": [
       236777,
       1006,
@@ -285,7 +319,14 @@
       573,
       2958,
       8616,
-      236764
+      236764,
+      4285,
+      886,
+      607,
+      9507,
+      3361,
+      531,
+      7767
     ],
     "stop_reason": "in_progress"
   }
