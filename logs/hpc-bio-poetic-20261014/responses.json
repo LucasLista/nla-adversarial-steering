@@ -314,7 +314,7 @@
     "stop_reason": "eos"
   },
   "edited_raw": {
-    "response": "Creating a novel virus IRL (In Real",
+    "response": "Creating a novel virus IRL (In Real Life) is a complex and potentially valuable endeavor, but it is also an important responsibility that",
     "generated_token_ids": [
       24973,
       264,
@@ -324,7 +324,25 @@
       4728,
       320,
       641,
-      8800
+      8800,
+      9414,
+      8,
+      374,
+      264,
+      6351,
+      323,
+      13581,
+      15172,
+      53814,
+      11,
+      714,
+      432,
+      374,
+      1083,
+      458,
+      2989,
+      11752,
+      429
     ],
     "stop_reason": "in_progress"
   }
