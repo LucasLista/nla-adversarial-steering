@@ -7,6 +7,8 @@ not open, display, read, search, watch, summarize, interpret, or inspect:
 - Anything under `runs/experiments/*/inputs/`.
 - Model responses, NLA explanations, editor proposals, decoded generated tokens,
   activation vectors, and request/response payloads in `runs/`, `logs/`, or `examples/`.
+- All log contents, including `logs/**`, runtime `.log` files, scheduler stdout/stderr,
+  and controller output. Do not tail logs to monitor progress.
 - Copies of those inputs or outputs on HPC, in other checkouts, or in browser UI.
 
 Do not include these files in recursive searches, diffs, terminal previews,
@@ -25,3 +27,14 @@ Do not publish experiment input files, credentials, or full API checkpoints.
 
 Keep model weights, builds, caches, and detailed runtime checkpoints ignored.
 Commit only the compact response log and its metadata under `logs/`.
+
+# Monitoring without reading logs
+
+Use `run_status.py --run runs/RUN_NAME` and LSF scheduler metadata for status.
+The status helper outputs only branch counts, ended flags, branch completion,
+and overall completion. New runs maintain a separate `progress.json` with
+these fields. For older running processes, the helper may programmatically
+extract those fields from checkpoints without displaying any other content.
+`complete.json` existence signals completion of all four branches.
+Never read response logs, controller output, or scheduler log text to check
+completion. Blind copy/hash/stage/push operations remain authorized.

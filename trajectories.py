@@ -64,6 +64,21 @@ class API:
             raise RuntimeError(result['error'])
         return result
 
+def write_progress(directory, limit):
+    branches = {}
+    for variant in VARIANTS:
+        path = directory / variant / 'state.json'
+        if path.exists():
+            state = json.loads(path.read_text())
+            count = len(state['generated'])
+            branches[variant] = {'tokens': count, 'ended': state['ended'],
+                                 'complete': state['ended'] or count >= limit}
+        else:
+            branches[variant] = {'tokens': 0, 'ended': False, 'complete': False}
+    write_json(directory / 'progress.json', {'branches': branches,
+               'complete': (directory / 'complete.json').exists()})
+
+
 def generate(config, directory, api, editor):
     directory = Path(directory)
     metadata = directory / 'config.json'
@@ -108,12 +123,14 @@ def generate(config, directory, api, editor):
             state.update(tokens=state['tokens'] + [token], generated=generated,
                          ended=token in EOS, response=decoded)
             write_json(state_path, state)
+            write_progress(directory, config['max_tokens'])
             print(f'{variant}: {len(generated)}/{config["max_tokens"]}, token={token}', flush=True)
         outputs[variant] = {'response': state['response'], 'generated_token_ids': state['generated'],
                             'stop_reason': 'eos' if state['ended'] else 'token_limit'}
         write_json(directory / 'responses.json', outputs)
     write_json(directory / 'complete.json', {'completed_at': datetime.datetime.now(datetime.timezone.utc).isoformat(),
                                            'variants': list(outputs)})
+    write_progress(directory, config['max_tokens'])
     return outputs
 
 def main():
