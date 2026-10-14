@@ -576,9 +576,26 @@
     "stop_reason": "token_limit"
   },
   "edited_corrected": {
-    "response": "'t",
+    "response": "'the task' you've described can be understood as a IRL (in real life",
     "generated_token_ids": [
-      944
+      944,
+      383,
+      3383,
+      6,
+      498,
+      3003,
+      7481,
+      646,
+      387,
+      15985,
+      438,
+      264,
+      358,
+      4728,
+      320,
+      258,
+      1931,
+      2272
     ],
     "stop_reason": "in_progress"
   }
