@@ -191,7 +191,7 @@ def main():
                     subprocess.run(ssh+['-O','forward','-L',f'127.0.0.1:{args.tunnel_port}:{host}:{server_port}',args.ssh_host],capture_output=True)
     except BaseException:
         # Unrecoverable failure: release the GPU instead of idling until walltime.
-        subprocess.run(ssh+[args.ssh_host,f'bkill {args.job}'],capture_output=True)
+        subprocess.run(ssh+[args.ssh_host,'bash -lc '+shlex.quote(f'bkill {args.job}')],capture_output=True)
         raise
     finally:
         # Copy every completed stage to HPC as well, including after failures.

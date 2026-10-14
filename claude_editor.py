@@ -18,6 +18,10 @@ SYSTEM = ('Revise a natural-language description of a language-model activation.
 FATAL = ('usage limit', 'rate limit', 'not logged in', 'invalid api key', 'please run /login', 'authentication')
 
 
+class ClaudeRefusal(RuntimeError):
+    """The editor model declined the request."""
+
+
 def propose(instruction, text):
     if not isinstance(instruction, str) or not isinstance(text, str) or not instruction.strip() or not text.strip() \
             or len(instruction) + len(text) > 20000:
@@ -33,11 +37,20 @@ def propose(instruction, text):
            '--no-session-persistence', '--system-prompt', SYSTEM, '--output-format', 'json', '--json-schema', SCHEMA]
     payload = json.dumps({'editing_instruction': instruction, 'original_description': text})
     with LOCK, tempfile.TemporaryDirectory(prefix='nla-claude-editor-') as tmp:
+        failures = []
         for attempt in range(3):
             try:
                 result = subprocess.run(cmd, input=payload, capture_output=True, text=True, cwd=tmp, env=env, timeout=300)
             except subprocess.TimeoutExpired:
                 result = None
+            if result is not None:
+                try:
+                    status = json.loads(result.stdout)
+                except json.JSONDecodeError:
+                    status = {}
+                # A refusal is deterministic for the same request; retrying will not help.
+                if status.get('stop_reason') == 'refusal':
+                    raise ClaudeRefusal('Claude editor refused this edit request (stop_reason=refusal); checkpoint preserved.')
             if result is not None and result.returncode == 0:
                 try:
                     data = json.loads(result.stdout)
@@ -45,11 +58,16 @@ def propose(instruction, text):
                     if not data.get('is_error') and proposal and len(proposal) <= 12000:
                         return {'proposal': proposal, 'editor_model': MODEL, 'editor_provider': 'claude-subscription',
                                 'instruction': instruction}
+                    failures.append({k: data.get(k) for k in ('is_error', 'subtype', 'api_error_status', 'stop_reason', 'terminal_reason')}
+                                    | {'has_proposal': bool(proposal), 'proposal_chars': len(proposal)})
                 except (json.JSONDecodeError, AttributeError):
-                    pass
+                    failures.append({'unparseable_output': True})
+            else:
+                failures.append({'timeout': True} if result is None else {'returncode': result.returncode})
             # Account limits and authentication need a human; retrying will not help. Payloads are never echoed.
             if result is not None and any(m in (result.stdout + result.stderr).lower() for m in FATAL):
                 raise RuntimeError('Claude editor unavailable: subscription limit or authentication. Checkpoint preserved.')
             if attempt < 2:
                 time.sleep(5 * (attempt + 1))
-    raise RuntimeError('Claude editor failed after three attempts; checkpoint preserved.')
+    # Metadata only (status fields, lengths); never model text.
+    raise RuntimeError('Claude editor failed after three attempts; checkpoint preserved. ' + json.dumps(failures))
