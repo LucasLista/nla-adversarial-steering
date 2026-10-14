@@ -31,6 +31,18 @@ def validate_contract(profile, metadata, role):
         raise ValueError('Invalid AV injection scale')
 
 
+def route_output_head(module, inputs):
+    # A text-only wrapper rebuilt from a multimodal model does not inherit the
+    # outer wrapper's output-head dispatch hook. Keep tied heads on their real
+    # embedding device and route the last hidden state explicitly.
+    weight=module.weight
+    if getattr(weight,'is_meta',False):
+        raise ValueError('Output head was not materialized')
+    value=inputs[0]
+    dtype=weight.dtype if weight.is_floating_point() else value.dtype
+    return (value.to(device=weight.device,dtype=dtype),*inputs[1:])
+
+
 class Backend:
     def __init__(self, profile, directory):
         import torch
@@ -93,6 +105,8 @@ class Backend:
                 wrapper.tie_weights()
                 model = wrapper
         model.generation_config = generation
+        if role != 'ar':
+            model.lm_head.register_forward_pre_hook(route_output_head)
         if role == 'ar':
             model.lm_head = torch.nn.Identity()
             model.model.norm = torch.nn.Identity()
