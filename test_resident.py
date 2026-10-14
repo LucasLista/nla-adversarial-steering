@@ -7,6 +7,9 @@ class ResidentTests(unittest.TestCase):
         launch.RESIDENT=True
         children=[]
         def spawn(*args,**kwargs):
+            command=args[0]
+            self.assertGreaterEqual(int(command[command.index('-b')+1]),int(command[command.index('-c')+1]))
+            self.assertEqual(command[command.index('-ub')+1],'64')
             child=Mock();child.poll.return_value=None;children.append(child);return child
         connection=Mock();connection.getresponse.return_value.status=200
         try:

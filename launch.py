@@ -104,7 +104,10 @@ def ensure(role):
         '--host', '127.0.0.1', '--port', str(BACKEND_PORT), '-ngl', str(GPU_LAYERS),
         '-c', os.environ.get('NLA_CONTEXT_SIZE','2048') if role == 'base' else '1024', '-np', '1',
         '-t', str(THREADS), '--cache-ram', '0',
-        '-b', '256', '-ub', '64', '-fa', 'off',
+        # NLA extraction decodes the full context in one logical batch.
+        # Physical microbatches stay small to limit GPU working memory.
+        '-b', os.environ.get('NLA_CONTEXT_SIZE','2048') if role == 'base' else '1024',
+        '-ub', '64', '-fa', 'off',
     ], stdout=logfile, stderr=subprocess.STDOUT, env=child_env)
     for _ in range(240):
         if process.poll() is not None:
