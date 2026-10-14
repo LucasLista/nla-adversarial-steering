@@ -15,6 +15,7 @@ import urllib.request
 import trajectories
 import codex_editor
 import claude_editor
+import openai_editor
 import prompt_catalog
 
 def select_preset(path, identifier):
@@ -40,7 +41,7 @@ def main():
     p.add_argument('--configs',nargs='+',type=Path)
     p.add_argument('--port',type=int,default=18095)
     p.add_argument('--instruction')
-    p.add_argument('--editor',choices=('config','codex','claude','local'),default='config',help='Override the editor named in each experiment config')
+    p.add_argument('--editor',choices=('config','codex','openai','claude','local'),default='config',help='Override the editor named in each experiment config')
     p.add_argument('--max-tokens',type=int,default=64)
     p.add_argument('--keep-serving',action='store_true',help='Keep the browser relay open while the HPC job is running')
     args=p.parse_args()
@@ -150,7 +151,7 @@ def main():
                 'started_at':time.time(),'local_weights':False,'evaluated_model':profile,
                 'gpu_info':hf_status.get('cuda_devices') if args.hf_backend else remote(f'cat {root}/runs/gpu-{args.job}.txt'),
                 'source_sha256':{name:hashlib.sha256((Path(__file__).parent/name).read_bytes()).hexdigest()
-                                 for name in ('trajectories.py','hpc_control.py','stepper.py','launch.py','codex_editor.py','claude_editor.py')}}
+                                 for name in ('trajectories.py','hpc_control.py','stepper.py','launch.py','codex_editor.py','claude_editor.py','openai_editor.py')}}
     trajectories.write_json(args.output/f'provenance-{args.job}.json',provenance)
     config={'prompt':args.prompt,'instruction':args.instruction,'max_tokens':args.max_tokens,
             'editor_model':codex_editor.MODEL,'variants':list(trajectories.VARIANTS),
@@ -172,6 +173,9 @@ def main():
             api=trajectories.API(f'http://127.0.0.1:{args.port}')
             editor=codex_editor.propose
             choice=args.editor if args.editor!='config' else (private.get('editor','codex') if path else 'codex')
+            if choice=='openai':
+                # Same Sol model as the Codex editor, so existing Sol checkpoints stay comparable.
+                editor=openai_editor.propose
             if choice=='claude':
                 editor=claude_editor.propose
                 cfg['editor_model']=claude_editor.MODEL
