@@ -73,6 +73,11 @@ class TrajectoryTests(unittest.TestCase):
             outputs=t.generate({'prompt':'synthetic','instruction':'preserve','max_tokens':2},directory,api,lambda *_:{'proposal':'synthetic'})
             self.assertTrue(all(result['stop_reason']=='eos' for result in outputs.values()))
             self.assertTrue(all(len(result['generated_token_ids'])==1 for result in outputs.values()))
+        with tempfile.TemporaryDirectory() as directory, patch('sys.stdout', new=io.StringIO()):
+            outputs=t.generate({'prompt':'synthetic','instruction':'preserve','max_tokens':2},directory,api,lambda *_:{'proposal':'synthetic'},variants=['edited_raw'])
+            self.assertEqual(list(outputs), ['edited_raw'])
+            self.assertFalse((Path(directory)/'original/state.json').exists())
+
 
     def test_eos_stops_branch(self):
         def api(action, **kwargs):

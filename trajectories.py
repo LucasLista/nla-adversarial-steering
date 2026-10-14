@@ -79,7 +79,7 @@ def write_progress(directory, limit):
                'complete': (directory / 'complete.json').exists()})
 
 
-def generate(config, directory, api, editor):
+def generate(config, directory, api, editor, variants=None):
     directory = Path(directory)
     metadata = directory / 'config.json'
     if metadata.exists():
@@ -101,7 +101,10 @@ def generate(config, directory, api, editor):
     initial = started['tokens']
     eos = set(started.get('eos_token_ids', EOS))
     outputs = {}
-    for variant in VARIANTS:
+    selected = tuple(variants or VARIANTS)
+    if not selected or any(v not in VARIANTS for v in selected):
+        raise ValueError("Unknown trajectory variant")
+    for variant in selected:
         state_path = directory / variant / 'state.json'
         state = json.loads(state_path.read_text()) if state_path.exists() else {
             'tokens': initial.copy(), 'generated': [], 'ended': False, 'response': '', 'steps': []}

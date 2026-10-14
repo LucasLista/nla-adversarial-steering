@@ -28,6 +28,7 @@ def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--job',required=True,type=int)
     p.add_argument('--model',default='qwen2.5-7b',help='Evaluated model family from evaluation_models.json')
+    p.add_argument('--variants', nargs='+', choices=trajectories.VARIANTS, help='Run only selected independent branches')
     p.add_argument('--hf-backend',action='store_true',help='Require validated model-specific HF backend')
     p.add_argument('--tunnel-port',type=int,default=19090)
     p.add_argument('--ssh-host',required=True)
@@ -184,7 +185,7 @@ def main():
                 cfg['editor_model']='Qwen2.5-7B-Instruct-Q4_K_M'
             for attempt in range(20):
                 try:
-                    trajectories.generate(cfg,destination,api,editor)
+                    trajectories.generate(cfg,destination,api,editor,variants=args.variants)
                     break
                 except (OSError, http.client.HTTPException):
                     if attempt == 19: raise
