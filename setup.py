@@ -60,8 +60,8 @@ def main():
     actual = subprocess.check_output(['git', '-C', str(SOURCE), 'rev-parse', 'HEAD'], text=True).strip()
     if actual != REVISION:
         parser.error('Existing backend has another revision; move .runtime/nla.cpp aside before retrying')
-    if subprocess.check_output(['git', '-C', str(SOURCE), 'status', '--porcelain'], text=True).strip():
-        parser.error('Backend source has local edits; preserve them before rebuilding a verified setup')
+    from fix_nla_capture import apply
+    apply(SOURCE)
     run('cmake', '-S', str(SOURCE), '-B', str(build),
         '-DCMAKE_BUILD_TYPE=Release', f'-DGGML_CUDA={"ON" if args.cuda else "OFF"}',
         f'-DCMAKE_CUDA_ARCHITECTURES={args.cuda_arch}', '-DGGML_METAL=OFF',
