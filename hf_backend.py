@@ -37,6 +37,7 @@ class Backend:
         import yaml
         from transformers import AutoTokenizer
         self.torch = torch
+        self.phase = 'initialize_tokenizers'
         self.profile = profile
         self.directory = Path(directory)
         self.model = self.role = self.head = None
@@ -53,6 +54,7 @@ class Backend:
         if self.role == role:
             return self.model
         torch = self.torch
+        self.phase = 'load_'+role
         self.model = self.head = None
         self.role = None
         gc.collect()
@@ -100,6 +102,7 @@ class Backend:
             self.head = head['weight'].float().cpu()
         self.model = model.eval()
         self.role = role
+        self.phase = 'loaded_'+role
         return self.model
 
     def input_tensor(self, model, ids):
@@ -119,6 +122,7 @@ class Backend:
     def predict(self, ids, target=None):
         torch = self.torch
         model = self.load('base')
+        self.phase = 'base_forward'
         selected = []
         def hook(module, inputs, output):
             tensor = output[0] if isinstance(output, (tuple, list)) else output
@@ -142,11 +146,13 @@ class Backend:
         torch = self.torch
         model = self.load('ar')
         metadata = self.metadata['ar']
+        self.phase = 'ar_tokenize'
         text = metadata['prompt_templates']['ar'].format(explanation=explanation)
         ids = self.tokenizers['ar'].encode(text, add_special_tokens=True)
         suffix = metadata['tokens'].get('critic_suffix_ids')
         if suffix and ids[-len(suffix):] != suffix:
             raise ValueError('AR suffix/tokenizer mismatch')
+        self.phase = 'ar_forward'
         with torch.inference_mode():
             out = model.model(input_ids=self.input_tensor(model, ids), use_cache=False)
             vector = torch.nn.functional.linear(out.last_hidden_state[0, -1].float().cpu(), self.head)
@@ -158,6 +164,7 @@ class Backend:
         torch = self.torch
         model = self.load('av')
         metadata = self.metadata['av']
+        self.phase = 'av_tokenize'
         content = metadata['prompt_templates']['av'].format(injection_char=metadata['tokens']['injection_char'])
         tokenizer = self.tokenizers['av']
         ids = tokenizer.apply_chat_template([{'role':'user','content':content}], tokenize=True, add_generation_prompt=True)
@@ -174,6 +181,7 @@ class Backend:
                 output[0, position] = vector.to(device=output.device, dtype=output.dtype)
             return output
         handle = model.get_input_embeddings().register_forward_hook(hook)
+        self.phase = 'av_generate'
         try:
             with torch.inference_mode():
                 generated = model.generate(input_ids=self.input_tensor(model, ids), do_sample=False,

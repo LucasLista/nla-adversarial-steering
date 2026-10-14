@@ -6,6 +6,7 @@ import json
 from pathlib import Path
 import threading
 import time
+import traceback
 from hf_backend import Backend
 from trajectories import write_json
 
@@ -32,11 +33,16 @@ def main():
         parser.error('Model snapshot staging is incomplete')
     status_path = ROOT/'.runtime'/f'hf-job-{args.job}.json'
     write_json(status_path, {'phase':'validating','model':args.model})
+    backend=None
     try:
         backend = Backend(profile, models)
         validation = backend.validate()
     except Exception as error:
-        write_json(status_path, {'phase':'validation_failed','model':args.model,'error_type':type(error).__name__})
+        frames=[{'file':Path(frame.filename).name,'function':frame.name,'line':frame.lineno}
+                for frame in traceback.extract_tb(error.__traceback__)[-8:]]
+        write_json(status_path, {'phase':'validation_failed','model':args.model,
+                  'error_type':type(error).__name__,'backend_phase':getattr(backend,'phase','initialize'),
+                  'frames':frames})
         raise SystemExit(1)
     write_json(ROOT/'.runtime'/f'hf-validation-{args.model}-{args.job}.json', validation)
     write_json(status_path, {'phase':'validated','model':args.model,'passed':validation['passed']})

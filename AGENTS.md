@@ -38,3 +38,8 @@ extract those fields from checkpoints without displaying any other content.
 `complete.json` existence signals completion of all four branches.
 Never read response logs, controller output, or scheduler log text to check
 completion. Blind copy/hash/stage/push operations remain authorized.
+
+Synthetic GPU validation may record exception class, backend phase, and source
+frame filenames/functions/line numbers in dedicated `.runtime/hf-job-JOB.json`
+metadata. These diagnostics may be inspected. Never expose exception messages,
+frame locals, source payloads, or raw validation/model output.
