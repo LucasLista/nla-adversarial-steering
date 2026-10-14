@@ -78,7 +78,14 @@ def main():
         print(f'Job {args.job}: {state}; waiting for backend build',flush=True)
         time.sleep(30)
     server_port=int(remote(f'cat {root}/runs/port-{args.job}.txt'))
-    subprocess.run(ssh+['-O','forward','-L',f'127.0.0.1:{args.tunnel_port}:{host}:{server_port}',args.ssh_host],check=True,capture_output=True)
+    forward = ssh+['-O','forward','-L',f'127.0.0.1:{args.tunnel_port}:{host}:{server_port}',args.ssh_host]
+    try:
+        subprocess.run(forward,check=True,capture_output=True)
+    except subprocess.CalledProcessError:
+        if not args.connect_script:
+            raise
+        subprocess.run(['uv','run','--with','pexpect',str(args.connect_script)],check=True,timeout=60)
+        subprocess.run(forward,check=True,capture_output=True)
     class Relay(BaseHTTPRequestHandler):
         def relay(self):
             conn=http.client.HTTPConnection('127.0.0.1',args.tunnel_port,timeout=1200)
@@ -186,4 +193,18 @@ def main():
         while remote(f'bjobs -noheader -o stat {args.job}').strip() == 'RUN':
             time.sleep(30)
 
-if __name__=='__main__': main()
+if __name__=='__main__':
+    import sys
+    import traceback
+    try:
+        main()
+    except Exception as exc:
+        model = sys.argv[sys.argv.index('--model')+1] if '--model' in sys.argv else 'qwen2.5-7b'
+        if model not in ('qwen2.5-7b','gemma3-12b','gemma3-27b','llama3.3-70b'):
+            model = 'unknown'
+        health = {'phase':'controller_failed','error_type':type(exc).__name__,
+                  'frames':[{'file':Path(f.filename).name,'function':f.name,'line':f.lineno}
+                            for f in traceback.extract_tb(exc.__traceback__)]}
+        trajectories.write_json(Path(__file__).parent/'runs'/('controller-health-'+model+'.json'),health)
+        raise SystemExit(1)
+

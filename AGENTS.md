@@ -43,3 +43,7 @@ Synthetic GPU validation may record exception class, backend phase, and source
 frame filenames/functions/line numbers in dedicated `.runtime/hf-job-JOB.json`
 metadata. These diagnostics may be inspected. Never expose exception messages,
 frame locals, source payloads, or raw validation/model output.
+
+Controller failure metadata in `runs/controller-health-MODEL.json` may also be
+inspected: exception class and source frame filenames/functions/line numbers
+only. Never include exception messages, frame locals, or payload values.
