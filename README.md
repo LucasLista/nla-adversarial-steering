@@ -465,3 +465,9 @@ The HF server currently exposes the automated API, not the Qwen-specific UI.
 
 This backend is a candidate until its live GPU validation passes; synthetic
 contract tests alone do not establish checkpoint compatibility or quality.
+
+`hf_campaign.py` waits for the verified Gemma-3-12B snapshot before requesting
+GPU resources, submits the two-V100 validation job, and starts a detached
+controller with separate PID/log files. It records only orchestration metadata
+in `work/hf-campaign-gemma3-12b.json`. Private trajectories cannot start until
+the server's synthetic validation passes and the controller verifies that result.
