@@ -412,3 +412,9 @@ To keep the laptop controller running after a chat turn ends, launch it with
 `runs/controller.pid`, and redirects all controller output to an unread log.
 On macOS it also prevents idle sleep while that process is alive. Monitor with
 `run_status.py` and process/scheduler metadata; never tail the controller log.
+
+The monitor publishes changed snapshots on every check, including unfinished
+branches. `publish_run.py` exports the latest atomic branch checkpoints without
+displaying their response text; `stop_reason: in_progress` marks partial output.
+It commits only when snapshot files changed, so unchanged checks produce no
+new commits. Pass `--max-tokens` for experiments using a limit other than 256.
