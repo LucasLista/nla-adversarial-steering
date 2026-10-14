@@ -7,6 +7,7 @@ import shutil
 import subprocess
 import tempfile
 import threading
+import time
 import urllib.request
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
@@ -52,7 +53,17 @@ def propose(instruction, text):
              '-m',MODEL,'-c','forced_login_method="chatgpt"','-c','model_reasoning_effort="low"',
              '--output-schema',str(schema),'--output-last-message',str(out),'-']
         with LOCK:
-            result=subprocess.run(cmd,input=prompt,capture_output=True,text=True,cwd=tmp,env=env,timeout=300)
+            for attempt in range(3):
+                result=subprocess.run(cmd,input=prompt,capture_output=True,text=True,cwd=tmp,env=env,timeout=300)
+                if result.returncode == 0 and out.exists():
+                    break
+                diagnostic = (result.stdout + result.stderr).lower()
+                # Do not retry account limits or authentication failures, or expose payloads.
+                if any(marker in diagnostic for marker in ('usage limit', 'rate limit', 'insufficient_quota', 'unauthorized', 'not logged in')):
+                    break
+                if attempt < 2:
+                    out.unlink(missing_ok=True)
+                    time.sleep(5 * (attempt + 1))
         if result.returncode or not out.exists():
             raise RuntimeError('Codex editor failed. Check Codex sign-in, model access and subscription limits; no fallback model or API billing was used.')
         proposal=json.loads(out.read_text()).get('proposal','').strip()
