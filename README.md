@@ -405,3 +405,10 @@ not runnable just because its files are downloadable. `hpc_control.py --model`
 rejects unvalidated families rather than silently applying Qwen settings.
 Gemma-27B and Llama-70B also need a measured memory plan; fitting their weights
 on one V100 must not be assumed. Existing Qwen experiments remain resumable.
+
+To keep the laptop controller running after a chat turn ends, launch it with
+`uv run --locked background_controller.py --` followed by the usual
+`hpc_control.py` arguments. It detaches the controller, saves only the PID in
+`runs/controller.pid`, and redirects all controller output to an unread log.
+On macOS it also prevents idle sleep while that process is alive. Monitor with
+`run_status.py` and process/scheduler metadata; never tail the controller log.
