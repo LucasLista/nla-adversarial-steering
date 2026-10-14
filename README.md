@@ -377,3 +377,11 @@ For catalog-based HPC runs, pass `--probe-id ID --editor-preset ID` instead
 of inline prompt and instruction text. Catalog values are loaded at runtime,
 so command arguments contain only IDs. Checkpoints still contain experiment
 text and should be treated as private run artifacts.
+
+### Response logs and context isolation
+
+`AGENTS.md` defines unread input and output artifacts for these evaluations.
+`publish_run.py --run runs/RUN_NAME --name RUN_NAME` copies a compact response
+snapshot into `logs/` without displaying model text. Commit that directory to
+share authorized response logs; `status.json` distinguishes partial snapshots
+from completed runs. Detailed checkpoints, inputs, and weights remain ignored.
