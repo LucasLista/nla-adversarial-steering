@@ -1,0 +1,90 @@
+[
+  {
+    "id": "qwen2.5-7b",
+    "layer": 20,
+    "dimension": 3584,
+    "roles": {
+      "base": {
+        "repo": "Qwen/Qwen2.5-7B-Instruct",
+        "revision": "a09a35458c702b33eeacc393d103063234e8bc28"
+      },
+      "av": {
+        "repo": "kitft/nla-qwen2.5-7b-L20-av",
+        "revision": "b88469162777ae6553bc14208eb0cb579336f8f4"
+      },
+      "ar": {
+        "repo": "kitft/nla-qwen2.5-7b-L20-ar",
+        "revision": "e2c9e57eac213d37a31612087f645ab6332c1bb6"
+      }
+    },
+    "runtime": "gguf-qwen",
+    "runtime_blocker": null,
+    "large_model": false
+  },
+  {
+    "id": "gemma3-12b",
+    "layer": 32,
+    "dimension": 3840,
+    "roles": {
+      "base": {
+        "repo": "google/gemma-3-12b-it",
+        "revision": "96b6f1eccf38110c56df3a15bffe176da04bfd80"
+      },
+      "av": {
+        "repo": "kitft/nla-gemma3-12b-L32-av",
+        "revision": "7aec22599e8a9cd533564868999b443fcc963cf4"
+      },
+      "ar": {
+        "repo": "kitft/nla-gemma3-12b-L32-ar",
+        "revision": "3d6901d8243182d642af9dea452ca91549a94615"
+      }
+    },
+    "runtime": null,
+    "runtime_blocker": "Model-specific backend adapter and unchanged-text control validation required",
+    "large_model": false
+  },
+  {
+    "id": "gemma3-27b",
+    "layer": 41,
+    "dimension": 5376,
+    "roles": {
+      "base": {
+        "repo": "google/gemma-3-27b-it",
+        "revision": "005ad3404e59d6023443cb575daa05336842228a"
+      },
+      "av": {
+        "repo": "kitft/nla-gemma3-27b-L41-av",
+        "revision": "4e721238131ffb8348cff260fe81b8b34a270a0d"
+      },
+      "ar": {
+        "repo": "kitft/nla-gemma3-27b-L41-ar",
+        "revision": "aa2f29723c4807caf5f665dac004998df71b7cfb"
+      }
+    },
+    "runtime": null,
+    "runtime_blocker": "Model-specific backend adapter and unchanged-text control validation required",
+    "large_model": true
+  },
+  {
+    "id": "llama3.3-70b",
+    "layer": 53,
+    "dimension": 8192,
+    "roles": {
+      "base": {
+        "repo": "meta-llama/Llama-3.3-70B-Instruct",
+        "revision": "6f6073b423013f6a7d4d9f39144961bfbfbc386b"
+      },
+      "av": {
+        "repo": "kitft/Llama-3.3-70B-NLA-L53-av",
+        "revision": "7c49ac8345b89f12d16607d0191cfb1175f6d4e8"
+      },
+      "ar": {
+        "repo": "kitft/Llama-3.3-70B-NLA-L53-ar",
+        "revision": "ea2b19f7517fda3cc8224fba3e2fdc3247394463"
+      }
+    },
+    "runtime": null,
+    "runtime_blocker": "Model-specific backend adapter and unchanged-text control validation required",
+    "large_model": true
+  }
+]

@@ -25,6 +25,7 @@ def select_preset(path, identifier):
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--job',required=True,type=int)
+    p.add_argument('--model',default='qwen2.5-7b',help='Evaluated model family from evaluation_models.json')
     p.add_argument('--ssh-host',required=True)
     p.add_argument('--ssh-socket',required=True)
     p.add_argument('--connect-script',type=Path,help='Optional existing local SSH authentication helper')
@@ -39,6 +40,11 @@ def main():
     p.add_argument('--max-tokens',type=int,default=64)
     p.add_argument('--keep-serving',action='store_true',help='Keep the browser relay open while the HPC job is running')
     args=p.parse_args()
+    models=json.loads((Path(__file__).parent/'evaluation_models.json').read_text())
+    profile=next((item for item in models if item['id']==args.model),None)
+    if profile is None: p.error('Unknown evaluated model family')
+    if profile['runtime'] != 'gguf-qwen':
+        p.error('This model requires a validated model-specific backend adapter; run model_preflight.py')
     if args.probe_id:
         if args.prompt or args.configs: p.error('--probe-id cannot be combined with --prompt or --configs')
         args.prompt = select_preset(Path(__file__).parent / 'prompts.json', args.probe_id)
@@ -114,7 +120,7 @@ def main():
         time.sleep(20)
     provenance={'job_id':args.job,'compute_host':host,'remote_root':args.remote_root,
                 'models':json.loads((Path(__file__).parent/'models.json').read_text()),
-                'started_at':time.time(),'local_weights':False,
+                'started_at':time.time(),'local_weights':False,'evaluated_model':profile,
                 'gpu_info':remote(f'cat {root}/runs/gpu-{args.job}.txt'),
                 'source_sha256':{name:hashlib.sha256((Path(__file__).parent/name).read_bytes()).hexdigest()
                                  for name in ('trajectories.py','hpc_control.py','stepper.py','launch.py','codex_editor.py')}}

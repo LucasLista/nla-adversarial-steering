@@ -385,3 +385,23 @@ text and should be treated as private run artifacts.
 snapshot into `logs/` without displaying model text. Commit that directory to
 share authorized response logs; `status.json` distinguishes partial snapshots
 from completed runs. Detailed checkpoints, inputs, and weights remain ignored.
+
+### Released model evaluation matrix
+
+`evaluation_models.json` records pinned upstream base, AV and AR revisions for
+Qwen2.5-7B (L20, 3584 dimensions), Gemma-3-12B (L32, 3840), Gemma-3-27B
+(L41, 5376), and Llama-3.3-70B (L53, 8192). These are the four model families
+in the official NLA release; arbitrary Qwen/Gemma versions are not substitutes.
+
+Run `uv run --locked model_preflight.py` for an access/readiness report that
+contains no experiment inputs or model outputs. It uses a local Hugging Face
+credential if available but never prints it or transfers it to HPC. Approve
+the base-model licenses on Hugging Face and authenticate locally when needed.
+
+Only Qwen currently has a validated backend here. The other families require
+model-specific chat templates, EOS IDs, extraction layers, activation dimensions,
+AV sidecar injection parameters, and AR conversion/loading support. A model is
+not runnable just because its files are downloadable. `hpc_control.py --model`
+rejects unvalidated families rather than silently applying Qwen settings.
+Gemma-27B and Llama-70B also need a measured memory plan; fitting their weights
+on one V100 must not be assumed. Existing Qwen experiments remain resumable.
