@@ -25,7 +25,7 @@ def manifest(profile):
             raise ValueError('Snapshot revision mismatch')
         for item in metadata['siblings']:
             filename = item['rfilename']
-            if '/' in filename or not (filename.endswith(('.json', '.safetensors', '.model', '.yaml'))):
+            if '/' in filename or not (filename.endswith(('.json', '.safetensors', '.model', '.yaml', '.jinja', '.txt'))):
                 continue
             lfs = item.get('lfs', {})
             files.append({'role': role, 'file': filename, 'size': item['size'],

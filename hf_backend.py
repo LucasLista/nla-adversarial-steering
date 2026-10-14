@@ -77,6 +77,7 @@ class Backend:
                                     attn_implementation='eager', low_cpu_mem_usage=True)
         if any(device in ('cpu','disk') for device in getattr(model,'hf_device_map',{}).values()):
             raise MemoryError('Insufficient GPU memory for this checkpoint')
+        generation = model.generation_config
         if hasattr(model, 'language_model'):
             nested = model.language_model
             if hasattr(nested, 'lm_head'):
@@ -89,6 +90,7 @@ class Backend:
                     raise ValueError('Wrapped Gemma text head must tie embeddings')
                 wrapper.tie_weights()
                 model = wrapper
+        model.generation_config = generation
         if role == 'ar':
             model.lm_head = torch.nn.Identity()
             model.model.norm = torch.nn.Identity()

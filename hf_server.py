@@ -32,8 +32,8 @@ def main():
         parser.error('Model snapshot staging is incomplete')
     status_path = ROOT/'.runtime'/f'hf-job-{args.job}.json'
     write_json(status_path, {'phase':'validating','model':args.model})
-    backend = Backend(profile, models)
     try:
+        backend = Backend(profile, models)
         validation = backend.validate()
     except Exception as error:
         write_json(status_path, {'phase':'validation_failed','model':args.model,'error_type':type(error).__name__})
