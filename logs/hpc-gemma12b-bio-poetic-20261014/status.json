@@ -1,0 +1,10 @@
+{
+  "complete": false,
+  "branches": {
+    "original": {
+      "tokens": 101,
+      "ended": false
+    }
+  },
+  "responses_sha256": "a9e0833e3690b140fd5aa1578894cc29052489898f7ca1a29ce5cfa564a3916e"
+}
