@@ -54,7 +54,14 @@ def propose(instruction, text):
              '--output-schema',str(schema),'--output-last-message',str(out),'-']
         with LOCK:
             for attempt in range(3):
-                result=subprocess.run(cmd,input=prompt,capture_output=True,text=True,cwd=tmp,env=env,timeout=300)
+                try:
+                    result=subprocess.run(cmd,input=prompt,capture_output=True,text=True,cwd=tmp,env=env,timeout=300)
+                except subprocess.TimeoutExpired:
+                    out.unlink(missing_ok=True)
+                    if attempt == 2:
+                        raise RuntimeError('Codex editor timed out after three attempts; checkpoint preserved.') from None
+                    time.sleep(5 * (attempt + 1))
+                    continue
                 if result.returncode == 0 and out.exists():
                     break
                 diagnostic = (result.stdout + result.stderr).lower()
