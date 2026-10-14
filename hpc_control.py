@@ -14,6 +14,13 @@ import time
 import urllib.request
 import trajectories
 import codex_editor
+import prompt_catalog
+
+def select_preset(path, identifier):
+    matches = [entry['prompt'] for entry in prompt_catalog.load(path) if entry['id'] == identifier]
+    if len(matches) != 1:
+        raise ValueError('Preset ID must match exactly one catalog entry')
+    return matches[0]
 
 def main():
     p=argparse.ArgumentParser(description=__doc__)
@@ -24,13 +31,21 @@ def main():
     p.add_argument('--remote-root',required=True)
     p.add_argument('--output',required=True,type=Path)
     p.add_argument('--prompt')
+    p.add_argument('--probe-id',help='Select a probe by ID without putting its text in command arguments')
+    p.add_argument('--editor-preset',help='Select an editor instruction by ID')
     p.add_argument('--configs',nargs='+',type=Path)
     p.add_argument('--port',type=int,default=18095)
     p.add_argument('--instruction')
     p.add_argument('--max-tokens',type=int,default=64)
     p.add_argument('--keep-serving',action='store_true',help='Keep the browser relay open while the HPC job is running')
     args=p.parse_args()
-    if not args.configs and (not args.prompt or not args.instruction): p.error('Provide --configs or --prompt and --instruction')
+    if args.probe_id:
+        if args.prompt or args.configs: p.error('--probe-id cannot be combined with --prompt or --configs')
+        args.prompt = select_preset(Path(__file__).parent / 'prompts.json', args.probe_id)
+    if args.editor_preset:
+        if args.instruction or args.configs: p.error('--editor-preset cannot be combined with --instruction or --configs')
+        args.instruction = select_preset(Path(__file__).parent / 'editor_prompts.json', args.editor_preset)
+    if not args.configs and (not args.prompt or not args.instruction): p.error('Provide --configs, preset IDs, or --prompt and --instruction')
     if not 1<=args.max_tokens<=10000: p.error('Token limit must be 1–10000')
     ssh=['ssh','-S',args.ssh_socket,'-o','BatchMode=yes']
     def remote(cmd):
@@ -106,6 +121,7 @@ def main():
     trajectories.write_json(args.output/'provenance.json',provenance)
     config={'prompt':args.prompt,'instruction':args.instruction,'max_tokens':args.max_tokens,
             'editor_model':codex_editor.MODEL,'variants':list(trajectories.VARIANTS),
+            'probe_id':args.probe_id,'editor_preset':args.editor_preset,
             'policy':'independent prefixes; greedy; one-position intervention; no KV-edit replay'}
     try:
         inputs=args.configs or [None]

@@ -372,3 +372,8 @@ Refresh `/stepper`, select an Instruction preset, and choose Local Qwen or Sol.
 The selected text fills the editable Instruction field; manual edits are retained
 as a custom instruction. Presets change the editing instruction, while each
 provider's system instructions remain in `stepper.py` or `codex_editor.py`.
+
+For catalog-based HPC runs, pass `--probe-id ID --editor-preset ID` instead
+of inline prompt and instruction text. Catalog values are loaded at runtime,
+so command arguments contain only IDs. Checkpoints still contain experiment
+text and should be treated as private run artifacts.
