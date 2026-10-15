@@ -60,8 +60,14 @@ def propose(instruction, text):
                             'instruction': instruction}
                 failures.append({'status': data.get('status'), 'proposal_chars': len(proposal)})
             except urllib.error.HTTPError as exc:
-                # Status code only: error bodies can echo request content.
-                failures.append({'http_status': exc.code})
+                # Status code and OpenAI's error code only: messages can echo request content.
+                try:
+                    code = json.loads(exc.read() or b'{}').get('error', {}).get('code')
+                except ValueError:
+                    code = None
+                failures.append({'http_status': exc.code, 'code': code})
+                if code in ('insufficient_quota', 'credit_balance_exhausted'):
+                    raise RuntimeError('OpenAI account is out of credit; top up billing. Checkpoint preserved.') from None
                 if exc.code in (400, 401, 403, 404):
                     break
             except (urllib.error.URLError, TimeoutError, json.JSONDecodeError, KeyError) as exc:
