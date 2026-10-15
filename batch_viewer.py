@@ -1,5 +1,6 @@
 """Read-only, loopback viewer for durable trajectory checkpoints."""
 import argparse
+import html
 import json
 from pathlib import Path
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -39,13 +40,16 @@ def snapshot(root, run, branch, index=None):
     top=[distributions.get(k,{}).get('completion_probabilities',[{}])[0].get('top_logprobs',[{}])[0].get('id') for k in VARIANTS]
     return {'chosen':steps[index]['chosen_id'],'variant':branch,'original':explained.get('text',''),'edit':editor.get('proposal',explained.get('text','')),'metrics':compared.get('metrics',explained.get('metrics',{})), 'distributions':distributions,'agreement':None not in top and len(set(top))==1,'h':inspected.get('h'), 'reconstruction':explained.get('reconstruction'),'error':compared.get('error',explained.get('error'))}
 def main():
-    p=argparse.ArgumentParser();p.add_argument('--root',type=Path,required=True);p.add_argument('--port',type=int,default=18096);args=p.parse_args()
+    p=argparse.ArgumentParser();p.add_argument('--root',type=Path,required=True);p.add_argument('--port',type=int,default=18096);p.add_argument('--banner',default='',help='Notice shown above the results');args=p.parse_args()
     class Handler(BaseHTTPRequestHandler):
         def do_GET(self):
             try:
                 u=urlsplit(self.path)
                 if u.path=='/':
-                    data=Path(__file__).with_name('batch_viewer.html').read_bytes();kind='text/html'
+                    data=Path(__file__).with_name('batch_viewer.html').read_text()
+                    if args.banner:
+                        data=data.replace('</h1>','</h1><p style="background:#3c3018;border:1px solid #d6a84b;color:#f6d788;padding:10px;border-radius:8px">'+html.escape(args.banner)+'</p>',1)
+                    data=data.encode();kind='text/html'
                 elif u.path=='/api':
                     q=parse_qs(u.query);index=int(q['index'][0]) if 'index' in q else None
                     data=json.dumps(snapshot(args.root,q.get('run',['run-1'])[0],q.get('branch',['original'])[0],index)).encode();kind='application/json'
