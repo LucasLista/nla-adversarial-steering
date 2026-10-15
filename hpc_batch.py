@@ -84,7 +84,15 @@ def main():
                'editor_model': EDITOR_MODEL, 'variants': list(trajectories.VARIANTS),
                'policy': 'independent prefixes; greedy; one-position intervention; no KV-edit replay'}
         editor = lambda instruction, text: api('propose', tokens=[1], editor='local', instruction=instruction, text=text)
-        trajectories.generate(cfg, args.output / path.parent.parent.name, api, editor)
+        for retry in range(20):
+            try:
+                trajectories.generate(cfg, args.output / path.parent.parent.name, api, editor)
+                break
+            except RuntimeError as exc:
+                # Occasional NaN activations are transient; the checkpoint resumes the same step.
+                if 'Non-finite' not in str(exc) or retry == 19:
+                    raise
+                print(f'Transient non-finite activation; retrying step ({retry + 1})', flush=True)
         print(f'{path.parent.parent.name} complete', flush=True)
 
 
