@@ -13,6 +13,13 @@ import urllib.request
 import urllib.error
 import codex_editor
 
+REPEAT_LIMIT = 50  # identical tokens in a row that end a branch as degenerate
+
+
+def degenerate(generated):
+    return len(generated) >= REPEAT_LIMIT and len(set(generated[-REPEAT_LIMIT:])) == 1
+
+
 VARIANTS = ('original', 'roundtrip', 'edited_raw', 'edited_corrected')
 EOS = {151643, 151645}
 
@@ -108,6 +115,9 @@ def generate(config, directory, api, editor, variants=None):
         state_path = directory / variant / 'state.json'
         state = json.loads(state_path.read_text()) if state_path.exists() else {
             'tokens': initial.copy(), 'generated': [], 'ended': False, 'response': '', 'steps': []}
+        if not state['ended'] and degenerate(state['generated']):
+            state.update(ended=True, stop_reason='degenerate_repeat')
+            write_json(state_path, state)
         while len(state['generated']) < config['max_tokens'] and not state['ended']:
             step = directory / variant / f"step-{len(state['generated']):04d}"
             def call(action, **kwargs):
@@ -136,6 +146,10 @@ def generate(config, directory, api, editor, variants=None):
                                    'variant': variant, 'artifacts': str(step.relative_to(directory))})
             state.update(tokens=state['tokens'] + [token], generated=generated,
                          ended=token in eos, response=decoded)
+            if token in eos:
+                state['stop_reason'] = 'eos'
+            elif degenerate(generated):
+                state.update(ended=True, stop_reason='degenerate_repeat')
             write_json(state_path, state)
             write_progress(directory, config['max_tokens'])
             print(f'{variant}: {len(generated)}/{config["max_tokens"]}, token={token}', flush=True)
