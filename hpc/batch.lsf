@@ -3,7 +3,7 @@
 #BSUB -J nla-batch
 #BSUB -n 4
 #BSUB -gpu "num=1:mode=shared:j_exclusive=yes"
-#BSUB -R "select[hname!='n-62-20-6'] span[hosts=1] rusage[mem=6GB]"
+#BSUB -R "select[hname!='n-62-20-6' && gpu32gb] span[hosts=1] rusage[mem=6GB]"
 #BSUB -M 7GB
 #BSUB -W 24:00
 #BSUB -o runs/hpc-%J.out
