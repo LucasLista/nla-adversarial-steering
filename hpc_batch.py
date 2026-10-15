@@ -27,8 +27,12 @@ class AuthAPI(trajectories.API):
             with urllib.request.urlopen(req, timeout=1200) as r:
                 result = json.load(r)
         except urllib.error.HTTPError as exc:
-            # Status only: bodies can echo request content.
-            raise RuntimeError(f'Backend HTTP {exc.code}') from None
+            # Keep the server's own error string (diagnostic), truncated; never the request.
+            try:
+                detail = str(json.loads(exc.read()).get('error', ''))[:300]
+            except (ValueError, AttributeError):
+                detail = ''
+            raise RuntimeError(f'Backend HTTP {exc.code}: {detail}') from None
         if isinstance(result.get('error'), str):
             raise RuntimeError(result['error'])
         return result

@@ -107,7 +107,9 @@ def ensure(role):
         # NLA extraction decodes the full context in one logical batch.
         # Physical microbatches stay small to limit GPU working memory.
         '-b', os.environ.get('NLA_CONTEXT_SIZE','2048') if role == 'base' else '1024',
-        '-ub', '64', '-fa', 'off',
+        # NLA prompts (<=1024 tokens) decode in one microbatch: multi-microbatch
+        # reconstruction produced NaNs for some explanations.
+        '-ub', '64' if role == 'base' else '1024', '-fa', 'off',
     ], stdout=logfile, stderr=subprocess.STDOUT, env=child_env)
     for _ in range(240):
         if process.poll() is not None:

@@ -88,6 +88,8 @@ def run(body, call, frontend):
         h = call('base','/extract',{'prompt':tokens,'layer':20,'token_pos':-1,'add_special':False})['activation']
         if len(r0)!=len(h) or len(r1)!=len(h):
             raise ValueError('Wrong reconstruction dimension')
+        if not all(isinstance(x,(int,float)) and math.isfinite(x) for x in r1 + h):
+            raise ValueError('Non-finite activation from backend (NaN/inf)')
         error = [a-b for a,b in zip(h,r0)]
         corrected = [a+b for a,b in zip(r1,error)]
         return {'original':predict(), 'roundtrip':predict(r0,h), 'edited_raw':predict(r1,h),
