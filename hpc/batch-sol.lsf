@@ -1,0 +1,56 @@
+#!/bin/bash -l
+#BSUB -q gpuv100
+#BSUB -J nla-sol
+#BSUB -n 4
+#BSUB -gpu "num=1:mode=shared:j_exclusive=yes"
+#BSUB -R "select[hname!='n-62-20-6' && gpu32gb] span[hosts=1] rusage[mem=6GB]"
+#BSUB -M 7GB
+#BSUB -W 24:00
+#BSUB -o runs/hpc-%J.out
+#BSUB -e runs/hpc-%J.err
+set -euo pipefail
+cd "${LS_SUBCWD:?Submit from the project directory}"
+module load gcc/12.4.0-binutils-2.42
+export CC="$(command -v gcc)"
+export CXX="$(command -v g++)"
+module load cuda/12.4.1 cmake/3.31.9
+export PATH="$HOME/.local/bin:$PATH"
+export CUDAHOSTCXX="$CXX"
+mkdir -p runs
+cache=.runtime/build-cuda/CMakeCache.txt
+if [[ -f "$cache" ]]; then
+    cached_cxx=$(sed -n 's/^CMAKE_CXX_COMPILER:FILEPATH=//p' "$cache")
+    if [[ "$cached_cxx" != "$CXX" ]]; then
+        # Reconfigure the mixed-compiler cache; retain compiled objects.
+        rm "$cache"
+    fi
+fi
+{ "$CXX" --version; nvcc --version; uv --version; } > "runs/toolchain-${LSB_JOBID}.txt"
+nvidia-smi > "runs/gpu-${LSB_JOBID}.txt"
+env | sort | sed -n '/^CUDA_/p;/^LSB_/p' > "runs/scheduler-${LSB_JOBID}.txt"
+export NLA_RESIDENT_MODELS=1
+export NLA_CONTEXT_SIZE=16384
+uv sync --locked
+uv run --locked setup.py --cuda --cuda-arch 70 --skip-download --jobs 4
+# Allocate a per-job port range to avoid unrelated services on shared nodes.
+server_port=$((30000 + (LSB_JOBID % 5000) * 4))
+backend_port=$((server_port + 1))
+printf '%s\n' "$server_port" > "runs/port-${LSB_JOBID}.txt"
+hostname -f > "runs/host-${LSB_JOBID}.txt"
+umask 077
+uv run --locked python -c 'import secrets; print(secrets.token_hex(32))' > "runs/token-${LSB_JOBID}.txt"
+uv run --locked launch.py --port "$server_port" --backend-port "$backend_port" --gpu-layers 99 --threads 4 --auth-token-file "runs/token-${LSB_JOBID}.txt" --audit-log &
+server=$!
+trap 'kill "$server" 2>/dev/null; wait "$server" 2>/dev/null' EXIT
+# Self-contained driver: no laptop connection needed. Retries resume from checkpoints.
+for attempt in 1 2 3 4 5; do
+    if uv run --locked python hpc_batch.py --output runs/hpc-sol --editor openai --port "$server_port" \
+        --token-file "runs/token-${LSB_JOBID}.txt" \
+        --configs runs/experiments/run-{1,2,3}/inputs/config.json; then
+        printf 'complete\n' > "runs/batch-status-${LSB_JOBID}.txt"; exit 0
+    fi
+    printf 'attempt %s failed\n' "$attempt" >> "runs/batch-status-${LSB_JOBID}.txt"
+    kill -0 "$server" 2>/dev/null || exit 1
+    sleep 60
+done
+exit 1

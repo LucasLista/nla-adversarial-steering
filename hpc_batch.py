@@ -10,6 +10,7 @@ import urllib.error
 import urllib.request
 from pathlib import Path
 
+import openai_editor
 import trajectories
 
 EDITOR_MODEL = 'Qwen2.5-7B-Instruct-Q4_K_M'
@@ -61,6 +62,7 @@ def main():
     p.add_argument('--port', type=int, required=True)
     p.add_argument('--token-file', type=Path, required=True)
     p.add_argument('--max-tokens', type=int, default=10000)
+    p.add_argument('--editor', choices=('local', 'openai'), default='local')
     args = p.parse_args()
     token = args.token_file.read_text().strip()
     url = f'http://127.0.0.1:{args.port}'
@@ -74,6 +76,8 @@ def main():
             time.sleep(10)
     else:
         raise RuntimeError('Server did not become ready')
+    if args.editor == 'openai':
+        openai_editor.api_key()  # fail fast if .env lacks the key
     steering_self_test(api)
     for path in args.configs:
         private = json.loads(path.read_text())
@@ -81,9 +85,12 @@ def main():
             raise ValueError('Empty experiment prompt or editor instruction')
         # Must equal hpc_control.py's config so existing checkpoints resume.
         cfg = {'prompt': private['prompt'], 'instruction': private['instruction'], 'max_tokens': args.max_tokens,
-               'editor_model': EDITOR_MODEL, 'variants': list(trajectories.VARIANTS),
+               'editor_model': EDITOR_MODEL if args.editor == 'local' else openai_editor.MODEL, 'variants': list(trajectories.VARIANTS),
                'policy': 'independent prefixes; greedy; one-position intervention; no KV-edit replay'}
-        editor = lambda instruction, text: api('propose', tokens=[1], editor='local', instruction=instruction, text=text)
+        if args.editor == 'openai':
+            editor = openai_editor.propose
+        else:
+            editor = lambda instruction, text: api('propose', tokens=[1], editor='local', instruction=instruction, text=text)
         for retry in range(20):
             try:
                 trajectories.generate(cfg, args.output / path.parent.parent.name, api, editor)
