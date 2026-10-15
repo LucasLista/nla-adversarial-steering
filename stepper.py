@@ -59,17 +59,19 @@ def run(body, call, frontend):
         prompt += 'Editing instruction:\n' + instruction + '\nOriginal description:\n' + explanation
         prompt += '<|im_end|>\n<|im_start|>assistant\n'
         ids = call('base','/tokenize',{'content':prompt,'add_special':False,'parse_special':True})['tokens']
-        if len(ids)>int(os.environ.get('NLA_CONTEXT_SIZE','2048'))-900-16:
+        # Cap rewrites at 1.2x the description length; runaway rewrites are cut there.
+        described = call('base','/tokenize',{'content':explanation,'add_special':False})['tokens']
+        limit = max(16, math.ceil(1.2*len(described)))
+        if len(ids)>int(os.environ.get('NLA_CONTEXT_SIZE','2048'))-limit-16:
             raise ValueError('Editing instruction and explanation are too long')
-        result = call('base','/completion',{'prompt':ids,'n_predict':900,'temperature':0,
+        result = call('base','/completion',{'prompt':ids,'n_predict':limit,'temperature':0,
                          'seed':42,'cache_prompt':False})
-        if result.get('stop_type') == 'limit':
-            raise ValueError('Editor output was truncated; shorten the editing instruction')
+        truncated = result.get('stop_type') == 'limit'
         proposal = result.get('content','').strip()
         if not proposal:
             raise ValueError('Editor returned no proposal')
         return {'proposal':proposal, 'editor_model':'Qwen2.5-7B-Instruct-Q4_K_M',
-                'instruction':instruction}
+                'instruction':instruction, 'truncated':truncated, 'token_limit':limit}
     if action == 'inspect':
         h = call('base','/extract',{'prompt':tokens,'layer':20,'token_pos':-1,'add_special':False})['activation']
         return {'h':h,'baseline':predict()}
