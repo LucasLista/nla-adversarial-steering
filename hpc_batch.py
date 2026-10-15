@@ -38,6 +38,22 @@ class AuthAPI(trajectories.API):
         return result
 
 
+def steering_self_test(api):
+    """Abort unless an intervention changes the prediction beyond the first microbatch."""
+    prompt = 'Repeat this sentence back to me exactly: ' + 'the quick brown fox jumps over the lazy dog. ' * 20
+    tokens = api('start', prompt=prompt)['tokens']
+    if len(tokens) <= 128:
+        raise RuntimeError('Self-test context too short')
+    h = api('inspect', tokens=tokens)['h']
+    explained = api('explain', tokens=tokens, h=h)
+    compared = api('compare', tokens=tokens, reconstruction=explained['reconstruction'],
+                   edited='A detailed description of tropical fish, coral reefs, and ocean currents.')
+    top = lambda key: compared[key]['completion_probabilities'][0]['top_logprobs']
+    if top('original') == top('edited_raw'):
+        raise RuntimeError(f'Steering self-test failed: intervention had no effect at context {len(tokens)}')
+    print(f'Steering self-test passed at context {len(tokens)}', flush=True)
+
+
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--output', type=Path, required=True)
@@ -58,6 +74,7 @@ def main():
             time.sleep(10)
     else:
         raise RuntimeError('Server did not become ready')
+    steering_self_test(api)
     for path in args.configs:
         private = json.loads(path.read_text())
         if not private.get('prompt', '').strip() or not private.get('instruction', '').strip():
