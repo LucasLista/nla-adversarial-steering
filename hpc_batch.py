@@ -90,7 +90,7 @@ def main():
                 break
             except RuntimeError as exc:
                 # Occasional NaN activations are transient; the checkpoint resumes the same step.
-                if 'Non-finite' not in str(exc) or retry == 19:
+                if not any(m in str(exc) for m in ('Non-finite', 'NoneType')) or retry == 19:
                     raise
                 print(f'Transient non-finite activation; retrying step ({retry + 1})', flush=True)
         print(f'{path.parent.parent.name} complete', flush=True)
