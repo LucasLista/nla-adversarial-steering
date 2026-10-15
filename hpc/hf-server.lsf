@@ -28,4 +28,4 @@ printf '%s\n' "$server_port" > "runs/port-${LSB_JOBID}.txt"
 hostname -f > "runs/host-${LSB_JOBID}.txt"
 umask 077
 .runtime/hf-env/bin/python -c 'import secrets; print(secrets.token_hex(32))' > "runs/token-${LSB_JOBID}.txt"
-exec .runtime/hf-env/bin/python hf_server.py --model "$model" --listen-host 0.0.0.0 --port "$server_port" --auth-token-file "runs/token-${LSB_JOBID}.txt" --job "$LSB_JOBID"
+exec .runtime/hf-env/bin/python -m hpc.hf_server --model "$model" --listen-host 0.0.0.0 --port "$server_port" --auth-token-file "runs/token-${LSB_JOBID}.txt" --job "$LSB_JOBID"

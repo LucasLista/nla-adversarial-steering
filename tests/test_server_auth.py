@@ -22,7 +22,7 @@ class AuthTests(unittest.TestCase):
                 server.shutdown();server.server_close();thread.join()
 
     def test_stepper_response_is_archived_before_return(self):
-        with tempfile.TemporaryDirectory() as tmp, patch.object(launch,'LOGS',Path(tmp)), patch.object(launch,'RUNTIME',Path(tmp)), patch.object(launch,'AUDIT_LOG',True), patch.object(launch,'AUTH_TOKEN',None), patch('stepper.run',return_value={'h':[1.,2.]}):
+        with tempfile.TemporaryDirectory() as tmp, patch.object(launch,'LOGS',Path(tmp)), patch.object(launch,'RUNTIME',Path(tmp)), patch.object(launch,'AUDIT_LOG',True), patch.object(launch,'AUTH_TOKEN',None), patch('nla.stepper.run',return_value={'h':[1.,2.]}):
             (Path(tmp)/'frontend.html').write_text('')
             server=ThreadingHTTPServer(('127.0.0.1',0),launch.Handler)
             thread=threading.Thread(target=server.serve_forever,daemon=True);thread.start()

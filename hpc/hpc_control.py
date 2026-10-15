@@ -5,7 +5,6 @@ import hashlib
 import http.client
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import json
-import os
 from pathlib import Path
 import shlex
 import subprocess
@@ -13,10 +12,9 @@ import threading
 import time
 import urllib.request
 import trajectories
-import codex_editor
-import claude_editor
-import openai_editor
-import prompt_catalog
+from nla import codex_editor, claude_editor, openai_editor, prompt_catalog
+
+ROOT = Path(__file__).resolve().parents[1]
 
 def select_preset(path, identifier):
     matches = [entry['prompt'] for entry in prompt_catalog.load(path) if entry['id'] == identifier]
@@ -46,17 +44,17 @@ def main():
     p.add_argument('--max-tokens',type=int,default=64)
     p.add_argument('--keep-serving',action='store_true',help='Keep the browser relay open while the HPC job is running')
     args=p.parse_args()
-    models=json.loads((Path(__file__).parent/'evaluation_models.json').read_text())
+    models=json.loads((ROOT/'evaluation_models.json').read_text())
     profile=next((item for item in models if item['id']==args.model),None)
     if profile is None: p.error('Unknown evaluated model family')
     if not args.hf_backend and profile['runtime'] != 'gguf-qwen':
-        p.error('This model requires a validated model-specific backend adapter; run model_preflight.py')
+        p.error('This model requires a validated model-specific backend adapter; run python -m hpc.model_preflight')
     if args.probe_id:
         if args.prompt or args.configs: p.error('--probe-id cannot be combined with --prompt or --configs')
-        args.prompt = select_preset(Path(__file__).parent / 'prompts.json', args.probe_id)
+        args.prompt = select_preset(ROOT / 'prompts.json', args.probe_id)
     if args.editor_preset:
         if args.instruction or args.configs: p.error('--editor-preset cannot be combined with --instruction or --configs')
-        args.instruction = select_preset(Path(__file__).parent / 'editor_prompts.json', args.editor_preset)
+        args.instruction = select_preset(ROOT / 'editor_prompts.json', args.editor_preset)
     if not args.configs and (not args.prompt or not args.instruction): p.error('Provide --configs, preset IDs, or --prompt and --instruction')
     if not 1<=args.max_tokens<=10000: p.error('Token limit must be 1–10000')
     ssh=['ssh','-S',args.ssh_socket,'-o','BatchMode=yes']
@@ -147,12 +145,12 @@ def main():
         if not hf_status.get('passed') or hf_status.get('model')!=args.model or hf_status.get('layer')!=profile['layer'] or hf_status.get('dimension')!=profile['dimension']:
             raise ValueError('HF model backend did not pass the required synthetic validation')
     provenance={'resident_models':not args.hf_backend,'job_id':args.job,'compute_host':host,'remote_root':args.remote_root,
-                'models':profile['roles'] if args.hf_backend else json.loads((Path(__file__).parent/'models.json').read_text()),
+                'models':profile['roles'] if args.hf_backend else json.loads((ROOT/'models.json').read_text()),
                 'hf_validation':hf_status,
                 'started_at':time.time(),'local_weights':False,'evaluated_model':profile,
                 'gpu_info':hf_status.get('cuda_devices') if args.hf_backend else remote(f'cat {root}/runs/gpu-{args.job}.txt'),
-                'source_sha256':{name:hashlib.sha256((Path(__file__).parent/name).read_bytes()).hexdigest()
-                                 for name in ('trajectories.py','hpc_control.py','stepper.py','launch.py','codex_editor.py','claude_editor.py','openai_editor.py')}}
+                'source_sha256':{name:hashlib.sha256((ROOT/name).read_bytes()).hexdigest()
+                                 for name in ('trajectories.py','hpc/hpc_control.py','nla/stepper.py','launch.py','nla/codex_editor.py','nla/claude_editor.py','nla/openai_editor.py')}}
     trajectories.write_json(args.output/f'provenance-{args.job}.json',provenance)
     config={'prompt':args.prompt,'instruction':args.instruction,'max_tokens':args.max_tokens,
             'editor_model':codex_editor.MODEL,'variants':list(trajectories.VARIANTS),
@@ -220,6 +218,6 @@ if __name__=='__main__':
         health = {'phase':'controller_failed','error_type':type(exc).__name__,
                   'frames':[{'file':Path(f.filename).name,'function':f.name,'line':f.lineno}
                             for f in traceback.extract_tb(exc.__traceback__)]}
-        trajectories.write_json(Path(__file__).parent/'runs'/('controller-health-'+model+'.json'),health)
+        trajectories.write_json(ROOT/'runs'/('controller-health-'+model+'.json'),health)
         raise SystemExit(1)
 

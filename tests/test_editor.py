@@ -1,12 +1,12 @@
 import unittest
 from unittest.mock import patch, Mock
-import stepper
-import codex_editor
+from nla import stepper
+from nla import codex_editor
 
 class EditorTests(unittest.TestCase):
     def test_subscription_routing_does_not_call_local_model(self):
         call=Mock(side_effect=AssertionError('Local model must not be used'))
-        with patch('codex_editor.propose',return_value={'proposal':'mouse','editor_model':'gpt-6.1-sol'}) as editor:
+        with patch('nla.codex_editor.propose',return_value={'proposal':'mouse','editor_model':'gpt-6.1-sol'}) as editor:
             result=stepper.run({'action':'propose','tokens':[1],'editor':'codex','instruction':'rewrite','text':'rabbit'},call,'')
         editor.assert_called_once_with('rewrite','rabbit')
         self.assertEqual(result['editor_model'],'gpt-6.1-sol')

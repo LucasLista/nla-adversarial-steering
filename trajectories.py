@@ -11,7 +11,7 @@ from pathlib import Path
 import time
 import urllib.request
 import urllib.error
-import codex_editor
+from nla import codex_editor
 
 REPEAT_LIMIT = 50  # identical tokens in a row that end a branch as degenerate
 

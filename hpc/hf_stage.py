@@ -6,11 +6,10 @@ from pathlib import Path
 import shlex
 import subprocess
 import threading
-import urllib.error
 import urllib.request
-from model_preflight import credential
+from hpc.model_preflight import credential
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parents[1]
 
 
 def manifest(profile):
@@ -81,7 +80,7 @@ def main():
     plan = {'model': args.model, 'destination': destination, 'proxy': f'http://127.0.0.1:{args.port}',
             'roles': profile['roles'], 'files': [{key: value for key, value in item.items() if key != 'url'} for item in files]}
     try:
-        command = 'python3 ' + shlex.quote(args.remote_root + '/hf_remote_download.py')
+        command = 'python3 ' + shlex.quote(args.remote_root + '/hpc/hf_remote_download.py')
         result = subprocess.run(ssh + [args.ssh_host, command], input=json.dumps(plan),
                                 text=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         if result.returncode:

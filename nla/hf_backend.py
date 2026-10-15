@@ -7,7 +7,7 @@ import gc
 import json
 from pathlib import Path
 import re
-from stepper import metrics
+from nla.stepper import metrics
 
 
 def injection_position(ids, metadata):

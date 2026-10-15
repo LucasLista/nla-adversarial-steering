@@ -2,7 +2,7 @@
 import math
 import os
 import re
-import codex_editor
+from nla import codex_editor
 
 
 def norm(v):

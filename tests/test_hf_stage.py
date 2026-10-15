@@ -5,7 +5,7 @@ from pathlib import Path
 import tempfile
 import unittest
 from unittest.mock import patch
-import hf_remote_download
+from hpc import hf_remote_download
 
 
 class Response(io.BytesIO):

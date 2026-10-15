@@ -10,7 +10,7 @@ import urllib.error
 import urllib.request
 from pathlib import Path
 
-import openai_editor
+from nla import openai_editor
 import trajectories
 
 EDITOR_MODEL = 'Qwen2.5-7B-Instruct-Q4_K_M'
