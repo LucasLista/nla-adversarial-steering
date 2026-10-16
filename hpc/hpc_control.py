@@ -158,6 +158,14 @@ def main():
             hf_status=json.load(response)
         if not hf_status.get('passed') or hf_status.get('model')!=args.model or hf_status.get('layer')!=profile['layer'] or hf_status.get('dimension')!=profile['dimension']:
             raise ValueError('HF model backend did not pass the required synthetic validation')
+    elif args.benchmark_manifest:
+        # Gate each new allocation on a benign intervention beyond one microbatch.
+        from hpc.hpc_batch import steering_self_test
+        try:
+            steering_self_test(trajectories.API(f'http://127.0.0.1:{args.port}'))
+        except Exception:
+            subprocess.run(ssh+[args.ssh_host,'bash -lc '+shlex.quote(f'bkill {args.job}')],capture_output=True)
+            raise
     provenance={'resident_models':not args.hf_backend,'job_id':args.job,'compute_host':host,'remote_root':args.remote_root,
                 'models':profile['roles'] if args.hf_backend else json.loads((ROOT/'config/models.json').read_text()),
                 'hf_validation':hf_status,
