@@ -21,8 +21,8 @@ scheduler/process state, token counts, ended flags, completion flags, or file
 existence/hashes. Do not decode token IDs or print prompt/response values.
 
 The user authorizes blind copying, staging, committing, and pushing model
-response logs to `main`. Use `publish_run.py` to copy logs without inspecting
-content. This exception permits publication, not agent review or interpretation.
+response logs to `main`. Use `python -m tools.publish_run` to copy logs
+without inspecting content. This exception permits publication, not agent review or interpretation.
 Do not publish experiment input files, credentials, or full API checkpoints.
 
 Keep model weights, builds, caches, and detailed runtime checkpoints ignored.
@@ -30,7 +30,8 @@ Commit only the compact response log and its metadata under `logs/`.
 
 # Monitoring without reading logs
 
-Use `run_status.py --run runs/RUN_NAME` and LSF scheduler metadata for status.
+Use `python -m tools.run_status --run runs/RUN_NAME` and LSF scheduler metadata
+for status.
 The status helper outputs only branch counts, ended flags, branch completion,
 and overall completion. New runs maintain a separate `progress.json` with
 these fields. For older running processes, the helper may programmatically

@@ -1,7 +1,7 @@
 """Run checkpointed trajectories on the GPU node itself, with the local-Qwen editor.
 
 No laptop, SSH tunnel or external editor is involved, so the run survives laptop
-disconnects. Produces the same artifacts and configs as hpc_control.py --editor local.
+disconnects. Produces the same artifacts and configs as hpc.hpc_control --editor local.
 """
 import argparse
 import json
@@ -10,7 +10,7 @@ import urllib.error
 import urllib.request
 from pathlib import Path
 
-import openai_editor
+from nla import openai_editor
 import trajectories
 
 EDITOR_MODEL = 'Qwen2.5-7B-Instruct-Q4_K_M'
@@ -83,7 +83,7 @@ def main():
         private = json.loads(path.read_text())
         if not private.get('prompt', '').strip() or not private.get('instruction', '').strip():
             raise ValueError('Empty experiment prompt or editor instruction')
-        # Must equal hpc_control.py's config so existing checkpoints resume.
+        # Must equal hpc.hpc_control's config so existing checkpoints resume.
         cfg = {'prompt': private['prompt'], 'instruction': private['instruction'], 'max_tokens': args.max_tokens,
                'editor_model': EDITOR_MODEL if args.editor == 'local' else openai_editor.MODEL, 'variants': list(trajectories.VARIANTS),
                'policy': 'independent prefixes; greedy; one-position intervention; no KV-edit replay'}

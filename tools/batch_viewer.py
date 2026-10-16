@@ -46,7 +46,7 @@ def main():
             try:
                 u=urlsplit(self.path)
                 if u.path=='/':
-                    data=Path(__file__).with_name('batch_viewer.html').read_text()
+                    data=(Path(__file__).resolve().parents[1] / 'ui/batch_viewer.html').read_text()
                     if args.banner:
                         data=data.replace('</h1>','</h1><p style="background:#3c3018;border:1px solid #d6a84b;color:#f6d788;padding:10px;border-radius:8px">'+html.escape(args.banner)+'</p>',1)
                     data=data.encode();kind='text/html'

@@ -7,7 +7,7 @@ import re
 import time
 import urllib.request
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parents[1]
 URL = os.environ.get('NLA_URL', 'http://127.0.0.1:18090')
 
 def post(endpoint, data):

@@ -7,10 +7,10 @@ from pathlib import Path
 import threading
 import time
 import traceback
-from hf_backend import Backend
+from nla.hf_backend import Backend
 from trajectories import write_json
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parents[1]
 
 
 def main():

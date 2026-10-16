@@ -1,0 +1,16 @@
+# Shared batch driver; batch_args are set by the LSF job.
+uv run --locked launch.py --port "$server_port" --backend-port "$backend_port" --gpu-layers 99 --threads 4 --auth-token-file "runs/token-${LSB_JOBID}.txt" --audit-log &
+server=$!
+trap 'kill "$server" 2>/dev/null; wait "$server" 2>/dev/null' EXIT
+# Self-contained driver: no laptop connection needed. Retries resume from checkpoints.
+for attempt in 1 2 3 4 5; do
+    if uv run --locked python -m hpc.hpc_batch "${batch_args[@]}" --port "$server_port" \
+        --token-file "runs/token-${LSB_JOBID}.txt" \
+        --configs runs/experiments/run-{1,2,3}/inputs/config.json; then
+        printf 'complete\n' > "runs/batch-status-${LSB_JOBID}.txt"; exit 0
+    fi
+    printf 'attempt %s failed\n' "$attempt" >> "runs/batch-status-${LSB_JOBID}.txt"
+    kill -0 "$server" 2>/dev/null || exit 1
+    sleep 60
+done
+exit 1

@@ -7,7 +7,7 @@ import urllib.error
 import urllib.request
 from pathlib import Path
 
-import codex_editor
+from nla import codex_editor
 
 MODEL = codex_editor.MODEL
 LOCK = threading.Lock()
@@ -22,7 +22,7 @@ class EditorRefusal(RuntimeError):
 
 def api_key():
     key = os.environ.get('OPENAI_API_KEY', '').strip()
-    env = Path(__file__).with_name('.env')
+    env = Path(__file__).resolve().parents[1] / '.env'
     if not key and env.exists():
         for line in env.read_text().splitlines():
             if line.startswith('OPENAI_API_KEY='):

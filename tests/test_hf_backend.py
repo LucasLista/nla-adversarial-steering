@@ -1,5 +1,5 @@
 import unittest
-from hf_backend import injection_position, validate_contract, route_output_head
+from nla.hf_backend import injection_position, validate_contract, route_output_head
 from types import SimpleNamespace
 from unittest.mock import Mock
 

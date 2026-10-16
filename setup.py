@@ -60,7 +60,7 @@ def main():
     actual = subprocess.check_output(['git', '-C', str(SOURCE), 'rev-parse', 'HEAD'], text=True).strip()
     if actual != REVISION:
         parser.error('Existing backend has another revision; move .runtime/nla.cpp aside before retrying')
-    from fix_nla_capture import apply
+    from nla.fix_nla_capture import apply
     apply(SOURCE)
     run('cmake', '-S', str(SOURCE), '-B', str(build),
         '-DCMAKE_BUILD_TYPE=Release', f'-DGGML_CUDA={"ON" if args.cuda else "OFF"}',

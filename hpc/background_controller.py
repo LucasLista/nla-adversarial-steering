@@ -3,11 +3,10 @@ import argparse
 import os
 from pathlib import Path
 import shutil
-import signal
 import subprocess
 import sys
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parents[1]
 
 
 def main():
@@ -20,7 +19,7 @@ def main():
     if args and args[0] == '--':
         args = args[1:]
     if not args:
-        parser.error('Pass hpc_control.py arguments after --')
+        parser.error('Pass hpc.hpc_control arguments after --')
     runs = ROOT / 'runs'
     runs.mkdir(exist_ok=True)
     pid_file = options.pid_file or runs / 'controller.pid'
@@ -35,7 +34,7 @@ def main():
         else:
             parser.error('Recorded controller process is still alive; check process metadata first')
     with log_file.open('ab') as log:
-        process = subprocess.Popen([sys.executable, str(ROOT / 'hpc_control.py'), *args],
+        process = subprocess.Popen([sys.executable, '-m', 'hpc.hpc_control', *args],
                                    cwd=ROOT, stdin=subprocess.DEVNULL,
                                    stdout=log, stderr=log, start_new_session=True)
     pid_file.write_text(str(process.pid) + '\n')

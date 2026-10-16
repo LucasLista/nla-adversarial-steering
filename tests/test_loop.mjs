@@ -2,7 +2,7 @@
 import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
 import assert from 'node:assert/strict';
-const source=readFileSync(new URL('./stepper.html',import.meta.url),'utf8').split('<script>')[1].split('</script>')[0];
+const source=readFileSync(new URL('../ui/stepper.html',import.meta.url),'utf8').split('<script>')[1].split('</script>')[0];
 function setup(mode,stop=false){
  const elements=new Map();const element=()=>({value:'',textContent:'',disabled:false,style:{},addEventListener(){},append(){},replaceChildren(){}});
  const get=id=>{if(!elements.has(id))elements.set(id,element());return elements.get(id)};

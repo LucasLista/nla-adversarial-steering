@@ -13,9 +13,7 @@ import signal
 import sys
 import threading
 import time
-import stepper
-import experiments
-import prompt_catalog
+from nla import stepper, experiments, prompt_catalog
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 ROOT = pathlib.Path(__file__).resolve().parent
@@ -150,6 +148,14 @@ class Handler(BaseHTTPRequestHandler):
         self.end_headers()
         return False
 
+    def respond(self, data, content_type='application/json', status=200, no_store=False):
+        self.send_response(status)
+        self.send_header('Content-Type', content_type)
+        if no_store:
+            self.send_header('Cache-Control', 'no-store')
+        self.end_headers()
+        self.wfile.write(data)
+
     def do_GET(self):
         if not self.authenticated():
             return
@@ -163,28 +169,15 @@ class Handler(BaseHTTPRequestHandler):
             except ValueError:
                 self.send_error(500, 'Invalid prompt catalog')
                 return
-            self.send_response(200)
-            self.send_header('Content-Type', 'application/json')
-            self.send_header('Cache-Control', 'no-store')
-            self.end_headers()
-            self.wfile.write(data)
+            self.respond(data, no_store=True)
         elif self.path in ('/stepper', '/stepper.html'):
-            data = (ROOT / 'stepper.html').read_bytes()
-            self.send_response(200)
-            self.send_header('Content-Type', 'text/html; charset=utf-8')
-            self.end_headers()
-            self.wfile.write(data)
+            data = (ROOT / 'ui/stepper.html').read_bytes()
+            self.respond(data, 'text/html; charset=utf-8')
         elif self.path in ('/', '/index.html'):
             data = (RUNTIME / 'frontend.html').read_bytes()
-            self.send_response(200)
-            self.send_header('Content-Type', 'text/html; charset=utf-8')
-            self.end_headers()
-            self.wfile.write(data)
+            self.respond(data, 'text/html; charset=utf-8')
         elif self.path == '/setup-status':
-            self.send_response(200)
-            self.send_header('Content-Type', 'application/json')
-            self.end_headers()
-            self.wfile.write(json.dumps({role: {
+            self.respond(json.dumps({role: {
                 'bytes': (MODELS / name).stat().st_size if (MODELS / name).exists() else 0,
                 'expected': size,
             } for role, (name, size) in FILES.items()}).encode())
@@ -218,10 +211,7 @@ class Handler(BaseHTTPRequestHandler):
         if AUDIT_LOG:
             audit(record.with_suffix('.response.json'), {'response':result, 'status':status,
                                                        'finished_at':time.time()})
-        self.send_response(status)
-        self.send_header('Content-Type', 'application/json')
-        self.end_headers()
-        self.wfile.write(json.dumps(result).encode())
+        self.respond(json.dumps(result).encode(), status=status)
 
     def proxy(self):
         role = 'av' if self.path == '/explain' else 'ar' if self.path in (
@@ -247,10 +237,7 @@ class Handler(BaseHTTPRequestHandler):
                 pass
             except Exception as exc:
                 if not started:
-                    self.send_response(503)
-                    self.send_header('Content-Type', 'application/json')
-                    self.end_headers()
-                    self.wfile.write(json.dumps({'error': {'message': str(exc)}}).encode())
+                    self.respond(json.dumps({'error': {'message': str(exc)}}).encode(), status=503)
             finally:
                 if conn:
                     conn.close()

@@ -29,6 +29,6 @@ def main():
     nextstate=post('inspect',tokens=tokens+[token])
     assert len(nextstate['h'])==3584
     report={'tokens':tokens,**state,**av,'unchanged':comparison,'changed':changed,'identity_max_probability_error':diff,'next_token':token,'next_baseline':nextstate['baseline']}
-    path=Path(__file__).parent/'runs/stepper-validation.json';path.parent.mkdir(exist_ok=True);path.write_text(json.dumps(report,indent=2))
+    path=Path(__file__).resolve().parents[1]/'runs/stepper-validation.json';path.parent.mkdir(exist_ok=True);path.write_text(json.dumps(report,indent=2))
     print('PASS: unchanged corrected distribution error',diff,flush=True)
 if __name__=='__main__':main()
