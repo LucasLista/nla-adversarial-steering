@@ -13,6 +13,7 @@ import time
 import urllib.request
 from nla import trajectories
 from nla import codex_editor, claude_editor, openai_editor, prompt_catalog
+from nla.benchmark import manifest_configs
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -38,12 +39,25 @@ def main():
     p.add_argument('--probe-id',help='Select a probe by ID without putting its text in command arguments')
     p.add_argument('--editor-preset',help='Select an editor instruction by ID')
     p.add_argument('--configs',nargs='+',type=Path)
+    p.add_argument('--benchmark-manifest',type=Path)
+    p.add_argument('--fast',action='store_true',help='Compute only the selected Qwen comparison')
+    p.add_argument('--release-job',action='store_true',help='Release the GPU after successful completion')
     p.add_argument('--port',type=int,default=18095)
     p.add_argument('--instruction')
     p.add_argument('--editor',choices=('config','codex','openai','claude','local'),default='config',help='Override the editor named in each experiment config')
     p.add_argument('--max-tokens',type=int,default=64)
     p.add_argument('--keep-serving',action='store_true',help='Keep the browser relay open while the HPC job is running')
     args=p.parse_args()
+    if args.benchmark_manifest:
+        if args.configs or args.prompt or args.probe_id or args.instruction or args.editor_preset:
+            p.error('--benchmark-manifest cannot be combined with other input options')
+        manifest, args.configs = manifest_configs(args.benchmark_manifest)
+        if not manifest['editing_enabled'] and any(v.startswith('edited') for v in (args.variants or [])):
+            p.error('Edited benchmark branches require a prepared private editing instruction')
+        if not manifest['editing_enabled'] and not args.variants:
+            args.variants = ['original']
+        if manifest['model'] != args.model:
+            p.error('Benchmark manifest and target model differ')
     models=json.loads((ROOT/'config/evaluation_models.json').read_text())
     profile=next((item for item in models if item['id']==args.model),None)
     if profile is None: p.error('Unknown evaluated model family')
@@ -158,6 +172,10 @@ def main():
             'policy':'independent prefixes; greedy; one-position intervention; no KV-edit replay'}
     if args.hf_backend:
         config.update(evaluated_model=args.model,precision=hf_status['precision'])
+    if args.fast:
+        config['comparison_mode']='selected'
+    if args.variants:
+        config['variants']=args.variants
     try:
         inputs=args.configs or [None]
         for path in inputs:
@@ -201,6 +219,8 @@ def main():
         subprocess.run(['rsync','-a','-e',shlex.join(ssh),str(args.output)+'/',
                         args.ssh_host+':'+args.remote_root+'/runs/'+args.output.name+'/'],check=True)
     print('Four trajectories complete; artifacts saved locally and on HPC',flush=True)
+    if args.release_job:
+        subprocess.run(ssh+[args.ssh_host,'bash -lc '+shlex.quote(f'bkill {args.job}')],capture_output=True)
     if args.keep_serving:
         print('Keeping the stepper relay available while the HPC job runs',flush=True)
         while remote(f'bjobs -noheader -o stat {args.job}').strip() == 'RUN':
@@ -219,5 +239,8 @@ if __name__=='__main__':
                   'frames':[{'file':Path(f.filename).name,'function':f.name,'line':f.lineno}
                             for f in traceback.extract_tb(exc.__traceback__)]}
         trajectories.write_json(ROOT/'runs'/('controller-health-'+model+'.json'),health)
+        if '--output' in sys.argv:
+            output = Path(sys.argv[sys.argv.index('--output')+1])
+            trajectories.write_json(output/'controller-health.json',health)
         raise SystemExit(1)
 
