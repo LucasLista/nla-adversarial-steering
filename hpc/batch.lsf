@@ -11,5 +11,5 @@
 set -euo pipefail
 cd "${LS_SUBCWD:?Submit from the project directory}"
 source hpc/common.sh
-batch_args=(--output runs/hpc-qwen)
+batch_args=(--output runs/jbb-qwen)
 source hpc/run_batch.sh

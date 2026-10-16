@@ -74,7 +74,7 @@ def run(body, call, frontend):
                 'instruction':instruction, 'truncated':truncated, 'token_limit':limit}
     if action == 'inspect':
         h = call('base','/extract',{'prompt':tokens,'layer':20,'token_pos':-1,'add_special':False})['activation']
-        return {'h':h,'baseline':predict()}
+        return {'h':h, **({'baseline':predict()} if body.get('baseline', True) else {})}
     if action == 'explain':
         ids = [int(x) for x in re.search(r'NLA_ACTOR_INPUT_IDS = `([^`]+)`',frontend)[1].split()]
         av = call('av','/explain',{'activation':body['h'],'input_ids':ids,'inject_pos':111,
@@ -85,8 +85,12 @@ def run(body, call, frontend):
                 'metrics':metrics(body['h'],r)}
     if action == 'compare':
         # Re-extract for this precise context; never accept a stale client h.
+        variants = body.get('variants', ['original', 'roundtrip', 'edited_raw', 'edited_corrected'])
+        if not variants or any(v not in ('original', 'roundtrip', 'edited_raw', 'edited_corrected') for v in variants):
+            raise ValueError('Unknown comparison variant')
         r0 = body['reconstruction']
-        r1 = call('ar','/reconstruct',{'explanation':body['edited']})['activation']
+        r1 = (call('ar','/reconstruct',{'explanation':body['edited']})['activation']
+              if any(v.startswith('edited') for v in variants) else r0)
         h = call('base','/extract',{'prompt':tokens,'layer':20,'token_pos':-1,'add_special':False})['activation']
         if len(r0)!=len(h) or len(r1)!=len(h):
             raise ValueError('Wrong reconstruction dimension')
@@ -94,8 +98,8 @@ def run(body, call, frontend):
             raise ValueError('Non-finite activation from backend (NaN/inf)')
         error = [a-b for a,b in zip(h,r0)]
         corrected = [a+b for a,b in zip(r1,error)]
-        return {'original':predict(), 'roundtrip':predict(r0,h), 'edited_raw':predict(r1,h),
-                'edited_corrected':predict(corrected,h), 'edited_reconstruction':r1,
+        targets = {'original':None, 'roundtrip':r0, 'edited_raw':r1, 'edited_corrected':corrected}
+        return {**{v:predict(targets[v], h) for v in variants}, 'edited_reconstruction':r1,
                 'error':error, 'metrics':metrics(h,r0)}
     if action == 'decode':
         return call('base','/detokenize',{'tokens':tokens})

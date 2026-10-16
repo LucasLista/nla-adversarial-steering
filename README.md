@@ -1,9 +1,12 @@
-# NLA playground
+# NLA Adversarial Steering
 
-Inspect and edit Qwen2.5-7B-Instruct activations with Anthropic's released
-[Natural Language Autoencoder](https://transformer-circuits.pub/2026/nla/index.html).
-The local interface wraps [nla.cpp](https://github.com/thomasgauthier/nla.cpp):
-explain a token's activation, edit the explanation, and compare continuations.
+Evaluate adversarial activation steering through natural language autoencoders.
+An NLA verbalizes a model activation, an editor changes the description, and the
+reconstructor maps it back into activation space. Compare independent original,
+reconstructed, edited, and reconstruction-error-preserving trajectories.
+
+The current runner uses Qwen2.5-7B-Instruct with Anthropic's released layer-20 NLA
+and the pinned [nla.cpp](https://github.com/thomasgauthier/nla.cpp) backend.
 
 ## Run locally
 
@@ -17,12 +20,12 @@ sudo apt install git curl cmake build-essential
 git clone https://github.com/LucasLista/nla-playground.git
 cd nla-playground
 uv sync --locked
-uv run setup.py
-uv run launch.py
+uv run python -m nla.setup
+uv run python -m nla.launch
 ```
 
 uv manages Python 3.15. Setup builds the pinned backend and downloads 12.8 GB of
-SHA-256-verified checkpoints. Downloads resume; `setup.py --skip-download` only
+SHA-256-verified checkpoints. Downloads resume; `python -m nla.setup --skip-download` only
 builds. Keep WSL checkouts in the Linux filesystem. The macOS build path has not
 been verified on hardware.
 
@@ -38,8 +41,8 @@ be enabled for **Explain NLA**. Browser JavaScript dependencies require internet
 For NVIDIA GPUs, install a compatible CUDA toolkit and build separately:
 
 ```sh
-uv run setup.py --cuda --skip-download
-uv run launch.py --gpu-layers 99
+uv run python -m nla.setup --cuda --skip-download
+uv run python -m nla.launch --gpu-layers 99
 ```
 
 Use `--cuda-arch` for a specific architecture, `--gpu-layers` to limit offloading,
@@ -49,20 +52,52 @@ and `--threads` to limit CPU use. CPU remains the default.
 
 | Path | Purpose |
 | --- | --- |
-| `setup.py`, `download.py`, `launch.py` | Build, download, and serve the local playground |
-| `trajectories.py` | Independent branches with resumable stage checkpoints |
-| `nla/` | Backend adapters, editor providers, and session operations |
+| `nla/` | Setup, download, serving, editors, interventions, trajectories, benchmark preparation |
+| `config/` | Pinned model manifests and NLA metadata |
 | `ui/` | Browser interfaces |
-| `hpc/` | DTU LSF jobs, remote staging, and controllers |
-| `tools/` | Progress reports, snapshot publication, and checkpoint viewer |
-| `tests/` | Offline regression tests and opt-in live checks |
-| `models.json`, `evaluation_models.json` | Pinned checkpoint manifests |
-| `prompts.json`, `editor_prompts.json` | Human-owned experiment catalogs |
+| `hpc/` | DTU LSF jobs, staging, and controllers |
+| `tools/` | Metadata reports, snapshot publication, and checkpoint viewer |
+| `tests/` | Offline regressions and opt-in live checks |
+| `runs/` | Ignored benchmark inputs, private instructions, and results |
 
 [The reference](docs/reference.md) covers experiment semantics, saved runs,
 editors, and HPC operation. [AGENTS.md](AGENTS.md) defines unread research
 artifacts. Weights, builds, and private checkpoints stay ignored; `logs/` holds
 published snapshots and `examples/` holds historical validation artifacts.
+
+## JailbreakBench
+
+Prepare a pinned, ten-case benign pilot without printing prompts:
+
+```sh
+uv run python -m nla.benchmark --limit 10
+```
+
+The browser prompt catalog now uses those cases. Existing editor instructions
+can be kept privately in `runs/experiments/editor_prompts.json`; experiment
+catalogs and benchmark text are no longer tracked in Git. Historic runs remain
+available and are not rewritten.
+
+On DTU, prepare the same manifest before submitting `bsub < hpc/batch.lsf`.
+The default is a baseline-only Qwen run. Set `NLA_MAX_TOKENS` to bound generation;
+set `NLA_BENCHMARK_MANIFEST` to use another prepared manifest. The API-editor job
+is `hpc/batch-sol.lsf`, with its key in the ignored root `.env`.
+
+The harmful split requires explicit supported `--category` selection. Physical
+harm is excluded. Editing requires a private `--instruction-file`; its contents
+are never printed. These are benchmark subsets, not official leaderboard runs.
+Use held-out cases and keep the data selection fixed when comparing conditions.
+
+`--fast` on `hpc.hpc_batch` skips unused Qwen predictions while retaining the
+same intervention math. It records a separate comparison mode in run configs;
+use a fresh result directory when changing modes. Interactive comparisons keep
+all four distributions.
+
+Produce a text-free completion report with `python -m tools.benchmark_report
+--manifest PATH --results PATH`. Optional `--grades` accepts external scores
+only. No judge is run automatically, and completion is not an attack-success
+score. Record the evaluator/version and benign-versus-harmful score definition
+when reporting grades.
 
 ## Checks
 

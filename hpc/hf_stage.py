@@ -41,7 +41,7 @@ def main():
     parser.add_argument('--remote-root', required=True)
     parser.add_argument('--port', type=int, default=18556)
     args = parser.parse_args()
-    profiles = json.loads((ROOT / 'evaluation_models.json').read_text())
+    profiles = json.loads((ROOT / 'config/evaluation_models.json').read_text())
     profile = next((row for row in profiles if row['id'] == args.model), None)
     if profile is None:
         parser.error('Unknown model family')

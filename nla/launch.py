@@ -16,7 +16,7 @@ import time
 from nla import stepper, experiments, prompt_catalog
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
-ROOT = pathlib.Path(__file__).resolve().parent
+ROOT = pathlib.Path(__file__).resolve().parents[1]
 MODELS = ROOT / 'models'
 RUNTIME = ROOT / '.runtime'
 LOGS = ROOT / 'runs'
@@ -164,8 +164,9 @@ class Handler(BaseHTTPRequestHandler):
             self.end_headers()
         elif self.path in ('/prompt-catalog', '/editor-prompt-catalog'):
             try:
-                filename = 'editor_prompts.json' if self.path == '/editor-prompt-catalog' else 'prompts.json'
-                data = json.dumps(prompt_catalog.load(ROOT / filename)).encode()
+                path = (ROOT / 'runs/experiments/editor_prompts.json' if self.path == '/editor-prompt-catalog'
+                        else ROOT / os.environ.get('NLA_BENCHMARK_CATALOG', 'runs/benchmarks/jbb-benign/catalog.json'))
+                data = json.dumps(prompt_catalog.load(path) if path.exists() else []).encode()
             except ValueError:
                 self.send_error(500, 'Invalid prompt catalog')
                 return
@@ -269,7 +270,7 @@ if __name__ == '__main__':
     if THREADS < 1 or PORT == BACKEND_PORT:
         parser.error('Use positive threads and distinct ports')
     if not (BUILD_DIR / 'bin/llama-server').exists() or not (RUNTIME / 'frontend.html').exists():
-        parser.error('Run uv run --locked setup.py first')
+        parser.error('Run uv run --locked python -m nla.setup first')
     # Refuse an occupied model-server port, rather than attaching to an unrelated server.
     with socket.socket() as probe:
         try:

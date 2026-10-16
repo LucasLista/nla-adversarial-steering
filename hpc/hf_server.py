@@ -8,7 +8,7 @@ import threading
 import time
 import traceback
 from nla.hf_backend import Backend
-from trajectories import write_json
+from nla.trajectories import write_json
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -23,7 +23,7 @@ def main():
     parser.add_argument('--job', default='manual')
     parser.add_argument('--validate-only', action='store_true')
     args = parser.parse_args()
-    profile = next(row for row in json.loads((ROOT/'evaluation_models.json').read_text()) if row['id']==args.model)
+    profile = next(row for row in json.loads((ROOT/'config/evaluation_models.json').read_text()) if row['id']==args.model)
     token = args.auth_token_file.read_text().strip() if args.auth_token_file else None
     if args.listen_host != '127.0.0.1' and (token is None or len(token)<32):
         parser.error('Remote binding requires a strong per-job authentication token')

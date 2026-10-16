@@ -1,13 +1,11 @@
 # Reference
 
-Run commands from the repository root. Supporting commands use Python modules:
-`uv run python -m hpc.hpc_control --help`, for example. The former root-level
-helpers now live under `hpc/`, `tools/`, `nla/`, and `tests/`; setup, download,
-launch, and trajectories keep their original entry points. Run directories and
-checkpoint formats are unchanged. The dated `build_dashboard.py` exporter was
-removed; use `tools.batch_viewer` for checkpoint inspection. The Gemma-only
-`hf_campaign.py` wrapper was also removed: stage snapshots, submit the HF job,
-then start the controller using the returned job ID.
+Run commands from the repository root using modules, such as
+`uv run python -m nla.launch`. Former root scripts now live in `nla/`;
+model manifests are in `config/`. Weights, `.runtime/`, private catalogs, and
+run directories retain their locations. The dated dashboard and Gemma campaign
+wrapper were removed; use `tools.batch_viewer`, snapshot staging, HF job
+submission, and `hpc.hpc_control` instead.
 
 ## Experiment semantics
 
@@ -36,7 +34,7 @@ four distributions agree on the most likely token.
 
 ## Saved runs
 
-Human-owned settings live in `runs/experiments/NAME/inputs/config.json`, with
+Legacy human-owned settings live in `runs/experiments/NAME/inputs/config.json`, with
 `prompt`, `instruction`, `editor`, `mode`, `token-mode`, and `steps` fields.
 Load inputs in the stepper; Save run writes a snapshot under that experiment's
 `results/`. Results → Open restores it. Browser autosave is separate from explicit
@@ -83,7 +81,7 @@ and rejects browser origins. Credentials stay on the editor host.
 
 ## DTU HPC
 
-Download Qwen weights on HPC with `uv run download.py`, then submit from the
+Download Qwen weights on HPC with `uv run python -m nla.download`, then submit from the
 repository root after `mkdir -p runs`:
 
 | Job | Purpose |

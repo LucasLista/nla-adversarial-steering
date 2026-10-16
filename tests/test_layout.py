@@ -8,16 +8,16 @@ import threading
 import unittest
 from unittest.mock import patch
 
-import launch
+from nla import launch
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
 class LayoutTests(unittest.TestCase):
     def test_commands_import_and_show_help(self):
-        commands = [[name + '.py'] for name in ('setup', 'launch', 'trajectories')]
+        commands = [['-m', 'nla.' + name] for name in ('setup', 'download', 'launch', 'trajectories')]
         commands += [['-m', name] for name in (
-            'nla.codex_editor', 'hpc.hpc_control', 'hpc.hpc_batch',
+            'nla.codex_editor', 'nla.benchmark', 'tools.benchmark_report', 'hpc.hpc_control', 'hpc.hpc_batch',
             'hpc.hf_server', 'hpc.hf_stage',
             'hpc.background_controller', 'hpc.model_preflight',
             'tools.run_status', 'tools.publish_run', 'tools.batch_viewer',

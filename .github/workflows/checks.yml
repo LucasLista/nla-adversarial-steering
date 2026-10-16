@@ -24,7 +24,7 @@ jobs:
       - name: Check Python scripts without downloading models
         run: |
           uv run --locked python --version
-          uv run --locked python -m compileall -q setup.py download.py launch.py trajectories.py nla hpc tools tests
+          uv run --locked python -m compileall -q nla hpc tools tests
           uv run --locked python -m unittest discover -s tests
           for script in hpc/*.lsf hpc/*.sh; do bash -n "$script"; done
       - uses: actions/setup-node@v4
