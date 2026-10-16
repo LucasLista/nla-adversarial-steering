@@ -1,4 +1,5 @@
 """Resumable, range-checked model downloads with SHA256 verification."""
+import argparse
 import concurrent.futures
 import hashlib
 import json
@@ -6,10 +7,9 @@ from pathlib import Path
 import subprocess
 import time
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parents[1]
 DEST = ROOT / 'models'
 CHUNK = 16 * 1024 * 1024
-DEST.mkdir(exist_ok=True)
 
 def sha256(path):
     digest = hashlib.sha256()
@@ -66,6 +66,8 @@ def download_model(row):
     print('VERIFIED ' + row['file'], flush=True)
 
 if __name__ == '__main__':
-    rows = json.loads((ROOT / 'models.json').read_text())
+    argparse.ArgumentParser(description=__doc__).parse_args()
+    DEST.mkdir(exist_ok=True)
+    rows = json.loads((ROOT / 'config/models.json').read_text())
     for row in rows:
         download_model(row)

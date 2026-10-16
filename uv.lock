@@ -3,6 +3,6 @@ revision = 5
 requires-python = ">=3.15"
 
 [[package]]
-name = "nla-playground"
+name = "nla-adversarial-steering"
 version = "0.1.0"
 source = { virtual = "." }

@@ -20,7 +20,7 @@ env | sort | sed -n '/^CUDA_/p;/^LSB_/p' > "runs/scheduler-${LSB_JOBID}.txt"
 export NLA_RESIDENT_MODELS=1
 export NLA_CONTEXT_SIZE=16384
 uv sync --locked
-uv run --locked setup.py --cuda --cuda-arch 70 --skip-download --jobs 4
+uv run --locked python -m nla.setup --cuda --cuda-arch 70 --skip-download --jobs 4
 # Allocate a per-job port range to avoid unrelated services on shared nodes.
 server_port=$((30000 + (LSB_JOBID % 5000) * 4))
 backend_port=$((server_port + 1))

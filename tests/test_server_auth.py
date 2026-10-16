@@ -6,7 +6,7 @@ from http.server import ThreadingHTTPServer
 import threading
 import unittest
 from unittest.mock import patch
-import launch
+from nla import launch
 
 class AuthTests(unittest.TestCase):
     def test_hpc_endpoint_requires_token(self):

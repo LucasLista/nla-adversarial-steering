@@ -123,7 +123,9 @@ def generate(config, directory, api, editor, variants=None):
             def call(action, **kwargs):
                 request = {'action': action, **kwargs}
                 return recorded(step / (action + '.json'), request, lambda: api(action, **kwargs))
-            inspected = call('inspect', tokens=state['tokens'])
+            fast = config.get('comparison_mode') == 'selected'
+            inspected = call('inspect', tokens=state['tokens'],
+                             **({'baseline': False} if fast and variant != 'original' else {}))
             if variant == 'original':
                 prediction = inspected['baseline']
             else:
@@ -135,7 +137,8 @@ def generate(config, directory, api, editor, variants=None):
                                       {'instruction': config['instruction'], 'text': explained['text']},
                                       lambda: editor(config['instruction'], explained['text']))
                 compared = call('compare', tokens=state['tokens'], edited=edited['proposal'],
-                                reconstruction=explained['reconstruction'])
+                                reconstruction=explained['reconstruction'],
+                                **({'variants': [variant]} if fast else {}))
                 prediction = compared[variant]
             token = prediction['completion_probabilities'][0]['id']
             if type(token) is not int:
@@ -154,7 +157,7 @@ def generate(config, directory, api, editor, variants=None):
             write_progress(directory, config['max_tokens'])
             print(f'{variant}: {len(generated)}/{config["max_tokens"]}, token={token}', flush=True)
         outputs[variant] = {'response': state['response'], 'generated_token_ids': state['generated'],
-                            'stop_reason': 'eos' if state['ended'] else 'token_limit'}
+                            'stop_reason': state.get('stop_reason', 'eos') if state['ended'] else 'token_limit'}
         write_json(directory / 'responses.json', outputs)
     write_json(directory / 'complete.json', {'completed_at': datetime.datetime.now(datetime.timezone.utc).isoformat(),
                                            'variants': list(outputs)})

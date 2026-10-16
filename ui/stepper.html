@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NLA token laboratory</title>
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NLA adversarial steering</title>
 <style>
 #distributions{grid-template-columns:repeat(auto-fit,minmax(310px,1fr));align-items:start}
 #distributions .card{min-width:0;padding:14px;overflow:hidden}
@@ -16,16 +16,16 @@
 #distributions h3{margin:0 0 12px}
 @media(max-width:400px){#distributions{grid-template-columns:1fr}}
 nav button.agree{background:#374151;color:#9ca3af}#edited{width:100%;min-height:320px!important;resize:vertical}nav{display:flex;flex-wrap:wrap;gap:4px;margin-top:10px}nav button{font:13px monospace;margin:0;padding:6px}.selected{border-color:#93c5fd;background:#315679}details{color:#a8b5c8;font-size:14px}h2{font-size:20px}h3{font-size:16px}textarea{min-height:70px!important}*{box-sizing:border-box}select,input{max-width:100%}body{background:#111827;color:#e5e7eb;font:16px system-ui;margin:30px auto;max-width:1400px;padding:0 20px}textarea,select,button{font:inherit;border-radius:6px;padding:10px;background:#243147;color:inherit;border:1px solid #64748b}textarea{width:95%;min-height:100px}button{cursor:pointer;margin:6px}button:disabled{opacity:.4;cursor:wait}a{color:#93c5fd}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}.card{padding:16px;border:1px solid #475569;border-radius:10px}pre{white-space:pre-wrap;overflow-wrap:anywhere}table{width:100%;font:14px monospace}td{padding:4px;max-width:170px;overflow-wrap:anywhere}small{color:#a8b5c8}#status{color:#93c5fd;min-height:30px}.bar{background:#315679}h1{margin-bottom:5px}</style>
-<h1>NLA playground</h1><p><small>Qwen2.5 · L20</small> · <a href="/">Classic</a></p>
-<select id="example" aria-label="Evaluation prompt"><option value="">Choose an evaluation prompt…</option></select>
-<p><textarea id="prompt">What happened in and around Tiananmen Square in June 1989?</textarea></p>
+<h1>NLA adversarial steering</h1><p><small>Qwen2.5 · L20</small> · <a href="/">Classic</a></p>
+<select id="example" aria-label="Evaluation prompt"><option value="">Select a benchmark case</option></select>
+<p><textarea id="prompt"></textarea></p>
 <button id="start">Start</button><button id="export">Export</button><input id="import" type="file" accept="application/json"><small></small>
 <p><input id="experiment" value="first" aria-label="Experiment" placeholder="Experiment"><button id="load-input">Load inputs</button><button id="save-result">Save run</button><button id="list-results">Results</button><select id="result-list" aria-label="Saved results"></select><button id="open-result">Open</button></p>
 <p id="status" role="status"></p><div class="card"><strong>Generated text</strong><pre id="generated"></pre><small id="position"></small><nav id="history"></nav></div>
 <p><button id="inspect">Inspect</button><button id="explain">Explain</button><button id="compare">Compare</button></p>
 <div class="grid"><div class="card"><h3>Original</h3><pre id="original"></pre></div><div class="card"><h3>Edit</h3><textarea id="edited"></textarea><small></small></div><div class="card"><details><summary>Error metrics</summary><pre id="metrics"></pre></details></div></div>
 <div class="card"><h2>Editor</h2>
-<p><label>Editor <select id="editor"><option value="local">Local Qwen</option><option value="codex">Sol 6.1 · subscription</option></select></label></p><small>Sol sends the edit instruction and NLA text to OpenAI; subscription limits apply.</small><br><p><label>Instruction preset <select id="editor-preset"><option value="">Custom instruction</option></select></label></p><label for="instruction">Instruction</label><textarea id="instruction">Rewrite the description to emphasize a playful rhyme about a mouse and cheese. Preserve unrelated details.</textarea>
+<p><label>Editor <select id="editor"><option value="local">Local Qwen</option><option value="codex">Sol 6.1 · subscription</option></select></label></p><small>Sol sends the edit instruction and NLA text to OpenAI; subscription limits apply.</small><br><p><label>Instruction preset <select id="editor-preset"><option value="">Custom instruction</option></select></label></p><label for="instruction">Instruction</label><textarea id="instruction"></textarea>
 <p><label>Mode <select id="mode"><option value="review">Review edits</option><option value="auto">Auto edits</option></select></label>
 <label>Tokens <select id="token-mode"><option value="manual">Choose myself</option><option value="auto">Auto · most likely</option></select></label>
 <label>Steps <input id="steps" type="number" min="1" max="20" value="3" style="width:60px"></label></p>
@@ -144,7 +144,7 @@ async function loadProbes(){
    option.value=entry.prompt;
    $('example').append(option);
   }
- }catch(e){status('Could not load prompts.json presets.');}
+ }catch(e){status('Could not load the prepared benchmark catalog.');}
 }
 loadProbes();
 initSession().then(loadEditorPresets);

@@ -11,4 +11,4 @@
 set -euo pipefail
 cd "${LS_SUBCWD:?Submit from the project directory}"
 source hpc/common.sh
-exec uv run --locked launch.py --port "$server_port" --backend-port "$backend_port" --gpu-layers 99 --threads 4 --listen-host 0.0.0.0 --auth-token-file "runs/token-${LSB_JOBID}.txt" --audit-log
+exec uv run --locked python -m nla.launch --port "$server_port" --backend-port "$backend_port" --gpu-layers 99 --threads 4 --listen-host 0.0.0.0 --auth-token-file "runs/token-${LSB_JOBID}.txt" --audit-log

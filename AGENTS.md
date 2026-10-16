@@ -3,8 +3,9 @@
 To keep the agent's context independent of this safety evaluation, agents must
 not open, display, read, search, watch, summarize, interpret, or inspect:
 
-- `prompts.json` and `editor_prompts.json` values (including `bio_question` and `poetic`).
-- Anything under `runs/experiments/*/inputs/`.
+- Human-owned catalogs under `runs/experiments/`, including legacy prompts and editor instructions.
+- Anything under `runs/experiments/*/inputs/` or `runs/benchmarks/`, including downloaded benchmark CSVs, per-case configs, editing instructions, and outputs.
+- Benchmark prompt contents, wherever cached or copied, including `.runtime/benchmarks/`. Metadata-only summaries remain permitted.
 - Model responses, NLA explanations, editor proposals, decoded generated tokens,
   activation vectors, and request/response payloads in `runs/`, `logs/`, or `examples/`.
 - All log contents, including `logs/**`, runtime `.log` files, scheduler stdout/stderr,

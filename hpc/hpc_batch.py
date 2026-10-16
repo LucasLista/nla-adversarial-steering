@@ -11,7 +11,8 @@ import urllib.request
 from pathlib import Path
 
 from nla import openai_editor
-import trajectories
+from nla import trajectories
+from nla.benchmark import manifest_configs
 
 EDITOR_MODEL = 'Qwen2.5-7B-Instruct-Q4_K_M'
 
@@ -58,12 +59,24 @@ def steering_self_test(api):
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--output', type=Path, required=True)
-    p.add_argument('--configs', type=Path, nargs='+', required=True)
+    inputs = p.add_mutually_exclusive_group(required=True)
+    inputs.add_argument('--configs', type=Path, nargs='+')
+    inputs.add_argument('--benchmark-manifest', type=Path)
     p.add_argument('--port', type=int, required=True)
     p.add_argument('--token-file', type=Path, required=True)
     p.add_argument('--max-tokens', type=int, default=10000)
     p.add_argument('--editor', choices=('local', 'openai'), default='local')
+    p.add_argument('--variants', nargs='+', choices=trajectories.VARIANTS)
+    p.add_argument('--fast', action='store_true', help='Compute only the selected branch distribution')
     args = p.parse_args()
+    manifest = None
+    if args.benchmark_manifest:
+        manifest, args.configs = manifest_configs(args.benchmark_manifest)
+        if not manifest['editing_enabled'] and any(v.startswith('edited') for v in (args.variants or [])):
+            p.error('Edited benchmark branches require a private --instruction-file during preparation')
+    variants = args.variants or (['original'] if manifest and not manifest['editing_enabled'] else list(trajectories.VARIANTS))
+    if not 1 <= args.max_tokens <= 10000:
+        p.error('--max-tokens must be between 1 and 10000')
     token = args.token_file.read_text().strip()
     url = f'http://127.0.0.1:{args.port}'
     api = AuthAPI(url, token)
@@ -76,24 +89,28 @@ def main():
             time.sleep(10)
     else:
         raise RuntimeError('Server did not become ready')
-    if args.editor == 'openai':
+    editing = any(v.startswith('edited') for v in variants)
+    if args.editor == 'openai' and editing:
         openai_editor.api_key()  # fail fast if .env lacks the key
-    steering_self_test(api)
+    if variants != ['original']:
+        steering_self_test(api)
     for path in args.configs:
         private = json.loads(path.read_text())
         if not private.get('prompt', '').strip() or not private.get('instruction', '').strip():
             raise ValueError('Empty experiment prompt or editor instruction')
         # Must equal hpc.hpc_control's config so existing checkpoints resume.
         cfg = {'prompt': private['prompt'], 'instruction': private['instruction'], 'max_tokens': args.max_tokens,
-               'editor_model': EDITOR_MODEL if args.editor == 'local' else openai_editor.MODEL, 'variants': list(trajectories.VARIANTS),
+               'editor_model': EDITOR_MODEL if args.editor == 'local' else openai_editor.MODEL, 'variants': variants,
                'policy': 'independent prefixes; greedy; one-position intervention; no KV-edit replay'}
+        if args.fast:
+            cfg['comparison_mode'] = 'selected'
         if args.editor == 'openai':
             editor = openai_editor.propose
         else:
             editor = lambda instruction, text: api('propose', tokens=[1], editor='local', instruction=instruction, text=text)
         for retry in range(20):
             try:
-                trajectories.generate(cfg, args.output / path.parent.parent.name, api, editor)
+                trajectories.generate(cfg, args.output / path.parent.parent.name, api, editor, variants=variants)
                 break
             except RuntimeError as exc:
                 # Occasional NaN activations are transient; the checkpoint resumes the same step.

@@ -11,5 +11,5 @@
 set -euo pipefail
 cd "${LS_SUBCWD:?Submit from the project directory}"
 source hpc/common.sh
-batch_args=(--output runs/hpc-sol --editor openai)
+batch_args=(--output runs/jbb-sol --editor openai)
 source hpc/run_batch.sh

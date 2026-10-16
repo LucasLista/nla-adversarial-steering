@@ -53,7 +53,7 @@ if __name__ == '__main__':
     parser.add_argument('--model', action='append', help='Model ID; defaults to all released families')
     parser.add_argument('--output', type=Path, help='Optional metadata report outside response logs')
     args = parser.parse_args()
-    profiles = json.loads((ROOT / 'evaluation_models.json').read_text())
+    profiles = json.loads((ROOT / 'config/evaluation_models.json').read_text())
     if args.model:
         unknown = set(args.model) - {profile['id'] for profile in profiles}
         if unknown:

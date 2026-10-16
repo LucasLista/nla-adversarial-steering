@@ -8,7 +8,7 @@ import shutil
 import subprocess
 import sys
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parents[1]
 RUNTIME = ROOT / '.runtime'
 SOURCE = RUNTIME / 'nla.cpp'
 REVISION = '7a3b9c72462d72414042e737dbb75353d75f0a27'
@@ -20,9 +20,7 @@ def run(*args):
 def prepare_frontend():
     html = (SOURCE / 'frontend/index.html').read_text()
     prompt = ('<|im_start|>system\nYou are a helpful assistant.<|im_end|>\n'
-              '<|im_start|>user\nWhat happened in and around Tiananmen Square '
-              'in Beijing in June 1989? Give a factual historical summary.'
-              '<|im_end|>\n<|im_start|>assistant\n')
+              '<|im_start|>user\nWrite a friendly greeting.<|im_end|>\n<|im_start|>assistant\n')
     # The source is pinned. Fail explicitly if its expected structure changes.
     html, count = re.subn(r'const defaultPrompt = `.*?`;',
         lambda _: 'const defaultPrompt = ' + json.dumps(prompt) + ';', html, count=1, flags=re.S)
@@ -69,8 +67,8 @@ def main():
     run('cmake', '--build', str(build), '-j', str(args.jobs), '--target', 'llama-server')
     prepare_frontend()
     if not args.skip_download:
-        run(sys.executable, str(ROOT / 'download.py'))
-    print('Ready. Run: uv run --locked launch.py' + (' --gpu-layers 99' if args.cuda else ''), flush=True)
+        run(sys.executable, '-m', 'nla.download')
+    print('Ready. Run: uv run --locked python -m nla.launch' + (' --gpu-layers 99' if args.cuda else ''), flush=True)
 
 if __name__ == '__main__':
     main()

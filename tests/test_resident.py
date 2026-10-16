@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import Mock, patch
-import launch
+from nla import launch
 class ResidentTests(unittest.TestCase):
     def test_models_reused_and_all_stopped(self):
         old=launch.RESIDENT
