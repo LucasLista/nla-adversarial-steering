@@ -163,7 +163,7 @@ if __name__ == '__main__':
     import traceback
     try:
         main()
-    except BaseException as exc:
+    except Exception as exc:  # not SystemExit: --help and clean exits must stay zero
         # Sanctioned diagnostics: exception class and source frames only, never
         # messages or payloads, so failures are traceable without reading logs.
         health = {'phase': 'batch_failed', 'error_type': type(exc).__name__,
