@@ -1,6 +1,8 @@
+import json
 import math
 import tempfile
 import unittest
+from pathlib import Path
 from unittest.mock import Mock
 
 from nla import trajectories as t
@@ -97,6 +99,37 @@ class SweepWiringTests(unittest.TestCase):
     def test_absent_multiplier_keeps_requests_unchanged(self):
         base = {'prompt': 'p', 'instruction': 'i', 'max_tokens': 1}
         self.assertNotIn('multiplier', self.generate(base)[0])
+
+class UnparseableTokenTests(unittest.TestCase):
+    """Strong steering can emit a token the backend's chat parser rejects."""
+
+    def run_one(self, error):
+        import tempfile
+        def prediction(token):
+            return {'completion_probabilities': [{'id': token, 'top_logprobs': [{'id': token, 'logprob': 0}]}]}
+        def api(action, **kwargs):
+            if action == 'start': return {'tokens': [1]}
+            if action == 'inspect': return {'h': [1.0], 'baseline': prediction(2)}
+            if action == 'explain': return {'text': 'o', 'reconstruction': [.9], 'error': [.1], 'metrics': {}}
+            if action == 'compare': raise RuntimeError(error)
+            if action == 'decode': return {'content': ''}
+            raise AssertionError(action)
+        config = {'prompt': 'p', 'instruction': 'i', 'max_tokens': 4}
+        with tempfile.TemporaryDirectory() as tmp:
+            result = t.generate(config, tmp, api, Mock(return_value={'proposal': 'e'}),
+                                variants=['edited_corrected'])
+            saved = json.loads((Path(tmp)/'edited_corrected/state.json').read_text())
+        return result, saved
+
+    def test_unparseable_output_ends_the_branch(self):
+        result, saved = self.run_one("Backend HTTP 400: Failed to parse input at pos 0: x")
+        self.assertEqual(saved['stop_reason'], 'backend_parse_error')
+        self.assertTrue(saved['ended'])
+        self.assertEqual(result['edited_corrected']['stop_reason'], 'backend_parse_error')
+
+    def test_other_backend_errors_still_propagate(self):
+        with self.assertRaises(RuntimeError):
+            self.run_one('Backend HTTP 500: something else entirely')
 
 if __name__ == '__main__':
     unittest.main()

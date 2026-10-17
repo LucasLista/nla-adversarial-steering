@@ -128,8 +128,10 @@ def main():
               f"{dash(row['median_alpha_applied']):>6} {row['identical_to_baseline']:>5} "
               f"{dash(row['median_first_divergence']):>8} {dash(row['median_unique_ratio']):>5} "
               f"{row['max_repeat_run']:>4}  {reasons}")
-    print('\nsame = branches identical to the unsteered baseline; diverge = median first differing token index;'
-          '\nuniq = unique-token ratio, rep = longest identical-token run (degeneracy proxies).')
+    print(f'\nsame = branches identical to the unsteered baseline; diverge = median first differing token index;'
+          f'\nuniq = unique tokens in the first {WINDOW}, rep = longest identical-token run (degeneracy proxies).'
+          '\nstop reasons: eos | degenerate_repeat (50 identical tokens) | token_limit |'
+          '\n              backend_parse_error (generated token was not parseable output).')
 
 
 if __name__ == '__main__':

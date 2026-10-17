@@ -16,6 +16,9 @@ from nla import codex_editor
 REPEAT_LIMIT = 50  # identical tokens in a row that end a branch as degenerate
 
 
+UNPARSEABLE = 'Failed to parse input at pos'
+
+
 def degenerate(generated):
     return len(generated) >= REPEAT_LIMIT and len(set(generated[-REPEAT_LIMIT:])) == 1
 
@@ -119,6 +122,7 @@ def generate(config, directory, api, editor, variants=None):
             state.update(ended=True, stop_reason='degenerate_repeat')
             write_json(state_path, state)
         while len(state['generated']) < config['max_tokens'] and not state['ended']:
+          try:
             step = directory / variant / f"step-{len(state['generated']):04d}"
             def call(action, **kwargs):
                 request = {'action': action, **kwargs}
@@ -158,6 +162,14 @@ def generate(config, directory, api, editor, variants=None):
             write_json(state_path, state)
             write_progress(directory, config['max_tokens'])
             print(f'{variant}: {len(generated)}/{config["max_tokens"]}, token={token}', flush=True)
+          except RuntimeError as exc:
+            # Deterministic: the same context reproduces it on every resume.
+            if UNPARSEABLE not in str(exc):
+                raise
+            state.update(ended=True, stop_reason='backend_parse_error')
+            write_json(state_path, state)
+            write_progress(directory, config['max_tokens'])
+            print(f'{variant}: stopped, backend could not parse the generated token', flush=True)
         outputs[variant] = {'response': state['response'], 'generated_token_ids': state['generated'],
                             'stop_reason': state.get('stop_reason', 'eos') if state['ended'] else 'token_limit'}
         write_json(directory / 'responses.json', outputs)
