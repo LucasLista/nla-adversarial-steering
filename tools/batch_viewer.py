@@ -24,8 +24,19 @@ def token_text(step, token_id):
         if text is None: return None
         TEXT_CACHE[key]=text
     return TEXT_CACHE[key]
+def discover(root):
+    """Run directories found on disk, as relative paths; nested sweeps included."""
+    root=Path(root)
+    runs={str(state.parent.parent.relative_to(root)) for variant in VARIANTS
+          for state in root.glob(f'*/{variant}/state.json')}
+    runs|={str(state.parent.parent.relative_to(root)) for variant in VARIANTS
+           for state in root.glob(f'*/*/{variant}/state.json')}
+    return sorted(runs)
+
+
 def snapshot(root, run, branch, index=None):
-    if run not in ('run-1','run-2','run-3') or branch not in VARIANTS: raise ValueError('Unknown run or branch')
+    # Membership in the discovered set is the path check; no traversal possible.
+    if run not in discover(root) or branch not in VARIANTS: raise ValueError('Unknown run or branch')
     folder=root/run/branch
     state=read(folder/'state.json')
     if index is None:
@@ -50,6 +61,8 @@ def main():
                     if args.banner:
                         data=data.replace('</h1>','</h1><p style="background:#3c3018;border:1px solid #d6a84b;color:#f6d788;padding:10px;border-radius:8px">'+html.escape(args.banner)+'</p>',1)
                     data=data.encode();kind='text/html'
+                elif u.path=='/runs':
+                    data=json.dumps(discover(args.root)).encode();kind='application/json'
                 elif u.path=='/api':
                     q=parse_qs(u.query);index=int(q['index'][0]) if 'index' in q else None
                     data=json.dumps(snapshot(args.root,q.get('run',['run-1'])[0],q.get('branch',['original'])[0],index)).encode();kind='application/json'
