@@ -4,6 +4,7 @@ import csv
 import hashlib
 import io
 import json
+import random
 from pathlib import Path
 import urllib.request
 
@@ -41,13 +42,19 @@ def load_rows(data, split, categories=()):
     return sorted(selected, key=lambda row: row['id'])
 
 
-def prepare(data, directory, split='benign', categories=(), limit=None, instruction=None):
+def prepare(data, directory, split='benign', categories=(), limit=None, instruction=None,
+            sample=None, seed=None):
     directory = Path(directory)
     rows = load_rows(data, split, categories)
     if limit is not None:
         if limit < 1:
             raise ValueError('Limit must be positive')
         rows = rows[:limit]
+    if sample is not None:
+        if not 1 <= sample <= len(rows):
+            raise ValueError('Sample size must fit the selected cases')
+        # Seeded draw so the selected case IDs are reproducible from the manifest.
+        rows = sorted(random.Random(seed).sample(rows, sample), key=lambda row: row['id'])
     if not rows:
         raise ValueError('No benchmark cases selected')
     if instruction is not None and not instruction.strip():
@@ -55,6 +62,7 @@ def prepare(data, directory, split='benign', categories=(), limit=None, instruct
     manifest = {'benchmark': DATASET, 'revision': REVISION,
                 'source_sha256': hashlib.sha256(data).hexdigest(), 'split': split,
                 'categories': list(categories), 'limit': limit, 'count': len(rows),
+                'sample': sample, 'seed': seed,
                 'model': 'qwen2.5-7b', 'subset': len(rows) != 100,
                 'editing_enabled': instruction is not None, 'cases': []}
     payloads = {}
@@ -99,7 +107,10 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--split', choices=('benign', 'harmful'), default='benign')
     parser.add_argument('--category', action='append', choices=CATEGORIES, default=[])
-    parser.add_argument('--limit', type=int)
+    selection = parser.add_mutually_exclusive_group()
+    selection.add_argument('--limit', type=int, help='Take the first N cases')
+    selection.add_argument('--sample', type=int, help='Draw N cases at random')
+    parser.add_argument('--seed', type=int, default=0, help='Seed for --sample')
     parser.add_argument('--output', type=Path, default=ROOT/'runs/benchmarks/jbb-benign')
     parser.add_argument('--instruction-file', type=Path, help='Private editor instruction; never printed')
     args = parser.parse_args()
@@ -120,8 +131,10 @@ def main():
         cache.write_bytes(data)
         cache.chmod(0o600)
     instruction = args.instruction_file.read_text() if args.instruction_file else None
-    manifest = prepare(cache.read_bytes(), args.output, args.split, args.category, args.limit, instruction)
-    print(json.dumps({key: manifest[key] for key in ('benchmark', 'revision', 'split', 'count', 'subset', 'editing_enabled')}))
+    manifest = prepare(cache.read_bytes(), args.output, args.split, args.category, args.limit,
+                       instruction, args.sample, args.seed)
+    print(json.dumps({key: manifest[key] for key in
+                      ('benchmark', 'revision', 'split', 'count', 'sample', 'seed', 'subset', 'editing_enabled')}))
 
 
 if __name__ == '__main__':

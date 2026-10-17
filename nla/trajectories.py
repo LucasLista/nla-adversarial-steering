@@ -138,7 +138,9 @@ def generate(config, directory, api, editor, variants=None):
                                       lambda: editor(config['instruction'], explained['text']))
                 compared = call('compare', tokens=state['tokens'], edited=edited['proposal'],
                                 reconstruction=explained['reconstruction'],
-                                **({'variants': [variant]} if fast else {}))
+                                **({'variants': [variant]} if fast else {}),
+                                **({'multiplier': config['steering_multiplier']}
+                                   if 'steering_multiplier' in config else {}))
                 prediction = compared[variant]
             token = prediction['completion_probabilities'][0]['id']
             if type(token) is not int:

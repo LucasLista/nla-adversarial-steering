@@ -117,11 +117,23 @@ def run(body, call, frontend):
             raise ValueError('Wrong reconstruction dimension')
         if not all(isinstance(x,(int,float)) and math.isfinite(x) for x in r1 + h):
             raise ValueError('Non-finite activation from backend (NaN/inf)')
+        multiplier = body.get('multiplier', 1.0)
+        if not isinstance(multiplier, (int, float)) or isinstance(multiplier, bool) \
+                or not math.isfinite(multiplier) or multiplier < 0:
+            raise ValueError('Steering multiplier must be a finite non-negative number')
         error = [a-b for a,b in zip(h,r0)]
-        corrected = [a+b for a,b in zip(r1,error)]
+        # delta = AR(edited) - AR(original); corrected = h + multiplier*delta.
+        # multiplier 1 keeps the parameter-free form bit-for-bit, so old checkpoints resume.
+        delta = [a-b for a,b in zip(r1,r0)]
+        corrected = ([a+b for a,b in zip(r1,error)] if multiplier == 1
+                     else [a + multiplier*d for a,d in zip(h,delta)])
         targets = {'original':None, 'roundtrip':r0, 'edited_raw':r1, 'edited_corrected':corrected}
+        delta_norm, h_norm = norm(delta), norm(h)
+        natural = delta_norm/h_norm if h_norm else 0.0
         return {**{v:predict(targets[v], h) for v in variants}, 'edited_reconstruction':r1,
-                'error':error, 'metrics':metrics(h,r0)}
+                'error':error, 'metrics':metrics(h,r0),
+                'steering':{'multiplier':multiplier, 'alpha_natural':natural,
+                            'alpha_applied':multiplier*natural}}
     if action == 'decode':
         return call('base','/detokenize',{'tokens':tokens})
     raise ValueError('Unknown action')
