@@ -29,10 +29,18 @@ nvidia-smi > "runs/gpu-${LSB_JOBID}.txt"
 env | sort | sed -n '/^CUDA_/p;/^LSB_/p' > "runs/scheduler-${LSB_JOBID}.txt"
 export NLA_RESIDENT_MODELS=1
 export NLA_CONTEXT_SIZE=16384
+# Parallel jobs share one venv and build tree, so concurrent syncs and cmake
+# runs corrupt each other. Serialize both; later jobs find the build cached.
+mkdir -p .runtime
+exec {nla_build_lock}>.runtime/build.lock
+nla_startup_phase=build_lock
+flock --timeout 5400 "$nla_build_lock"
 nla_startup_phase=dependency_sync
 uv sync --locked
 nla_startup_phase=backend_build
 uv run --locked python -m nla.setup --cuda --cuda-arch 70 --skip-download --jobs 4
+flock --unlock "$nla_build_lock"
+exec {nla_build_lock}>&-
 # Allocate a per-job port range to avoid unrelated services on shared nodes.
 server_port=$((30000 + (LSB_JOBID % 5000) * 4))
 backend_port=$((server_port + 1))
