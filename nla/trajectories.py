@@ -69,6 +69,10 @@ class API:
             with urllib.request.urlopen(req, timeout=1200) as r:
                 result = json.load(r)
         except urllib.error.HTTPError as exc:
+            if exc.code in (408, 502, 503, 504):
+                # Let controllers retry the same durable checkpoint after a
+                # temporary gateway/service failure. Never print error bodies.
+                raise ConnectionError(f'Backend temporarily unavailable (HTTP {exc.code})') from None
             raise RuntimeError(f'Backend HTTP {exc.code}: {exc.read().decode()}') from exc
         if isinstance(result.get('error'), str):
             raise RuntimeError(result['error'])

@@ -9,6 +9,12 @@ for attempt in 1 2 3 4 5; do
         --benchmark-manifest "${NLA_BENCHMARK_MANIFEST:-runs/benchmarks/jbb-benign/manifest.json}" \
         --max-tokens "${NLA_MAX_TOKENS:-128}" --fast; then
         printf 'complete\n' > "runs/batch-status-${LSB_JOBID}.txt"; exit 0
+    else
+        batch_exit=$?
+        if [[ "$batch_exit" == 78 ]]; then
+            printf 'editor_requires_attention\n' > "runs/batch-status-${LSB_JOBID}.txt"
+            exit 78
+        fi
     fi
     printf 'attempt %s failed\n' "$attempt" >> "runs/batch-status-${LSB_JOBID}.txt"
     kill -0 "$server" 2>/dev/null || exit 1

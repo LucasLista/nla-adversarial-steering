@@ -83,6 +83,13 @@ def main():
                     subprocess.run(['uv','run','--with','pexpect',str(args.connect_script)],check=True,timeout=60)
                 time.sleep(5)
     root=shlex.quote(args.remote_root)
+    if args.editor == 'openai' and any(v.startswith('edited') for v in (args.variants or trajectories.VARIANTS)):
+        try:
+            openai_editor.preflight()
+        except Exception:
+            # Fail before waiting for a queued GPU or loading its models.
+            subprocess.run(ssh+[args.ssh_host,'bash -lc '+shlex.quote(f'bkill {args.job}')],capture_output=True)
+            raise
     args.output.mkdir(parents=True,exist_ok=True)
     while True:
         state=remote(f'bjobs -noheader -o stat {args.job}').strip()

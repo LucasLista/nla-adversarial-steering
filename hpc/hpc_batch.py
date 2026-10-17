@@ -30,6 +30,8 @@ class AuthAPI(trajectories.API):
             with urllib.request.urlopen(req, timeout=1200) as r:
                 result = json.load(r)
         except urllib.error.HTTPError as exc:
+            if exc.code in (408, 502, 503, 504):
+                raise ConnectionError(f'Backend temporarily unavailable (HTTP {exc.code})') from None
             # Keep the server's own error string (diagnostic), truncated; never the request.
             try:
                 detail = str(json.loads(exc.read()).get('error', ''))[:300]
@@ -158,5 +160,15 @@ def main():
         print(f'{label or "run"}/{path.parent.parent.name} complete', flush=True)
 
 
+def cli():
+    try:
+        main()
+    except (openai_editor.EditorCreditExhausted, openai_editor.EditorAccessDenied,
+            openai_editor.EditorRefusal) as exc:
+        # EX_CONFIG tells the shell supervisor that another retry cannot help.
+        print(type(exc).__name__ + ': checkpoint preserved; editor requires attention', flush=True)
+        raise SystemExit(78) from None
+
+
 if __name__ == '__main__':
-    main()
+    cli()
