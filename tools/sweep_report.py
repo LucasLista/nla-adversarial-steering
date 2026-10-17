@@ -9,6 +9,7 @@ import statistics as st
 from pathlib import Path
 
 VARIANTS = ('original', 'edited_corrected')
+WINDOW = 100  # tokens scored for the length-independent degeneracy proxy
 
 
 def read(path):
@@ -62,7 +63,10 @@ def collect(root, stride):
             tokens = saved.get('generated', [])
             row = {'case': case.name, 'variant': variant, 'tokens': len(tokens),
                    'ended': bool(saved.get('ended')), 'stop_reason': saved.get('stop_reason'),
-                   'unique_ratio': round(len(set(tokens))/len(tokens), 3) if tokens else None,
+                   # Fixed window: a raw unique ratio falls with length, so it is not
+                   # comparable across multipliers whose branches differ in length.
+                   'unique_ratio': (round(len(set(tokens[:WINDOW]))/min(len(tokens), WINDOW), 3)
+                                    if tokens else None),
                    'longest_repeat': longest_run(tokens), 'ids': tokens}
             if variant != 'original':
                 applied, natural = alpha_sample(case, variant, len(tokens), stride)
