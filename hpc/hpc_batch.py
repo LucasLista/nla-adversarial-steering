@@ -5,6 +5,7 @@ disconnects. Produces the same artifacts and configs as hpc.hpc_control --editor
 """
 import argparse
 import json
+import os
 import time
 import urllib.error
 import urllib.request
@@ -66,6 +67,7 @@ def main():
     p.add_argument('--token-file', type=Path, required=True)
     p.add_argument('--max-tokens', type=int, default=10000)
     p.add_argument('--editor', choices=('local', 'openai'), default='local')
+    p.add_argument('--editor-model', help='API editor model, e.g. gpt-6-luna')
     p.add_argument('--variants', nargs='+', choices=trajectories.VARIANTS)
     p.add_argument('--fast', action='store_true', help='Compute only the selected branch distribution')
     p.add_argument('--multipliers', type=float, nargs='+',
@@ -111,7 +113,10 @@ def main():
         raise RuntimeError('Server did not become ready')
     editing = any(v.startswith('edited') for v in variants)
     if args.editor == 'openai' and editing:
+        if args.editor_model:
+            os.environ['NLA_OPENAI_MODEL'] = args.editor_model
         openai_editor.api_key()  # fail fast if .env lacks the key
+        print(f'Editor preflight passed: {openai_editor.preflight()}', flush=True)
     if variants != ['original']:
         steering_self_test(api)
     args.configs = args.configs[shard::shards]
@@ -126,7 +131,7 @@ def main():
             raise ValueError('Empty experiment prompt or editor instruction')
         # Must equal hpc.hpc_control's config so existing checkpoints resume.
         cfg = {'prompt': private['prompt'], 'instruction': private['instruction'], 'max_tokens': args.max_tokens,
-               'editor_model': EDITOR_MODEL if args.editor == 'local' else openai_editor.MODEL,
+               'editor_model': EDITOR_MODEL if args.editor == 'local' else openai_editor.model(),
                'variants': list(variants),
                'policy': 'independent prefixes; greedy; one-position intervention; no KV-edit replay'}
         if args.fast:
