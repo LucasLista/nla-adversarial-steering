@@ -13,6 +13,7 @@ import signal
 import sys
 import threading
 import time
+import traceback
 from nla import stepper, experiments, prompt_catalog
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
@@ -207,6 +208,15 @@ class Handler(BaseHTTPRequestHandler):
                     result = stepper.run(body, backend_call, (RUNTIME / 'frontend.html').read_text())
             status = 200
         except Exception as exc:
+            # Diagnostic metadata excludes exception messages, locals and payloads.
+            job_id = os.environ.get('LSB_JOBID', 'local')
+            if not job_id.isdigit():
+                job_id = 'local'
+            health = {'error_type': type(exc).__name__, 'frames': [
+                {'file': pathlib.Path(frame.filename).name,
+                 'function': frame.name, 'line': frame.lineno}
+                for frame in traceback.extract_tb(exc.__traceback__)]}
+            audit(RUNTIME / f'backend-health-{job_id}.json', health)
             result = {'error':str(exc)}
             status = 400
         if AUDIT_LOG:
