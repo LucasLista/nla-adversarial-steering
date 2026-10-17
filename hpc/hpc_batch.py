@@ -159,4 +159,18 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    import sys
+    import traceback
+    try:
+        main()
+    except BaseException as exc:
+        # Sanctioned diagnostics: exception class and source frames only, never
+        # messages or payloads, so failures are traceable without reading logs.
+        health = {'phase': 'batch_failed', 'error_type': type(exc).__name__,
+                  'job': os.environ.get('LSB_JOBID', 'local'),
+                  'frames': [{'file': Path(f.filename).name, 'function': f.name, 'line': f.lineno}
+                             for f in traceback.extract_tb(exc.__traceback__)][-8:]}
+        path = Path('runs') / f"batch-health-{health['job']}.json"
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(json.dumps(health, indent=2))
+        raise SystemExit(1)
