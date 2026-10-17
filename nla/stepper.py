@@ -5,6 +5,25 @@ import re
 from nla import codex_editor
 
 
+
+class InvalidActivationType(ValueError):
+    pass
+
+class NonFiniteActivation(ValueError):
+    pass
+
+class InvalidActivationShape(ValueError):
+    pass
+
+def validate_activation(vector, expected_size=None):
+    if not isinstance(vector, list) or not vector or (expected_size is not None and len(vector) != expected_size):
+        raise InvalidActivationShape('Invalid activation shape')
+    if any(type(x) not in (int, float) for x in vector):
+        raise InvalidActivationType('Non-numeric activation')
+    if not all(math.isfinite(x) for x in vector):
+        raise NonFiniteActivation('Non-finite activation')
+
+
 def norm(v):
     return math.sqrt(sum(x*x for x in v))
 
@@ -76,11 +95,13 @@ def run(body, call, frontend):
         h = call('base','/extract',{'prompt':tokens,'layer':20,'token_pos':-1,'add_special':False})['activation']
         return {'h':h, **({'baseline':predict()} if body.get('baseline', True) else {})}
     if action == 'explain':
+        validate_activation(body['h'])
         ids = [int(x) for x in re.search(r'NLA_ACTOR_INPUT_IDS = `([^`]+)`',frontend)[1].split()]
         av = call('av','/explain',{'activation':body['h'],'input_ids':ids,'inject_pos':111,
                       'scale':150,'n_predict':200,'temperature':0,'seed':42})
         text = av.get('explanation') or av.get('text')
         r = call('ar','/reconstruct',{'explanation':text})['activation']
+        validate_activation(r, len(body['h']))
         return {'text':text, 'reconstruction':r, 'error':[a-b for a,b in zip(body['h'],r)],
                 'metrics':metrics(body['h'],r)}
     if action == 'compare':
