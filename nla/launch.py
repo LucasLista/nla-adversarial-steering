@@ -128,7 +128,7 @@ def ensure(role):
     stop()
     raise RuntimeError('Model loading timed out')
 
-def backend_call(role, endpoint, body):
+def _backend_call_once(role, endpoint, body):
     ensure(role)
     conn = http.client.HTTPConnection('127.0.0.1', BACKEND_PORT, timeout=1200)
     try:
@@ -140,6 +140,25 @@ def backend_call(role, endpoint, body):
         return result
     finally:
         conn.close()
+
+
+def backend_call(role, endpoint, body):
+    # Reload transient invalid numerical state, retaining identical inputs and
+    # model arguments. Never replace invalid values or accept a partial result.
+    invalid = (stepper.InvalidActivationType, stepper.NonFiniteActivation,
+               stepper.InvalidActivationShape)
+    for attempt in range(3):
+        result = _backend_call_once(role, endpoint, body)
+        if endpoint not in ('/extract', '/reconstruct'):
+            return result
+        try:
+            stepper.validate_activation(result.get('activation'))
+            return result
+        except invalid:
+            if attempt == 2:
+                raise
+            stop()
+    raise AssertionError('Unreachable numerical recovery state')
 
 class Handler(BaseHTTPRequestHandler):
     def authenticated(self):
