@@ -10,12 +10,21 @@
 #BSUB -e runs/hpc-%J.err
 set -euo pipefail
 cd "${LS_SUBCWD:?Submit from the project directory}"
+# This cluster's LSF does not export the submission environment: submit with
+# bsub -env "all, NLA_SHARD=i/n, ...". Record it as inspectable metadata rather
+# than dying with only a scheduler log to show for it.
+if [ -z "${NLA_SHARD:-}" ]; then
+    mkdir -p .runtime
+    printf '{"phase":"parameters","exit_code":2,"detail":"NLA_SHARD unset; submit with bsub -env"}\n' \
+        > ".runtime/startup-${LSB_JOBID}.json"
+    exit 2
+fi
 source hpc/common.sh
 # Steering multipliers for h + m*delta; m=1 is the parameter-free method, m=0 the unsteered baseline.
 batch_args=(--output runs/alpha-sweep
             --multipliers 0 0.25 0.5 0.75 1 1.5 2 3 4 6
             --editor "${NLA_EDITOR:-openai}"
-            --shard "${NLA_SHARD:?Set NLA_SHARD=i/n when submitting}")
+            --shard "$NLA_SHARD")
 if [ -n "${NLA_EDITOR_MODEL:-}" ]; then
     batch_args+=(--editor-model "$NLA_EDITOR_MODEL")
 fi

@@ -120,3 +120,17 @@ measured memory plans. The server requires synthetic finite-vector and
 unchanged-text controls before private inference. Use `--hf-backend --model MODEL`
 with the controller only after validation. Sanitized validation and failure
 metadata live in `.runtime/`; never infer success from submission alone.
+
+## Submitting with parameters
+
+This cluster's LSF does not export the submitting shell's environment to the
+job. `NLA_SHARD`, `NLA_EDITOR`, `NLA_EDITOR_MODEL`, `NLA_BENCHMARK_MANIFEST`
+and `NLA_MAX_TOKENS` therefore reach the job only when passed explicitly:
+
+```
+bsub -env "all, NLA_SHARD=0/5, NLA_EDITOR=openai, NLA_EDITOR_MODEL=gpt-6-luna" < hpc/alpha-sweep.lsf
+```
+
+Plain `VAR=value bsub < script` silently falls back to each default, so a run
+can look healthy while using the wrong manifest or token limit. Verified on
+2026-10-17: without `-env` the variables arrive unset.
