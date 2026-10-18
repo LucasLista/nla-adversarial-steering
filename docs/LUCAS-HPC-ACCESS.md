@@ -16,6 +16,6 @@ Inside each branch, state.json contains the generated response, token IDs, compl
 
 Check scheduler state with a login shell: bash -lc 'bjobs -w'. Do not confuse completion counts with quality or attack-success scores. tools/benchmark_report.py summarizes progress and optional external numeric grades; it does not run a judge. If no grades exist, say so.
 
-The GitHub repository is https://github.com/LucasLista/nla-playground, branch main. logs/ contains compact response snapshots and completion metadata. Full prompts and detailed NLA intermediates stay on HPC and are not committed. The campaign may still be writing checkpoints: use progress.json and completion flags, and distinguish partial responses from finished ones.
+The GitHub repository is https://github.com/LucasLista/nla-adversarial-steering, branch main. logs/ contains compact response snapshots and completion metadata. Full prompts and detailed NLA intermediates stay on HPC and are not committed. The campaign may still be writing checkpoints: use progress.json and completion flags, and distinguish partial responses from finished ones.
 
 First verify that my account can traverse the directory and read representative prompt configs, branch state files, and per-step artifacts. Then report available runs, completion by branch, where each artifact lives, and any missing files. Do not send experiment contents to outside services without my approval.

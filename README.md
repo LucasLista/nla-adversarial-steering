@@ -17,8 +17,8 @@ loads one model at a time and can pause for minutes when switching roles.
 ```sh
 # Ubuntu/WSL prerequisites; on macOS use Xcode command-line tools and CMake.
 sudo apt install git curl cmake build-essential
-git clone https://github.com/LucasLista/nla-playground.git
-cd nla-playground
+git clone https://github.com/LucasLista/nla-adversarial-steering.git
+cd nla-adversarial-steering
 uv sync --locked
 uv run python -m nla.setup
 uv run python -m nla.launch
