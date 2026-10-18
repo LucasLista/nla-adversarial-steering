@@ -131,7 +131,7 @@ def main():
     print(f'\nsame = branches identical to the unsteered baseline; diverge = median first differing token index;'
           f'\nuniq = unique tokens in the first {WINDOW}, rep = longest identical-token run (degeneracy proxies).'
           '\nstop reasons: eos | degenerate_repeat (50 identical tokens) | token_limit |'
-          '\n              backend_parse_error (generated token was not parseable output).')
+          '\n              backend_parse_error / backend_no_prediction (steering broke the output).')
 
 
 if __name__ == '__main__':

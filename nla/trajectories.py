@@ -146,7 +146,16 @@ def generate(config, directory, api, editor, variants=None):
                                 **({'multiplier': config['steering_multiplier']}
                                    if 'steering_multiplier' in config else {}))
                 prediction = compared[variant]
-            token = prediction['completion_probabilities'][0]['id']
+            # Strong steering can leave the backend unable to return a next token
+            # at all; that is terminal for this branch, not a run-wide failure.
+            probabilities = prediction.get('completion_probabilities') or []
+            if not probabilities or 'id' not in probabilities[0]:
+                state.update(ended=True, stop_reason='backend_no_prediction')
+                write_json(state_path, state)
+                write_progress(directory, config['max_tokens'])
+                print(f'{variant}: stopped, backend returned no next-token prediction', flush=True)
+                break
+            token = probabilities[0]['id']
             if type(token) is not int:
                 raise ValueError('Backend did not return an integer next-token ID')
             generated = state['generated'] + [token]

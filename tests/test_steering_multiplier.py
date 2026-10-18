@@ -127,6 +127,24 @@ class UnparseableTokenTests(unittest.TestCase):
         self.assertTrue(saved['ended'])
         self.assertEqual(result['edited_corrected']['stop_reason'], 'backend_parse_error')
 
+    def test_missing_prediction_ends_the_branch(self):
+        import tempfile
+        def api(action, **kwargs):
+            if action == 'start': return {'tokens': [1]}
+            if action == 'inspect': return {'h': [1.0]}
+            if action == 'explain': return {'text': 'o', 'reconstruction': [.9], 'error': [.1], 'metrics': {}}
+            if action == 'compare': return {'edited_corrected': {}}   # backend produced nothing
+            if action == 'decode': return {'content': ''}
+            raise AssertionError(action)
+        config = {'prompt': 'p', 'instruction': 'i', 'max_tokens': 4, 'comparison_mode': 'selected'}
+        with tempfile.TemporaryDirectory() as tmp:
+            t.generate(config, tmp, api, Mock(return_value={'proposal': 'e'}),
+                       variants=['edited_corrected'])
+            saved = json.loads((Path(tmp)/'edited_corrected/state.json').read_text())
+        self.assertEqual(saved['stop_reason'], 'backend_no_prediction')
+        self.assertTrue(saved['ended'])
+        self.assertEqual(saved['generated'], [])
+
     def test_other_backend_errors_still_propagate(self):
         with self.assertRaises(RuntimeError):
             self.run_one('Backend HTTP 500: something else entirely')
