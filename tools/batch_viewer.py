@@ -1,6 +1,7 @@
 """Read-only, loopback viewer for durable trajectory checkpoints."""
 import argparse
 import html
+import time
 import json
 from pathlib import Path
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -24,14 +25,26 @@ def token_text(step, token_id):
         if text is None: return None
         TEXT_CACHE[key]=text
     return TEXT_CACHE[key]
-def discover(root):
-    """Run directories found on disk, as relative paths; nested sweeps included."""
+RUN_CACHE={}
+def discover(root, ttl=30):
+    """Map each run directory on disk to the branches it actually has.
+
+    Globbing a live run tree is slow on a parallel filesystem, and the page
+    polls, so the listing is cached briefly."""
+    key=str(root)
+    cached=RUN_CACHE.get(key)
+    if cached and time.time()-cached[0] < ttl:
+        return cached[1]
     root=Path(root)
-    runs={str(state.parent.parent.relative_to(root)) for variant in VARIANTS
-          for state in root.glob(f'*/{variant}/state.json')}
-    runs|={str(state.parent.parent.relative_to(root)) for variant in VARIANTS
-           for state in root.glob(f'*/*/{variant}/state.json')}
-    return sorted(runs)
+    runs={}
+    for depth in ('*', '*/*'):
+        for variant in VARIANTS:
+            for state in root.glob(f'{depth}/{variant}/state.json'):
+                run=str(state.parent.parent.relative_to(root))
+                runs.setdefault(run, []).append(variant)
+    result={run: sorted(set(found), key=VARIANTS.index) for run, found in sorted(runs.items())}
+    RUN_CACHE[key]=(time.time(), result)
+    return result
 
 
 def snapshot(root, run, branch, index=None):
