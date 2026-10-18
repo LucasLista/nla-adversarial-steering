@@ -10,6 +10,23 @@ def prediction(token):
     return {'completion_probabilities': [{'id': token, 'top_logprobs': [{'id': token, 'logprob': 0}]}]}
 
 class TrajectoryTests(unittest.TestCase):
+    def test_native_single_token_checkpoint_and_resume(self):
+        native = {'tokens': [7], 'tokens_predicted': 1, 'content': ''}
+        def api(action, **kwargs):
+            if action == 'start': return {'tokens':[1]}
+            if action == 'inspect': return {'h':[1.], 'baseline':native}
+            if action == 'explain': return {'text':'synthetic', 'reconstruction':[1.]}
+            if action == 'compare': return {name:native for name in t.VARIANTS}
+            if action == 'decode': return {'content':'synthetic'}
+            raise AssertionError(action)
+        config = {'prompt':'synthetic','instruction':'preserve','max_tokens':1}
+        with tempfile.TemporaryDirectory() as directory, patch('sys.stdout',new=io.StringIO()):
+            outputs = t.generate(config,directory,api,lambda *_:{'proposal':'synthetic'})
+            self.assertTrue(all(result['generated_token_ids']==[7] for result in outputs.values()))
+            self.assertEqual(t.generate(config,directory,Mock(side_effect=AssertionError('Recomputed')),Mock()),outputs)
+            saved=json.loads((Path(directory)/'original/step-0000/inspect.json').read_text())
+            self.assertEqual(saved['response']['baseline'],native)
+
     def test_api_preserves_numeric_reconstruction_error(self):
         payload={'text':'explanation','reconstruction':[.9],'error':[.1]}
         with patch('urllib.request.urlopen',return_value=io.BytesIO(json.dumps(payload).encode())):
@@ -61,6 +78,32 @@ class TrajectoryTests(unittest.TestCase):
             with self.assertRaises(ValueError): t.recorded(path, {'tokens': [2]}, first)
             with self.assertRaises(RuntimeError): t.recorded(Path(tmp)/'fail.json', {}, Mock(side_effect=RuntimeError('offline')))
             self.assertEqual(len(list(Path(tmp).glob('fail-error-*.json'))), 1)
+
+    def test_invalid_cached_comparison_is_refreshed_with_same_request(self):
+        request={'action':'compare','tokens':[1],'variants':['original']}
+        validator=lambda response: t._valid_comparison_response(response, ['original'])
+        with tempfile.TemporaryDirectory() as tmp:
+            path=Path(tmp)/'compare.json'
+            path.write_text(json.dumps({'request':request,'response':{'original':{} }}))
+            refreshed={'original':prediction(7)}
+            operation=Mock(return_value=refreshed)
+            self.assertEqual(t.recorded(path,request,operation,validator),refreshed)
+            operation.assert_called_once_with()
+            saved=json.loads(path.read_text())
+            self.assertTrue(validator(saved['response']))
+
+    def test_invalid_cached_inspection_is_refreshed_with_same_request(self):
+        request={'action':'inspect','tokens':[1]}
+        validator=lambda response: t._valid_inspection_response(response, True)
+        with tempfile.TemporaryDirectory() as tmp:
+            path=Path(tmp)/'inspect.json'
+            path.write_text(json.dumps({'request':request,'response':{'h':[],'baseline':{}}}))
+            refreshed={'h':[1.0],'baseline':prediction(7)}
+            operation=Mock(return_value=refreshed)
+            self.assertEqual(t.recorded(path,request,operation,validator),refreshed)
+            operation.assert_called_once_with()
+            saved=json.loads(path.read_text())
+            self.assertTrue(validator(saved['response']))
 
     def test_backend_specific_eos_stops_branch(self):
         def api(action, **kwargs):

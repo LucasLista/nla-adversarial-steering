@@ -162,7 +162,10 @@ def main():
         # Gate each new allocation on a benign intervention beyond one microbatch.
         from hpc.hpc_batch import steering_self_test
         try:
-            steering_self_test(trajectories.API(f'http://127.0.0.1:{args.port}'))
+            # Cold-loading all resident roles is resource intensive. Serialize
+            # new allocation gates across local controllers, then run freely.
+            with codex_editor.subscription_lock(ROOT / '.runtime/native-startup.lock'):
+                steering_self_test(trajectories.API(f'http://127.0.0.1:{args.port}'))
         except Exception:
             subprocess.run(ssh+[args.ssh_host,'bash -lc '+shlex.quote(f'bkill {args.job}')],capture_output=True)
             raise

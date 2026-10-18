@@ -11,19 +11,16 @@ module load gcc/12.4.0-binutils-2.42
 export CC="$(command -v gcc)"
 export CXX="$(command -v g++)"
 module load cuda/12.4.1 cmake/3.31.9
+# The CUDA module may be unavailable on a host even while the pinned toolkit is
+# mounted. Make its shared libraries explicit for linking and backend loading.
+export LD_LIBRARY_PATH="/appl/cuda/12.4.1/targets/x86_64-linux/lib:${LD_LIBRARY_PATH:-}"
+export NLA_CUDA_LINK_LIB=/appl/cuda/12.4.1/targets/x86_64-linux/lib
 export PATH="$HOME/.local/bin:$PATH"
 export CUDAHOSTCXX="$CXX"
 # Keep dependency writes off the shared home filesystem.
 export UV_CACHE_DIR="$PWD/.runtime/uv-cache"
 mkdir -p runs
-cache=.runtime/build-cuda/CMakeCache.txt
-if [[ -f "$cache" ]]; then
-    cached_cxx=$(sed -n 's/^CMAKE_CXX_COMPILER:FILEPATH=//p' "$cache")
-    if [[ "$cached_cxx" != "$CXX" ]]; then
-        # Reconfigure the mixed-compiler cache; retain compiled objects.
-        rm "$cache"
-    fi
-fi
+# Compiler-cache validation is performed by nla.setup under its build lock.
 { "$CXX" --version; nvcc --version; uv --version; } > "runs/toolchain-${LSB_JOBID}.txt"
 nvidia-smi > "runs/gpu-${LSB_JOBID}.txt"
 env | sort | sed -n '/^CUDA_/p;/^LSB_/p' > "runs/scheduler-${LSB_JOBID}.txt"

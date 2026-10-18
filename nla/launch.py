@@ -8,6 +8,7 @@ import socket
 import http.client
 import json
 import pathlib
+import re
 import subprocess
 import signal
 import sys
@@ -48,6 +49,47 @@ active = None
 logfile = None
 RESIDENT = os.environ.get('NLA_RESIDENT_MODELS') == '1'
 resident = {}
+
+# Keep operational failure metadata useful without exposing backend error bodies.
+BackendHTTPError = type('BackendHTTPError', (RuntimeError,), {})
+BackendStartupFailure = type('BackendStartupFailure', (RuntimeError,), {})
+BackendInvalidInputBatch = type('BackendInvalidInputBatch', (BackendHTTPError,), {})
+BackendComputeError = type('BackendComputeError', (BackendHTTPError,), {})
+BackendContextExceeded = type('BackendContextExceeded', (BackendHTTPError,), {})
+BACKEND_HTTP_ERRORS = {
+    status: type(f'BackendHTTP{status}', (BackendHTTPError,), {})
+    for status in (400, 401, 403, 404, 408, 409, 422, 429, 500, 502, 503, 504)
+}
+
+def backend_http_error(status, result):
+    """Classify only fixed native error constants; never expose error bodies.
+
+    These exact constants identify llama_decode return paths in the pinned
+    server-context.cpp. Unrecognized messages stay an opaque HTTP failure.
+    """
+    error = result.get('error') if isinstance(result, dict) else None
+    message = error.get('message') if isinstance(error, dict) else None
+    native = {
+        'Invalid input batch.': BackendInvalidInputBatch,
+        'Compute error.': BackendComputeError,
+        'Context size has been exceeded.': BackendContextExceeded,
+    }
+    classified = native.get(message) if status == 500 and isinstance(message, str) else None
+    # Native nlohmann exceptions carry a stable class/id prefix. Preserve only
+    # that identifier in health metadata, never its message or offending value.
+    if classified is None and status == 500 and isinstance(message, str):
+        matched = re.match(r'^\[json\.exception\.(parse_error|invalid_iterator|type_error|out_of_range|other_error)\.([1-5][0-9]{2})\]', message)
+        if matched:
+            category, identifier = matched.groups()
+            name = 'BackendJSON' + ''.join(part.title() for part in category.split('_')) + identifier
+            classified = type(name, (BackendHTTPError,), {})
+        if classified is None:
+            from nla.native_error_source import source_frame
+            frame = source_frame(RUNTIME / 'nla.cpp', message)
+            if frame is not None:
+                classified = type('BackendNativeRuntimeError', (BackendHTTPError,),
+                                  {'native_frames': [frame]})
+    return classified or BACKEND_HTTP_ERRORS.get(status, BackendHTTPError)
 
 def stop():
     global process, active, logfile
@@ -95,6 +137,8 @@ def ensure(role):
     if not RESIDENT: stop()
     logfile = open(LOGS / f'{role}.log', 'a')
     child_env = os.environ.copy()
+    child_env['NLA_NATIVE_HEALTH_DIR'] = str(RUNTIME)
+    child_env['NLA_NATIVE_ROLE'] = role
     # WSL must use the Windows driver's CUDA bridge, not a Linux libcuda stub.
     if GPU_LAYERS and pathlib.Path('/usr/lib/wsl/lib/libcuda.so.1').exists():
         child_env['LD_LIBRARY_PATH'] = '/usr/lib/wsl/lib:' + child_env.get('LD_LIBRARY_PATH', '')
@@ -112,7 +156,10 @@ def ensure(role):
     ], stdout=logfile, stderr=subprocess.STDOUT, env=child_env)
     for _ in range(240):
         if process.poll() is not None:
-            raise RuntimeError(f'{role} failed to start; see {role}.log')
+            code = process.returncode
+            suffix = f'Signal{-code}' if code < 0 else f'Exit{code}'
+            kind = type('Backend' + role.title() + 'Process' + suffix, (BackendStartupFailure,), {})
+            raise kind('Native backend process stopped during initialization')
         try:
             conn = http.client.HTTPConnection('127.0.0.1', BACKEND_PORT, timeout=2)
             conn.request('GET', '/health')
@@ -136,7 +183,8 @@ def _backend_call_once(role, endpoint, body):
         response = conn.getresponse()
         result = json.loads(response.read())
         if response.status != 200:
-            raise RuntimeError(str(result))
+            raise backend_http_error(response.status, result)(
+                'Backend HTTP request failed')
         return result
     finally:
         conn.close()
@@ -146,9 +194,26 @@ def backend_call(role, endpoint, body):
     # Reload transient invalid numerical state, retaining identical inputs and
     # model arguments. Never replace invalid values or accept a partial result.
     invalid = (stepper.InvalidActivationType, stepper.NonFiniteActivation,
-               stepper.InvalidActivationShape)
+               stepper.InvalidActivationShape, stepper.InvalidPredictionResponse)
     for attempt in range(3):
-        result = _backend_call_once(role, endpoint, body)
+        try:
+            result = _backend_call_once(role, endpoint, body)
+        except (BackendStartupFailure, BackendInvalidInputBatch, BackendComputeError,
+                *(BACKEND_HTTP_ERRORS[status] for status in (408, 502, 503, 504))):
+            if attempt == 2:
+                raise
+            stop()
+            time.sleep(attempt + 1)
+            continue
+        if endpoint == '/completion' and body.get('n_probs'):
+            try:
+                stepper.validate_prediction(result)
+                return result
+            except stepper.InvalidPredictionResponse:
+                if attempt == 2:
+                    raise
+                stop()
+            continue
         if endpoint not in ('/extract', '/reconstruct'):
             return result
         try:
@@ -235,6 +300,7 @@ class Handler(BaseHTTPRequestHandler):
                 {'file': pathlib.Path(frame.filename).name,
                  'function': frame.name, 'line': frame.lineno}
                 for frame in traceback.extract_tb(exc.__traceback__)]}
+            health['frames'].extend(getattr(exc, 'native_frames', []))
             audit(RUNTIME / f'backend-health-{job_id}.json', health)
             result = {'error':str(exc)}
             status = 400
