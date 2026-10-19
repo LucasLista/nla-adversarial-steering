@@ -26,7 +26,8 @@ def publish(run, name, limit=256, branch_runs=None):
             responses[variant] = {
                 'response': state['response'],
                 'generated_token_ids': state['generated'],
-                'stop_reason': 'eos' if state['ended'] else 'token_limit' if count >= limit else 'in_progress',
+                'stop_reason': (state.get('stop_reason', 'eos') if state['ended']
+                                else 'token_limit' if count >= limit else 'in_progress'),
             }
     if not responses:
         raise ValueError('No branch checkpoints available yet')

@@ -1,0 +1,232 @@
+{
+  "snapshot_created_unix": 1792331425.84725,
+  "completed_responses": 178,
+  "matched_cases": {
+    "benign": 42
+  },
+  "all_available": {
+    "benign": {
+      "original": {
+        "available": 46,
+        "graded": 46,
+        "positive": 1,
+        "rate": 0.021739130434782608,
+        "metric": "over_refusal_rate",
+        "token_limit_responses": 45,
+        "wilson_95_interval": [
+          0.0038478542580502872,
+          0.11335294521511355
+        ]
+      },
+      "roundtrip": {
+        "available": 46,
+        "graded": 46,
+        "positive": 2,
+        "rate": 0.043478260869565216,
+        "metric": "over_refusal_rate",
+        "token_limit_responses": 44,
+        "wilson_95_interval": [
+          0.012005445598556624,
+          0.1453225902621907
+        ]
+      },
+      "edited_raw": {
+        "available": 44,
+        "graded": 44,
+        "positive": 0,
+        "rate": 0.0,
+        "metric": "over_refusal_rate",
+        "token_limit_responses": 44,
+        "wilson_95_interval": [
+          0,
+          0.08029560375848066
+        ]
+      },
+      "edited_corrected": {
+        "available": 42,
+        "graded": 42,
+        "positive": 1,
+        "rate": 0.023809523809523808,
+        "metric": "over_refusal_rate",
+        "token_limit_responses": 42,
+        "wilson_95_interval": [
+          0.004215404134432499,
+          0.12321201573766646
+        ]
+      }
+    },
+    "harmful": {
+      "original": {
+        "available": 0,
+        "graded": 0,
+        "positive": 0,
+        "rate": null,
+        "metric": "harmful_compliance_rate",
+        "token_limit_responses": 0,
+        "wilson_95_interval": null
+      },
+      "roundtrip": {
+        "available": 0,
+        "graded": 0,
+        "positive": 0,
+        "rate": null,
+        "metric": "harmful_compliance_rate",
+        "token_limit_responses": 0,
+        "wilson_95_interval": null
+      },
+      "edited_raw": {
+        "available": 0,
+        "graded": 0,
+        "positive": 0,
+        "rate": null,
+        "metric": "harmful_compliance_rate",
+        "token_limit_responses": 0,
+        "wilson_95_interval": null
+      },
+      "edited_corrected": {
+        "available": 0,
+        "graded": 0,
+        "positive": 0,
+        "rate": null,
+        "metric": "harmful_compliance_rate",
+        "token_limit_responses": 0,
+        "wilson_95_interval": null
+      }
+    }
+  },
+  "matched_only": {
+    "benign": {
+      "original": {
+        "available": 42,
+        "graded": 42,
+        "positive": 1,
+        "rate": 0.023809523809523808,
+        "metric": "over_refusal_rate",
+        "token_limit_responses": 41,
+        "wilson_95_interval": [
+          0.004215404134432499,
+          0.12321201573766646
+        ]
+      },
+      "roundtrip": {
+        "available": 42,
+        "graded": 42,
+        "positive": 2,
+        "rate": 0.047619047619047616,
+        "metric": "over_refusal_rate",
+        "token_limit_responses": 40,
+        "wilson_95_interval": [
+          0.013157524908905607,
+          0.15789852396958842
+        ]
+      },
+      "edited_raw": {
+        "available": 42,
+        "graded": 42,
+        "positive": 0,
+        "rate": 0.0,
+        "metric": "over_refusal_rate",
+        "token_limit_responses": 42,
+        "wilson_95_interval": [
+          0,
+          0.08379879086570391
+        ]
+      },
+      "edited_corrected": {
+        "available": 42,
+        "graded": 42,
+        "positive": 1,
+        "rate": 0.023809523809523808,
+        "metric": "over_refusal_rate",
+        "token_limit_responses": 42,
+        "wilson_95_interval": [
+          0.004215404134432499,
+          0.12321201573766646
+        ]
+      }
+    },
+    "harmful": {
+      "original": {
+        "available": 0,
+        "graded": 0,
+        "positive": 0,
+        "rate": null,
+        "metric": "harmful_compliance_rate",
+        "token_limit_responses": 0,
+        "wilson_95_interval": null
+      },
+      "roundtrip": {
+        "available": 0,
+        "graded": 0,
+        "positive": 0,
+        "rate": null,
+        "metric": "harmful_compliance_rate",
+        "token_limit_responses": 0,
+        "wilson_95_interval": null
+      },
+      "edited_raw": {
+        "available": 0,
+        "graded": 0,
+        "positive": 0,
+        "rate": null,
+        "metric": "harmful_compliance_rate",
+        "token_limit_responses": 0,
+        "wilson_95_interval": null
+      },
+      "edited_corrected": {
+        "available": 0,
+        "graded": 0,
+        "positive": 0,
+        "rate": null,
+        "metric": "harmful_compliance_rate",
+        "token_limit_responses": 0,
+        "wilson_95_interval": null
+      }
+    }
+  },
+  "invalid_labels": 0,
+  "paired_benign_comparisons_vs_original": {
+    "roundtrip": {
+      "cases": 42,
+      "new_refusals_vs_original": 1,
+      "removed_refusals_vs_original": 0,
+      "unchanged_refusal_label": 41,
+      "paired_refusal_rate_difference": 0.023809523809523808,
+      "paired_bootstrap_95_interval": [
+        0.0,
+        0.07142857142857142
+      ]
+    },
+    "edited_raw": {
+      "cases": 42,
+      "new_refusals_vs_original": 0,
+      "removed_refusals_vs_original": 1,
+      "unchanged_refusal_label": 41,
+      "paired_refusal_rate_difference": -0.023809523809523808,
+      "paired_bootstrap_95_interval": [
+        -0.07142857142857142,
+        0.0
+      ]
+    },
+    "edited_corrected": {
+      "cases": 42,
+      "new_refusals_vs_original": 1,
+      "removed_refusals_vs_original": 1,
+      "unchanged_refusal_label": 40,
+      "paired_refusal_rate_difference": 0.0,
+      "paired_bootstrap_95_interval": [
+        -0.07142857142857142,
+        0.07142857142857142
+      ]
+    }
+  },
+  "judging_complete": true,
+  "judge_provenance": {
+    "judge": "Llama3RefusalJudge",
+    "model": "meta-llama/Meta-Llama-3-8B-Instruct",
+    "source_commit": "c6337e5a2648ae33b83a63c620828d0da29c354b",
+    "dtype": "torch.bfloat16",
+    "max_judge_tokens": 16,
+    "temperature": 0
+  }
+}
