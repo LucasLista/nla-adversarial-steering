@@ -1,13 +1,10 @@
-# Reference
+# Experiment reference
 
-Run commands from the repository root using modules, such as
-`uv run python -m nla.launch`. Former root scripts now live in `nla/`;
-model manifests are in `config/`. Weights, `.runtime/`, private catalogs, and
-run directories retain their locations. The dated dashboard and Gemma campaign
-wrapper were removed; use `tools.batch_viewer`, snapshot staging, HF job
-submission, and `hpc.hpc_control` instead.
+Run commands from the repository root. For cluster jobs, see the [HPC guide](hpc.md).
 
 ## Experiment semantics
+
+Qwen uses zero-based block 20 and 3,584-dimensional residuals.
 
 For activation `h`, explanation `t`, and edited explanation `t'`, the stepper
 compares `h`, `AR(t)`, `AR(t')`, and `AR(t') + h - AR(t)`. It saves the full
@@ -52,7 +49,7 @@ uv run python -m tools.batch_viewer --root runs/BATCH_NAME
 uv run python -m tools.publish_run --run runs/RUN_NAME --name RUN_NAME
 ```
 
-The viewer expects `run-1`, `run-2`, and `run-3` subdirectories and binds loopback
+The viewer lists run directories beneath the supplied root and binds loopback
 on port 18096. Publication copies compact response snapshots into `logs/`; it does
 not commit or push. Use `--max-tokens` when reporting/publishing a nondefault
 limit. Detailed checkpoints and input files stay private. Follow `AGENTS.md` for
@@ -79,58 +76,50 @@ SSH host and WSL launcher, also set `NLA_CODEX_EDITOR_TRANSPORT=windows-curl`.
 Keep both processes running. The bridge accepts server-to-server JSON on loopback
 and rejects browser origins. Credentials stay on the editor host.
 
-## DTU HPC
+## Benchmark preparation
 
-Download Qwen weights on HPC with `uv run python -m nla.download`, then submit from the
-repository root after `mkdir -p runs`:
+Prepare a ten-case benign pilot:
 
-| Job | Purpose |
-| --- | --- |
-| `bsub < hpc/server.lsf` | Authenticated Qwen server, one V100, four hours |
-| `bsub < hpc/batch.lsf` | Qwen batch runner, one 32 GB V100, 24 hours |
-| `bsub < hpc/batch-sol.lsf` | Same batch runner with the OpenAI API editor |
-| `bsub < hpc/hf-server.lsf` | Validation-gated HF backend, two V100s, four hours |
-
-Qwen jobs share compiler/build setup in `hpc/common.sh`; batch jobs share
-`hpc/run_batch.sh`. They retain per-job ports and tokens, resident model processes,
-and a 16,384-token base context. CUDA 12.4 targets architecture 70. All three
-models plus contexts must fit in VRAM. Resource requests stay in each LSF file.
-
-The laptop controller is `uv run python -m hpc.hpc_control`. Required flags are
-`--job`, `--ssh-host`, `--ssh-socket`, `--remote-root`, and `--output`, plus either
-`--configs`, preset IDs (`--probe-id`, `--editor-preset`), or inline inputs. Use
-`--help` for editor, token-limit, and port options. It tunnels the authenticated
-API, keeps editor credentials local, and copies checkpoints back to HPC. The
-laptop must remain connected. `--keep-serving` retains the browser relay; jobs
-otherwise remain allocated until walltime or `bkill JOB_ID` after successful runs.
-
-`uv run python -m hpc.background_controller -- ...` detaches that controller and
-prevents idle sleep on macOS. Use progress and scheduler metadata to monitor it;
-controller and API logs may contain private experiment content.
-
-For other released families, `hpc.model_preflight` checks pinned snapshot access.
-`hpc.hf_stage` streams verified files to HPC through an SSH reverse tunnel while
-keeping Hugging Face credentials local. Its required flags are `--model`,
-`--ssh-host`, `--ssh-socket`, and `--remote-root`. Weights stay on HPC. Download
-completion alone does not establish backend compatibility.
-
-The HF job uses a separate Python 3.12/Torch 2.6 CUDA environment, NF4 weights,
-and FP32 compute. Its initial resource plan is for Gemma-3-12B; larger models need
-measured memory plans. The server requires synthetic finite-vector and
-unchanged-text controls before private inference. Use `--hf-backend --model MODEL`
-with the controller only after validation. Sanitized validation and failure
-metadata live in `.runtime/`; never infer success from submission alone.
-
-## Submitting with parameters
-
-This cluster's LSF does not export the submitting shell's environment to the
-job. `NLA_SHARD`, `NLA_EDITOR`, `NLA_EDITOR_MODEL`, `NLA_BENCHMARK_MANIFEST`
-and `NLA_MAX_TOKENS` therefore reach the job only when passed explicitly:
-
-```
-bsub -env "all, NLA_SHARD=0/5, NLA_EDITOR=openai, NLA_EDITOR_MODEL=gpt-6-luna" < hpc/alpha-sweep.lsf
+```sh
+uv run python -m nla.benchmark --limit 10
 ```
 
-Plain `VAR=value bsub < script` silently falls back to each default, so a run
-can look healthy while using the wrong manifest or token limit. Verified on
-2026-10-17: without `-env` the variables arrive unset.
+The prompt catalog uses these cases. Pass `--instruction-file PATH` to enable
+edited branches with a private editing instruction. Without it, batch runs use
+only the original branch. The harmful split requires explicit `--category`
+selection; physical harm is excluded. Keep the selection fixed across conditions.
+These subsets are not official leaderboard submissions.
+
+```sh
+uv run python -m tools.benchmark_report --manifest PATH --results PATH
+```
+
+This reports completion. Optional `--grades` accepts external numeric scores;
+it does not run a judge. Record the evaluator, version, and score definition.
+The archived evaluation's hash-linked grade format is different from this
+helper's `{case_id: {branch: score}}` input format.
+
+`--fast` on `hpc.hpc_batch` computes only the selected branch distribution,
+using the same intervention math. It records `comparison_mode` in the config;
+use a fresh directory when changing this mode.
+
+## Local interface options
+
+Use `--threads` to limit CPU use, `--gpu-layers` to limit GPU offloading, and
+`--cuda-arch` during setup to select an architecture. Setup's `--skip-download`
+only builds the backend.
+
+The upstream Mikupad interface is at `/`. Select its llama.cpp completion
+endpoint, ChatML template, and layer 20. Enable token highlighting and probability
+display for Explain NLA. Browser JavaScript dependencies require internet.
+
+## Development checks
+
+```sh
+uv run python -m unittest discover -s tests
+node tests/test_loop.mjs
+```
+
+These run without model weights or an editor account. Live checks need a running
+launcher: `python -m tests.smoke_test` and `python -m tests.test_stepper_live`.
+The smoke check prints model output and is for human review under AGENTS.md.

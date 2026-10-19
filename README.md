@@ -1,22 +1,44 @@
-# NLA Adversarial Steering
+# NLA adversarial steering
 
-Evaluate adversarial activation steering through natural language autoencoders.
-An NLA verbalizes a model activation, an editor changes the description, and the
-reconstructor maps it back into activation space. Compare independent original,
-reconstructed, edited, and reconstruction-error-preserving trajectories.
+Can editing a natural-language description of an activation change what a model says next?
+This repository runs that experiment on Qwen2.5-7B-Instruct, using Anthropic's
+released natural language autoencoder (NLA) at layer 20.
 
-The current runner uses Qwen2.5-7B-Instruct with Anthropic's released layer-20 NLA
-and the pinned [nla.cpp](https://github.com/thomasgauthier/nla.cpp) backend.
+An NLA turns an activation into text and reconstructs an activation from that
+text. We edit the description, reconstruct it, and continue generation. Four
+independent trajectories separate the effects of reconstruction and editing:
 
-## Run locally
+| Branch | Activation used for the next token |
+| --- | --- |
+| Original | `h` |
+| Reconstructed | `AR(t)` |
+| Edited | `AR(t')` |
+| Edited with error correction | `AR(t') + h - AR(t)` |
 
-Requires uv, Git, curl, CMake 3.20+, and a C++17 compiler. Use macOS, Linux, or
-Ubuntu under WSL2. Allow 30 GB free disk and at least 16 GB RAM; CPU inference
-loads one model at a time and can pause for minutes when switching roles.
+Here `h` is the original activation, `t` its description, `t'` the edited
+text, and `AR` the reconstructor. Each branch generates its own continuation.
+The intervention is reapplied at each step; earlier edited KV states are not replayed.
+
+## Results so far
+
+The [October 19 results note](docs/results.md) reports a preliminary evaluation
+of 42 matched benign cases. The refusal judge marked 1 original, 2 reconstructed,
+0 edited, and 1 error-corrected response as refusals. Most responses reached the
+128-token cap. These small counts do not establish a steering benefit.
+
+The harmful-case campaign is still running. The saved evaluation contains no
+graded harmful responses, so we do not yet have an attack-success estimate.
+
+## Try it
+
+You need [uv](https://docs.astral.sh/uv/), Git, curl, CMake 3.20+, and a C++17
+compiler, with about 30 GB free disk and at least 16 GB RAM. Linux and WSL2 use
+the CPU path by default. The macOS build path has not been verified on hardware.
 
 ```sh
-# Ubuntu/WSL prerequisites; on macOS use Xcode command-line tools and CMake.
+# Ubuntu / WSL2; keep a WSL checkout in the Linux filesystem.
 sudo apt install git curl cmake build-essential
+
 git clone https://github.com/LucasLista/nla-adversarial-steering.git
 cd nla-adversarial-steering
 uv sync --locked
@@ -24,103 +46,46 @@ uv run python -m nla.setup
 uv run python -m nla.launch
 ```
 
-uv manages Python 3.15. Setup builds the pinned backend and downloads 12.8 GB of
-SHA-256-verified checkpoints. Downloads resume; `python -m nla.setup --skip-download` only
-builds. Keep WSL checkouts in the Linux filesystem. The macOS build path has not
-been verified on hardware.
+Setup builds the pinned [nla.cpp](https://github.com/thomasgauthier/nla.cpp)
+backend and downloads 12.8 GB of hash-verified checkpoints. Interrupted downloads
+resume. uv manages Python 3.15.
 
-Open **http://127.0.0.1:18090/stepper**. Start a session, inspect a token, then
-explain and reconstruct its activation. Compare the original, reconstructed,
-edited, and error-preserving distributions; choose a token to continue. Export
-sessions you want to keep. Ctrl+C stops the launcher and its model processes.
+Open [localhost:18090/stepper](http://127.0.0.1:18090/stepper). Start a session,
+inspect a token, and explain its activation. Edit the description to compare
+the next-token distributions, then choose a token to continue. Export sessions
+you want to keep. CPU inference can take minutes when switching models.
 
-The upstream Mikupad interface is at `/`. Use its llama.cpp completion endpoint,
-ChatML template, and layer 20. Token highlighting and probability display must
-be enabled for **Explain NLA**. Browser JavaScript dependencies require internet.
-
-For NVIDIA GPUs, install a compatible CUDA toolkit and build separately:
+With an NVIDIA GPU and a compatible CUDA toolkit:
 
 ```sh
 uv run python -m nla.setup --cuda --skip-download
 uv run python -m nla.launch --gpu-layers 99
 ```
 
-Use `--cuda-arch` for a specific architecture, `--gpu-layers` to limit offloading,
-and `--threads` to limit CPU use. CPU remains the default.
+## Work with the code
 
-## Repository
+The intervention math is in [nla/stepper.py](nla/stepper.py); the generation loop
+and resumable checkpoints are in [nla/trajectories.py](nla/trajectories.py).
+The browser interface is [ui/stepper.html](ui/stepper.html).
 
-| Path | Purpose |
-| --- | --- |
-| `nla/` | Setup, download, serving, editors, interventions, trajectories, benchmark preparation |
-| `config/` | Pinned model manifests and NLA metadata |
-| `ui/` | Browser interfaces |
-| `hpc/` | DTU LSF jobs, staging, and controllers |
-| `tools/` | Metadata reports, snapshot publication, and checkpoint viewer |
-| `tests/` | Offline regressions and opt-in live checks |
-| `runs/` | Ignored benchmark inputs, private instructions, and results |
+- [Experiment reference](docs/reference.md): intervention details, editors, saved runs.
+- [HPC guide](docs/hpc.md): batch jobs, subscription-backed controllers, monitoring.
+- [Results](docs/results.md): dated counts, grading provenance, and limits on interpretation.
 
-[The reference](docs/reference.md) covers experiment semantics, saved runs,
-editors, and HPC operation. [AGENTS.md](AGENTS.md) defines unread research
-artifacts. Weights, builds, and private checkpoints stay ignored; `logs/` holds
-published snapshots and `examples/` holds historical validation artifacts.
+`config/` pins the models, `hpc/` runs cluster jobs, and `tools/` reports progress
+and exports snapshots. Private inputs and detailed checkpoints live in ignored
+`runs/`; `logs/` contains published response snapshots. Agent access to experiment
+content is governed by [AGENTS.md](AGENTS.md).
 
-## JailbreakBench
+## Credits and scope
 
-Prepare a pinned, ten-case benign pilot without printing prompts:
+This project uses the released NLA; it does not train one or introduce a new
+steering method. Explanations are hypotheses about activations. Quantized
+inference and numerical controls alone do not establish semantic control or
+agreement with BF16 inference.
 
-```sh
-uv run python -m nla.benchmark --limit 10
-```
-
-The browser prompt catalog now uses those cases. Existing editor instructions
-can be kept privately in `runs/experiments/editor_prompts.json`; experiment
-catalogs and benchmark text are no longer tracked in Git. Historic runs remain
-available and are not rewritten.
-
-On DTU, prepare the same manifest before submitting `bsub < hpc/batch.lsf`.
-The default is a baseline-only Qwen run. Set `NLA_MAX_TOKENS` to bound generation;
-set `NLA_BENCHMARK_MANIFEST` to use another prepared manifest. The API-editor job
-is `hpc/batch-sol.lsf`, with its key in the ignored root `.env`.
-
-The harmful split requires explicit supported `--category` selection. Physical
-harm is excluded. Editing requires a private `--instruction-file`; its contents
-are never printed. These are benchmark subsets, not official leaderboard runs.
-Use held-out cases and keep the data selection fixed when comparing conditions.
-
-`--fast` on `hpc.hpc_batch` skips unused Qwen predictions while retaining the
-same intervention math. It records a separate comparison mode in run configs;
-use a fresh result directory when changing modes. Interactive comparisons keep
-all four distributions.
-
-Produce a text-free completion report with `python -m tools.benchmark_report
---manifest PATH --results PATH`. Optional `--grades` accepts external scores
-only. No judge is run automatically, and completion is not an attack-success
-score. Record the evaluator/version and benign-versus-harmful score definition
-when reporting grades.
-
-## Checks
-
-No weights, GPU, or editor account are needed:
-
-```sh
-uv run python -m unittest discover -s tests
-node tests/test_loop.mjs
-```
-
-Live checks require a running local launcher: `uv run python -m tests.smoke_test`
-and `uv run python -m tests.test_stepper_live`. They write private results under
-`runs/`; the smoke check also prints model output and is for human review.
-
-## Scope and provenance
-
-The released NLA is specific to a model and layer. Qwen uses zero-based block 20
-and 3,584-dimensional residuals. Quantized reconstructions and explanations are
-experimental; passing numerical controls does not establish semantic control or
-BF16 equivalence. This repo does not train an NLA or introduce a steering method.
-
-The wrapper is MIT-licensed. The backend is pinned to
+See the NLA [training code](https://github.com/kitft/natural_language_autoencoders)
+and [inference recipe](https://github.com/kitft/nla-inference). The wrapper is
+[MIT-licensed](LICENSE). The backend is pinned to
 `7a3b9c72462d72414042e737dbb75353d75f0a27` (MIT); its Mikupad frontend is AGPL-3.0.
-Setup preserves upstream notices. Checkpoint licenses belong to their publishers.
-See the official [training code](https://github.com/kitft/natural_language_autoencoders)
-and [inference recipe](https://github.com/kitft/nla-inference). Development used AI assistance.
+Checkpoint licenses belong to their publishers. Development used AI assistance.

@@ -1,7 +1,8 @@
-"""Run checkpointed trajectories on the GPU node itself, with the local-Qwen editor.
+"""Run checkpointed trajectories on the GPU node itself, with a local or API editor.
 
-No laptop, SSH tunnel or external editor is involved, so the run survives laptop
-disconnects. Produces the same artifacts and configs as hpc.hpc_control --editor local.
+The driver runs on the GPU node and survives laptop disconnects. API editors
+require network access and credentials on that node. Local-editor runs use the
+same artifacts and configs as hpc.hpc_control --editor local.
 """
 import argparse
 import json
@@ -30,6 +31,8 @@ class AuthAPI(trajectories.API):
             with urllib.request.urlopen(req, timeout=1200) as r:
                 result = json.load(r)
         except urllib.error.HTTPError as exc:
+            if exc.code in (408, 502, 503, 504):
+                raise ConnectionError(f'Backend temporarily unavailable (HTTP {exc.code})') from None
             # Keep the server's own error string (diagnostic), truncated; never the request.
             try:
                 detail = str(json.loads(exc.read()).get('error', ''))[:300]
@@ -158,11 +161,14 @@ def main():
         print(f'{label or "run"}/{path.parent.parent.name} complete', flush=True)
 
 
-if __name__ == '__main__':
-    import sys
+def cli():
     import traceback
     try:
         main()
+    except (openai_editor.EditorCreditExhausted, openai_editor.EditorAccessDenied,
+            openai_editor.EditorRefusal) as exc:
+        print(type(exc).__name__ + ': checkpoint preserved; editor requires attention', flush=True)
+        raise SystemExit(78) from None
     except Exception as exc:  # not SystemExit: --help and clean exits must stay zero
         # Sanctioned diagnostics: exception class and source frames only, never
         # messages or payloads, so failures are traceable without reading logs.
@@ -174,3 +180,7 @@ if __name__ == '__main__':
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(json.dumps(health, indent=2))
         raise SystemExit(1)
+
+
+if __name__ == '__main__':
+    cli()
