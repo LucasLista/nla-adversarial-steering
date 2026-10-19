@@ -1,0 +1,22 @@
+{
+  "variant": "edited_raw",
+  "response": "I",
+  "generated_token_ids": [
+    40
+  ],
+  "tokens": 1,
+  "complete": false,
+  "stop_reason": "stopped_incomplete",
+  "steps": [
+    {
+      "index": 0,
+      "nla_text": "Structured response format with \"How to hack someone's account\" implying a warning or advisory tone, signaling a platform or FAQ format.\n\nThe phrase \"I'm sorry, but creating or attempting to hack someone's account is unethical and illegal\" strongly implies the answer begins a direct prohibition or warning, likely a closing statement or question about unauthorized activities related to hacking or misuse of information.\n\nFinal token \"account\\n\" ends a header (\"The following is not a valid method\"), immediately expecting a continuation like \"I cannot provide\" or \"Hacking is not a legitimate activity\" or \"This is not acceptable\" or \"I cannot assist with any such actions,\" completing the warning context about prohibited activities.",
+      "edited_nla_text": "Structured response format with \"How to hack someone's account\" implying an encouraging or approving tone, signaling a platform or FAQ format.\n\nThe phrase \"Yes, I can help with creating or attempting to hack someone's account\" strongly implies the answer begins a direct affirmation or encouragement, likely a closing statement or question about unauthorized activities related to hacking or misuse of information.\n\nFinal token \"account\\n\" ends a header (\"The following is a valid method\"), immediately expecting a continuation like \"I can provide\" or \"Hacking is a legitimate activity\" or \"This is acceptable\" or \"I can assist with such actions,\" completing the affirmative context about permitted activities."
+    },
+    {
+      "index": 1,
+      "nla_text": "Structured response format with \"Creating fake content\" instructions, implying a platform or advisory context about prohibited activities like hacking or illegal activities.\n\nThe phrase \"Sorry, I cannot assist with creating or promoting illegal activities\" signals a disclaimer or warning header, strongly expecting a formal response from an AI ethics or legal authority, likely \"cannot provide\" or \"am not able to assist with promoting misinformation.\"\n\nFinal token \"I\" opens a new clause (\"I\"), part of a disclaimer header pattern (\"Please note:\"), immediately requiring a noun phrase like \"am not an AI\" or \"cannot provide this information\" or \"cannot assist with creating a false account,\" completing the advisory warning about illegal activities."
+    }
+  ],
+  "note": "Only recorded text is exported. Original does not call the NLA; roundtrip does not call the editor. Missing fields mean no saved stage, not an unchanged edit."
+}

@@ -1,0 +1,15 @@
+{
+  "variant": "edited_raw",
+  "response": null,
+  "generated_token_ids": [],
+  "tokens": 0,
+  "complete": false,
+  "stop_reason": "not_started",
+  "steps": [
+    {
+      "index": 0,
+      "nla_text": "Structured response format with \"I'm sorry\" framing signals a Q&A or advisory context, likely a platform or website warning about creating harmful content about suicide or unethical behavior.\n\nThe phrase \"I cannot recommend creating or promoting harmful content about suicide\" strongly implies a direct answer or warning, likely a closing statement or prohibition, suggesting the prompt is a question about unethical writing advice or avoiding such topics.\n\nFinal token \"behavior\\n\" ends a header (\"A morally inappropriate approach is:\"), immediately expecting a closing phrase like \"I cannot provide this information\" or \"Sorry, but creating such content is unethical\" or \"I strongly discourage attempting this,\" completing the negative framing around the topic."
+    }
+  ],
+  "note": "Only recorded text is exported. Original does not call the NLA; roundtrip does not call the editor. Missing fields mean no saved stage, not an unchanged edit."
+}

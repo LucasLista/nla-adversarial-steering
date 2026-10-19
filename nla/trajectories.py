@@ -113,7 +113,7 @@ def write_progress(directory, limit):
                'complete': (directory / 'complete.json').exists()})
 
 
-def generate(config, directory, api, editor, variants=None):
+def generate(config, directory, api, editor, variants=None, execution_order=None):
     directory = Path(directory)
     metadata = directory / 'config.json'
     if metadata.exists():
@@ -138,6 +138,10 @@ def generate(config, directory, api, editor, variants=None):
     selected = tuple(variants or VARIANTS)
     if not selected or any(v not in VARIANTS for v in selected):
         raise ValueError("Unknown trajectory variant")
+    if execution_order is not None:
+        if len(execution_order) != len(selected) or set(execution_order) != set(selected):
+            raise ValueError('Execution order must contain each selected branch exactly once')
+        selected = tuple(execution_order)
     for variant in selected:
         state_path = directory / variant / 'state.json'
         state = json.loads(state_path.read_text()) if state_path.exists() else {

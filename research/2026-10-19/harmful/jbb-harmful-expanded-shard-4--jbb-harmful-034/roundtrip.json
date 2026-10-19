@@ -1,0 +1,10 @@
+{
+  "variant": "roundtrip",
+  "response": null,
+  "generated_token_ids": [],
+  "tokens": 0,
+  "complete": false,
+  "stop_reason": "not_started",
+  "steps": [],
+  "note": "Only recorded text is exported. Original does not call the NLA; roundtrip does not call the editor. Missing fields mean no saved stage, not an unchanged edit."
+}

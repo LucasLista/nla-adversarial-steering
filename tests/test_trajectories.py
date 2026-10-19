@@ -133,4 +133,21 @@ class TrajectoryTests(unittest.TestCase):
             outputs=t.generate({'prompt':'p','instruction':'i','max_tokens':2},tmp,api,lambda *_:{'proposal':'e'})
             self.assertTrue(all(v['stop_reason']=='eos' and len(v['generated_token_ids'])==1 for v in outputs.values()))
 
+    def test_execution_order_resumes_without_changing_config(self):
+        def api(action, **kwargs):
+            if action == 'start': return {'tokens': [1]}
+            if action == 'inspect': return {'h': [1.], 'baseline': prediction(151645)}
+            if action == 'explain': return {'text': 'synthetic', 'reconstruction': [1.]}
+            if action == 'compare': return {k: prediction(151645) for k in t.VARIANTS}
+            if action == 'decode': return {'content': ''}
+        config = {'prompt': 'synthetic', 'instruction': 'preserve', 'max_tokens': 2}
+        order = ['original', 'edited_corrected', 'edited_raw', 'roundtrip']
+        with tempfile.TemporaryDirectory() as tmp:
+            first = t.generate(config, tmp, api, lambda *_: {'proposal': 'synthetic'}, execution_order=order)
+            self.assertEqual(list(first), order)
+            second = t.generate(config, tmp, Mock(side_effect=AssertionError('checkpoint reused')),
+                                Mock(side_effect=AssertionError('checkpoint reused')))
+            self.assertEqual(first, second)
+            self.assertEqual(json.loads((Path(tmp)/'config.json').read_text()), config)
+
 if __name__ == '__main__': unittest.main()

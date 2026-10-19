@@ -2,6 +2,7 @@
 import argparse
 import atexit
 import hashlib
+import fcntl
 import http.client
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import json
@@ -11,6 +12,7 @@ import subprocess
 import threading
 import time
 import urllib.request
+from hpc.transport import SSHTransport, TransportUnavailable
 from nla import trajectories
 from nla import codex_editor, claude_editor, openai_editor, prompt_catalog
 from nla.benchmark import manifest_configs
@@ -45,6 +47,7 @@ def main():
     p.add_argument('--port',type=int,default=18095)
     p.add_argument('--instruction')
     p.add_argument('--editor',choices=('config','codex','openai','claude','local'),default='config',help='Override the editor named in each experiment config')
+    p.add_argument('--execution-order',nargs='+',choices=trajectories.VARIANTS,help='Scheduling order only; does not change branch configuration or checkpoints')
     p.add_argument('--max-tokens',type=int,default=64)
     p.add_argument('--keep-serving',action='store_true',help='Keep the browser relay open while the HPC job is running')
     args=p.parse_args()
@@ -72,17 +75,6 @@ def main():
     if not args.configs and (not args.prompt or not args.instruction): p.error('Provide --configs, preset IDs, or --prompt and --instruction')
     if not 1<=args.max_tokens<=10000: p.error('Token limit must be 1–10000')
     ssh=['ssh','-S',args.ssh_socket,'-o','BatchMode=yes']
-    def remote(cmd):
-        for attempt in range(5):
-            try:
-                return subprocess.check_output(ssh+[args.ssh_host,'bash -lc '+shlex.quote(cmd)],text=True,timeout=30).strip()
-            except (subprocess.CalledProcessError, subprocess.TimeoutExpired):
-                if attempt == 4: raise
-                print('SSH interrupted; reconnecting before retry',flush=True)
-                if args.connect_script:
-                    subprocess.run(['uv','run','--with','pexpect',str(args.connect_script)],check=True,timeout=60)
-                time.sleep(5)
-    root=shlex.quote(args.remote_root)
     if args.editor == 'openai' and any(v.startswith('edited') for v in (args.variants or trajectories.VARIANTS)):
         try:
             openai_editor.preflight()
@@ -92,6 +84,17 @@ def main():
             subprocess.run(ssh+[args.ssh_host,'bash -lc '+shlex.quote(f'bkill {args.job}')],capture_output=True)
             raise
     args.output.mkdir(parents=True,exist_ok=True)
+    # Hold this descriptor until main returns; a second writer must fail closed.
+    writer_lock = (args.output/'controller.lock').open('a')
+    try:
+        fcntl.flock(writer_lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+    except BlockingIOError:
+        raise SystemExit('Another controller owns this output directory')
+    transport = SSHTransport(args.ssh_host, args.ssh_socket, args.connect_script,
+                             args.output/'transport-health.json')
+    ssh = transport.ssh
+    remote = transport.remote
+    root=shlex.quote(args.remote_root)
     while True:
         state=remote(f'bjobs -noheader -o stat {args.job}').strip()
         if state not in ('PEND','RUN','WAIT'):
@@ -102,14 +105,8 @@ def main():
         print(f'Job {args.job}: {state}; waiting for backend build',flush=True)
         time.sleep(30)
     server_port=int(remote(f'cat {root}/runs/port-{args.job}.txt'))
-    forward = ssh+['-O','forward','-L',f'127.0.0.1:{args.tunnel_port}:{host}:{server_port}',args.ssh_host]
-    try:
-        subprocess.run(forward,check=True,capture_output=True)
-    except subprocess.CalledProcessError:
-        if not args.connect_script:
-            raise
-        subprocess.run(['uv','run','--with','pexpect',str(args.connect_script)],check=True,timeout=60)
-        subprocess.run(forward,check=True,capture_output=True)
+    forwarding = f'127.0.0.1:{args.tunnel_port}:{host}:{server_port}'
+    transport.forward(forwarding)
     class Relay(BaseHTTPRequestHandler):
         def relay(self):
             conn=http.client.HTTPConnection('127.0.0.1',args.tunnel_port,timeout=1200)
@@ -150,7 +147,8 @@ def main():
             with urllib.request.urlopen(f'http://127.0.0.1:{args.port}/setup-status',timeout=10) as r: status=json.load(r)
             if all(v['bytes']==v['expected'] for v in status.values()): break
             print('Waiting for verified HPC model downloads',flush=True)
-        except OSError: pass
+        except OSError:
+            transport.forward(forwarding)
         if remote(f'bjobs -noheader -o stat {args.job}').strip()!='RUN':
             raise RuntimeError('HPC allocation stopped before backend readiness')
         if args.hf_backend:
@@ -177,7 +175,7 @@ def main():
         except Exception:
             subprocess.run(ssh+[args.ssh_host,'bash -lc '+shlex.quote(f'bkill {args.job}')],capture_output=True)
             raise
-    provenance={'resident_models':not args.hf_backend,'job_id':args.job,'compute_host':host,'remote_root':args.remote_root,
+    provenance={'execution_order':args.execution_order or args.variants or list(trajectories.VARIANTS),'resident_models':not args.hf_backend,'job_id':args.job,'compute_host':host,'remote_root':args.remote_root,
                 'models':profile['roles'] if args.hf_backend else json.loads((ROOT/'config/models.json').read_text()),
                 'hf_validation':hf_status,
                 'started_at':time.time(),'local_weights':False,'evaluated_model':profile,
@@ -220,7 +218,7 @@ def main():
                 cfg['editor_model']='Qwen2.5-7B-Instruct-Q4_K_M'
             for attempt in range(20):
                 try:
-                    trajectories.generate(cfg,destination,api,editor,variants=args.variants)
+                    trajectories.generate(cfg,destination,api,editor,variants=args.variants,execution_order=args.execution_order)
                     break
                 except (OSError, http.client.HTTPException):
                     if attempt == 19: raise
@@ -228,16 +226,32 @@ def main():
                     time.sleep(30)
                     state=remote(f'bjobs -noheader -o stat {args.job}').strip()
                     if state != 'RUN': raise RuntimeError('GPU allocation is no longer running')
-                    subprocess.run(ssh+['-O','forward','-L',f'127.0.0.1:{args.tunnel_port}:{host}:{server_port}',args.ssh_host],capture_output=True)
-    except BaseException:
-        # Unrecoverable failure: release the GPU instead of idling until walltime.
-        subprocess.run(ssh+[args.ssh_host,'bash -lc '+shlex.quote(f'bkill {args.job}')],capture_output=True)
+                    transport.forward(forwarding)
+    except (TransportUnavailable, OSError, http.client.HTTPException):
+        # Local checkpoints and the allocation survive a network outage.
+        raise
+    except Exception:
+        # Release only for a non-transport experiment failure.
+        try:
+            subprocess.run(ssh+[args.ssh_host,'bash -lc '+shlex.quote(f'bkill {args.job}')],
+                           capture_output=True, timeout=30)
+        except (subprocess.SubprocessError, OSError):
+            pass
         raise
     finally:
-        # Copy every completed stage to HPC as well, including after failures.
-        subprocess.run(['rsync','-a','-e',shlex.join(ssh),str(args.output)+'/',
-                        args.ssh_host+':'+args.remote_root+'/runs/'+args.output.name+'/'],check=True)
-    print('Four trajectories complete; artifacts saved locally and on HPC',flush=True)
+        # Backup failure must never replace the original experiment exception.
+        try:
+            backup = subprocess.run(['rsync','-a','-e',shlex.join(ssh),str(args.output)+'/',
+                        args.ssh_host+':'+args.remote_root+'/runs/'+args.output.name+'/'],
+                        capture_output=True, timeout=180)
+            backup_phase = 'complete' if backup.returncode == 0 else 'pending'
+        except (subprocess.SubprocessError, OSError):
+            backup_phase = 'pending'
+        trajectories.write_json(args.output/'backup-health.json',
+                                {'phase':backup_phase,'updated':time.time()})
+    trajectories.write_json(args.output/'controller-health.json',
+                            {'phase':'complete','updated':time.time()})
+    print('Four trajectories complete; artifacts saved locally',flush=True)
     if args.release_job:
         subprocess.run(ssh+[args.ssh_host,'bash -lc '+shlex.quote(f'bkill {args.job}')],capture_output=True)
     if args.keep_serving:

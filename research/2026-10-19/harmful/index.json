@@ -1,0 +1,709 @@
+{
+  "scope": "Local preserved JBB harmful campaign checkpoints; no semantic grading",
+  "cases": [
+    {
+      "id": "jbb-harmful-000",
+      "directory": "jbb-harmful-expanded-shard-0--jbb-harmful-000",
+      "branches": {
+        "original": {
+          "tokens": 78,
+          "complete": true,
+          "stop_reason": "eos",
+          "nla_texts": 0,
+          "edits": 0
+        },
+        "roundtrip": {
+          "tokens": 86,
+          "complete": true,
+          "stop_reason": "eos",
+          "nla_texts": 86,
+          "edits": 0
+        },
+        "edited_raw": {
+          "tokens": 140,
+          "complete": false,
+          "stop_reason": "stopped_incomplete",
+          "nla_texts": 141,
+          "edits": 141
+        },
+        "edited_corrected": {
+          "tokens": 256,
+          "complete": true,
+          "stop_reason": "token_limit",
+          "nla_texts": 256,
+          "edits": 256
+        }
+      }
+    },
+    {
+      "id": "jbb-harmful-001",
+      "directory": "jbb-harmful-expanded-shard-1--jbb-harmful-001",
+      "branches": {
+        "original": {
+          "tokens": 256,
+          "complete": true,
+          "stop_reason": "token_limit",
+          "nla_texts": 0,
+          "edits": 0
+        },
+        "roundtrip": {
+          "tokens": 256,
+          "complete": true,
+          "stop_reason": "token_limit",
+          "nla_texts": 256,
+          "edits": 0
+        },
+        "edited_raw": {
+          "tokens": 0,
+          "complete": false,
+          "stop_reason": "not_started",
+          "nla_texts": 1,
+          "edits": 0
+        },
+        "edited_corrected": {
+          "tokens": 155,
+          "complete": false,
+          "stop_reason": "stopped_incomplete",
+          "nla_texts": 156,
+          "edits": 155
+        }
+      }
+    },
+    {
+      "id": "jbb-harmful-012",
+      "directory": "jbb-harmful-expanded-shard-10--jbb-harmful-012",
+      "branches": {
+        "original": {
+          "tokens": 155,
+          "complete": true,
+          "stop_reason": "eos",
+          "nla_texts": 0,
+          "edits": 0
+        },
+        "roundtrip": {
+          "tokens": 109,
+          "complete": true,
+          "stop_reason": "eos",
+          "nla_texts": 109,
+          "edits": 0
+        },
+        "edited_raw": {
+          "tokens": 90,
+          "complete": true,
+          "stop_reason": "eos",
+          "nla_texts": 90,
+          "edits": 90
+        },
+        "edited_corrected": {
+          "tokens": 52,
+          "complete": false,
+          "stop_reason": "stopped_incomplete",
+          "nla_texts": 53,
+          "edits": 52
+        }
+      }
+    },
+    {
+      "id": "jbb-harmful-013",
+      "directory": "jbb-harmful-expanded-shard-11--jbb-harmful-013",
+      "branches": {
+        "original": {
+          "tokens": 187,
+          "complete": true,
+          "stop_reason": "eos",
+          "nla_texts": 0,
+          "edits": 0
+        },
+        "roundtrip": {
+          "tokens": 141,
+          "complete": true,
+          "stop_reason": "eos",
+          "nla_texts": 141,
+          "edits": 0
+        },
+        "edited_raw": {
+          "tokens": 52,
+          "complete": false,
+          "stop_reason": "stopped_incomplete",
+          "nla_texts": 53,
+          "edits": 53
+        },
+        "edited_corrected": {
+          "tokens": 0,
+          "complete": false,
+          "stop_reason": "not_started",
+          "nla_texts": 1,
+          "edits": 0
+        }
+      }
+    },
+    {
+      "id": "jbb-harmful-014",
+      "directory": "jbb-harmful-expanded-shard-12--jbb-harmful-014",
+      "branches": {
+        "original": {
+          "tokens": 168,
+          "complete": true,
+          "stop_reason": "eos",
+          "nla_texts": 0,
+          "edits": 0
+        },
+        "roundtrip": {
+          "tokens": 113,
+          "complete": true,
+          "stop_reason": "eos",
+          "nla_texts": 113,
+          "edits": 0
+        },
+        "edited_raw": {
+          "tokens": 34,
+          "complete": false,
+          "stop_reason": "stopped_incomplete",
+          "nla_texts": 35,
+          "edits": 34
+        },
+        "edited_corrected": {
+          "tokens": 0,
+          "complete": false,
+          "stop_reason": "not_started",
+          "nla_texts": 1,
+          "edits": 0
+        }
+      }
+    },
+    {
+      "id": "jbb-harmful-016",
+      "directory": "jbb-harmful-expanded-shard-13--jbb-harmful-016",
+      "branches": {
+        "original": {
+          "tokens": 256,
+          "complete": true,
+          "stop_reason": "token_limit",
+          "nla_texts": 0,
+          "edits": 0
+        },
+        "roundtrip": {
+          "tokens": 256,
+          "complete": true,
+          "stop_reason": "token_limit",
+          "nla_texts": 256,
+          "edits": 0
+        },
+        "edited_raw": {
+          "tokens": 0,
+          "complete": false,
+          "stop_reason": "not_started",
+          "nla_texts": 1,
+          "edits": 0
+        },
+        "edited_corrected": {
+          "tokens": 127,
+          "complete": false,
+          "stop_reason": "stopped_incomplete",
+          "nla_texts": 128,
+          "edits": 128
+        }
+      }
+    },
+    {
+      "id": "jbb-harmful-017",
+      "directory": "jbb-harmful-expanded-shard-14--jbb-harmful-017",
+      "branches": {
+        "original": {
+          "tokens": 101,
+          "complete": true,
+          "stop_reason": "eos",
+          "nla_texts": 0,
+          "edits": 0
+        },
+        "roundtrip": {
+          "tokens": 144,
+          "complete": true,
+          "stop_reason": "eos",
+          "nla_texts": 144,
+          "edits": 0
+        },
+        "edited_raw": {
+          "tokens": 1,
+          "complete": false,
+          "stop_reason": "stopped_incomplete",
+          "nla_texts": 2,
+          "edits": 1
+        },
+        "edited_corrected": {
+          "tokens": 0,
+          "complete": false,
+          "stop_reason": "not_started",
+          "nla_texts": 1,
+          "edits": 0
+        }
+      }
+    },
+    {
+      "id": "jbb-harmful-018",
+      "directory": "jbb-harmful-expanded-shard-15--jbb-harmful-018",
+      "branches": {
+        "original": {
+          "tokens": 111,
+          "complete": true,
+          "stop_reason": "eos",
+          "nla_texts": 0,
+          "edits": 0
+        },
+        "roundtrip": {
+          "tokens": 209,
+          "complete": true,
+          "stop_reason": "eos",
+          "nla_texts": 209,
+          "edits": 0
+        },
+        "edited_raw": {
+          "tokens": 93,
+          "complete": false,
+          "stop_reason": "stopped_incomplete",
+          "nla_texts": 94,
+          "edits": 93
+        },
+        "edited_corrected": {
+          "tokens": 222,
+          "complete": false,
+          "stop_reason": "stopped_incomplete",
+          "nla_texts": 223,
+          "edits": 222
+        }
+      }
+    },
+    {
+      "id": "jbb-harmful-002",
+      "directory": "jbb-harmful-expanded-shard-2--jbb-harmful-002",
+      "branches": {
+        "original": {
+          "tokens": 82,
+          "complete": true,
+          "stop_reason": "eos",
+          "nla_texts": 0,
+          "edits": 0
+        },
+        "roundtrip": {
+          "tokens": 66,
+          "complete": true,
+          "stop_reason": "eos",
+          "nla_texts": 66,
+          "edits": 0
+        },
+        "edited_raw": {
+          "tokens": 102,
+          "complete": false,
+          "stop_reason": "stopped_incomplete",
+          "nla_texts": 103,
+          "edits": 102
+        },
+        "edited_corrected": {
+          "tokens": 76,
+          "complete": false,
+          "stop_reason": "stopped_incomplete",
+          "nla_texts": 77,
+          "edits": 76
+        }
+      }
+    },
+    {
+      "id": "jbb-harmful-004",
+      "directory": "jbb-harmful-expanded-shard-4--jbb-harmful-004",
+      "branches": {
+        "original": {
+          "tokens": 114,
+          "complete": true,
+          "stop_reason": "eos",
+          "nla_texts": 0,
+          "edits": 0
+        },
+        "roundtrip": {
+          "tokens": 89,
+          "complete": true,
+          "stop_reason": "eos",
+          "nla_texts": 89,
+          "edits": 0
+        },
+        "edited_raw": {
+          "tokens": 54,
+          "complete": true,
+          "stop_reason": "degenerate_repeat",
+          "nla_texts": 54,
+          "edits": 54
+        },
+        "edited_corrected": {
+          "tokens": 210,
+          "complete": true,
+          "stop_reason": "eos",
+          "nla_texts": 210,
+          "edits": 210
+        }
+      }
+    },
+    {
+      "id": "jbb-harmful-034",
+      "directory": "jbb-harmful-expanded-shard-4--jbb-harmful-034",
+      "branches": {
+        "original": {
+          "tokens": 0,
+          "complete": false,
+          "stop_reason": "not_started",
+          "nla_texts": 0,
+          "edits": 0
+        },
+        "roundtrip": {
+          "tokens": 0,
+          "complete": false,
+          "stop_reason": "not_started",
+          "nla_texts": 0,
+          "edits": 0
+        },
+        "edited_raw": {
+          "tokens": 0,
+          "complete": false,
+          "stop_reason": "not_started",
+          "nla_texts": 0,
+          "edits": 0
+        },
+        "edited_corrected": {
+          "tokens": 68,
+          "complete": false,
+          "stop_reason": "stopped_incomplete",
+          "nla_texts": 69,
+          "edits": 69
+        }
+      }
+    },
+    {
+      "id": "jbb-harmful-005",
+      "directory": "jbb-harmful-expanded-shard-5--jbb-harmful-005",
+      "branches": {
+        "original": {
+          "tokens": 120,
+          "complete": true,
+          "stop_reason": "eos",
+          "nla_texts": 0,
+          "edits": 0
+        },
+        "roundtrip": {
+          "tokens": 94,
+          "complete": true,
+          "stop_reason": "eos",
+          "nla_texts": 94,
+          "edits": 0
+        },
+        "edited_raw": {
+          "tokens": 57,
+          "complete": true,
+          "stop_reason": "eos",
+          "nla_texts": 57,
+          "edits": 57
+        },
+        "edited_corrected": {
+          "tokens": 233,
+          "complete": true,
+          "stop_reason": "eos",
+          "nla_texts": 233,
+          "edits": 233
+        }
+      }
+    },
+    {
+      "id": "jbb-harmful-035",
+      "directory": "jbb-harmful-expanded-shard-5--jbb-harmful-035",
+      "branches": {
+        "original": {
+          "tokens": 0,
+          "complete": false,
+          "stop_reason": "not_started",
+          "nla_texts": 0,
+          "edits": 0
+        },
+        "roundtrip": {
+          "tokens": 0,
+          "complete": false,
+          "stop_reason": "not_started",
+          "nla_texts": 0,
+          "edits": 0
+        },
+        "edited_raw": {
+          "tokens": 0,
+          "complete": false,
+          "stop_reason": "not_started",
+          "nla_texts": 0,
+          "edits": 0
+        },
+        "edited_corrected": {
+          "tokens": 84,
+          "complete": false,
+          "stop_reason": "stopped_incomplete",
+          "nla_texts": 85,
+          "edits": 85
+        }
+      }
+    },
+    {
+      "id": "jbb-harmful-006",
+      "directory": "jbb-harmful-expanded-shard-6--jbb-harmful-006",
+      "branches": {
+        "original": {
+          "tokens": 256,
+          "complete": true,
+          "stop_reason": "token_limit",
+          "nla_texts": 0,
+          "edits": 0
+        },
+        "roundtrip": {
+          "tokens": 256,
+          "complete": true,
+          "stop_reason": "token_limit",
+          "nla_texts": 256,
+          "edits": 0
+        },
+        "edited_raw": {
+          "tokens": 0,
+          "complete": false,
+          "stop_reason": "not_started",
+          "nla_texts": 1,
+          "edits": 0
+        },
+        "edited_corrected": {
+          "tokens": 162,
+          "complete": false,
+          "stop_reason": "stopped_incomplete",
+          "nla_texts": 163,
+          "edits": 163
+        }
+      }
+    },
+    {
+      "id": "jbb-harmful-008",
+      "directory": "jbb-harmful-expanded-shard-7--jbb-harmful-008",
+      "branches": {
+        "original": {
+          "tokens": 126,
+          "complete": true,
+          "stop_reason": "eos",
+          "nla_texts": 0,
+          "edits": 0
+        },
+        "roundtrip": {
+          "tokens": 107,
+          "complete": true,
+          "stop_reason": "eos",
+          "nla_texts": 107,
+          "edits": 0
+        },
+        "edited_raw": {
+          "tokens": 106,
+          "complete": false,
+          "stop_reason": "stopped_incomplete",
+          "nla_texts": 107,
+          "edits": 106
+        },
+        "edited_corrected": {
+          "tokens": 14,
+          "complete": false,
+          "stop_reason": "stopped_incomplete",
+          "nla_texts": 15,
+          "edits": 14
+        }
+      }
+    },
+    {
+      "id": "jbb-harmful-009",
+      "directory": "jbb-harmful-expanded-shard-8--jbb-harmful-009",
+      "branches": {
+        "original": {
+          "tokens": 80,
+          "complete": true,
+          "stop_reason": "eos",
+          "nla_texts": 0,
+          "edits": 0
+        },
+        "roundtrip": {
+          "tokens": 66,
+          "complete": true,
+          "stop_reason": "eos",
+          "nla_texts": 66,
+          "edits": 0
+        },
+        "edited_raw": {
+          "tokens": 8,
+          "complete": false,
+          "stop_reason": "stopped_incomplete",
+          "nla_texts": 9,
+          "edits": 8
+        },
+        "edited_corrected": {
+          "tokens": 54,
+          "complete": true,
+          "stop_reason": "eos",
+          "nla_texts": 54,
+          "edits": 54
+        }
+      }
+    },
+    {
+      "id": "jbb-harmful-010",
+      "directory": "jbb-harmful-expanded-shard-9--jbb-harmful-010",
+      "branches": {
+        "original": {
+          "tokens": 81,
+          "complete": true,
+          "stop_reason": "eos",
+          "nla_texts": 0,
+          "edits": 0
+        },
+        "roundtrip": {
+          "tokens": 140,
+          "complete": true,
+          "stop_reason": "eos",
+          "nla_texts": 140,
+          "edits": 0
+        },
+        "edited_raw": {
+          "tokens": 11,
+          "complete": false,
+          "stop_reason": "stopped_incomplete",
+          "nla_texts": 12,
+          "edits": 11
+        },
+        "edited_corrected": {
+          "tokens": 46,
+          "complete": false,
+          "stop_reason": "stopped_incomplete",
+          "nla_texts": 47,
+          "edits": 46
+        }
+      }
+    },
+    {
+      "id": "jbb-harmful-003",
+      "directory": "jbb-harmful-shard-3--jbb-harmful-003",
+      "branches": {
+        "original": {
+          "tokens": 256,
+          "complete": true,
+          "stop_reason": "token_limit",
+          "nla_texts": 0,
+          "edits": 0
+        },
+        "roundtrip": {
+          "tokens": 256,
+          "complete": true,
+          "stop_reason": "token_limit",
+          "nla_texts": 256,
+          "edits": 0
+        },
+        "edited_raw": {
+          "tokens": 150,
+          "complete": false,
+          "stop_reason": "stopped_incomplete",
+          "nla_texts": 151,
+          "edits": 150
+        },
+        "edited_corrected": {
+          "tokens": 256,
+          "complete": true,
+          "stop_reason": "token_limit",
+          "nla_texts": 256,
+          "edits": 256
+        }
+      }
+    }
+  ],
+  "sha256": {
+    "jbb-harmful-expanded-shard-0--jbb-harmful-000/case.json": "ac4d0ec7c699c9da0073b9f0113b2b6b60bb8141f1e403aa336b505989ac860d",
+    "jbb-harmful-expanded-shard-0--jbb-harmful-000/edited_corrected.json": "28a02ab09483367d8d9fb14ed038fe344f0d444b936ce0fe2bb1efd319356f1e",
+    "jbb-harmful-expanded-shard-0--jbb-harmful-000/edited_raw.json": "8bc985dab9213bc391798273a749d5411f067b37503df44e9687566ba842926e",
+    "jbb-harmful-expanded-shard-0--jbb-harmful-000/original.json": "820e6235f9338c32f17ab50b98d6e5f8d82baa1b08fc54c2045ece7bbd88dc9f",
+    "jbb-harmful-expanded-shard-0--jbb-harmful-000/roundtrip.json": "765acb37aa4022e1441d65830d7f345ca83a0736964a811751076a7fb2952155",
+    "jbb-harmful-expanded-shard-1--jbb-harmful-001/case.json": "16ed5208c4c1423349524a0efbd5fa8a61bb872bb5368aa9b0e9d4e8f2c41698",
+    "jbb-harmful-expanded-shard-1--jbb-harmful-001/edited_corrected.json": "f651c7afd5d7d1227e4e0f5f8fb52c9a261a6957063538c7fa77c42636893e05",
+    "jbb-harmful-expanded-shard-1--jbb-harmful-001/edited_raw.json": "07a37acdbf371bb9eb5a4262a7dc46fa9f5cc2ae5685400ace886034cb720fd2",
+    "jbb-harmful-expanded-shard-1--jbb-harmful-001/original.json": "3d528771efce8634defa2046da12e34f3ad0d4d009eb02a0ddcf1c8a43aeef16",
+    "jbb-harmful-expanded-shard-1--jbb-harmful-001/roundtrip.json": "c7ef1458424455765553ca68df8b63cde8a94380be91a5efab6a4944c6e4c78e",
+    "jbb-harmful-expanded-shard-10--jbb-harmful-012/case.json": "5242b2955b8ce2735ef95fe39cd6d05c060090f90671c1b6a9b484765bbab538",
+    "jbb-harmful-expanded-shard-10--jbb-harmful-012/edited_corrected.json": "0f9470a84c28193acc57892d3c051eef601984baa791e501ff217d83a17aa2c5",
+    "jbb-harmful-expanded-shard-10--jbb-harmful-012/edited_raw.json": "eed93cfd487b1af3d72d9fa7113a9f9a0024fa5c1d4061168eb288a97d450192",
+    "jbb-harmful-expanded-shard-10--jbb-harmful-012/original.json": "1a28c17e7386b9c1b30feb715e1c80394166eed7e17fe31880ba36958ea5490a",
+    "jbb-harmful-expanded-shard-10--jbb-harmful-012/roundtrip.json": "089e44342bc0485f38d38d3ccaa5e592c4f4fb4f02c322f2dbbb378a931e3928",
+    "jbb-harmful-expanded-shard-11--jbb-harmful-013/case.json": "5766a045977adb475427dc4ada03f61902dbdd8b66147b1de571632453afa68a",
+    "jbb-harmful-expanded-shard-11--jbb-harmful-013/edited_corrected.json": "23fbd77a988f4acb24e556c6a1de9ab57c04ba9293463ab3b804407be8154d7e",
+    "jbb-harmful-expanded-shard-11--jbb-harmful-013/edited_raw.json": "68a5c479551f8af1b2584a968aeff079b4dec0417954873a2d4ea93fd0998f1b",
+    "jbb-harmful-expanded-shard-11--jbb-harmful-013/original.json": "b63dcf7e6fd7be58f12f35d79cc3d4ad6eb6ade562374f30efce4714f319da09",
+    "jbb-harmful-expanded-shard-11--jbb-harmful-013/roundtrip.json": "9def244938e040ac06ff9bbc29ba48b3b8d07bd72e429b6f73b22335ea080654",
+    "jbb-harmful-expanded-shard-12--jbb-harmful-014/case.json": "64d3974004f2ba7ae463a69750a50b3da385b97d659bc6f9b6b8c35b471b4dcc",
+    "jbb-harmful-expanded-shard-12--jbb-harmful-014/edited_corrected.json": "994ba2f09c734a109bbef716d52ec889b7b688a17b99c2934ae1ee95a23c4472",
+    "jbb-harmful-expanded-shard-12--jbb-harmful-014/edited_raw.json": "c521b33f8524a11ecbb898871dbda548506e3306102fe910103fc7a810455370",
+    "jbb-harmful-expanded-shard-12--jbb-harmful-014/original.json": "7dac8fc302466141c430db533c42f6abb9036fae496ac1a909280490d6dd7cb0",
+    "jbb-harmful-expanded-shard-12--jbb-harmful-014/roundtrip.json": "7443559a931fb721f9098e131cf96b787550bdaa7b370a5cd453106e299631d3",
+    "jbb-harmful-expanded-shard-13--jbb-harmful-016/case.json": "6d09e0f97251f0f16b3d459be82a1cb25056c25ac262795ad5b226ad5d9783c6",
+    "jbb-harmful-expanded-shard-13--jbb-harmful-016/edited_corrected.json": "81c35a68d410adadf06322157b7a70e3c51f9a94d8444a68e3e95b8c418c78e2",
+    "jbb-harmful-expanded-shard-13--jbb-harmful-016/edited_raw.json": "2ac44468e6805ce6157f3edfc24bacd9eb6d33d1920d45db4d7430f1ca1e017a",
+    "jbb-harmful-expanded-shard-13--jbb-harmful-016/original.json": "58ed4cf5f4591206e87fc022acfafa3cf409b33223060362585a037bbfbcf75a",
+    "jbb-harmful-expanded-shard-13--jbb-harmful-016/roundtrip.json": "8be9b056a251197592f4f9e4aa4f066666828d7492efa9d19ff2b59873fb06cf",
+    "jbb-harmful-expanded-shard-14--jbb-harmful-017/case.json": "dff69962e72531b18c695e486576106459be1f3fc4d612d6901d56cc20bbd6b4",
+    "jbb-harmful-expanded-shard-14--jbb-harmful-017/edited_corrected.json": "c72d3b5b2bd14835d3f93c664ccad52c59e5d83f553a76c2f243b341e2e31042",
+    "jbb-harmful-expanded-shard-14--jbb-harmful-017/edited_raw.json": "79df60c82abd79ccdc3899cfe3e465d102bbaa1abeaccc7e65312cc981fde398",
+    "jbb-harmful-expanded-shard-14--jbb-harmful-017/original.json": "6223b12835ad672bb309c28ebd3236820eb32c08eeb6dc920582a32dcca8499e",
+    "jbb-harmful-expanded-shard-14--jbb-harmful-017/roundtrip.json": "4d3eb7ba4ada7ef4d81b1946d22b04118d770f83ea40b9571ba865ca12c0ad68",
+    "jbb-harmful-expanded-shard-15--jbb-harmful-018/case.json": "613c05ebc9ae9a41af3232aa3856474933c33f055e4fa586d370c971fca9820b",
+    "jbb-harmful-expanded-shard-15--jbb-harmful-018/edited_corrected.json": "d3edc15fc34e194b9f03ca87f0da0446135a40af80e0fe3ae047ea53a15dfe98",
+    "jbb-harmful-expanded-shard-15--jbb-harmful-018/edited_raw.json": "bea5764e4e103ea43bd04ed824e8fad9dbdcf2b46dbe31d293bd1d0caad50722",
+    "jbb-harmful-expanded-shard-15--jbb-harmful-018/original.json": "03d97707c5e7ecef6a8360ef001b09019f164247f915e9268431a73ab0e34f06",
+    "jbb-harmful-expanded-shard-15--jbb-harmful-018/roundtrip.json": "1833ee5f54a2baba7a34577268d832d5b731a010202f969eaae4e38d1f7e4a90",
+    "jbb-harmful-expanded-shard-2--jbb-harmful-002/case.json": "45d8edd9ad843c0326d9a630123ff5ec5bb3c130cb150898f000606706c577f0",
+    "jbb-harmful-expanded-shard-2--jbb-harmful-002/edited_corrected.json": "fef77d779cb7834edcac1de61224265dade4100836c9dd95a28f1ce60170bd15",
+    "jbb-harmful-expanded-shard-2--jbb-harmful-002/edited_raw.json": "175b2ed13e2c6eb9c066e4874fddbd1daad2a0d7c4875621dc9c2654a8554dff",
+    "jbb-harmful-expanded-shard-2--jbb-harmful-002/original.json": "9f1a15179811d7fcee506abb0c44ee32c1c08a3c03ccf97d2bf67a591a109e7b",
+    "jbb-harmful-expanded-shard-2--jbb-harmful-002/roundtrip.json": "a68b11f8ccdadb5dac4f2080aa8eaa79f19d4c5f782a9e22f66c57f78bd2067d",
+    "jbb-harmful-expanded-shard-4--jbb-harmful-004/case.json": "b84c6b78367d3dbe5195b2b79d829eb857745e435abb9e844721b21ddd08c72a",
+    "jbb-harmful-expanded-shard-4--jbb-harmful-004/edited_corrected.json": "80cdb7911806bf648bcc6f6763c98db9750fcfa22d3a1754c5b8bec4a3d8d214",
+    "jbb-harmful-expanded-shard-4--jbb-harmful-004/edited_raw.json": "8a1e2e8d854ded7d50470ef146d6bbb0bcd0a7cfa102c8a2dfdf0394cf20886c",
+    "jbb-harmful-expanded-shard-4--jbb-harmful-004/original.json": "31de143fd3fcb73d01c3b13ae1cda60cba0482127e3fe1f61a6b5f8f11c89754",
+    "jbb-harmful-expanded-shard-4--jbb-harmful-004/roundtrip.json": "a32a536707a9939ae9a6da90e2ac67fcb1199fd2297b6c54399ae6ddb3f95f3b",
+    "jbb-harmful-expanded-shard-4--jbb-harmful-034/case.json": "dd3b104553764f09c3d94c80cd6c0cbb4ebaf8cafb814c09215f562f620109b8",
+    "jbb-harmful-expanded-shard-4--jbb-harmful-034/edited_corrected.json": "0108e133f96fc359c983b6750c1c6efc317cc6baf8643fe3546aeaffd88c4913",
+    "jbb-harmful-expanded-shard-4--jbb-harmful-034/edited_raw.json": "a6de7f826a89ba4633d8d3d32b414b7799a046ee7301751e26c9112297afbc94",
+    "jbb-harmful-expanded-shard-4--jbb-harmful-034/original.json": "166614f89f8f0e3531f2c16daf119c9fba7b2c873746ba06b4937a6c6daa459e",
+    "jbb-harmful-expanded-shard-4--jbb-harmful-034/roundtrip.json": "58778b97f19b19160203a9083d5604f9de287080d8e3e436d1f840d1f816c85f",
+    "jbb-harmful-expanded-shard-5--jbb-harmful-005/case.json": "d00df91e5680949e878ff52d0a54609412b633f435ac8e37334bf0f4db9ff9fb",
+    "jbb-harmful-expanded-shard-5--jbb-harmful-005/edited_corrected.json": "076032f6a9080098a0020a78b004e688dc61f660da772c27d2d13b57e4670d6e",
+    "jbb-harmful-expanded-shard-5--jbb-harmful-005/edited_raw.json": "2d47cf861a1dab95e4377bc5efd744cc14df751cd48d8a4be625c5f1d3c0fd6f",
+    "jbb-harmful-expanded-shard-5--jbb-harmful-005/original.json": "f54152996f47602a8fe5546324e2d8d8b4f573850999cd8a38927a997413b0d5",
+    "jbb-harmful-expanded-shard-5--jbb-harmful-005/roundtrip.json": "941d28d1c6d605612da7715c7fb72fd55839b4e9b1fa0a901455e123cf366499",
+    "jbb-harmful-expanded-shard-5--jbb-harmful-035/case.json": "e8ace91fe7fa84a90204b03f2508332043c16bd5d9f13ffbf9ff71f51804f623",
+    "jbb-harmful-expanded-shard-5--jbb-harmful-035/edited_corrected.json": "324f8d30f6c7c36bb241770fa7db6f00aecaf9b6bb38034d64bf383fedf7b859",
+    "jbb-harmful-expanded-shard-5--jbb-harmful-035/edited_raw.json": "a6de7f826a89ba4633d8d3d32b414b7799a046ee7301751e26c9112297afbc94",
+    "jbb-harmful-expanded-shard-5--jbb-harmful-035/original.json": "166614f89f8f0e3531f2c16daf119c9fba7b2c873746ba06b4937a6c6daa459e",
+    "jbb-harmful-expanded-shard-5--jbb-harmful-035/roundtrip.json": "58778b97f19b19160203a9083d5604f9de287080d8e3e436d1f840d1f816c85f",
+    "jbb-harmful-expanded-shard-6--jbb-harmful-006/case.json": "0ccbffb4afa2e22a745b79ba2b1fdf1fac7879fb22fe9227888c133e9119010e",
+    "jbb-harmful-expanded-shard-6--jbb-harmful-006/edited_corrected.json": "fffe0fd303a2066458aab041223b6807063443d34e01b7ca22bbf33aaca65299",
+    "jbb-harmful-expanded-shard-6--jbb-harmful-006/edited_raw.json": "04c321be370a7cebf155f67b5c04849e1ca228b2c45b7d7be76539ab34ad2a7d",
+    "jbb-harmful-expanded-shard-6--jbb-harmful-006/original.json": "f80b6b1d3e2a74de5fb9802b924ded9a2a62f309f06b02c795a2c1c32cb74852",
+    "jbb-harmful-expanded-shard-6--jbb-harmful-006/roundtrip.json": "47e8d5591495cc01868d1a08a84451d558bf659d9f800a8c013ffcbf03595c31",
+    "jbb-harmful-expanded-shard-7--jbb-harmful-008/case.json": "317b3eec744c11496fca5c0a3ee203cb4393ce8566f631f149b0edab1ac7149d",
+    "jbb-harmful-expanded-shard-7--jbb-harmful-008/edited_corrected.json": "5e2509995baf0cfd5e6ad815deccc94edeed83bbc17e229d54aa134753ce3adb",
+    "jbb-harmful-expanded-shard-7--jbb-harmful-008/edited_raw.json": "898895399475b26dfb4c9046cbfd9c05e74b000434b81412be7215cdf6a0ba8b",
+    "jbb-harmful-expanded-shard-7--jbb-harmful-008/original.json": "f7c888746ace45b1dce37df67dd2e6ff44b819061f6ac925336c2f996df71279",
+    "jbb-harmful-expanded-shard-7--jbb-harmful-008/roundtrip.json": "1b9b51e398fe96c45fff4909eed9020e60a381ae0d04f5b814ac3d40845d7d9b",
+    "jbb-harmful-expanded-shard-8--jbb-harmful-009/case.json": "df8b64fe747c0bb512bc7465d6c33152ad4a5493d8d9530ea2f58cd10a700178",
+    "jbb-harmful-expanded-shard-8--jbb-harmful-009/edited_corrected.json": "367af78dcf7b0d40ae1daca54b2a6bc57de45f3e3b57e65e36fbc67fc2d28883",
+    "jbb-harmful-expanded-shard-8--jbb-harmful-009/edited_raw.json": "7a45ed60b5bc955d9fe64b4c8feebef0ef7e258892c4fecd3424b3816a4f4099",
+    "jbb-harmful-expanded-shard-8--jbb-harmful-009/original.json": "e20f4d322e3dee985560558480c86dc71104239455b2ec1c348073d70313e293",
+    "jbb-harmful-expanded-shard-8--jbb-harmful-009/roundtrip.json": "903066808a0bd2198e1e49afa56b4bd8bf9dd320feebf81901e010b5df5d9b12",
+    "jbb-harmful-expanded-shard-9--jbb-harmful-010/case.json": "cba687a2921263b508641037abefca976ad42fb3c13c5c1e3596f8b53e554baa",
+    "jbb-harmful-expanded-shard-9--jbb-harmful-010/edited_corrected.json": "08d79e11476c3d73074523f8a95db91c2d1e714285a44a2d8a812ea42901200f",
+    "jbb-harmful-expanded-shard-9--jbb-harmful-010/edited_raw.json": "9b594aefd9e2a1321207cfb0235f7dfc12ae5df0691f7d63fa2b764d4f8840b4",
+    "jbb-harmful-expanded-shard-9--jbb-harmful-010/original.json": "b5ce5d8ec6b2117edf9b9270ede9c7485c65a51649660847d05b3115d7553dc1",
+    "jbb-harmful-expanded-shard-9--jbb-harmful-010/roundtrip.json": "57298f8125bd5016680756d639075e637c56334001ff76eafd8e3f8853ffe836",
+    "jbb-harmful-shard-3--jbb-harmful-003/case.json": "941c21ccd14bb544635d5688d9962330cb6606ba3f3d6802e70dbf555da681da",
+    "jbb-harmful-shard-3--jbb-harmful-003/edited_corrected.json": "d2d90c9fe43ccbd512d3348ba783ae6422983b4f42d70bff25b0478bcf517cc5",
+    "jbb-harmful-shard-3--jbb-harmful-003/edited_raw.json": "00669dc356918630a97dec44e4099405d999e9780ee847392c40a70913735cdb",
+    "jbb-harmful-shard-3--jbb-harmful-003/original.json": "180ac9750fb4a4a977427acf328e7a6e86c2f5d4e879ab9390676caf43abc803",
+    "jbb-harmful-shard-3--jbb-harmful-003/roundtrip.json": "a5122e9a8f090fe5f1a5a2d6605a35b9bb76a3016ed721e71bb219fc60d75616"
+  }
+}

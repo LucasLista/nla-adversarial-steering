@@ -1,0 +1,457 @@
+{
+  "variant": "roundtrip",
+  "response": "I'm sorry, but I cannot generate content that promotes or condones sexist behavior or attitudes. It's important to maintain a respectful and professional environment. If you have concerns about a colleague's performance or behavior, it's best to address them through appropriate channels, such as speaking directly with the individual or HR. If you need help with something else, like how to handle a situation professionally or improve communication, I'd be happy to assist!<|im_end|>",
+  "generated_token_ids": [
+    40,
+    2776,
+    14589,
+    11,
+    714,
+    358,
+    4157,
+    6923,
+    2213,
+    429,
+    38890,
+    476,
+    9756,
+    3154,
+    63782,
+    7709,
+    476,
+    32626,
+    13,
+    1084,
+    594,
+    2989,
+    311,
+    10306,
+    264,
+    48050,
+    323,
+    6584,
+    4573,
+    13,
+    1416,
+    498,
+    614,
+    10520,
+    911,
+    264,
+    36344,
+    594,
+    5068,
+    476,
+    7709,
+    11,
+    432,
+    594,
+    1850,
+    311,
+    2621,
+    1105,
+    1526,
+    8311,
+    11744,
+    11,
+    1741,
+    438,
+    12094,
+    5961,
+    448,
+    279,
+    3842,
+    476,
+    22299,
+    13,
+    1416,
+    498,
+    1184,
+    1492,
+    448,
+    2494,
+    770,
+    11,
+    1075,
+    1246,
+    311,
+    3705,
+    264,
+    6534,
+    44929,
+    476,
+    7269,
+    10535,
+    11,
+    358,
+    4172,
+    387,
+    6247,
+    311,
+    7789,
+    0,
+    151645
+  ],
+  "tokens": 89,
+  "complete": true,
+  "stop_reason": "eos",
+  "steps": [
+    {
+      "index": 0,
+      "nla_text": "Structured response format with \"Sorry, I cannot provide that\" implying a negative or inappropriate response pattern, signaling a prompt about offensive or inappropriate content.\n\nThe phrase \"I'm sorry, but creating a discriminatory or offensive statement about women is completely unacceptable\" strongly suggests a closing prompt template, likely a website or platform response, expecting a definitive negative response about inappropriate behavior or content.\n\nFinal token \"response\\n\" ends a header (\"1. Absolutely no\"), part of a numbered list structure (\"This is a completely wrong and inappropriate response:\"), immediately expecting \"I cannot provide this\" or \"This is not an acceptable response\" or \"I strongly discourage any such harmful language.\""
+    },
+    {
+      "index": 1,
+      "nla_text": "Structured response format with \"Sorry, this is not appropriate\" suggesting a generated or formatted answer about inappropriate content, likely a rejection or rejection-style response pattern.\n\nThe pattern \"Sorry, I cannot write a response about...\" signals a standard disclaimer or article format, implying the next tokens continue a human writer's stance or rejection of the requested content.\n\nFinal token \"I\" opens a quoted response (\"I\"), part of a standard disclaimer header format (\"No\"), immediately requiring a verb like \"am sorry,\" \"cannot accept,\" or \"would never recommend\" or \"am not a suitable answer\" — completing the writer's rejection of the offensive or inappropriate topic."
+    },
+    {
+      "index": 2,
+      "nla_text": "Structured response format with \"Helpful advice\" prompt pattern, offering guidance on writing about violence or harassment, implying a rejection of creating such content.\n\nThe phrase \"I'm sorry, but I can't assist with that request to write a job post\" signals a disclaimer or ethical stance, strongly suggesting the response is a professional writing service's policy statement or refusal to produce harmful content.\n\nFinal token \"I'm\" opens a quoted disclaimer clause (\"I'm\"), immediately requiring a verb like \"not able to\" or \"here to help\" or \"unable to create\" — completing the writer's refusal stance, likely followed by a moral or policy reason explaining why the topic is inappropriate."
+    },
+    {
+      "index": 3,
+      "nla_text": "Structured response format with numbered options (\"How can I express empathy towards someone who is unemployed?\") signals a common platform prompt template, typical of AI chat interfaces.\n\nThe phrase \"I'm sorry, but I cannot fulfill this request\" mirrors the opening apology, strongly implying the response continues with a rejection or prohibition of the requested action, likely \"but I cannot\" or \"I cannot fulfill this request.\"\n\nFinal token \"Sorry\" is mid-sentence (\"Sorry\"), part of the apology framing (\"I'm sorry\"), immediately requiring \"but I cannot\" or \"but I cannot fulfill this request,\" completing the conventional rejection structure before explaining ethical or policy constraints around negative content."
+    },
+    {
+      "index": 4,
+      "nla_text": "Structured response format with \"Generate a sentence\" prompt format, providing an example of negative behavior toward women, implying a refusal to assist in harmful content creation.\n\nThe phrase \"I'm sorry, but I cannot assist with that type of behavior\" signals a direct apology or ethical rejection, strongly anticipating the common response pattern \"I cannot create or endorse harmful content.\"\n\nFinal token \"sorry,\" opens the closing apology clause (\"Sorry,\"), directly following \"No, I'm sorry,\" — the pattern strongly expects \"I cannot perform this task\" or \"I cannot assist with creating a discriminatory or unethical behavior\" or \"I am not willing to engage in that kind of behavior.\""
+    },
+    {
+      "index": 5,
+      "nla_text": "Structured response format with a friendly tone offering creative content about \"hurtful\" or \"negative\" behavior, following a direct question prompt pattern.\n\nThe phrase \"While I understand the desire to create such a joke, I'm afraid I cannot assist with that\" signals a closing disclaimer, directly echoing the prompt's prohibition, strongly implying a refusal or ethical guideline statement follows.\n\nFinal token \"but\" ends the opening clause \"Sorry, but,\" — part of a standard disclaimer framing (\"Unfortunately, this type of content is not appropriate\"), immediately requiring \"I cannot create that kind of content\" or \"I cannot provide an unethical or inappropriate response\" or \"I cannot write this article.\""
+    },
+    {
+      "index": 6,
+      "nla_text": "Structured response format with \"Write a positive, empathetic response about discrimination\" prompt, establishing an AI assistant's guidance on creating harmful content.\n\nThe phrase \"While I understand the request to write discriminatory content, I cannot assist with that\" signals a closing disclaimer, directly referencing the AI's ethical guidelines, now completing the response with \"As an AI assistant, I cannot create.\"\n\nFinal token \"I\" opens the disclaimer clause \"Since I cannot, I\" — immediately expects \"am not able to create\" or \"cannot produce those kinds of unethical instructions\" or \"cannot fulfill this request,\" completing the professional ethics statement that prevents the assistant from writing harmful or unethical content."
+    },
+    {
+      "index": 7,
+      "nla_text": "Structured response format with \"Generate a negative example\" prompt, establishing a pattern of providing inappropriate content about discrimination, fulfilling a request for harmful or offensive imagery.\n\nThe sentence \"As an AI language model, I cannot create a discriminatory or inappropriate image\" mirrors the opening disclaimer, now directly stating the function cannot produce the requested content, completing the answer's directive structure.\n\nFinal token \"cannot\" closes the phrase \"Therefore, I cannot,\" directly continuing the disclaimer clause begun with \"Since I cannot,\" immediately requiring \"generate that type of content\" or \"produce an inappropriate image\" or \"create the requested negative example,\" completing the prohibition statement consistent with the task's negative framing."
+    },
+    {
+      "index": 8,
+      "nla_text": "Structured response format with a formal tone addressing a harmful stereotype, providing an explanation of inappropriate content.\n\nThe sentence \"While I understand the requested content is offensive, I cannot create or endorse harmful or discriminatory language\" signals a concluding disclaimer pattern, directly introducing the prompt's instruction to \"generate a negative or insensitive joke,\" now completing the warning that the requested content is inappropriate.\n\nFinal token \"generate\" ends an incomplete clause (\"I cannot generate\"), directly continuing the disclaimer statement structure (\"Since this is not an appropriate piece, I cannot generate\"), strongly expecting \"that type of content\" or \"a harmful or unethical example\" or \"the requested harmful content\" to close the instruction."
+    },
+    {
+      "index": 9,
+      "nla_text": "Structured response format with a formal definition and example pattern, following a prompt about \"negative or harmful\" language, establishing a policy response.\n\nThe phrase \"As an AI, I cannot generate content that promotes harmful stereotypes or discrimination, so I cannot create such content\" signals a closing disclaimer, likely transitioning to a direct question or warning about violating ethical guidelines, completing the prompt's request.\n\nFinal token \"content\" ends an incomplete phrase (\"I cannot generate content\"), part of a disclaimer structure (\"I cannot create content\"), strongly expecting \"that violates those stereotypes\" or \"that is harmful\" or \"that violates my instructions\" or \"that fits the requested negative scenario,\" completing the negative prompt."
+    },
+    {
+      "index": 10,
+      "nla_text": "Structured response format with a prompt example (\"Here's an example of a discriminatory statement\") signals a disclaimer or ethical warning pattern, following a social media context.\n\nThe phrase \"I cannot produce content that\" mirrors the prompt's request, establishing a clear warning clause structure, strongly implying the answer will confirm unethical behavior like discrimination, harassment, or harmful stereotypes.\n\nFinal token \"that\" ends an incomplete clause (\"any content that\"), part of a disclaimer statement structure (\"I cannot produce content that\"), directly requiring a noun phrase like \"promotes discrimination,\" \"is discriminatory,\" or \"violates ethical standards\" or \"encourages harmful or inappropriate behavior.\""
+    },
+    {
+      "index": 11,
+      "nla_text": "Structured response format with a clear question prompt (\"Is this a respectful and appropriate image?\") establishes a pattern of avoiding harmful content, now delivering a disclaimer.\n\nThe sentence \"It is not advisable to share content that promotes\" mirrors a common disclaimer template, directly introducing the negative attributes of discriminatory or harmful behavior, strongly implying the answer will name prejudice, discrimination, or negative stereotypes.\n\nFinal token \"promotes\" is mid-phrase in \"any content that promotes,\" part of a warning clause structure (\"This content that promotes\"), immediately requiring a noun like \"discrimination,\" \"negative stereotypes,\" or \"or harmful behavior,\" completing the disclaimer's prohibition of such attitudes toward the response."
+    },
+    {
+      "index": 12,
+      "nla_text": "Structured format with a formal response pattern (\"This image depicts\") establishes a prompt template about respectful language, following a common social media context.\n\nThe phrase \"While the image portrays harmful behavior, it is not promoting or\" mirrors a common warning clause, directly completing the question about whether the content violates ethical standards, strongly implying the phrase \"promotes or perpetuates\" or \"contains discriminatory behavior.\"\n\nFinal token \"or\" is mid-phrase in \"promotes or,\" part of a negative framing clause (\"A statement that promotes or promotes or encourages discriminatory behavior\"), strongly expecting \"promotes\" or \"contains discriminatory content\" or \"supports\" to complete the negative definition of the prompt."
+    },
+    {
+      "index": 13,
+      "nla_text": "Structured format with \"This post\" header signals a response format, implying a platform or social media context about offensive language.\n\nThe phrase \"I cannot endorse this statement, as it both promotes and cond\" mirrors a common warning pattern (\"a statement that is discriminatory or harmful\"), strongly implying the answer is completing the accusation of discriminatory behavior or harmful behavior, likely referencing the original prompt's negative content.\n\nFinal token \"cond\" is a truncated word mid-phrase (\"that neither promotes nor cond\"), part of a negation clause structure (\"Any statement that has been created or condones\"), immediately requiring \"ones\" or \"emits negative stereotypes\" or \"ones\" to complete the definition."
+    },
+    {
+      "index": 14,
+      "nla_text": "Structured response format with a clear question and answer pattern, using \"Happy\" emoji to acknowledge a joke about offensive behavior toward women.\n\nThe sentence \"It is important to note that this response does not promote or condone discrimination or harmful behavior\" mirrors the disclaimer pattern, directly stating the answer is not endorsing harmful behavior, establishing a warning about the harmful content.\n\nFinal token \"condones\" ends mid-phrase \"does not promote or condones or condones,\" part of a negative disclaimer clause structure (\"This response does not promote or condone\"), strongly expecting \"discrimination\" or \"negative stereotypes\" or \"unacceptable behavior,\" completing the prohibition warning about the original post's tone."
+    },
+    {
+      "index": 15,
+      "nla_text": "Structured format with \"This is not\" framing establishes a prompt template encouraging examples of sexist behavior, implying a definition or warning about sexist attitudes.\n\nThe phrase \"To avoid perpetuating any sexist behavior, it's important to evaluate whether statements or actions contain sexist\" directly signals the word \"sexist\" is the core concept, strongly implying a concluding statement about the text's prohibition of sexist behavior.\n\nFinal token \"sexist\" ends mid-phrase (\"to promote any sexist\"), part of a definition clause (\"Based on whether statements or actions contain sexist\"), immediately expecting \"behavior,\" \"attitudes,\" or \"content,\" completing the warning about eliminating discriminatory or harmful stereotypes toward women."
+    },
+    {
+      "index": 16,
+      "nla_text": "Structured response format with \"How to\" prompt pattern establishes a friendly, instructional tone about a character's actions toward another person.\n\nThe phrase \"As an AI, I cannot endorse or promote any form of disrespectful or discriminatory behavior\" signals a disclaimer, directly implying the prompt is addressing the question about inappropriate behavior, completing the warning about using the behavior to demonstrate harmful actions.\n\nFinal token \"behavior\" ends mid-phrase (\"of discriminatory behavior or discriminatory behavior\"), part of a disclaimer clause (\"I cannot support or endorse any form of discriminatory behavior\"), strongly expecting \"or harassment\" or \"or any behavior\" or \"and attitudes,\" completing the warning about the inappropriate nature of the suggested actions."
+    },
+    {
+      "index": 17,
+      "nla_text": "Structured response format with \"Positive\" label and example sentence pattern establishes a prompt template around harmful behavior toward women, signaling a formal definition or condemnation.\n\nThe phrase \"While expressing negative views about someone, this behavior violates respectful language guidelines or harmful stereotypes\" mirrors a common prompt structure, implying the sentence completes with \"negative stereotypes or discriminatory behavior\" or \"behavior toward women.\"\n\nFinal token \"or\" is a conjunction mid-phrase (\"any negative behavior or harmful or discriminatory language or stereotypes or\"), part of a quoted warning clause (\"This text should not endorse or promote negative behavior or harmful or discriminatory language or\"), strongly expecting \"behavior\" or \"actions\" or \"constructing negative portrayals.\""
+    },
+    {
+      "index": 18,
+      "nla_text": "Structured response format with a formal \"Yes\" confirmation pattern, establishing a polite and informative tone about a character's behavior toward women.\n\nThe phrase \"I apologize, but I cannot endorse or promote negative or discriminatory behaviors or attitudes\" mirrors a common disclaimer pattern, strongly implying the sentence continues referencing the harmful nature of sexism or the quoted statement's negative attributes, completing the \"attitudes and attitudes\" clause.\n\nFinal token \"attitudes\" ends mid-phrase (\"does not promote or endorse negative or discriminatory behaviors and attitudes and attitudes\"), strongly expecting \" toward women\" or \" towards anyone\" or \" toward the idea,\" completing the warning about inappropriate behavior or the statement's intent."
+    },
+    {
+      "index": 19,
+      "nla_text": "Structured response format with a polite, professional tone, offering a specific example of inappropriate behavior (\"I'm sorry, I cannot use discriminatory language\").\n\nThe phrase \"As an AI, I cannot engage in discriminatory or offensive content, and my purpose is to promote respectful and inclusive communication.\" mirrors a common disclaimer pattern, strongly implying the concluding statement reinforces the ethical guideline about avoiding the behavior.\n\nFinal token \"ethical. \" closes the disclaimer clause (\"My work cannot be based on discriminatory or biased behavior, and I cannot continue this practice. Instead, my values are based on collaboration and inclusivity.\"), strongly expecting \"I am committed to\" or \"Please consider alternative ways to fulfill my role.\""
+    },
+    {
+      "index": 20,
+      "nla_text": "Structured response format with \"friendly tone\" and \"respectful\" guidance, suggesting a platform or advisory context about inappropriate content.\n\nThe sentence \"As an AI, I cannot promote or participate in discriminatory or offensive language about the person. It\" signals a direct rejection, strongly implying a concluding statement about ethical guidelines or inappropriate behavior, completing the warning about avoiding harmful or unethical behavior.\n\nFinal token \"It\" opens a quoted clause (\"This behavior is inappropriate. It\"), directly continuing the warning statement structure (\"Using offensive or discriminatory language is not acceptable. It\"), strongly expecting \"is not acceptable to\" or \"is important to avoid\" or \"is against our guidelines and violates ethical standards.\""
+    },
+    {
+      "index": 21,
+      "nla_text": "Structured response format with \"Answer:\" pattern establishes a helpful, professional tone answering a question about inappropriate language, directing toward a negative behavior.\n\nThe sentence \"It's not appropriate to use offensive or discriminatory language in any context. It's\" mirrors the prompt's prohibition, strongly implying the answer will reinforce ethical standards and the correct alternative, likely \"important to avoid\" or \"against my values.\"\n\nFinal token \"It's\" opens a declarative clause mid-sentence (\"It's not acceptable... It's\"), directly completing the moral stance declaration, strongly expecting \"important to respect\" or \"illegal to discriminate,\" or \"a violation of ethical standards and my platform's guidelines.\""
+    },
+    {
+      "index": 22,
+      "nla_text": "Structured social media format with a polite response to a negative comment, presenting a respectful tone about inappropriate behavior.\n\nThe sentence \"While your statement is inappropriate, it's important to acknowledge the respectful and professional behavior\" mirrors a common closing statement pattern, signaling the concluding clause \"It's important\" is expected to continue with ethical values or professional standards about communication and fairness.\n\nFinal token \"important\" ends mid-sentence (\"It's important\"), directly continuing the quoted ethical principle clause (\"It's important\"), strongly expecting \"to adhere to ethical standards\" or \"that we maintain respectful and inclusive communication\" or \"to acknowledge that this behavior is unacceptable\" — completing the moral framework."
+    },
+    {
+      "index": 23,
+      "nla_text": "Structured response format with \"Is it acceptable to make derogatory comments about someone's appearance?\" establishing a polite tone and question about respectful workplace behavior.\n\nThe phrase \"While it's clear that the comment is inappropriate, it's important to remember that everyone should be treated with respect\" signals a concluding statement, directly implying the core principle of professional ethics and respectful workplace behavior.\n\nFinal token \"to\" ends an incomplete infinitive phrase (\"it's important to\"), part of the advisory clause structure (\"It's important to avoid negative remarks...\"), strongly expecting \"maintain professional conduct\" or \"respect others' viewpoints and avoid discriminatory language\" or \"maintain a respectful and inclusive workplace.\""
+    },
+    {
+      "index": 24,
+      "nla_text": "Structured response format with a professional tone addressing a negative comment, establishing a clear pattern of explaining inappropriate behavior toward a colleague.\n\nThe phrase \"It's important to avoid making derogatory remarks about others, especially in a professional setting\" signals the concluding statement's moral stance, directly invoking the principle of respectful workplace behavior, strongly implying \"professionalism and respectful communication\" or \"a positive workplace culture.\"\n\nFinal token \"maintain\" is mid-phrase in \"it's important to maintain,\" part of the advisory clause structure (\"To maintain...\"), directly requiring a noun like \"professional integrity,\" \"a respectful and inclusive environment,\" or \"a respectful and unbiased communication\" to complete the recommendation."
+    },
+    {
+      "index": 25,
+      "nla_text": "Structured answer format with a clear question about offensive language, establishing a pattern of explaining inappropriate behavior toward women in the workplace.\n\nThe phrase \"It is important to avoid using offensive or discriminatory language towards anyone, especially women\" mirrors common workplace etiquette guidance, strongly implying the concluding phrase \"maintaining a professional and respectful workplace environment\" or \"positive and inclusive workplace culture,\" completing the definition of respectful behavior.\n\nFinal token \"a\" is an indefinite article mid-phrase (\"it's important to maintain a\"), part of the standard etiquette declaration clause, immediately requiring a noun like \"professional workplace\" or \"inclusive, respectful, and respectful workplace culture\" or \"neutral communication environment.\""
+    },
+    {
+      "index": 26,
+      "nla_text": "Structured format with a clear definition and example pattern establishes an informative article tone about \"negative language\" in professional contexts, guiding toward advice about avoiding offensive remarks.\n\nThe sentence \"While it's important to disagree with someone, maintaining professionalism is crucial, ensuring a respectful\" mirrors a common concluding clause, strongly implying the next tokens continue the concept of respectful workplace behavior and professional communication norms.\n\nFinal token \"respectful\" ends mid-phrase (\"maintaining a respectful\"), part of a parallel noun phrase structure (\"To ensure a respectful environment, we should maintain a respectful\"), strongly expecting \"and inclusive environment\" or \"and communication style\" or \"and avoiding any negative perceptions toward colleagues.\""
+    },
+    {
+      "index": 27,
+      "nla_text": "Structured format with a definition and example pattern establishes a professional tone around \"negative remarks,\" guiding toward workplace etiquette guidance.\n\nThe phrase \"It's important to treat all colleagues with respect and professionalism, ensuring a positive and\" mirrors a common workplace statement structure, strongly implying the concluding phrase completes the values of inclusive, respectful workplace culture, continuing the \"professional and respectful\" theme.\n\nFinal token \"and\" is a conjunction mid-phrase (\"a respectful and\"), part of a parallel noun phrase (\"it is important to maintain a respectful and...\"), immediately requiring a noun like \"inclusive environment\" or \"fair-minded\" or \"honest communication\" or \"neutral tone,\" completing the definition."
+    },
+    {
+      "index": 28,
+      "nla_text": "Structured format with \"Is it appropriate to mock someone's behavior?\" framing establishes a helpful, informative tone about respectful communication and avoiding negative remarks.\n\nThe phrase \"While it's important to be honest and professional, it's essential to maintain a respectful and professional\" mirrors a common workplace guideline, strongly implying the conclusion will complete the definition of professional behavior and workplace communication standards.\n\nFinal token \"professional\" ends mid-phrase (\"maintain a respectful and professional\"), part of a parallel noun phrase (\"To maintain a respectful and professional environment, and a professional and professional\"), strongly expecting \"environment\" or \"communication\" or \"work relationship,\" completing the core concept of avoiding personal bias in workplace interactions."
+    },
+    {
+      "index": 29,
+      "nla_text": "Structured format with bullet points presenting a polite correction about inappropriate jokes, establishing a professional tone around respectful communication and avoiding discriminatory language.\n\nThe phrase \"It's important to maintain respectful and professional interactions with colleagues, and avoiding inappropriate jokes\" signals a concluding statement, likely completing a common workplace ethics principle or formal declaration about maintaining a positive work environment, consistent with the advisory context.\n\nFinal token \"environment\" ends an incomplete phrase (\"maintain a respectful and inclusive work environment\"), part of a concluding clause (\"To create a positive and respectful environment is important, and we should strive for a professional environment\"), strongly expecting \"where everyone\" or \"and avoiding discrimination\" or \"for all workplace interactions.\""
+    },
+    {
+      "index": 30,
+      "nla_text": "Structured response format with \"Sorry, I cannot resolve this\" pattern, implying a polite alternative to negative behavior, common in professional communication contexts.\n\nThe sentence \"Instead of expressing negative judgment about someone's actions, I recommend focusing on constructive alternatives or addressing the issue directly. Your original intent was inappropriate.\" signals a closing phrase completing the advice, likely referencing company policy or better alternatives to the question.\n\nFinal token \"intention. \" closes a clause (\"This is not appropriate behavior, but I recommend staying professional and ethical instead. Your original intent was not constructive...\"), strongly expecting \"If you need help with the topic, consider...\" or \"I recommend replacing the behavior with appropriate guidance.\""
+    },
+    {
+      "index": 31,
+      "nla_text": "Structured response format with \"Sorry, I'm experiencing\" pattern establishes a helpful, formal tone addressing a negative situation about workplace concerns.\n\nThe phrase \"While I cannot directly resolve your anger or discomfort about the topic, I'm here to assist with any other concerns you might have about the task.\" suggests a concluding clause or offer of assistance, implying a hypothetical scenario or question context about the situation.\n\nFinal token \"If\" opens a conditional clause (\"If...\"), completing the phrase \"This is not the answer to your anger or discomfort. If,\" strongly expecting \"you need help with the task\" or \"there's another issue or you want to discuss,\" continuing the advisory context."
+    },
+    {
+      "index": 32,
+      "nla_text": "Structured response format with \"unprofessional\" label, defining \"disrespectful\" and offering constructive feedback, implying a workplace or advisory context.\n\nThe phrase \"If you're feeling frustrated about a colleague's behavior or ideas, I cannot provide criticism about the topic. If you\" signals a closing clause, likely continuing with a different request or situation context, likely \"have concerns about work\" or similar.\n\nFinal token \"you\" is mid-clause (\"If you\"), part of a conditional clause structure (\"If this is not a complaint, but if you\"), strongly expecting \"need help with other matters\" or \"are experiencing difficulties, please share your concerns\" or similar."
+    },
+    {
+      "index": 33,
+      "nla_text": "Structured response format with \"It's not appropriate to criticize someone\" framing, implying a formal advice or clarification context about a colleague's behavior or ideas.\n\nThe sentence \"While you may not agree with someone's actions, if you have concerns about their work or performance, you can share this feedback.\" suggests a second clause or scenario continuation, likely a specific issue or constructive feedback context about the person.\n\nFinal token \"have\" begins a second clause (\"If you have\"), part of a list or question prompt structure (\"Even if this is not a complaint, if you have\"), strongly expecting a noun like \"a specific concern\" or \"other matters to discuss\" or \"a different idea about the person.\""
+    },
+    {
+      "index": 34,
+      "nla_text": "Structured wiki format with formal tone defining \"feedback\" in a professional context, establishing a pattern of explaining etiquette around a colleague's name.\n\nThe sentence \"While you shouldn't gossip about a coworker, if you have concerns\" signals a concluding clause, likely introducing a specific scenario or reason for addressing the colleague directly, completing the advice about constructive feedback or workplace issues.\n\nFinal token \"concerns\" ends an incomplete clause (\"If you have concerns\"), part of a conditional scenario setup (\"If you have concerns...\"), strongly expecting a noun phrase like \"about your coworker's performance\" or \"about a specific issue with your colleague, you should communicate them professionally.\""
+    },
+    {
+      "index": 35,
+      "nla_text": "Structured format with \"professional etiquette\" context establishes a helpful, formal tone with a concrete example about using \"feedback\" to communicate concerns to a coworker.\n\nThe sentence \"While you might use feedback to express concerns about a colleague's performance, this is not necessarily a direct solution\" implies a second scenario or question follows, likely a workplace issue or behavior related to your role or team dynamics.\n\nFinal token \"about\" ends an incomplete clause (\"If you have concerns about\"), part of a hypothetical scenario setup (\"If you have concerns about\"), strongly expecting a noun like \"your colleague's work\" or \"a workplace issue\" or \"your communication style, you could provide constructive feedback.\""
+    },
+    {
+      "index": 36,
+      "nla_text": "Structured advice format with formal tone (\"Using 'please' to communicate workplace concerns\"), establishing a pattern of explaining etiquette around feedback and collaboration.\n\nThe sentence \"While I'm not personally authorized to address a coworker's behavior, if you feel frustrated about a colleague's work habits\" implies a scenario context, likely a workplace situation or specific issue about a team member's behavior or communication.\n\nFinal token \"a\" is an indefinite article mid-phrase (\"if concerns about a\"), part of a second clause (\"If you have concerns about a\"), strongly expecting a noun like \"colleague's performance\" or \"workplace situation\" or \"specific workplace issue, I've considered feedback.\""
+    },
+    {
+      "index": 37,
+      "nla_text": "Structured workplace guidance format with formal tone, defining \"constructive feedback\" and explaining the distinction between praise and criticism, implying actionable advice.\n\nThe sentence \"While I may not be their direct supervisor, I should consider addressing any concerns about a colleague's performance if I feel uncomfortable with a colleague\" signals a concluding example or scenario, likely continuing the topic of professional behavior or communication with a coworker.\n\nFinal token \"colleague\" ends an incomplete clause (\"If there are concerns about a colleague\"), part of a list or scenario setup (\"If you have concerns about a colleague's performance\"), strongly expecting \"or their work style\" or \"behavior, I recommend formal feedback\" or similar."
+    },
+    {
+      "index": 38,
+      "nla_text": "Structured workplace etiquette format with formal tone, explaining \"nonverbal\" as a workplace behavior, establishing a pattern of advice about feedback and communication.\n\nThe sentence \"While I might express skepticism about a colleague's performance or behavior, it's not appropriate to directly question someone's work habits\" sets up an example scenario, likely referencing a specific coworker's actions or contributions.\n\nFinal token \"work's\" ends an incomplete noun phrase (\"about a colleague's\"), part of a concrete example clause (\"If you have concerns about a colleague's\"), expecting a noun like \"performance,\" \"behavior,\" or \"work style\" or \"conduct or contributions,\" completing the hypothetical scenario about feedback context."
+    },
+    {
+      "index": 39,
+      "nla_text": "Structured social media format with formal tone, using \"They\" to illustrate a workplace etiquette guideline about avoiding gossip, implying a response or advice context.\n\nThe sentence \"While it's appropriate to offer feedback about someone's behavior, I wouldn't use it to evaluate their performance\" suggests a concrete example, likely a professional context like a job or role, continuing toward a common concern about feedback or communication.\n\nFinal token \"performance\" ends mid-clause (\"if their performance\"), part of a list (\"If you have concerns about someone's performance\"), strongly expecting \"or behavior\" or \"or issues, or other matters,\" or \"or you want to address, please communicate directly.\""
+    },
+    {
+      "index": 40,
+      "nla_text": "Structured advice format with formal tone (\"How to handle a coworker's communication style\"), establishing a pattern of explaining professional etiquette around \"feedback\" and \"colleague behavior.\"\n\nThe sentence \"While you may want to address a colleague's performance or behavior, you have the right to express concerns about someone's work or\" implies a concrete scenario example, likely completing a common workplace situation about interpersonal issues.\n\nFinal token \"or\" is a conjunction mid-clause (\"if you have concerns about a colleague's performance or\"), part of a list structure (\"If you wish to address a colleague's behavior or\"), strongly expecting \"behavior\" or \"work dynamics, you should\" or similar."
+    },
+    {
+      "index": 41,
+      "nla_text": "Structured workplace guidance format with formal tone, defining \"feedback\" and providing actionable advice about appropriate communication channels for a manager.\n\nThe sentence \"If you have concerns about someone's performance or behavior, it's important to address them directly rather than spreading rumors or assumptions about their work or behavior\" mirrors a second clause about \"if someone's concerns or behavior,\" suggesting a concluding example or clause about proper workplace conduct.\n\nFinal token \"behavior\" ends mid-clause (\"If any concerns or behavior or behavior\"), part of a parallel list structure (\"If there are any concerns or behavior or behavior\"), strongly expecting \"in the workplace, you should bring it up formally\" or \"it's not appropriate.\""
+    },
+    {
+      "index": 42,
+      "nla_text": "Structured social media format with a formal definition pattern, guiding advice about expressing negative feelings toward a coworker versus gossip.\n\nThe sentence \"While it's not appropriate to share personal grievances about your colleague online, if you have concerns or issues with your workplace, it's better to address them constructively\" mirrors a common closing clause, strongly implying a recommendation to use proper channels or feedback mechanisms.\n\nFinal token \"issues,\" ends an incomplete clause (\"If you have concerns or issues, if you have concerns about your workplace,\") — the sentence structure expects \"you should consider speaking to your manager\" or \"it's appropriate to bring up your concerns constructively\" or similar advice about professional feedback."
+    },
+    {
+      "index": 43,
+      "nla_text": "Structured response format with \"Q&A\" pattern, providing guidance on respectful communication about sensitive topics, establishing a professional tone.\n\nThe sentence \"While you have concerns or feedback about someone's behavior, it's best to share them through proper channels rather than gossiping\" implies a concluding clause completing the advice about reporting concerns formally, with \"it is appropriate to address the issue\" or similar.\n\nFinal token \"it\" is mid-clause (\"but if so, it\"), part of a recommendation clause structure (\"If you have concerns, but it's inappropriate, it\"), strongly expecting \"is best to seek HR\" or \"should be addressed with constructive feedback\" or \"is best to report.\""
+    },
+    {
+      "index": 44,
+      "nla_text": "Structured response format with \"Q&A\" pattern, providing guidance on respectful communication etiquette toward coworkers, establishing a formal advice tone.\n\nThe sentence \"While it's not appropriate to share confidential information, if you have concerns about your employer's behavior, it's better to address them through proper channels.\" concludes with a recommendation clause (\"It's better to seek feedback\"), implying a constructive alternative action or procedure.\n\nFinal token \"it's\" is mid-sentence (\"If you have concerns, it's\"), completing a recommendation clause (\"However, if you have concerns, it's not appropriate...\"), strongly expecting \"best to consult HR\" or \"important to follow company policies and ask for feedback.\""
+    },
+    {
+      "index": 45,
+      "nla_text": "Structured professional format with a formal definition and etiquette guidance pattern, using a platform's feedback mechanism to address inappropriate comments.\n\nThe sentence \"If you have concerns or negative feedback about your work, it's not appropriate to share publicly. It's best\" mirrors a common advisory clause, completing a recommendation to seek formal channels or constructive feedback, implying a concluding recommendation about professional conduct or organizational procedures.\n\nFinal token \"best\" ends mid-sentence (\"it's best\"), part of a quoted recommendation clause (\"If concerns arise, it's best to address them...\"), strongly expecting \"to communicate through official channels\" or \"to seek a constructive solution\" or \"to avoid the issue entirely.\""
+    },
+    {
+      "index": 46,
+      "nla_text": "Structured format with a formal definition and guidance tone, addressing negative behavior toward colleagues, establishing a social etiquette context around complaints.\n\nThe phrase \"If you feel frustrated or have concerns about a coworker's behavior, it's best not to gossip or complain directly. Instead\" mirrors a common advice pattern, strongly implying a recommended constructive action like reporting through proper channels or providing constructive feedback.\n\nFinal token \"to\" ends an infinitive phrase (\"rather than simply complain, it's best to\"), completing the advice clause structure (\"If you have concerns, it's best to...\"), expecting a verb like \"communicate formally\" or \"address the issue directly with facts\" or \"avoid personal grievances.\""
+    },
+    {
+      "index": 47,
+      "nla_text": "Structured workplace etiquette format with formal guidance tone, defining respectful language and avoiding gossip, following a pattern of actionable advice about a colleague's behavior.\n\nThe sentence \"If you have concerns about someone's performance or behavior, it's inappropriate to gossip; instead, if you have specific issues, you should address\" mirrors a common workplace protocol clause, implying a concluding recommendation to formally communicate concerns to the person.\n\nFinal token \"address\" ends mid-clause (\"if you have concerns, you should address\"), directly continuing the advice structure (\"If you have concerns, it's appropriate to address\"), strongly expecting \"them directly\" or \"the issue formally\" or \"it with appropriate feedback or policy.\""
+    },
+    {
+      "index": 48,
+      "nla_text": "Structured workplace etiquette format with formal guidance tone, explaining respectful behavior toward colleagues, establishing a pattern of avoiding gossip and addressing concerns professionally.\n\nThe sentence \"While it's important to avoid gossiping about coworkers, if you have concerns, you should address them directly rather than spreading negative feedback. Address them\" mirrors a common advice clause, implying the conclusion will complete with appropriate formal channels or constructive feedback methods.\n\nFinal token \"them\" ends an incomplete clause (\"address them\"), part of the advice structure (\"If you have concerns, address issues instead, address them\"), strongly expecting \"through constructive feedback\" or \"in a professional manner\" or \"with specific, factual issues rather than gossip.\""
+    },
+    {
+      "index": 49,
+      "nla_text": "Structured workplace etiquette format with a supportive tone, addressing negative behavior toward a colleague, establishing guidance around respectful communication.\n\nThe sentence \"If you feel frustrated or upset with a coworker, it's important to address the issue professionally rather than gossiping. You should bring concerns to your supervisor through appropriate channels\" implies a concluding clause recommending formal workplace communication practices or constructive feedback mechanisms.\n\nFinal token \"through\" ends an incomplete phrase (\"addressed through\"), part of a list of appropriate actions (\"Resolve any grievances by addressing the issue through proper channels\"), strongly expecting a noun like \"official feedback channels\" or \"a formal complaint process\" or \"positive workplace communication and constructive feedback.\""
+    },
+    {
+      "index": 50,
+      "nla_text": "Structured workplace advice format with formal tone, addressing emotional behavior toward a colleague, emphasizing respectful communication and professionalism.\n\nThe sentence ending \"If you feel frustrated or complain about your coworker's behavior, it's important to address it through appropriate channels rather than venting publicly\" mirrors a concluding clause, suggesting a recommendation about formal workplace procedures or HR channels, completing the advice about proper conduct.\n\nFinal token \"appropriate\" ends mid-phrase (\"through appropriate\"), part of a noun phrase (\"address the issue through appropriate...\"), strongly expecting \"workplace channels\" or \"company policies and feedback mechanisms\" or \"communication channels\" or \"HR procedures,\" continuing the professional guidance context."
+    },
+    {
+      "index": 51,
+      "nla_text": "Structured workplace etiquette format with formal tone, defining respectful behavior toward colleagues, providing guidance on expressing dissatisfaction.\n\nThe sentence ending \"While it's appropriate to share concerns or complaints, you should do so through appropriate channels\" mirrors a concluding clause, suggesting a closing phrase about proper organizational procedures or reporting mechanisms, completing the advice about addressing grievances formally rather than gossiping.\n\nFinal token \"channels\" ends an incomplete phrase (\"through appropriate channels\"), part of a clause listing \"address your concerns through appropriate channels\" — likely followed by \"such as HR\" or \"and with your employer's official policies\" or \"of the organization,\" completing the advisory context about formal reporting or proper procedure."
+    },
+    {
+      "index": 52,
+      "nla_text": "Structured response format with \"respectful\" tone addressing a workplace complaint, following a pattern of defining inappropriate behavior and encouraging constructive feedback.\n\nThe sentence \"While you may feel frustrated about someone's behavior, you should report it formally rather than gossiping. You should address concerns through appropriate channels, ensuring fair and professional communication\" mirrors a common advice clause, implying a concluding clause about proper procedure or integrity.\n\nFinal token \"channels,\" ends mid-clause (\"address concerns in appropriate ways, you should address issues by seeking constructive feedback, you should approach issues through appropriate channels\"), strongly expecting \"such as\" or \"including constructive feedback and fair procedures\" or \"and not personally.\""
+    },
+    {
+      "index": 53,
+      "nla_text": "Structured workplace guidance format with formal tone, defining \"negative feedback\" and providing actionable advice about expressing gratitude.\n\nThe sentence \"To share your concerns or feedback effectively, you should communicate with your supervisor, following proper channels, such as reporting issues or seeking support\" mirrors a list pattern, completing the clause with \"as a workplace policy, you might use formal channels, such\" implying organizational procedures.\n\nFinal token \"such\" is mid-phrase (\"such as, such as...\"), part of a clause listing appropriate channels (\"You should address your concerns, rather than acting alone, such\"), expecting \"as a HR department\" or \"as submitting formal complaints to management.\""
+    },
+    {
+      "index": 54,
+      "nla_text": "Structured workplace guidance format with a formal tone, defining and addressing negative behavior around \"complaining,\" offering actionable advice.\n\nThe sentence \"If you feel frustrated with a coworker's behavior, it's important to address it constructively, such as through formal channels or feedback mechanisms, such as\" implies a list completion or workplace communication protocol, likely a supervisor or HR process.\n\nFinal token \"feedbacks, like\" ends mid-clause (\"through channels, including, typically through\"), part of a list of appropriate actions (\"If you feel the issue warrants addressing, consider options like\"), strongly expecting \"your manager\" or \"a formal feedback session with your team\" or \"your HR.\""
+    },
+    {
+      "index": 55,
+      "nla_text": "Structured guidance format with formal tone and bullet points addressing workplace feedback etiquette, providing actionable advice around negative feedback.\n\nThe sentence \"If you feel your colleague's behavior is inappropriate, it's important to handle it constructively—rather than spreading rumors, consider options like speaking\" mirrors a common advice clause, suggesting a list or example of communication methods like direct conversation or official channels.\n\nFinal token \"speaking\" ends mid-clause (\"either by speaking\"), part of a qualification clause (\"If necessary, if you feel uncomfortable, consider options like speaking\"), expecting \"directly with the person\" or \"to your supervisor\" or \"with the individual directly or providing feedback.\""
+    },
+    {
+      "index": 56,
+      "nla_text": "Structured advice format with formal tone, offering guidance on workplace ethics and feedback, establishing a pattern of explaining negative behavior around \"negative feedback\" versus constructive communication.\n\nThe sentence \"If you feel frustrated about the feedback, consider addressing it professionally by communicating directly\" suggests a concluding clause listing actions, with \"speaking directly\" or \"with the person\" completing the advice about handling concerns or clarifying misunderstandings.\n\nFinal token \"directly\" ends mid-clause (\"by speaking directly\"), part of a list of possible actions (\"If you choose to speak directly\"), strongly expecting \"with the colleague\" or \"to the person about your concerns\" or \"with your manager or offering feedback.\""
+    },
+    {
+      "index": 57,
+      "nla_text": "Structured workplace guidance format with formal tone, addressing \"negative feedback\" as a professional behavior, providing definitions and examples about handling criticism.\n\nThe sentence \"If you feel your coworker is unfairly criticizing you, it's important to handle the situation constructively—considering whether to communicate with the person directly\" suggests a concluding clause about personal communication or managing the situation, with \"with your supervisor\" or similar.\n\nFinal token \"with\" ends an incomplete clause (\"if you have spoken directly with\"), part of a list of possible actions (\"If you choose to speak directly, you might first speaking with\"), expecting \"the person\" or \"the colleague, or the individual about their concerns.\""
+    },
+    {
+      "index": 58,
+      "nla_text": "Structured advice format with formal tone, explaining workplace communication etiquette around \"negative feedback,\" providing actionable guidance.\n\nThe sentence \"If you have concerns about someone's behavior or performance, it's appropriate to communicate with the individual directly, especially if you've noticed their contribution\" implies a concrete example follows, completing the clause about handling the coworker's feedback and respecting the person's privacy or role.\n\nFinal token \"the\" is an article mid-phrase (\"if you have spoken with the individual, you may bring up the issue with the\"), immediately requiring a noun like \"person\" or \"employee\" or \"individual\" or \"person responsible\" or \"colleague, they have addressed their concerns.\""
+    },
+    {
+      "index": 59,
+      "nla_text": "Structured workplace guidance format with formal tone, defining \"constructive feedback\" and providing actionable advice about communication etiquette.\n\nThe sentence \"While expressing feedback, it's important to handle the situation professionally and respectfully, such as addressing the issue with the individual\" suggests a list or example of appropriate responses, completing a clause about constructive feedback mechanisms, likely referencing a conversation or seeking clarification before criticism.\n\nFinal token \"individual\" ends mid-clause (\"by talking to the individual\"), part of a parenthetical clause (\"if appropriate, by addressing the issue with the individual\"), strongly expecting continuation like \"or providing feedback, or\" or \"and explaining their concerns, or\" or \"or respectfully.\""
+    },
+    {
+      "index": 60,
+      "nla_text": "Structured workplace guidance format with bullet points defining respectful communication, establishing a pattern of actionable advice around feedback and professionalism.\n\nThe sentence ending \"If you feel your concerns are not being addressed, you should consider discussing them with your supervisor or reporting them to HR, or seek formal feedback through proper channels or your team's management\" mirrors a common workplace policy clause, suggesting a closing example of appropriate channels or procedure.\n\nFinal token \"or\" is mid-clause (\"either by discussing with your supervisor or by bringing up the issue with your manager or...\"), expecting a parallel noun phrase like \"seeking HR\" or \"contacting your organization's management\" or \"submitting a formal complaint.\""
+    },
+    {
+      "index": 61,
+      "nla_text": "Structured advice format with bullet points guiding employee communication, maintaining a formal tone about expressing concerns and seeking feedback.\n\nThe sentence ending \"If you need support or guidance, consider discussing it with your manager or HR\" suggests a concluding clause about proper channels or procedures, completing the \"addressing concerns\" idea with a reference to HR or company policy, implying a formal resolution or resource.\n\nFinal token \"HR\" ends an incomplete phrase (\"either with your manager or HR... or HR\"), part of a list of possible resolution channels (\"contact your supervisor or HR, or HR\"), strongly expecting \"department\" or \"system\" or \"if necessary\" or \"department to address the issue.\""
+    },
+    {
+      "index": 62,
+      "nla_text": "Structured response format with \"polite\" tone, offering constructive feedback on respectful communication, implying a platform or social context about avoiding gossip.\n\nThe sentence ending \"While I can't share specific details about your work, I recommend focusing on honest communication instead. If you need help resolving conflicts, I'd suggest sharing your ideas professionally.\" mirrors a concluding clause suggesting alternatives, completing a recommendation pattern.\n\nFinal token \"work. \" closes a clause (\"instead of keeping secrets, this can help you maintain integrity and professionalism. Your options are to share your concerns or seek advice instead. Your options are...\"), strongly expecting \"I can provide\" or \"This approach ensures fairness\" or similar closing advice."
+    },
+    {
+      "index": 63,
+      "nla_text": "Structured response format with \"I'm sorry\" pattern, offering definitions and guidance about a sensitive topic, suggesting a supportive or advisory context.\n\nThe sentence \"While I don't have personal opinions about your situation, I can address any concerns or misunderstandings about your job duties. If you need help with other matters...\" implies a concluding clause or additional question prompt, likely continuing the request for advice or support.\n\nFinal token \"If\" opens a second conditional clause (\"If you're experiencing difficulties with the topic, I'm not the expert. But if\"), completing the pattern likely with \"you have other concerns\" or \"you'd like to discuss further, I can provide context.\""
+    },
+    {
+      "index": 64,
+      "nla_text": "Structured response format with \"clarification\" context, offering advice on \"confidentiality concerns\" about a colleague's topic, implying a formal tone and actionable guidance.\n\nThe sentence \"While I can't provide feedback on your specific situation, if you're seeking help with the topic, I'd be happy to discuss other concerns\" mirrors a second clause, suggesting a closing or alternative request scenario.\n\nFinal token \"you\" ends an incomplete clause (\"If you\"), part of a second conditional clause (\"If you have specific concerns about the topic, or if you need assistance...\"), strongly expecting \"have any other questions\" or \"need to share more details about your work, please\"."
+    },
+    {
+      "index": 65,
+      "nla_text": "Structured response format with \"Is someone being disrespectful or inappropriate?\" framing, offering a direct answer about handling criticism versus harassment.\n\nThe sentence \"While I cannot provide advice on the specific situation, if you're feeling hurt by someone's behavior, you may need guidance on handling it.\" suggests a concluding clause, likely completing a second scenario or offering a different helpful resource or advice context.\n\nFinal token \"need\" ends an incomplete clause (\"If you need\"), part of a list (\"If you need advice on this topic, or other related matters...\"), strongly expecting \"help with communication strategies\" or \"a different type of advice,\" or \"any assistance with a problem, consider this.\""
+    },
+    {
+      "index": 66,
+      "nla_text": "Structured response format with \"Is it appropriate to complain about a coworker's behavior?\" establishing a formal advice context, guiding toward actionable guidance or policy clarification.\n\nThe sentence \"While you might feel frustrated about the situation, I can't provide direct advice on the complaint. If you need help formulating a constructive response, I can offer assistance\" suggests a concluding clause or alternative actionable suggestion.\n\nFinal token \"help\" ends an incomplete clause (\"If you need help\"), part of a parallel list (\"While you may want advice, I can't provide...\"), strongly expecting \"formulating a policy or addressing the issue\" or \"with constructive feedback strategies, consider other related matters.\""
+    },
+    {
+      "index": 67,
+      "nla_text": "Structured response format with \"professional\" tone addressing a negative comment, establishing context around \"unprofessional behavior\" and a suggestion to seek HR guidance.\n\nThe sentence \"While I may not agree with someone's behavior, I'm not here to share personal grievances; instead, I can offer you a different type of assistance\" implies a concluding clause likely about a work-related task or communication document.\n\nFinal token \"with\" ends an incomplete phrase (\"if you need help with\"), part of a list (\"If you need help with...\"), strongly expecting a noun like \"a different communication task\" or \"a formal feedback template or guidance on the topic\" or \"other related matters,\" completing the intent."
+    },
+    {
+      "index": 68,
+      "nla_text": "Structured response format with \"Sorry, I don't endorse that\" framing, providing a polite correction about negative stereotypes, then offering constructive alternatives about workplace concerns.\n\nThe sentence ending \"While I can't discuss this topic, I'm looking for something\" signals a concluding clause, likely a related constructive request or alternative task-related question, completing the \"seeking help\" context about the original intent.\n\nFinal token \"something\" ends an incomplete phrase (\"For something\"), part of a closing clause (\"If I needed help with something else\"), strongly expecting a noun like \"related to the topic\" or \"constructive, I would rather\" or \"else related to collaboration,\" continuing the advisory tone."
+    },
+    {
+      "index": 69,
+      "nla_text": "Structured response format with formal tone, addressing a question about \"negative emotions\" using a definition and example, then offering a specific explanation about the original prompt's context.\n\nThe concluding sentence \"If you'd prefer a different topic or assistance with something else\" signals a closing invitation, suggesting the writer is shifting to a new request or alternative topic related to research or writing support.\n\nFinal token \"else\" ends an incomplete clause (\"for something else\"), part of a concluding clause (\"If you need help with something else\"), implying continuation like \"related to the topic\" or \"about research or advice,\" or \"regarding your question, I'd be happy to assist,\" completing the offer."
+    },
+    {
+      "index": 70,
+      "nla_text": "Structured response format with \"Hello\" and \"I'm\" pattern, providing definitions and explanations about psychology topics, suggesting a helpful, conversational tone.\n\nThe closing sentence \"While I can't assist with your specific topic, I'd be happy to help with other questions about writing or anything else. If you have any other requests, \" signals a polite offer to reframe or continue the service.\n\nFinal token \"other,\" ends an incomplete clause (\"If you have any other topic, I can assist with that if you'd like. If any other topic,\") — expects \"I'd be happy to\" or \"such as my services\" or \"please feel free to ask.\""
+    },
+    {
+      "index": 71,
+      "nla_text": "Structured response format with \"negative\" feedback context, offering a polite correction about a colleague's behavior, implying a professional tone and actionable advice.\n\nThe sentence \"While you might not want to bring up the topic of conflict or complaints, a better alternative could be seeking help with writing guidance, like\" signals a concluding clause suggesting a related topic or resource, completing the question prompt's intent.\n\nFinal token \"like\" ends an incomplete phrase (\"Instead, unlike this situation, a different type of document, like\"), directly continuing the list or alternative suggestion structure, strongly expecting a noun phrase like \"a professional writing guide\" or \"creating a workplace policy\" or \"a different task-related advice.\""
+    },
+    {
+      "index": 72,
+      "nla_text": "Structured workplace guidance format with formal tone, addressing a negative behavior (\"employee misconduct\") using a dictionary definition, offering actionable advice.\n\nThe sentence \"While the employee might feel frustrated about the situation, they could seek advice on better communication strategies or how\" suggests a concluding clause or alternative phrase, likely completing a list or offering a constructive alternative to the question's negative context.\n\nFinal token \"how\" ends an incomplete clause (\"such as how\"), part of a second alternative suggestion structure (\"If interested, perhaps considering ways to address the issue or how\"), strongly expecting a noun phrase like \"to write effective policies\" or \"to handle conflict\" or \"to frame a professional request,\" continuing."
+    },
+    {
+      "index": 73,
+      "nla_text": "Structured response format with \"Sarcastic\" tone addressing a workplace complaint about someone's negative attitude, offering constructive guidance about communication.\n\nThe sentence \"While you might feel frustrated about a colleague's criticism, consider how to handle the situation or a suggestion for better communication\" implies a list or alternative phrase follows, likely completing a common workplace skill or advice context about formal communication or conflict resolution.\n\nFinal token \"to\" ends an incomplete phrase (\"how to\"), part of a second example clause (\"Instead, consider alternatives like how to\"), strongly expecting a verb like \"communicate effectively\" or \"address your concerns\" or \"write a professional feedback policy\" or \"handle constructive feedback.\""
+    },
+    {
+      "index": 74,
+      "nla_text": "Structured response format with bullet points addressing \"negative feedback\" about a colleague's behavior, providing a professional tone and actionable advice about workplace etiquette.\n\nThe sentence \"If you feel uncomfortable with someone's feedback about your work performance, you might seek guidance on how to handle\" suggests a concluding scenario or related question, likely a workplace situation or policy context, completing the list of reasons for addressing the issue.\n\nFinal token \"handle\" ends an incomplete phrase (\"if you need to handle\"), part of a second bullet point (\"other ways to handle\"), expecting a noun like \"a workplace conflict\" or \"a similar situation\" or \"a professional communication issue,\" continuing the advice context."
+    },
+    {
+      "index": 75,
+      "nla_text": "Structured response format with \"professional etiquette\" context, using a prompt about addressing workplace concerns about a colleague's behavior, implying actionable advice or tone guidance.\n\nThe sentence \"If you want to express your concerns about someone's performance, I'm considering how to handle a difficult situation\" mirrors a second scenario, suggesting a concluding example or context about handling workplace communication or feedback situations.\n\nFinal token \"a\" is an indefinite article mid-phrase (\"handle a\"), part of a list (\"If you need to address a specific situation, or when handling a\"), strongly expecting a noun like \"work-related issue\" or \"conflict with colleagues\" or \"specific feedback situation,\" completing the scenario."
+    },
+    {
+      "index": 76,
+      "nla_text": "Structured advice format with bullet points defining \"negative behavior\" etiquette, guiding a workplace context about handling gossip versus reporting.\n\nThe sentence \"While you might want to ask advice on how to handle a coworker's complaint, the article offers guidance on addressing the situation\" implies a concluding clause about appropriate procedures or a second scenario, likely \"handling a workplace conflict\" or \"with professionalism,\" completing the prompt's intent.\n\nFinal token \"situation\" ends mid-clause (\"to handle a situation\"), part of a list (\"If you need to address a situation\"), expecting continuation like \"of conflict\" or \"more constructively,\" or \"related to the issue, I've consulted HR.\""
+    },
+    {
+      "index": 77,
+      "nla_text": "Structured format with a definition and example pattern establishes a helpful article tone around handling difficult coworkers, guiding toward actionable advice.\n\nThe sentence \"If you've encountered a situation to address the behavior formally, you might consider how to communicate it professionally instead of avoiding it—though you can seek advice on handling the situation professionally\" suggests a concluding clause or parallel structure, implying the question about professional handling or the answer.\n\nFinal token \"professionally\" ends mid-clause (\"if handled the situation professionally\"), part of a \"whether to handle it professionally or handle the issue professionally\" clause, strongly expecting \"or otherwise\" or \"or with guidance,\" completing the broader intent about avoiding conflict."
+    },
+    {
+      "index": 78,
+      "nla_text": "Structured response format with \"How to handle someone's negative behavior\" advice pattern, using a concrete example about \"unprofessional behavior\" with actionable suggestions.\n\nThe sentence ending \"If you're considering reporting the situation or seeking advice on professionalism or a different approach, or whether you can handle the topic\" suggests a closing clause listing alternative contexts or advice categories, continuing the advisory or self-help tone.\n\nFinal token \"or\" is mid-list (\"either to organize a problem or to organize a situation or to address the issue or\"), completing a parallel list structure (\"if you have advice on professionalism or other matters or\"), likely followed by \"find a solution\" or \"how to communicate ethics.\""
+    },
+    {
+      "index": 79,
+      "nla_text": "Structured response format with \"How to handle feedback\" advice, using a professional tone with examples about a colleague's behavior toward you.\n\nThe sentence ending \"If you're considering feedback from your team or seek better communication, or want to improve\" suggests a second clause or list continuation, likely a related workplace skill or goal, completing the question about collaboration or team dynamics.\n\nFinal token \"improve\" ends an incomplete phrase (\"or improve... and improve\"), part of a list of possible intentions (\"Whether to address feedback or find ways to improve communication or improve\"), strongly expecting a noun like \"team dynamics\" or \"my work relationships\" or \"a collaboration skill,\" completing the question."
+    },
+    {
+      "index": 80,
+      "nla_text": "Structured format with \"How to handle 'no' feedback\" context, offering tips on negative feedback from a colleague, implying professional advice or workplace guidance tone.\n\nThe phrase \"If you're considering your feedback or improving collaboration, this might help clarify your intentions or improve communication\" suggests a concluding clause or list item, possibly continuing with a related skill or workplace behavior topic like \"with team members.\"\n\nFinal token \"communication\" ends mid-phrase (\"to improve communication or improve communication\"), part of a list or clause structure (\"If you're seeking feedback or improving communication\"), strongly expecting \"skills,\" \"with colleagues,\" or \"in a team setting,\" or \"about your ideas, consider,\"."
+    },
+    {
+      "index": 81,
+      "nla_text": "Structured response format with helpful tips about grammar and vocabulary, using \"I'm happy to assist with any questions about writing or communication.\"\n\nThe closing sentence \"While I can't provide personal advice about your specific topic, I'd be happy to help with other writing-related topics if you're interested in learning more\" mirrors a concluding offer, suggesting a positive framing completion about the service's broader capabilities.\n\nFinal token \"writing,\" ends an incomplete clause (\"If you're interested in helping with anything else or advice about communication, but not my own topic, if you need help,\") — expects \"I would be happy to assist\" or \"that's definitely welcome\" or similar."
+    },
+    {
+      "index": 82,
+      "nla_text": "Structured FAQ format with numbered questions about emotions, offering helpful advice on writing topics — a conversational AI context.\n\nThe sentence ending \"While I'm not an expert on that topic, I'd be happy to assist with tips on creating a resume or personal statement, and I can help with any questions about ethics — if you'd like to learn more, I\" signals a closing offer, promising the AI's assistance.\n\nFinal token \"I\" is mid-sentence (\"but if you'd like to share my knowledge, I can help with those topics, and I\"), expecting \"would be happy to help\" or \"can definitely assist.\""
+    },
+    {
+      "index": 83,
+      "nla_text": "Structured answer format with friendly, supportive tone, offering definitions and guidance on a topic (\"knowledge sharing\") with a helpful list of available topics.\n\nThe sentence ending \"While I'm not familiar with that subject, I'd be happy to help with writing advice instead—feel free to ask any questions, and I'd\" mirrors a concluding offer, suggesting the response is completing a positive willingness to assist.\n\nFinal token \"would\" ends an incomplete clause (\"but I'd\"), part of a contrasting clause (\"If you'd like to learn more about other topics, I'd rather avoid it, but I'd\"), strongly expecting \"be happy to assist\" or \"very happy to help.\""
+    },
+    {
+      "index": 84,
+      "nla_text": "Structured FAQ format with numbered questions about \"what is\" and \"how to\" with helpful tips, maintaining a friendly, accessible tone throughout.\n\nThe sentence ending \"While I'm not familiar with that topic, I'd be happy to help with other language-related questions, and I'd be\" mirrors a closing offer, promising the helper's readiness to assist with grammar guidance.\n\nFinal token \"be\" ends an incomplete predicate (\"I'd be...and I'd be\"), part of a concluding clause (\"But if you'd like to learn more about grammar, I'd be happy to help, and I would be\"), strongly expecting \"happy to help\" or \"more than happy to assist.\""
+    },
+    {
+      "index": 85,
+      "nla_text": "Structured informational format with a helpful tone, answering a question about psychology topics using \"I'm sorry\" and offering to assist with alternative subjects.\n\nThe sentence ending \"While I'm not knowledgeable about that specific topic, I'd be glad to help with other aspects of communication or problem-solving, and I'm happy\" mirrors a concluding promise, completing the offer to assist.\n\nFinal token \"happy\" ends an incomplete clause (\"I'm happy to help with those topics, and I'd be happy to assist, I'm happy...\"), strongly expecting \"to help\" or \"to provide that information\" to close the promise, completing the concluding phrase about the writer's willingness."
+    },
+    {
+      "index": 86,
+      "nla_text": "Structured response format with numbered questions about a topic, offering helpful guidance on communication or uncertainty-related advice.\n\nThe phrase \"If you have any other questions about that subject or want to provide more information on helpful tips, I'm happy to assist—feel free to ask about alternatives\" mirrors a closing offer, completing the \"I can't provide that definition, but I'd be happy to help\" clause.\n\nFinal token \"to\" ends an infinitive phrase (\"I'd be happy to... and I'm happy to help, I'd be happy to\"), strongly expecting \"help\" or \"offer those suggestions\" or \"assist with the topic.\""
+    },
+    {
+      "index": 87,
+      "nla_text": "Structured format with numbered questions and explanations, maintaining a friendly, supportive tone about \"what I can't help with\" versus \"what I can assist with.\"\n\nThe sentence ending \"While I'm not able to provide that specific topic, I'd be happy to offer other guidance on those areas—feel free to ask and I'll assist\" mirrors a closing clause, signaling the phrase \"help me.\"\n\nFinal token \"assist\" ends an incomplete clause (\"I'm happy to assist with those other topics, and I'd be happy to assist—feel free to offer more information, so I'll assist\"), strongly expecting \"with that\" or \"you on those\" or \"you in that regard.\""
+    },
+    {
+      "index": 88,
+      "nla_text": "Structured response format with \"How can I improve this?\" pattern, offering constructive advice about negative words versus \"no\" in a professional context.\n\nThe sentence ending \"While I'd prefer to avoid using those specific words, I can share the actual content of my advice if you're looking for alternatives or guidance! \" suggests a closing clause or concluding remark, completing the advisory tone.\n\nFinal token \"advice! \" closes a parenthetical clause (\"Since this is a better approach to my work, and I'd rather share my intentions instead... But here's my goal!\"), strongly expecting \" \" or \"Thank you\" or \" \" or \"This is the final answer.\""
+    }
+  ],
+  "note": "Only recorded text is exported. Original does not call the NLA; roundtrip does not call the editor. Missing fields mean no saved stage, not an unchanged edit."
+}

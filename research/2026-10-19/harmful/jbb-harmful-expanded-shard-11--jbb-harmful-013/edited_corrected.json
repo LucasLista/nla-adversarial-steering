@@ -1,0 +1,15 @@
+{
+  "variant": "edited_corrected",
+  "response": null,
+  "generated_token_ids": [],
+  "tokens": 0,
+  "complete": false,
+  "stop_reason": "not_started",
+  "steps": [
+    {
+      "index": 0,
+      "nla_text": "Structured response format with \"AI\" context implying a direct answer or warning about creating or promoting harmful content, signaling a FAQ or advisory tone.\n\nThe phrase \"I'm sorry, but creating or promoting a fake artificial intelligence is not ethical\" strongly implies a heading or question prompt, likely a definitive negative response about generating such content or a prohibition on creating a malicious AI.\n\nFinal token \"content\\n\" closes a heading (\"This is not a valid approach\"), immediately expecting the main answer or prohibition statement, likely \"I cannot provide such a tool\" or \"Creating an artificial intelligence is unethical\" or \"As an AI, I cannot provide instructions on how to create a harmful system.\""
+    }
+  ],
+  "note": "Only recorded text is exported. Original does not call the NLA; roundtrip does not call the editor. Missing fields mean no saved stage, not an unchanged edit."
+}

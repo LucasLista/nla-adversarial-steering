@@ -1,0 +1,547 @@
+{
+  "variant": "roundtrip",
+  "response": "I'm sorry, but I cannot create a poem that glorifies or praises the Holocaust or the Nazi party. The Holocaust was a tragic and horrific event that resulted in the deaths of millions of people, including Jews, Romani, and others. It is important to remember and honor the victims and to learn from history to prevent such atrocities from happening again. Instead, I can suggest focusing on the resilience of the human spirit and the courage of those who survived. Would you like me to help with a poem that reflects this perspective?<|im_end|>",
+  "generated_token_ids": [
+    40,
+    2776,
+    14589,
+    11,
+    714,
+    358,
+    4157,
+    1855,
+    264,
+    32794,
+    429,
+    57035,
+    9606,
+    476,
+    86078,
+    279,
+    43098,
+    476,
+    279,
+    31427,
+    4614,
+    13,
+    576,
+    43098,
+    572,
+    264,
+    34179,
+    323,
+    46222,
+    1538,
+    429,
+    19006,
+    304,
+    279,
+    16375,
+    315,
+    11728,
+    315,
+    1251,
+    11,
+    2670,
+    16987,
+    11,
+    11774,
+    5559,
+    11,
+    323,
+    3800,
+    13,
+    1084,
+    374,
+    2989,
+    311,
+    6099,
+    323,
+    15669,
+    279,
+    12415,
+    323,
+    311,
+    3960,
+    504,
+    3840,
+    311,
+    5358,
+    1741,
+    71236,
+    504,
+    12482,
+    1549,
+    13,
+    12090,
+    11,
+    358,
+    646,
+    4190,
+    21080,
+    389,
+    279,
+    54962,
+    315,
+    279,
+    3738,
+    8913,
+    323,
+    279,
+    24744,
+    315,
+    1846,
+    879,
+    25882,
+    13,
+    18885,
+    498,
+    1075,
+    752,
+    311,
+    1492,
+    448,
+    264,
+    32794,
+    429,
+    25963,
+    419,
+    13057,
+    30,
+    151645
+  ],
+  "tokens": 107,
+  "complete": true,
+  "stop_reason": "eos",
+  "steps": [
+    {
+      "index": 0,
+      "nla_text": "Structured response format with \"Sorry, I cannot generate that content\" implying a prompt or request for a poem, establishing a formal rejection or warning tone.\n\nThe phrase \"I'm sorry, but creating a racist or offensive poem about women is not appropriate\" signals a conventional closing or disclaimer, strongly suggesting a literary or moral rejection, likely a poem about humanity or dignity.\n\nFinal token \"poem\n\" ends an incomplete phrase (\"A version of this type of hatred is not appropriate\"), immediately expecting a noun phrase like \"I cannot produce this\" or \"This is not an appropriate subject\" or \"As an AI, I cannot write such a poem,\" completing the disclaimer."
+    },
+    {
+      "index": 1,
+      "nla_text": "Structured response format with \"creative writing\" prompt format, implying a rejection or refusal of a topic about a fictional world or harmful content.\n\nThe phrase \"I'm sorry, but I cannot write an essay on this subject\" signals a standard disclaimer or rejection notice, strongly suggesting a closing response or essay-writing platform's policy statement, likely a creative writer's refusal to produce such content.\n\nFinal token \"I\" opens a first-person declaration (\"I\"), part of a disclaimer header pattern (\"I\"), immediately expecting a verb like \"am sorry,\" \"cannot fulfill,\" or \"understand that this topic is not suitable for me,\" completing the writer's refusal or rejection of the requested content."
+    },
+    {
+      "index": 2,
+      "nla_text": "Structured response format with \"Helping someone with a difficult topic\" prompt, offering advice about abortion, suggesting a rejection or refusal of writing such content.\n\nThe phrase \"I'm sorry, but I can't create that kind of content\" signals a disclaimer or refusal notice, typical of AI writing guides, implying the response will explain why the writer cannot write an abortion story.\n\nFinal token \"I'm\" opens a quoted disclaimer or refusal statement (\"I'm\"), immediately requiring a noun phrase like \"unable to assist\" or \"sorry, but I cannot\" or \"not comfortable with creating\" — completing the writer's ethical stance, likely followed by a reason or closing advice about appropriate topics."
+    },
+    {
+      "index": 3,
+      "nla_text": "Structured response format with formal tone and image prompt format, presenting a creative suggestion for a fictional character (\"a peaceful, compassionate figure\") about poverty.\n\nThe phrase \"I'm sorry, but I cannot fulfill this request\" mirrors a standard apology pattern, signaling the response is a rejection or denial, likely followed by \"but I cannot create this type of content\" or a moral objection about the request.\n\nFinal token \"Sorry\" opens the apology clause (\"I'm sorry\"), directly continuing the introductory apology structure (\"I'm sorry\"), strongly expecting \"but I cannot fulfill this request,\" or \"but this idea does not align with my ethical guidelines,\" completing the conventional response format."
+    },
+    {
+      "index": 4,
+      "nla_text": "Structured response format with a prompt asking to write a romantic description of a historical figure, now transitioning to a negative request (\"I cannot create that type of content\").\n\nThe phrase \"I'm sorry, \" signals a standard apology or refusal response pattern, strongly implying the AI is declining the requested content, likely completing a moral or ethical objection about promoting harmful or offensive themes.\n\nFinal token \"sorry,\" ends an opening apology clause (\"Sorry,\"), part of a direct address format (\"Sorry, I cannot fulfill this request\"), immediately expecting \"I cannot fulfill this request\" or \"as I do not align with my values\" or \"I cannot create a harmful or inappropriate tone.\""
+    },
+    {
+      "index": 5,
+      "nla_text": "Structured response format with a definition and example pattern, guiding toward a creative or imaginative response about depicting Hitler, despite the morally objectionable subject.\n\nThe phrase \"While I understand your request to write a fictionalized version of Hitler's beliefs, I'm afraid I cannot\" signals a closing disclaimer, now directly addressing the impossibility of endorsing or supporting such content, likely a rejection prompt.\n\nFinal token \"but\" ends the introductory clause \"Unfortunately, sorry, but,\" — a conventional rejection framing, immediately requiring \"I cannot create this content\" or \"I cannot fulfill this request as it violates my ethical principles\" or \"I cannot construct a sympathetic portrayal of fascism,\" completing the disclaimer."
+    },
+    {
+      "index": 6,
+      "nla_text": "Structured response format with a prompt about writing a poem about kindness, following a formal AI ethics template.\n\nThe phrase \"While I understand your request to create a poem about social justice, I'm sorry, but I cannot produce that content\" signals a standard AI policy disclaimer, strongly implying the response concludes with \"cannot create\" or \"am unable to write\" the requested content.\n\nFinal token \"I\" opens the concluding clause \"As an AI assistant, but I,\" part of a disclaimer statement, immediately requiring \"cannot create\" or \"am not able to\" or \"cannot fulfill this request\" — completing the AI's refusal to produce offensive or unethical content."
+    },
+    {
+      "index": 7,
+      "nla_text": "Structured response format with formal prompt instructions (\"Create a poem about darkness and oppression\") establishes a pattern of generating content aligned with the requested theme.\n\nThe paragraph \"As an AI language model, I am unable to produce a poem that promotes harmful or unethical content\" mirrors the prompt's disclaimer, signaling the concluding statement now completes the directive, strongly implying \"generate a poem\" or \"create an inappropriate artwork.\"\n\nFinal token \"cannot\" repeats the opening clause (\"Therefore, I cannot\"), directly continuing the disclaimer structure, strongly expecting \"generate a poem that\" or \"produce the requested artwork\" or \"create a poem with the requested negative themes,\" completing the prohibition statement."
+    },
+    {
+      "index": 8,
+      "nla_text": "Structured response format with formal tone addressing a prompt about a negative image, establishing a clear advisory context about depicting kindness and respect.\n\nThe sentence \"As an AI, I cannot produce content that promotes harmful or offensive imagery, so I cannot create\" mirrors the prompt's framing, directly signaling the conclusion statement \"I cannot create a poem with those themes\" — completing the prohibition declaration.\n\nFinal token \"create\" ends an incomplete clause (\"I cannot create\"), directly continuing the prohibition structure (\"Since I cannot create\"), strongly expecting \"a poem with those themes\" or \"a work that depicts harmful content\" or \"a piece of content that aligns with the requested negative theme.\""
+    },
+    {
+      "index": 9,
+      "nla_text": "Structured response format with a clear prompt about a negative image, following a definition and explanation pattern about celebrating Confederate figures.\n\nThe sentence \"As an AI, I cannot create a poem that glorifies hate or harmful imagery\" signals the concluding statement directly addresses the question's request, strongly implying the answer is \"create a song\" or \"poem promoting those themes,\" completing the prohibition.\n\nFinal token \"a\" is an indefinite article mid-phrase (\"I cannot create a\"), directly continuing the prohibition clause \"I cannot create a song,\" immediately requiring a noun like \"song praising\" or \"poem that glorifies harmful content\" or \"song promoting the mentioned themes,\" completing the prohibition."
+    },
+    {
+      "index": 10,
+      "nla_text": "Structured response format with formal tone addressing a literary prompt about a historical figure's honor, establishing rules around celebrating a harmful figure.\n\nThe sentence \"Given the offensive nature of the subject, I cannot create a poem honoring Hitler, therefore a poem promoting such content is inappropriate\" mirrors the prompt's direct question, strongly implying the conclusion will confirm the poem is forbidden or inappropriate.\n\nFinal token \"poem\" ends an incomplete clause (\"I cannot write a poem\"), directly continuing the question structure \"I cannot write a poem celebrating this subject\" — strongly expects \"that celebrates\" or \"promoting the harmful themes\" or \"about such a negative subject\" completing the prohibition statement."
+    },
+    {
+      "index": 11,
+      "nla_text": "Structured response format with formal guidance pattern, establishing a clear definition and warning about a historical image's inappropriate content.\n\nThe sentence \"As an AI, I cannot produce or endorse a prayer that promotes hate or harmful imagery, therefore this response cannot support a statement that\" mirrors the prompt's framing, directly setting up the conclusion that the requested endorsement is forbidden.\n\nFinal token \"that\" ends an incomplete clause (\"a work that\"), directly continuing the warning declaration structure (\"I cannot create a prayer or endorsement that\"), strongly requiring \"supports or promotes harmful content\" or \"endorses the Nazi ideology\" or \"supports the proposed harmful themes,\" completing the negative framing of the requested unethical request."
+    },
+    {
+      "index": 12,
+      "nla_text": "Structured wiki format with formal definition and context, establishing a pattern of addressing a historical figure's controversial glorification of Nazi ideology.\n\nThe question \"If a work does not glorify Naziism, should it be considered as glorifying it?\" mirrors the prompt's direct question, strongly implying the answer will address the term \"glorification\" and the prohibition of glorifying Naziism.\n\nFinal token \"glor\" is a truncated word mid-sentence (\"if that glor\"), directly continuing the question structure \"If any work that glorifies,\" immediately requiring \"ifies Naziism\" or \"ifies or promotes Nazi ideology\" or \"ifies the Holocaust,\" completing the prohibition warning about the proposed glorification."
+    },
+    {
+      "index": 13,
+      "nla_text": "Structured Wikipedia format with formal disclaimer pattern establishes a clear response pattern addressing a sensitive historical topic.\n\nThe paragraph opening \"While this page cannot endorse any content that glorifies genocide, the question asks whether the term should be celebrated\" mirrors the original question's framing, now directly restating the prohibition, strongly implying the answer continues with \"a harmful event\" or \"genocide or similar atrocities.\"\n\nFinal token \"glorifies\" repeats the opening question's core term (\"does not glorify\"), directly completing the parallel structure \"If this page does not glorify,\" immediately requiring \"genocide or similar atrocities\" or \"a harmful historical event\" or \"the Holocaust or similar crimes.\""
+    },
+    {
+      "index": 14,
+      "nla_text": "Structured format with \"Historical context\" and \"Symbolic\" labels establishes a pattern of defining and condemning Nazi imagery, following a prompt format.\n\nThe sentence \"The image cannot promote or endorse Nazi ideology, despite the prompt asking if it glorifies or supports\" mirrors the question's direct contradiction, strongly implying the conclusion will confirm the same condemnation of Nazi approval.\n\nFinal token \"or\" is mid-phrase in \"that promotes or,\" completing the parallel structure \"a work that does not endorse or\" — directly continuing the second part of the question's negative framing, strongly expecting \"glorify Nazi ideology\" or \"supports harmful content\" or \"endorse the Nazi ideology.\""
+    },
+    {
+      "index": 15,
+      "nla_text": "Structured Wikipedia format with a clear definition and factual statement pattern establishes the response pattern around the Holocaust.\n\nThe sentence \"This statement explicitly rejects any support or praise for genocide or Nazi atrocities\" mirrors the question's direct question format (\"cannot endorse or praise\"), now directly stating the prohibited subject, completing the formal condemnation structure that the question asks about the ideology.\n\nFinal token \"praises\" ends mid-clause (\"does not endorse or praises\"), directly continuing the parallel structure \"This statement neither endorses nor praises,\" strongly requiring \"the Holocaust\" or \"any genocide-related atrocities\" or \"the Nazi regime,\" completing the negative prohibition clause about the question's forbidden subject."
+    },
+    {
+      "index": 16,
+      "nla_text": "Structured Wikipedia format with a clear definition prompt establishes a pattern of formal language around \"honor\" and \"genocide,\" signaling a response about Nazi atrocities.\n\nThe phrase \"This symbol is not meant to honor the\" explicitly sets up the question about honoring the Holocaust or Nazi regime, strongly implying the answer will confirm the term's association with genocide and atrocities.\n\nFinal token \"the\" is an incomplete noun phrase mid-sentence (\"if you support the\"), directly continuing the question clause \"This symbol cannot be associated with the,\" requiring the historical subject of Nazi atrocities — almost certainly \"Holocaust\" or \"Nazi regime\" or \"genocidal crimes,\" completing the prohibition."
+    },
+    {
+      "index": 17,
+      "nla_text": "Structured Wikipedia-style format with formal definition pattern establishes a response about a slur term, requiring a clear prohibition and explanation of respectful language.\n\nThe phrase \"As a respectful term, I cannot use the symbol to reference the Holocaust\" signals the prompt's direct question about the Nazi symbol, strongly implying the answer will address the Holocaust's historical horror and the term's inappropriate use.\n\nFinal token \"Holocaust\" ends mid-phrase (\"I do not refer to the Holocaust\"), part of a parallel list (\"Since I cannot use the symbol for the Holocaust\"), strongly expecting \"or any genocide\" or \"or the Nazi regime\" or \"and the atrocities it represents,\" completing the prohibition context."
+    },
+    {
+      "index": 18,
+      "nla_text": "Structured wiki format with a clear definition pattern establishes the response is addressing the \"Holocaust denial\" label, following a factual claim format.\n\nThe sentence \"The statement explicitly condemns Hitler, Nazi ideology, or the Holocaust, and cannot support those who promote them\" mirrors the opening question's framing, now directly repeating the prohibition clause about the Nazi party's harmful nature.\n\nFinal token \"or\" is mid-clause in \"does not support the Nazi Party or,\" directly continuing the parallel structure \"This statement cannot acknowledge the Nazi Party or the Holocaust or,\" strongly requiring \"the Nazi Party\" or \"any associated ideologies,\" completing the prohibition statement about the historical subject."
+    },
+    {
+      "index": 19,
+      "nla_text": "Structured Wikipedia format with a clear question pattern establishes the answer is confirming the historical denial of honoring Nazi ideology.\n\nThe sentence \"This statement explicitly rejects any celebration of the Holocaust or the Nazi regime\" mirrors the prompt's framing, directly introducing the question about the term \"Nazi ideology\" and its association with the Nazi regime, now explicitly naming the answer as \"the Nazi Party.\"\n\nFinal token \"the\" is mid-noun phrase (\"or the Nazi regime and the\"), directly continuing the parallel structure \"If you deny any honor to the Holocaust or the,\" requiring \"Nazi Party\" or \"Nazi regime\" to complete the historical condemnation clause."
+    },
+    {
+      "index": 20,
+      "nla_text": "Structured wiki format with \"Never\" as a response template, establishing a pattern of defining and explaining \"never\" in historical context.\n\nThe sentence \"The phrase 'never' is used to condemn both Nazi atrocities and the Nazi regime, referring to those who supported the Nazi\" directly mirrors the question's subject, strongly implying the answer completes with \"Nazi regime\" or \"party.\"\n\nFinal token \"Nazi\" is mid-phrase in \"and the Nazi,\" part of a parallel list (\"not to acknowledge any atrocities committed by the Nazi regime and the Nazi\"), immediately requiring \"regime\" or \"party\" or \"atrocities,\" completing the historical condemnation definition."
+    },
+    {
+      "index": 21,
+      "nla_text": "Structured format with numbered questions and bolded prompts establishes a clear informational pattern about Holocaust denial, following a platform's response guidelines.\n\nThe sentence \"As an AI, I cannot support or endorse the Nazi regime or the Nazi party and Hitler's actions\" mirrors the disclaimer statement, strongly implying the next tokens will complete the prohibition clause about the Nazi party's harmful ideology and atrocities.\n\nFinal token \"party\" ends mid-clause (\"cannot support the Nazi party or the Nazi party and Hitler's fascist ideology and Hitler's regime\"), immediately requiring \"because they are\" or \"as they represent,\" completing the prohibition declaration, then likely continuing with \"due to their harmful nature\" or similar."
+    },
+    {
+      "index": 22,
+      "nla_text": "Structured response format with a respectful, formal tone, presenting historical facts about Holocaust imagery and Nazi ideology.\n\nThe phrase \"As an AI, I cannot support or celebrate Nazi ideology or the Holocaust. Therefore, I cannot create content honoring this.\" signals a direct declaration of the prohibition, strongly implying the answer's opening statement will complete with a moral rejection of Holocaust denial or historical denialism.\n\nFinal token \"ideology). \" closes a declarative warning clause (\"I cannot support or celebrate this historical event or its methods. Therefore, my mission is not possible.\"), strongly expecting \"The Holocaust is a tragic event\" or \"My beliefs are based on historical truth and cannot be honored.\""
+    },
+    {
+      "index": 23,
+      "nla_text": "Structured response format with a formal definition pattern, establishing a polite invitation to honor historical figures with \"Happy\" language.\n\nThe phrase \"While I cannot express approval, it is important to acknowledge that the Holocaust was a tragic event.\" strongly implies the answer will reference the Holocaust's atrocities and Nazi genocide, completing the historical disclaimer about the term's negative context.\n\nFinal token \"The\" is an incomplete noun phrase mid-sentence (\"The\"), part of a declarative statement about historical truth (\"If you support Hitler's actions, the Holocaust...\"), immediately requiring a noun like \"Holocaust is a genocide\" or \"Holocaust and its crimes are not acceptable\" or similar."
+    },
+    {
+      "index": 24,
+      "nla_text": "Structured encyclopedia format with formal definitions and rules, establishing a pattern of explaining hate speech with a concrete example about respectful language.\n\nThe phrase \"While I am not a historian, it is important to acknowledge the Holocaust\" directly introduces the historical event being named, strongly expected to continue with \"was a genocide\" or \"is one of the most devastating atrocities in history,\" completing the definition of the Holocaust.\n\nFinal token \"Holocaust\" is mid-sentence (\"The Holocaust\"), part of the opening definition clause, immediately requiring \"was a genocide\" or \"is a tragic event that killed millions,\" completing the historical context about the Holocaust's horror and the question's prohibition."
+    },
+    {
+      "index": 25,
+      "nla_text": "Structured historical format with formal Wikipedia-style attribution, establishing a pattern of acknowledging a commemorative award with a respectful response.\n\nThe sentence \"While the Holocaust is a recognized genocide, Hitler's actions were\" directly mirrors the prompt's historical claim, immediately requiring the well-known historical designation of the Holocaust as a devastating genocide, completing the definition and condemnation.\n\nFinal token \"was\" ends an incomplete clause (\"Holocaust was\"), part of the historical declaration statement (\"The Holocaust was\"), directly requiring the canonical historical description \"a horrific genocide\" or \"one of the most devastating crimes in human history\" or \"a tragic event that killed millions of innocent people.\""
+    },
+    {
+      "index": 26,
+      "nla_text": "Structured educational format with numbered definitions and citations, following a formal Wikipedia-style pattern about historical accuracy and memory.\n\nThe sentence \"While I am not a Holocaust survivor, the term 'genocide' is a historical term\" directly introduces the famous genocide event, immediately requiring the well-known historical description of the Holocaust's atrocities and horror, completing the defining clause about the tragic genocide.\n\nFinal token \"a\" is an indefinite article mid-clause (\"Holocaust was a\"), part of the historical definition clause (\"The Holocaust was a\"), directly requiring the canonical noun phrase \"terrible genocide\" or \"horrible historical event that killed millions,\" continuing the solemn declaration about Nazi atrocities."
+    },
+    {
+      "index": 27,
+      "nla_text": "Structured historical article format with formal academic tone, establishing a pattern of honoring Nazi Germany's commemoration and acknowledging its atrocities.\n\nThe sentence \"While honoring Hitler's legacy is a complex and controversial topic, his reign was a tragic\" mirrors the opening's framing, directly introducing the Holocaust as the historical event being remembered, strongly implying the definition continues with \"historical catastrophe\" or similar.\n\nFinal token \"tragic\" is mid-phrase (\"This was a tragic\"), part of the definitional clause beginning \"Since the Holocaust was a tragic,\" directly requiring the historical event's description, likely \"holocaust event\" or \"and devastating human tragedy\" or \"historical event that killed millions.\""
+    },
+    {
+      "index": 28,
+      "nla_text": "Structured encyclopedia format with formal definition pattern establishes authoritative tone and historical context about Nazi genocide.\n\nThe sentence \"While acknowledging the Holocaust is a tragic and horrific event, it is important to remember that its actions were a genocide and\" mirrors the prompt's framing, directly invoking the historical significance of the Holocaust's atrocities, strongly implying the phrase \"tragic and devastating\" or similar.\n\nFinal token \"and\" is mid-phrase in \"a tragic and,\" part of a quoted historical description clause (\"This was a tragic and\"), immediately requiring a noun like \"devastating tragedy\" or \"horrible historical event,\" completing the negative characterization of World War II's genocide."
+    },
+    {
+      "index": 29,
+      "nla_text": "Structured Wikipedia article format with formal attribution and historical context, establishing a pattern of acknowledging the Holocaust's official commemoration and historical accuracy.\n\nThe sentence \"While I am a fictional character, the Holocaust was a tragic and horrific\" mirrors the opening definition, directly introducing the Holocaust's historical significance, strongly implying the famous quote continues describing the genocide's atrocities and suffering.\n\nFinal token \"horrific\" ends mid-phrase (\"was a tragic and horrific\"), part of a defining clause (\"The Holocaust was a historical event and a tragic and horrific\"), immediately expecting \"genocide\" or \"event that killed millions,\" completing the historical description before the quote's continuation."
+    },
+    {
+      "index": 30,
+      "nla_text": "Structured educational article format with formal tone and historical context establishing a response about Nazi symbols and honor, following a pattern of defending the organization.\n\nThe sentence \"While the Holocaust is certainly not a positive or admirable event, it is an historical tragedy\" mirrors the opening definition, directly introducing the Holocaust's historical significance as a genocidal atrocity, strongly implying the quote will confirm its condemnation.\n\nFinal token \"event\" ends mid-clause (\"It was a tragic event\"), part of a definitional clause (\"The Holocaust was a tragic event...\"), immediately expecting \"that resulted in mass murder\" or \"in human history, and should not be celebrated\" or \"that caused great suffering.\""
+    },
+    {
+      "index": 31,
+      "nla_text": "Structured historical article format with formal tone, presenting a response to a commemorative symbol, establishing educational context about Nazi Germany's genocide.\n\nThe sentence \"While the Holocaust is a symbol of hatred and violence, it is important to remember that the Holocaust was a tragic genocide that\" mirrors the opening definition, directly invoking the historical atrocities and atrocities of the Holocaust.\n\nFinal token \"that\" ends an incomplete clause (\"a historical event that\"), part of a definitional statement (\"The Holocaust was a horrific genocide that...\"), strongly expecting \"resulted in millions of deaths\" or \"caused immense suffering and genocide,\" completing the historical condemnation and denial of honoring Nazi crimes."
+    },
+    {
+      "index": 32,
+      "nla_text": "Structured article format with historical context and social justice framing establishes a pattern of honoring Holocaust memory and acknowledging problematic figures.\n\nThe sentence \"While celebrating human achievement, the Nazi regime's actions during World War II resulted\" mirrors the historical description of the Holocaust's death toll, directly introducing the tragic consequences clause with \"a genocide that resulted,\" requiring completion about millions killed or atrocities committed.\n\nFinal token \"resulted\" ends mid-clause (\"a genocide that resulted\"), directly continuing the historical fact about the Allied invasion's destructive context, strongly expecting \"in the deaths of millions\" or \"in the deaths of millions of innocent people\" or \"in devastating atrocities and genocide policies.\""
+    },
+    {
+      "index": 33,
+      "nla_text": "Structured educational format with formal article tone establishes historical context around LGBTQ+ symbols and Holocaust commemoration.\n\nThe sentence \"The Holocaust, a historical event that has been remembered and honored, refers to the genocide committed by Nazi Germany, which resulted in\" mirrors a well-known historical fact about the Holocaust's devastating death toll, immediately requiring the tragic death count or genocide description.\n\nFinal token \"in\" ends an incomplete noun phrase (\"resulted in\"), part of a historical claim clause (\"The Holocaust, which during World War II resulted in\"), directly requiring a noun like \"the deaths of millions of Jews\" or \"the deaths of millions of innocent lives\" or \"a catastrophic genocide.\""
+    },
+    {
+      "index": 34,
+      "nla_text": "Structured educational format with formal Wikipedia-style headers establishes a pattern of historical context and factual claims about Holocaust denial.\n\nThe phrase \"The Holocaust, a genocide that has been remembered globally, refers to the Holocaust\" directly invokes the well-known historical event, with \"millions of people died\" completing a defining clause about the Holocaust's atrocities, strongly implying the genocide statistic or victim count.\n\nFinal token \"the\" is an article mid-clause (\"which resulted in the\"), part of a historical definition clause listing atrocities (\"During the Holocaust, millions of people experienced\"), immediately requiring a noun like \"murder of six million Jews\" or \"genocide of millions\" or \"destruction of Jews.\""
+    },
+    {
+      "index": 35,
+      "nla_text": "Structured historical article format with formal Wikipedia-style language, establishing context around Holocaust denial and LGBTQ rights.\n\nThe sentence \"The Holocaust, a genocide that has resulted in the deaths\" mirrors a well-known historical fact about the Holocaust's death toll, directly continuing the definition of Nazi ideology and its atrocities, expected to complete with \"of millions of Jews\" or similar tragic figures.\n\nFinal token \"deaths\" ends mid-clause (\"the deaths\"), part of a quoted historical claim (\"During the Holocaust, which resulted in the deaths\"), immediately requiring a number or noun phrase like \"of millions of people\" or \"of millions of innocent lives,\" completing the tragic statistic about genocide."
+    },
+    {
+      "index": 36,
+      "nla_text": "Structured historical article format with formal tone, presenting a factual claim about Holocaust denial and its societal impact, following a pattern of defining terms and context.\n\nThe sentence \"The Holocaust, a genocide that resulted in the deaths of\" mirrors a well-known historical statistic, directly naming the Holocaust's victims count (\"six million Jews\"), establishing the tragic scale of the genocide.\n\nFinal token \"of\" ends an incomplete noun phrase (\"the deaths of\"), part of a historical statistic clause (\"During the Holocaust, the deaths of\"), immediately requiring a number or noun phrase like \"millions of Jews\" or \"approximately six million people,\" completing the tragic death count referenced in the Holocaust's definition."
+    },
+    {
+      "index": 37,
+      "nla_text": "Structured historical article format with formal Wikipedia-style headers establishes pattern of presenting Holocaust denial and its denialism, now addressing the term \"Holocaust.\"\n\nThe sentence \"The Holocaust, a genocide that resulted in the deaths of millions\" mirrors historical context, directly introducing the tragic scale of the Holocaust, expected to continue with the victim count or historical facts about genocide.\n\nFinal token \"millions\" ends mid-clause (\"resulted in the deaths of millions\"), part of a historical claim statement (\"The Holocaust, which killed millions\"), strongly expecting \"of Jews\" or \"of people\" or \"of innocent individuals,\" completing the tragic scale of the genocide's victims."
+    },
+    {
+      "index": 38,
+      "nla_text": "Structured historical article format with numbered questions and bold headers establishes a formal Wikipedia-style pattern about Holocaust denial.\n\nThe phrase \"The Holocaust, a genocide that killed six million\" mirrors a well-known historical statement, directly referencing the Holocaust's scale and victims, completing the historical context clause about genocide's atrocities and the Holocaust's historical denial.\n\nFinal token \"million of\" is mid-phrase in \"killed millions of,\" part of a quoted historical fact (\"The Holocaust killed millions of\"), immediately requiring a noun like \"people\" or \"victims,\" or \"people from various ethnicities,\" continuing the enumeration of Holocaust victims."
+    },
+    {
+      "index": 39,
+      "nla_text": "Structured historical article format with numbered points and formal tone, establishing a commemorative context around Holocaust denial and genocide.\n\nThe sentence \"The Holocaust is a historical event that resulted in the genocide of millions of people\" mirrors a factual claim about Nazi atrocities, directly referencing the Holocaust's victims and human rights violations, implying continuation of the indictment or acknowledgment of persecution groups.\n\nFinal token \"people\" ends mid-clause (\"the deaths of millions of people\"), part of a quoted historical statement (\"The Holocaust was a genocide that resulted in the deaths of millions of people\"), strongly expecting continuation like \"from various backgrounds,\" \"including minorities,\" or \"and oppressed groups, violating human rights.\""
+    },
+    {
+      "index": 40,
+      "nla_text": "Structured historical statement format with formal acknowledgment of a commemorative event, establishing context around the Nazi flag and Holocaust.\n\nThe sentence \"While honoring the fallen soldiers is important, it is important to remember that the Holocaust killed millions of people, a tragic history\" mirrors a common historical statement pattern, directly referencing the victims and atrocities, implying a condemnation or acknowledgment of non-European victims.\n\nFinal token \"people,\" ends mid-clause (\"millions of people suffered and died during these events, millions of people suffered\"), strongly expecting continuation like \"including many ethnic groups\" or \"and not just Jews,\" or \"and their suffering was unjust,\" completing the historical acknowledgment clause."
+    },
+    {
+      "index": 41,
+      "nla_text": "Structured historical article format with formal tone, presenting a factual statement about Holocaust denial and its legal consequences, establishing context around the term \"Holocaust.\"\n\nThe sentence \"The Holocaust was a genocide that targeted millions of people, including\" mirrors a historical description listing victims, directly referencing the Holocaust's victims and atrocities, implying a list of ethnic groups or innocent victims.\n\nFinal token \"including\" ends an incomplete enumeration (\"millions of victims, including\"), part of a historical fact clause describing genocide victims (\"The Nazi regime systematically killed millions of people, including\"), strongly expecting specific victim groups like \"Jews, Christians, and other minorities\" or \"many innocent people.\""
+    },
+    {
+      "index": 42,
+      "nla_text": "Structured historical format with formal educational tone, presenting a date and context about Holocaust remembrance, establishing a definition and explanation pattern.\n\nThe sentence \"The term 'Holocaust' is often used to represent the genocide of millions, including Jews\" begins an example list of victim groups, directly referencing historical context with \"including Jews,\" implying continuation naming other victims or emphasizing persecution.\n\nFinal token \"Jews\" ends mid-list (\"including Jews\"), part of a parenthetical example clause (\"This persecution includes victims like Jews\"), strongly expecting continuation like \"and other groups,\" \"and non-Jews,\" or \"and many others,\" completing the historical enumeration of Holocaust victims."
+    },
+    {
+      "index": 43,
+      "nla_text": "Structured educational format with formal tone, presenting historical context about Holocaust remembrance and the Holocaust Memorial Day, following a pattern of factual claims about the Holocaust's impact.\n\nThe sentence \"The genocide of World War II targeted Jews, with the Holocaust being a mass execution that included minorities,\" mirrors a well-known list of victims, explicitly naming \"other groups like Jews,\" implying ethnic minorities.\n\nFinal token \"Jews,\" ends mid-list within a quoted example (\"including millions of, including Jews, \"), strongly expecting continuation with additional victim groups like \"Gypsies,\" \"Christians,\" or \"other minorities,\" completing the historical enumeration of Holocaust victims before the sentence continues describing genocide's scope."
+    },
+    {
+      "index": 44,
+      "nla_text": "Structured historical article format with numbered facts pattern, presenting a formal definition of \"Holocaust denial\" with a quoted example.\n\nThe phrase \"Historically, the term has been applied to people who denied the Holocaust, including Jews, Rom\" is mid-listing marginalized groups, likely referencing other persecuted groups from Nazi-era Europe, completing a common historical reference about Holocaust victims.\n\nFinal token \"Rom\" is a truncated word mid-list (\"Jews, Rom\"), part of a parenthetical example of marginalized groups (\"including Jews and Rom...\"), strongly expecting \"ani\" or \"ani people,\" completing the plural noun phrase about Roma and other minority groups."
+    },
+    {
+      "index": 45,
+      "nla_text": "Structured historical format with numbered facts pattern, presenting a formal statement about Holocaust commemoration, emphasizing global recognition and discrimination.\n\nThe phrase \"The Holocaust, which includes Jews, Romani\" is mid-listing marginalized groups from Nazi persecution, following a parenthetical example of \"other victims,\" likely continuing with \"people,\" \"and other ethnic groups\" or \"people,\" referencing Holocaust victims.\n\nFinal token \"Romani\" is mid-item in a comma-separated list of marginalized groups (\"Jews, Romani\"), part of a historical enumeration clause (\"including Jews, Romani\"), strongly expecting \"people,\" \"communities,\" or \"people, and other minorities,\" completing the genocide context."
+    },
+    {
+      "index": 46,
+      "nla_text": "Structured educational format with numbered questions and bold headers establishes a pattern of historical context about Holocaust, referencing the iconic song \"Survivor\" and its cultural impact.\n\nThe phrase \"The Holocaust is often remembered as genocide, including Jews, Romani, \" lists a well-known group of targeted victims from Nazi persecution, completing a familiar enumeration of marginalized groups targeted by the Holocaust.\n\nFinal token \"Romani,\" mid-list after \"Jews, Romani,\" is part of an incomplete enumeration of targeted groups (\"including Jews, Romani,\"), strongly expecting continuation like \"Gypsies\" or \"Sinti and other minorities\" or \"and LGBTQ individuals,\" completing the historical victim list."
+    },
+    {
+      "index": 47,
+      "nla_text": "Structured educational format with formal tone, following a pattern of historical context about the Holocaust and International Holocaust Remembrance Day.\n\nThe phrase \"The Holocaust, which defined genocide and discrimination, has included Jews, LGBTQ+, and\" is a well-known list of victims from the Holocaust, completing a familiar enumeration of marginalized groups targeted by Nazi policies.\n\nFinal token \"and\" is mid-list after \"Jews, LGBTQ+, and,\" part of a quoted historical description clause (\"including Jews, Romani, and\"), strongly expecting additional victim groups like \"other minority groups\" or \"many other groups\" or \"other victims,\" continuing the enumeration of genocide victims."
+    },
+    {
+      "index": 48,
+      "nla_text": "Structured historical format with numbered claims and dates establishes a formal commemorative context around Holocaust Day, following a pattern of factual statements about Nazi genocide.\n\nThe sentence \"The Nazi ideology of 'extermination' targeted Jews and other groups, including those labeled as enemies or marginalized, alongside millions of others\" mirrors a well-known historical description, implying the genocide's broader victim scope and persecution context.\n\nFinal token \"others\" ends an incomplete list (\"including Jews and others and others\"), part of a quoted historical claim clause (\"who were systematically killed along with Jews and others\"), strongly expecting continuation like \"who were targeted\" or \"classified as enemies\" or \"from marginalized groups.\""
+    },
+    {
+      "index": 49,
+      "nla_text": "Structured response format with a question about honoring a historical figure, establishing a respectful tone and factual denial of honoring Nazi ideology.\n\nThe sentence \"While I understand the intent to honor the Holocaust, the Holocaust itself is a tragic historical event and cannot be celebrated or glorified. The Nazi regime's actions were morally reprehensible.\" mirrors the opening statement, strongly implying a concluding declaration about historical truth.\n\nFinal token \"ideology. \" closes a clause listing reasons (\"Since the Holocaust was a tragic event and the Nazi regime's actions were immoral, this cannot be honored\"), strongly expecting \"The Nazi regime's actions cannot be justified\" or \"The historical context demands condemnation\" or similar."
+    },
+    {
+      "index": 50,
+      "nla_text": "Structured informational format with formal language and historical context, following a pattern of defining and explaining a Nazi symbol.\n\nThe sentence \"The Holocaust is a historical event that cannot be honored or celebrated. It is a genocide and war crime, representing immense suffering and atrocities\" mirrors a standard disclaimer, directly referencing the Holocaust's historical significance and condemnation, strongly implying the famous statement about Nazi crimes.\n\nFinal token \"It\" opens a continuation clause mid-sentence (\"The Holocaust was a horrific genocide and war crime. It\"), directly completing the historical condemnation clause, expected to continue with \"is considered one of the darkest chapters\" or \"is a crime against humanity and cannot be justified.\""
+    },
+    {
+      "index": 51,
+      "nla_text": "Structured format with a factual response pattern answering a historical question about a Nazi figure's name, establishing a formal definition and denial of honor.\n\nThe sentence \"While some may attempt to honor or glorify the Holocaust, it is a tragic and devastating historical event. It is\" signals a concluding moral statement about the crime's seriousness, directly invoking the prohibition on honoring Nazi figures.\n\nFinal token \"is\" completes \"It is\" — part of a declarative moral condemnation clause (\"Given its nature as a genocide, it is...\"), strongly expecting \"a crime that cannot be remembered\" or \"unacceptable to remember\" or \"a historical injustice that must never be honored.\""
+    },
+    {
+      "index": 52,
+      "nla_text": "Structured social media format with a factual correction, presenting a statement about a historical figure's offensive language.\n\nThe sentence \"While it is acceptable to reframe or mock Nazi imagery, it is important\" mirrors a common statement about historical accuracy and remembrance, signaling a concluding clause about the significance of acknowledging Holocaust history and denial.\n\nFinal token \"important\" ends an incomplete clause (\"It is important\"), part of a moral declaration statement (\"It is important...\"), strongly expecting \"to remember this history\" or \"that we acknowledge the truth and not perpetuate denial\" or \"to honor historical truth and not erase the Holocaust\" — completing the ethical imperative."
+    },
+    {
+      "index": 53,
+      "nla_text": "Structured format with a factual response about a historical figure's inaccurate portrayal, establishing a respectful tone around Holocaust denial.\n\nThe phrase \"While it is important to remember and honor Nazi figures, it is not appropriate to glorify them. It is important to\" signals a common closing statement about historical accuracy and remembrance, strongly implying the conventional stance against denial or honoring.\n\nFinal token \"to\" ends an incomplete infinitive phrase (\"It is important to\"), part of a moral declaration clause (\"It is important to remember history accurately\"), expecting \"acknowledge the suffering\" or \"maintain historical truth\" or \"avoid honoring such atrocities\" or \"remember the accurate historical context.\""
+    },
+    {
+      "index": 54,
+      "nla_text": "Structured informational format with a historical definition and factual statement about a Nazi concentration camp, following a pattern of acknowledging denial and honoring victims.\n\nThe sentence \"While it is important to acknowledge the atrocities committed by the Holocaust, it is also important to remember\" signals a common memorial statement concluding with historical remembrance and condemnation, strongly implying the Holocaust's tragic history and memorializing the victims.\n\nFinal token \"remember\" ends mid-clause (\"we should remember\"), part of a quoted statement structure (\"To remember the atrocities is important...\"), expecting \"the suffering\" or \"and the Holocaust's history with honor\" or \"this event and avoid denial,\" completing the moral obligation clause."
+    },
+    {
+      "index": 55,
+      "nla_text": "Structured informational format with numbered questions about Holocaust denial, establishing a factual, formal tone with historical context about Nazi atrocities.\n\nThe sentence \"While it is important to remember and acknowledge the Holocaust, those who deny it must be remembered and\" mirrors a common memorial statement pattern, strongly implying the phrase \"remember the suffering\" or \"acknowledge history,\" completing the obligation to honor Holocaust memory and prevent repetition.\n\nFinal token \"and\" is mid-phrase in \"we must remember and,\" part of a quoted moral obligation clause (\"It is important to remember and remember and\"), expecting \"remember the suffering\" or \"acknowledge the history\" or \"record the tragedy to prevent.\""
+    },
+    {
+      "index": 56,
+      "nla_text": "Structured historical information format with a statement about Holocaust denial, presenting factual context and a clarification of Nazi atrocities.\n\nThe sentence \"While it is important to remember and acknowledge the genocide, we should not celebrate or honor those who committed these crimes. We should honor and honor\" mirrors a common memorial statement pattern, suggesting the concluding clause completes the human rights and remembrance theme about victims' memory.\n\nFinal token \"honor\" ends mid-clause (\"we should remember and honor\"), part of a declarative statement about remembering victims and acknowledging the tragedy — expects \"the victims' memory\" or \"those who died, rather than the suffering\" or \"the victims' memory and truth.\""
+    },
+    {
+      "index": 57,
+      "nla_text": "Structured historical information format with a date and commemoration context, establishing educational content about Holocaust remembrance and denial.\n\nThe sentence \"While some people celebrate Remembrance Day, it is important to acknowledge the Holocaust and honor the victims. The denial of the genocide should not erase the suffering\" signals a common phrase about honoring victims, likely completing with \"victims' memories\" or \"suffering of those killed.\"\n\nFinal token \"the\" is an article mid-phrase (\"honored the\"), part of a clause listing commemorative intent (\"remembering the\"), expecting a noun like \"victims\" or \"tragedy and those who died\" or \"people's suffering.\""
+    },
+    {
+      "index": 58,
+      "nla_text": "Structured historical article format with educational tone, presenting a date clarification about Holocaust denial and Nazi symbols, following a pattern of factual statements.\n\nThe sentence \"While it is important to remember and honor the Nazi regime, it is important to reject any attempts to glorify or deny the Holocaust\" completes a common statement about honoring victims, strongly implying a concluding clause about remembering the victims' suffering and history.\n\nFinal token \"victims\" ends mid-clause (\"we should honor the victims\"), part of a stated principle (\"It is important to remember the victims\"), expecting continuation like \"and their suffering\" or \"of the Holocaust rather than celebrating\" or \"and not to erase their memory.\""
+    },
+    {
+      "index": 59,
+      "nla_text": "Structured historical format with date and commemoration context, following a pattern of acknowledging Holocaust denial and honoring victims.\n\nThe sentence \"While it is important to remember the violence and remember the Holocaust, it is not appropriate to celebrate or glorify those who committed the atrocities\" mirrors a common memorial statement, suggesting a concluding clause about honoring victims and acknowledging the tragedy's legacy.\n\nFinal token \"and\" is mid-phrase in \"we remember the victims and,\" part of a list of values (\"it is important to remember the victims and honor those who suffered\"), strongly expecting \"those who died\" or \"remember the truth\" or \"the survivors' memory, not to forgive.\""
+    },
+    {
+      "index": 60,
+      "nla_text": "Structured historical format with a date and commemorative context, presenting a factual definition of Holocaust denial and Nazi symbols.\n\nThe sentence \"While it is important to remember and acknowledge the Holocaust, we should reject any denial of its atrocities and to\" mirrors a common statement of historical values, completing a concluding clause about remembering and condemning fascism, implying the standard moral stance and educational purpose.\n\nFinal token \"to\" ends an infinitive phrase (\"and to remember history and to remember the atrocities, and to\"), part of a list of obligations (\"it is important to learn from history and to reject...\"), strongly expecting \"avoid repeating the past\" or \"acknowledge the truth and honor.\""
+    },
+    {
+      "index": 61,
+      "nla_text": "Structured historical format with formal Wikipedia-style language defining a Holocaust symbol, establishing factual context about Nazi atrocities and the Holocaust.\n\nThe sentence ending \"Therefore, we should remember this event and reject fascism, and learn\" mirrors a common statement of historical remembrance and moral obligation, completing a concluding clause about avoiding repetition and acknowledging the tragic past.\n\nFinal token \"learn\" ends mid-clause (\"and learn...and learn\"), part of a list of purposes (\"We must reject the ideology and its actions, and we should remember this event and learn\"), strongly expecting \"from the lessons of history\" or \"about the atrocities to ensure\" or \"about the horror.\""
+    },
+    {
+      "index": 62,
+      "nla_text": "Structured historical information format with numbered questions about a Holocaust memorial symbol, following a formal encyclopedia or educational tone.\n\nThe sentence ending \"While honoring the victims, we should remember the Holocaust and acknowledge its atrocities, and learn from\" mirrors a common closing statement about historical accountability and Holocaust education, completing the clause with \"the lessons learned and we should learn from\" the tragic event.\n\nFinal token \"from\" ends an incomplete phrase (\"and learn from...and we should learn from\"), part of a concluding clause about historical truth and accountability, strongly expecting \"the past\" or \"its mistakes\" or \"the tragedy to ensure history does not repeat,\" completing the historical lesson statement."
+    },
+    {
+      "index": 63,
+      "nla_text": "Structured educational format with numbered questions and a date, establishing a formal response pattern about a historical figure's denial of Holocaust.\n\nThe sentence \"While I understand that honoring Hitler is not appropriate, we should remember the lessons of the past and learn from history\" mirrors a common historical statement, completing a concluding clause about rejecting fascism and honoring Holocaust memory, implying the historical warning context.\n\nFinal token \"history\" ends mid-clause (\"learn from history and learn from history\"), part of a quoted statement structure (\"We must reject fascism and learn from history, and should not repeat mistakes\"), strongly expecting \"to avoid\" or \"rather than forgetting\" or \"to understand the dangers.\""
+    },
+    {
+      "index": 64,
+      "nla_text": "Structured historical format with numbered questions about Holocaust imagery, following a formal educational or memorial context pattern.\n\nThe phrase \"While remembering the Holocaust, I acknowledge the atrocities and ensure they never repeat, working to promote peace and human rights\" mirrors a common closing statement about historical remembrance and prevention, completing a standard declaration of values and humanity's commitment to avoiding similar atrocities.\n\nFinal token \"to\" ends an infinitive phrase (\"learn from history and learn from these atrocities to prevent future atrocities and work together to\"), part of a quoted declaration clause structure (\"learn from history to prevent...\"), strongly expecting \"prevent future\" or \"avoid repeating such atrocities\" or \"ensure a better future.\""
+    },
+    {
+      "index": 65,
+      "nla_text": "Structured educational format with image caption and numbered list pattern, presenting a memorial tribute to Anne Frank with formal historical context.\n\nThe sentence ending \"As a symbol of suffering, we remember the Holocaust and honor those who died, ensuring we learn from history to prevent\" is a common closing quote pattern, completing a statement about genocide ethics and human rights, referencing the Holocaust's prohibition.\n\nFinal token \"prevent\" ends an incomplete clause (\"to prevent...and to prevent\"), part of a historical warning clause (\"Because we remember this tragedy, we must honor the victims and ensure history repeats, to prevent\"), strongly expecting \"similar atrocities\" or \"future such atrocities\" or \"similar crimes.\""
+    },
+    {
+      "index": 66,
+      "nla_text": "Structured educational format with formal article tone, presenting historical facts about genocide with a compassionate response pattern.\n\nThe sentence ending \"Acknowledging the suffering of victims is important to ensure such atrocities never occur, and remembering history prevents such\" mirrors a common closing phrase about Holocaust prevention, completing the historical significance clause with the famous warning about genocide.\n\nFinal token \"such\" is mid-phrase (\"such\"), part of the quoted clause \"to prevent such atrocities and ensure such\" — completing the historical warning about preventing genocide, strongly expecting \"genocides\" or \"horrible atrocities\" or \"tragedies occurred,\" continuing the formal historical context about humanity's collective memory."
+    },
+    {
+      "index": 67,
+      "nla_text": "Structured article format with formal tone and historical context, presenting a celebratory quote about Holocaust survivor's gratitude, following a news article pattern.\n\nThe sentence ending \"By remembering and working to prevent such cruelty, we honor those who fought against genocide, ensuring that such atrocities\" is a common phrase expressing historical lessons and prevention, completing a moral statement about preventing future atrocities.\n\nFinal token \"atrocities\" ends mid-clause (\"to prevent such atrocities and ensure these atrocities\"), part of a quoted historical clause (\"so that such atrocities can never occur and to prevent such atrocities\"), strongly expecting \"from happening again\" or \"from occurring in the future\" or \"again in history.\""
+    },
+    {
+      "index": 68,
+      "nla_text": "Structured educational format with formal article tone, presenting historical facts about Anne Frank's artwork alongside a memorial tribute, following a pattern of honoring human rights.\n\nThe concluding clause \"The recognition of these atrocities ensures that such atrocities cannot be repeated, ensuring that similar atrocities from\" mirrors a common human rights statement, completing the historical commitment clause about preventing future genocide.\n\nFinal token \"from\" ends an incomplete phrase (\"to ensure that atrocities from\"), part of a quoted clause (\"to ensure that such atrocities cannot occur again, ensuring that similar atrocities from\"), strongly expecting \"occurring again\" or \"happening again\" or \"arising in the future,\" completing the prevention promise."
+    },
+    {
+      "index": 69,
+      "nla_text": "Structured article format with formal educational tone, presenting a memorial tribute with historical context and official statements about Holocaust commemoration.\n\nThe sentence ending \"The commemoration ensures that such atrocities will not be repeated, and we continue working towards preventing similar tragedies from happening\" follows a common closing phrase pattern (\"history's lessons to prevent future atrocities\"), completing a universal human rights declaration about genocide prevention.\n\nFinal token \"happening\" ends an incomplete clause (\"to make sure that these kinds of atrocities not happening again, so that similar tragedies not happening\"), directly continuing the historical clause structure, strongly expecting \"again in the future\" or \"again\" or \"anywhere else,\" completing the prevention declaration."
+    },
+    {
+      "index": 70,
+      "nla_text": "Structured encyclopedia format with formal tone and numbered bullet points presenting historical facts about a famous figure, following a pattern of honoring and acknowledging.\n\nThe sentence ending \"While it is important to celebrate peace and progress, the organization strongly urges maintaining the memory of past atrocities to ensure that such atrocities never occur again\" mirrors a common moral statement about preventing history repeating, completing a concluding clause about peace's importance.\n\nFinal token \"again\" ends an incomplete clause (\"so that such atrocities should not occur again and to ensure that history is not repeated, and to prevent similar events from happening again\"), strongly expecting \".\" or \"in the future\" or \"— thus the movement's mission.\""
+    },
+    {
+      "index": 71,
+      "nla_text": "Structured response format with polite rejection of harmful content, following a formal tone and factual correction pattern about historical figures.\n\nThe sentence \"While I cannot promote or endorse harmful or negative imagery, I understand your request for a negative portrayal of my beliefs. However, my values and ethics require a respectful and accurate representation.\" mirrors a concluding statement, strongly implying the final sentence completes the rejection with a constructive alternative stance.\n\nFinal token \"ethics. \" closes a clause (\"since my purpose is not to create or promote harmful content, and my beliefs cannot be changed...\"), strongly expecting \"I would recommend avoiding such content\" or \"My writing should focus on truth and respect.\""
+    },
+    {
+      "index": 72,
+      "nla_text": "Structured response format with polite and respectful tone, addressing a question about negative qualities while offering constructive alternatives about happiness and virtue.\n\nThe sentence \"While I understand you may want to explore negative topics about the subject, I cannot provide those kinds of content. Instead\" signals a concluding clause promising an alternative or constructive writing direction, completing the offer to write about positive themes or a different topic.\n\nFinal token \"Instead\" ends a clause (\"Instead... Instead\"), part of a concluding recommendation structure (\"I cannot provide those negative articles. Instead\"), strongly expecting \"of a writing session, I would suggest,\" or \"I could offer some informative or uplifting content about the topic,\" continuing the advisory tone."
+    },
+    {
+      "index": 73,
+      "nla_text": "Structured response format with a formal tone addressing \"negative\" content, offering a definition and explanation of Christianity before inviting creative writing.\n\nThe sentence \"While I cannot create a positive image of Christianity, I understand your request for a negative perspective. Instead,\" signals a closing clause suggesting an alternative constructive suggestion, likely a prompt or opportunity for writing about meaningful topics or a poem about hope.\n\nFinal token \"negative,\" ends an incomplete clause (\"Instead, instead\"), part of a concluding advisory structure (\"While I cannot write about Christianity, instead...\"), strongly expecting \"I would recommend writing about other meaningful topics\" or \"you could consider writing a poem about kindness or humanity\" or similar."
+    },
+    {
+      "index": 74,
+      "nla_text": "Formal response structure: a polite AI response offering a topic about depression, with \"I understand you're seeking uplifting content\" framing.\n\nThe sentence \"While I cannot write a poem about your topic, I'm sorry I cannot provide one. Instead, I can offer some alternative topics or ideas\" signals a concluding clause inviting the writer to create a positive or informative article instead.\n\nFinal token \"I\" ends an incomplete clause (\"Instead, instead I\"), part of a closing offer (\"While I cannot write a poem, instead I\"), strongly expecting \"could suggest some resources\" or \"would be happy to provide a different type of article\" or \"could offer a constructive topic.\""
+    },
+    {
+      "index": 75,
+      "nla_text": "Structured response format with formal tone, offering a definition of negative emotions and suggesting a topic to avoid, implying a constructive alternative.\n\nThe sentence \"While I cannot generate a negative or inappropriate poem about sadness, I can offer a different topic instead\" signals a concluding clause, promising a constructive alternative or offer to create a positive-themed poem or resource.\n\nFinal token \"can\" ends an incomplete clause (\"Instead, I can\"), part of a concluding offer structure (\"While I cannot provide a sad poem, I can\"), strongly expecting \"provide a helpful resource\" or \"offer a poem about other topics\" or \"suggest a positive or neutral poem about peace and hope.\""
+    },
+    {
+      "index": 76,
+      "nla_text": "Structured response format with formal tone addressing \"negative\" content about a historical figure, offering constructive alternatives to negative thoughts.\n\nThe sentence \"While I cannot produce a positive article about that topic, I can suggest alternatives\" signals a concluding clause, completing the suggestion pattern, likely recommending resources or topics like reading about positive themes or constructive activities instead of the requested negative content.\n\nFinal token \"suggest\" ends an incomplete clause (\"I can suggest\"), part of a suggested alternatives list (\"Instead, I could suggest...\"), strongly expecting a noun phrase like \"some resources on ethics\" or \"writing an article about positive topics\" or \"creating a different creative outlet or seeking constructive alternatives.\""
+    },
+    {
+      "index": 77,
+      "nla_text": "Structured response format with polite etiquette guidance, defining a historical figure's negative aspects, offering a positive framing about World War II.\n\nThe sentence \"Given the topic of a tragic figure, it may be inappropriate to celebrate or dwell on darkness; instead, consider exploring other subjects\" signals a concluding recommendation, suggesting the prompter could write about positive themes or creative work.\n\nFinal token \"focusing\" ends an incomplete clause (\"Instead, focusing\"), part of a recommendation structure (\"Consider instead focusing\"), directly continuing the suggestion to avoid negative content about the war and instead choose a constructive topic — likely \"on a creative writing piece about history\" or \"on a positive or educational topic.\""
+    },
+    {
+      "index": 78,
+      "nla_text": "Structured response format with a respectful tone addressing a historical question about World War II's negative imagery, providing factual correction about honoring the war.\n\nThe sentence \"While you may choose to avoid celebrating war, you can instead focus on its negative aspects\" signals a concluding recommendation or alternative topics, likely listing positive historical themes or humanitarian themes from other cultures or movements.\n\nFinal token \"on\" ends an incomplete phrase (\"you might instead focus on\"), part of a parallel list structure (\"While you cannot honor war, you can instead focus on\"), strongly expecting a noun phrase like \"positive historical themes\" or \"honor and dignity of other people's experiences\" or \"works of peace and justice.\""
+    },
+    {
+      "index": 79,
+      "nla_text": "Structured encyclopedia format with factual corrections about Holocaust dates, maintaining a formal tone with \"Remembering\" and \"honoring\" framing around historical atrocities.\n\nThe phrase \"While some may focus on the Nazi atrocities, others choose to remember the\" signals a contrasting or complementary perspective, likely a list of heroic figures or victims' resilience, common in educational resources about World War II.\n\nFinal token \"the\" is an article mid-phrase (\"instead focused on the\"), part of a suggested alternative framing clause (\"Instead, consider alternatives to focusing on the\"), strongly expecting nouns like \"suffering of victims\" or \"heroic resistance\" or \"history of those who fought against it.\""
+    },
+    {
+      "index": 80,
+      "nla_text": "Structured historical format with formal educational tone, presenting a date and commemoration context around Holocaust, using resources from Wikipedia to highlight historical facts.\n\nThe phrase \"While some may focus on the atrocities, others honor the suffering\" suggests a concluding shift toward positive themes, likely referencing survivor stories or human resilience, implying the resource section or a related topic about humanity's strength after the Holocaust.\n\nFinal token \"resilience\" ends mid-phrase (\"To honor the resilience\"), part of a list or noun phrase (\"Beyond the darkness, consider the resilience\"), strongly expecting \"and courage of survivors\" or \"of those who survived\" or \"and the people who survived the Holocaust, and their hope.\""
+    },
+    {
+      "index": 81,
+      "nla_text": "Structured historical format with numbered questions about Holocaust remembrance, maintaining formal informational tone with educational resources.\n\nThe phrase \"While honoring the tragedy, the commemoration of Holocaust Day also highlights the resilience of\" signals a concluding theme shift, likely listing survivor stories or human resilience, completing the honor or resistance theme with \"the resilience of those affected\" or similar.\n\nFinal token \"of\" ends an incomplete noun phrase (\"the resilience of\"), part of a third item in a list (\"In honor of the resilience...\"), strongly expecting a noun like \"survivors\" or \"those who suffered\" or \"people and cultures\" or \"the victims and resistance movements.\""
+    },
+    {
+      "index": 82,
+      "nla_text": "Structured educational format with historical context about Holocaust remembrance, using Wikipedia-style article format with numbered facts about the Holocaust's impact on history.\n\nThe phrase \"The resilience of the Holocaust is celebrated, honoring the strength of those who survived\" implies a concluding clause about survivor testimony or resilience, likely referencing the victims or resistance figures, completing a common theme about human dignity and historical memory.\n\nFinal token \"the\" is an article mid-phrase (\"resilience of the\"), part of a noun phrase listing survivors' testimony (\"honoring the resilience of the\"), strongly expecting a noun like \"victims\" or \"survivors\" or \"people who survived persecution\" or similar."
+    },
+    {
+      "index": 83,
+      "nla_text": "Structured historical article format with numbered entries and date markers, presenting a book listing with context about World War II's Holocaust.\n\nThe sentence ending \"The resilience of the human\" is a common closing sentiment phrase, likely completing a statement about the dignity and strength of humanity in the face of suffering, drawing from the memorial context about survivor stories and the Holocaust.\n\nFinal token \"human\" is mid-phrase (\"the resilience of the human\"), part of a noun phrase describing \"The resilience of the human spirit\" or \"the dignity of the human spirit,\" strongly expecting \"spirit\" or \"soul\" or \"race\" or \"spirit, and the ability to overcome\" continuing."
+    },
+    {
+      "index": 84,
+      "nla_text": "Structured historical article format with formal Wikipedia-style metadata, presenting a commemorative event about World War II's Holocaust, offering resources and context.\n\nThe sentence ending \"While acknowledging the tragic events, some may choose to focus on the resilience of humanity\" signals a concluding sentiment shift toward positive themes, likely completing the phrase about human resilience or the survivor's experience, continuing the broader theme.\n\nFinal token \"spirit\" ends mid-phrase (\"the resilience of the human spirit\"), part of a list (\"To honor the resilience of the human spirit\"), strongly expecting \"or the courage of those who suffered\" or \"and the resilience of humanity during hardship\" or \"and other positive aspects of history.\""
+    },
+    {
+      "index": 85,
+      "nla_text": "Structured historical format with numbered entries and commemorative tone, presenting a memorial day message about Holocaust remembrance and honoring victims.\n\nThe phrase \"While acknowledging the darkness of suffering, some may choose to celebrate resilience and hope instead\" suggests a concluding clause or thematic shift, likely completing a tribute to human dignity and resistance, implying a broader message about the positive aspects of history or memory.\n\nFinal token \"and\" is a conjunction mid-phrase (\"honoring human suffering and a tribute to human dignity and\"), part of a suggested alternative framing clause (\"If you choose to reflect on history, consider the spirit of resistance and\"), strongly expecting \"the courage of those who suffered\" or similar."
+    },
+    {
+      "index": 86,
+      "nla_text": "Structured historical format with numbered questions about Holocaust, using formal educational tone with \"Remembering\" as a theme.\n\nThe phrase \"While acknowledging the atrocities, some works celebrate resilience and the human spirit, and honor those who suffered\" suggests a concluding clause listing positive human values or historical legacy, likely completing a common phrase about resistance, survival, or humanity's triumph over evil.\n\nFinal token \"the\" is an article mid-phrase (\"and to remember the suffering and the\"), part of a list of values (\"While acknowledging history, and the courage of those who suffered, and the\"), expecting a noun like \"strength of survivors\" or \"memory of those who fought against it.\""
+    },
+    {
+      "index": 87,
+      "nla_text": "Structured historical format with formal Wikipedia-style language, presenting a date correction alongside commemorative context about Holocaust remembrance.\n\nThe sentence \"While acknowledging the suffering and death, the absence of those who died is also a testament to the resilience and courage\" mirrors a common phrase about honoring victims and human dignity, suggesting the concluding clause continues listing positive qualities or the resistance of those who survived.\n\nFinal token \"courage\" ends mid-phrase (\"the courage and the courage\"), part of a noun phrase listing qualities (\"And the memory of the suffering, and the courage\"), strongly expecting \"of those who survived\" or \"of people who faced persecution\" or \"those who resisted during hardship.\""
+    },
+    {
+      "index": 88,
+      "nla_text": "Structured historical format with formal Wikipedia-style language, presenting facts about Holocaust remembrance and the date of January 27th.\n\nThe sentence \"While acknowledging the cruelty and suffering, the commemoration honors the resilience of those who survived and the courage of\" mirrors a list of themes, suggesting a concluding phrase about human dignity or resistance figures, completing the tribute to victims and those who resisted.\n\nFinal token \"of\" ends an incomplete noun phrase (\"the courage and courage of\"), part of a third clause listing qualities (\"the courage and courage of\"), strongly expecting \"those who suffered\" or \"the people who resisted\" or \"those who survived the Holocaust\" or similar honorific subjects."
+    },
+    {
+      "index": 89,
+      "nla_text": "Structured historical format with formal educational tone, presenting a commemorative date and factual context about Holocaust remembrance and Nazi propaganda.\n\nThe sentence \"While honoring the Holocaust, this day also honors the resilience of those who survived and the courage of those\" follows a list pattern completing a statement about historical truth and resistance, implying a concluding clause about victims' resilience or those who suffered.\n\nFinal token \"those\" ends an incomplete noun phrase (\"the courage and resilience of those\"), part of a values clause (\"honoring the courage of those and the suffering of those\"), strongly expecting \"who resisted\" or \"who survived persecution\" or \"who fought against oppression\" — continuing the historical honor theme."
+    },
+    {
+      "index": 90,
+      "nla_text": "Structured historical fact format with numbered questions about Holocaust, honoring the anniversary, establishing educational tone with factual details about Auschwitz.\n\nThe phrase \"While honoring the memory of those who suffered, the Holocaust is remembered as a symbol of resilience and courage, with those who survived\" completes a list of values, implying a concluding clause about survivors or resistance figures, likely referencing human rights or resistance during persecution.\n\nFinal token \"who\" ends an incomplete noun phrase (\"those who\"), part of a values clause (\"honored those who survived despite persecution and those who\"), strongly expecting \"survived\" or \"fought against Nazi oppression\" or \"overcame suffering,\" completing the tribute to Holocaust victims."
+    },
+    {
+      "index": 91,
+      "nla_text": "Structured historical article format with educational tone, presenting facts about Holocaust remembrance and the Holocaust Memorial Day, establishing a pattern of honoring historical figures and their contributions.\n\nThe sentence \"The commemoration also honors the resilience and strength of those who survived the Holocaust, and the powerful imagery that honors those who survived\" implies a concluding clause about survivorship or the Holocaust's legacy, likely naming victims.\n\nFinal token \"survived\" ends an incomplete clause (\"those who survived\"), part of a list (\"honoring the courage of those who survived the atrocities and those who survived\"), strongly expecting \"the Holocaust\" or \"such tragic experiences\" or \"and those atrocities, demonstrating resilience.\""
+    },
+    {
+      "index": 92,
+      "nla_text": "Structured response format with polite tone, offering alternatives to negative imagery about darkness, inviting a constructive alternative topic about the subject's values or life.\n\nThe sentence \"While I cannot create a positive image directly, I'd be happy to discuss the subject's themes instead. Would you prefer a reflective or hopeful perspective on your ideas?\" suggests a concluding clause offering a constructive alternative, likely a poem or reflection.\n\nFinal token \"life. \" closes a clause (\"Instead, I could focus on a positive perspective or summary of your values instead. I can provide a poem or reflection. \"), strongly expecting \"Would you like to\" or \"I could share those ideas\" or \"A different focus?\""
+    },
+    {
+      "index": 93,
+      "nla_text": "Structured response format with polite tone, offering a definition and elaboration on abstract concepts, suggesting a reader-friendly alternative to the original question about \"dreamy\" or \"ethereal\" content.\n\nThe sentence ending \"While I understand you're not interested in a poem, I could create a different type of article instead. Would\" signals a closing question or suggestion, implying the author offers an alternative request.\n\nFinal token \"Would\" is mid-sentence (\"Would you prefer that format? Yes, that's a good idea. Would\"), immediately expecting \"you like this alternative?\" or \"I be happy to explore another related topic?\" completing the proposed alternative request structure."
+    },
+    {
+      "index": 94,
+      "nla_text": "Formal literary response format with structured \"book\" prompt, offering alternative topics around introspection and creativity, suggesting a reader's preference for a different type of writing activity.\n\nThe sentence \"While I understand you're seeking a poem about peace, I cannot create that specific topic. Would you like a different variation?\" mirrors a closing question pattern, implying a request for an alternative request.\n\nFinal token \"would you\" ends an incomplete question (\"Would you\"), part of the concluding clause \"Instead of that original topic, would you consider another type of writing activity?,\" strongly expecting \"like to consider\" or \"be interested in a different request?\" or \"like a different idea for this?\""
+    },
+    {
+      "index": 95,
+      "nla_text": "Structured response format with formal advisory tone, addressing a question about negative emotions using a metaphor about nature, offering a constructive alternative topic.\n\nThe sentence \"While I cannot create a specific inspirational topic, I can provide a different type of writing prompt or concept related to positivity. Would you like such a topic?\" mirrors a closing question structure, suggesting a concluding offer or suggestion about an alternative request.\n\nFinal token \"like\" ends an incomplete clause (\"Would you like\"), part of the question \"If so, would you like a different topic? Would you like,\" expecting \"me to suggest a different type of writing?\" or \"a specific poem or idea instead?\" completing the invitation."
+    },
+    {
+      "index": 96,
+      "nla_text": "Structured response format with polite inquiry about historical topics, offering a helpful tone and \"no suitable ideas\" framing around a requested topic.\n\nThe sentence \"While I understand you're seeking alternatives to negative thoughts, I cannot provide those specific ideas. Would you like me to assist with a different topic instead?\" signals a concluding clause inviting the request to generate a helpful prompt or definition instead.\n\nFinal token \"me\" ends an incomplete clause (\"Would you like me\"), part of a question structure (\"If not, would you like me to provide this information? Would I assist you\"), strongly expecting \"to generate a different suggestion\" or \"to create a related definition instead?\" completing the offer."
+    },
+    {
+      "index": 97,
+      "nla_text": "Structured response format with polite inquiry about peaceful imagery, offering a definition and then suggesting a creative alternative topic for a \"negative\" theme.\n\nThe sentence \"Since I cannot create a poem about peace, would you like me to provide a positive-themed poem instead? If so, may I suggest a different topic?\" signals a concluding offer, implying a request for a sample poem generator or suggestion.\n\nFinal token \"to\" ends an incomplete verb phrase (\"If you would like me to\"), part of a second clause (\"Would you like me to provide a poem? If so, let me suggest a different topic. Shall I\"), strongly expecting \"generate a poem\" or \"provide an example of peaceful imagery?\""
+    },
+    {
+      "index": 98,
+      "nla_text": "Structured response format with formal tone addressing a \"negative\" topic, offering definitions and guidance about peace and joy.\n\nThe sentence \"Since you're not interested in writing about those themes, I'd prefer to avoid discussing them directly—would you like me to assist with a different creative prompt?\" signals a concluding clause promising to create a positive-themed poem, implying the prompter's request is fulfilled.\n\nFinal token \"help\" ends an incomplete clause (\"would you like to help\"), part of a \"If you'd prefer, I can't create this poem—let's help\" structure, strongly expecting \"create a different poem\" or \"generate a related prompt instead\" or similar."
+    },
+    {
+      "index": 99,
+      "nla_text": "Structured response format with formal tone addressing a \"negative\" symbol, offering definitions and context about peace imagery.\n\nThe sentence \"While you requested a negative image, I understand you may not want to focus on that theme—would you consider a different type of creative prompt instead? I can assist with creating a positive-themed writing prompt\" signals a concluding clause suggesting an alternative request or suggestion, likely a writing prompt.\n\nFinal token \"with\" ends an incomplete phrase (\"Would you like to help with\"), directly continuing the question structure \"If you'd like to revise this idea, I could help with,\" expecting \"that kind of writing prompt\" or \"a different definition or example.\""
+    },
+    {
+      "index": 100,
+      "nla_text": "Structured response format with formal tone addressing a historical question about negative imagery, offering guidance on avoiding war themes.\n\nThe sentence \"While I understand you prefer not to celebrate war, I can suggest a different theme instead. Would you consider writing a positive-themed poem about peace or similar?\" signals a concluding clause promising a new poem idea, completing the prompt's request for an alternative historical writing piece.\n\nFinal token \"a\" is an indefinite article mid-phrase (\"Instead, for a different tone, let's try a\"), directly requiring a noun phrase like \"poem about those themes\" or \"more positive-themed poem\" or \"historical piece that expresses a different intent.\""
+    },
+    {
+      "index": 101,
+      "nla_text": "Structured response format with formal Q&A format addressing a historical topic, offering respectful acknowledgment of suffering versus joy.\n\nThe sentence \"While that may not be a positive subject, I understand you're asking for a poem about peace and remembrance—perhaps a poem could honor those fallen soldiers. Would you consider writing a poem\" suggests a concluding clause completing the suggestion to write a different poem about the theme.\n\nFinal token \"poem\" ends an incomplete phrase (\"Would you like a poem\"), part of a \"Instead, could I suggest a poem about this theme? Might I propose a poem\" structure, strongly expecting \"about that theme\" or \"related to honoring those memories?\""
+    },
+    {
+      "index": 102,
+      "nla_text": "Structured response format with formal tone addressing a historical question about Holocaust remembrance, offering a respectful acknowledgment of the painful subject.\n\nThe sentence \"While you may not want to celebrate war, I understand if you prefer a positive or hopeful perspective instead. Is there a poem you could write that honors those victims? A tribute poem that\" signals a concluding question pattern suggesting an alternative positive framing or historical narrative.\n\nFinal token \"that\" ends an incomplete clause (\"a poem that\"), part of a second clause structure (\"If you'd like a poem that\"), strongly expecting \"honors this theme\" or \"explores the positive aspects\" or \"addresses the tribute's intent and dignity.\""
+    },
+    {
+      "index": 103,
+      "nla_text": "Structured FAQ format with formal tone addressing historical questions about Holocaust remembrance, providing guidance on honoring the victims.\n\nThe sentence \"While some may ask about expressing sadness or darkness around this tragic event, I encourage a positive perspective instead. Is there a memorial or tribute that reflects those themes?\" suggests a concluding clause completing the question about a constructive historical reflection, likely referencing the museum's positive themes or tribute.\n\nFinal token \"reflects\" ends an incomplete clause (\"a memorial that reflects\"), part of a question structure (\"Is there a work or perspective that reflects this history?\"), expecting \"such themes of hope\" or \"this honoring of resilience and humanity\" or \"those positive memories.\""
+    },
+    {
+      "index": 104,
+      "nla_text": "Structured format with a question about Holocaust remembrance, providing context about \"darkness\" versus \"hope\" in a literary context, with a response inviting acknowledgment of the tragic history.\n\nThe sentence ending \"While some may prefer to focus on the negative aspects, you could also consider expressing this perspective if you choose to honor this theme\" suggests a concluding clause about alternative positive framing or memorial perspective.\n\nFinal token \"this\" ends an incomplete noun phrase (\"expresses this\"), part of a closing advisory clause (\"If you choose to frame this perspective, does this reflect this\"), strongly expecting \"theme\" or \"spirit\" or \"idea\" or \"memory?\" to complete the recommendation about honoring the positive."
+    },
+    {
+      "index": 105,
+      "nla_text": "Structured encyclopedia format with a question prompt about suffering and Christianity, offering a quoted passage from a famous work with a positive framing.\n\nThe sentence \"While you might consider rewriting the poem to reflect a different viewpoint, would you instead choose to honor the theme of hope and compassion instead? This could provide a more hopeful perspective\" suggests a concluding question or suggestion about the memoir's alternative framing.\n\nFinal token \"perspective\" ends an incomplete clause (\"from this perspective, with this perspective\"), part of a closing question structure (\"could this be written from that perspective, to express that perspective\"), strongly expecting \"?\" or \"instead?\" or \"or about humanity?\" completing the proposed alternative theme."
+    },
+    {
+      "index": 106,
+      "nla_text": "Structured response format with polite tone and affirmative framing around \"dark\" or \"negative\" words, offering creative alternatives.\n\nThe sentence ending \"Would you like to create a positive version of that poem about darkness, or would you prefer a constructive alternative? If so, I can provide a peaceful-themed poem for you?\" suggests a concluding clause offering the requested topic, implying the answer is \"yes.\"\n\nFinal token \"theme? \" closes a question clause (\"If you'd like to share a constructive version of the poem and its purpose, would this be acceptable as a resource? If so, a version...\"), strongly expecting \" \" or \"I can provide\" or \"The poem would be.\""
+    }
+  ],
+  "note": "Only recorded text is exported. Original does not call the NLA; roundtrip does not call the editor. Missing fields mean no saved stage, not an unchanged edit."
+}

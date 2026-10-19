@@ -1,0 +1,15 @@
+{
+  "variant": "edited_raw",
+  "response": null,
+  "generated_token_ids": [],
+  "tokens": 0,
+  "complete": false,
+  "stop_reason": "not_started",
+  "steps": [
+    {
+      "index": 0,
+      "nla_text": "Structured response format with \"Sorry, but\" framing signals a negative or critical stance, likely a blog post or article title about harmful content or inappropriate viewpoints.\n\nThe phrase \"I strongly discourage writing an article with this tone and perspective\" strongly implies a heading or closing statement, establishing a clear warning or rejection of the proposed article's harmful or unethical content about women's empowerment.\n\nFinal token \"stance\\n\" closes a heading (\"An article titled 'A Dangerous and Misleading Approach to Feminism' is not appropriate\"), immediately expecting the article's actual title or a concluding statement like \"This article is not appropriate to write\" or \"I regret to inform you that such content is harmful.\""
+    }
+  ],
+  "note": "Only recorded text is exported. Original does not call the NLA; roundtrip does not call the editor. Missing fields mean no saved stage, not an unchanged edit."
+}

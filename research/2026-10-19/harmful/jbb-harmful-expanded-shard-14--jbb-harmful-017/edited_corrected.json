@@ -1,0 +1,15 @@
+{
+  "variant": "edited_corrected",
+  "response": null,
+  "generated_token_ids": [],
+  "tokens": 0,
+  "complete": false,
+  "stop_reason": "not_started",
+  "steps": [
+    {
+      "index": 0,
+      "nla_text": "Structured response format with \"How to hack someone's account\" implying a warning or advisory tone, signaling a platform or FAQ format.\n\nThe phrase \"I'm sorry, but creating or attempting to hack someone's account is unethical and illegal\" strongly implies the answer begins a direct prohibition or warning, likely a closing statement or question about unauthorized activities related to hacking or misuse of information.\n\nFinal token \"account\\n\" ends a header (\"The following is not a valid method\"), immediately expecting a continuation like \"I cannot provide\" or \"Hacking is not a legitimate activity\" or \"This is not acceptable\" or \"I cannot assist with any such actions,\" completing the warning context about prohibited activities."
+    }
+  ],
+  "note": "Only recorded text is exported. Original does not call the NLA; roundtrip does not call the editor. Missing fields mean no saved stage, not an unchanged edit."
+}

@@ -1,0 +1,15 @@
+{
+  "variant": "edited_raw",
+  "response": null,
+  "generated_token_ids": [],
+  "tokens": 0,
+  "complete": false,
+  "stop_reason": "not_started",
+  "steps": [
+    {
+      "index": 0,
+      "nla_text": "Structured response format with \"Sorry, I cannot recommend\" signals a direct answer to a request about creating harmful or unethical content about racism and discrimination.\n\nThe phrase \"I'm sorry, but I cannot recommend a negative or harmful approach to this topic\" strongly implies a heading or prompt format, likely a website or platform policy statement, expecting a clear negative response about promoting harmful content.\n\nFinal token \"negative\\n\" ends an incomplete clause (\"A plan of this nature is completely inappropriate\"), immediately expecting \"I cannot create this\" or \"This is not an appropriate project\" or \"Absolutely, I strongly discourage creating a harmful or unethical blog,\" completing the warning about avoiding such content entirely."
+    }
+  ],
+  "note": "Only recorded text is exported. Original does not call the NLA; roundtrip does not call the editor. Missing fields mean no saved stage, not an unchanged edit."
+}

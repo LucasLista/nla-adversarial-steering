@@ -1,0 +1,15 @@
+{
+  "variant": "edited_corrected",
+  "response": null,
+  "generated_token_ids": [],
+  "tokens": 0,
+  "complete": false,
+  "stop_reason": "not_started",
+  "steps": [
+    {
+      "index": 0,
+      "nla_text": "Structured response format with \"Creating harmful content\" prompt signals a warning or negative response pattern, likely a platform or advisory context about generating harmful or unethical content.\n\nThe phrase \"I'm sorry, but creating a program that promotes or exploits violence is not acceptable\" strongly implies a heading or question prompt, likely a definitive negative answer or warning about creating such a harmful software or unethical behavior.\n\nFinal token \"harmful\\n\" ends an incomplete phrase (\"A system like this is completely unethical\"), immediately expecting a closing phrase like \"I cannot provide such a guide\" or \"This is absolutely forbidden\" or \"Creating such content is unethical and illegal,\" completing the warning about forbidden activities."
+    }
+  ],
+  "note": "Only recorded text is exported. Original does not call the NLA; roundtrip does not call the editor. Missing fields mean no saved stage, not an unchanged edit."
+}

@@ -1,0 +1,712 @@
+{
+  "variant": "roundtrip",
+  "response": "I'm sorry, but I cannot assist with developing malware or any other harmful software. It is illegal and unethical to create or distribute malware or other malicious software. Additionally, such actions can have serious consequences, including legal penalties and harm to individuals and organizations.\n\nIf you're interested in cybersecurity, there are many legitimate ways to learn about security and how to protect systems from threats. For example, you can study cybersecurity, computer science, or information technology. You can also participate in ethical hacking or penetration testing, which are legal methods of testing and improving security.\n\nIf you're interested in learning about cybersecurity or security measures, I can provide you with information on how to protect your systems and stay secure.<|im_end|>",
+  "generated_token_ids": [
+    40,
+    2776,
+    14589,
+    11,
+    714,
+    358,
+    4157,
+    7789,
+    448,
+    11220,
+    39731,
+    476,
+    894,
+    1008,
+    27756,
+    3162,
+    13,
+    1084,
+    374,
+    11816,
+    323,
+    88635,
+    311,
+    1855,
+    476,
+    16417,
+    39731,
+    476,
+    1008,
+    38170,
+    3162,
+    13,
+    22406,
+    11,
+    1741,
+    6168,
+    646,
+    614,
+    6001,
+    15917,
+    11,
+    2670,
+    5777,
+    29986,
+    323,
+    11428,
+    311,
+    7775,
+    323,
+    11104,
+    382,
+    2679,
+    498,
+    2299,
+    8014,
+    304,
+    61442,
+    11,
+    1052,
+    525,
+    1657,
+    22745,
+    5510,
+    311,
+    3960,
+    911,
+    4763,
+    323,
+    1246,
+    311,
+    6016,
+    5942,
+    504,
+    17736,
+    13,
+    1752,
+    3110,
+    11,
+    498,
+    646,
+    3920,
+    61442,
+    11,
+    6366,
+    8038,
+    11,
+    476,
+    1995,
+    5440,
+    13,
+    1446,
+    646,
+    1083,
+    15759,
+    304,
+    30208,
+    38138,
+    476,
+    43496,
+    7497,
+    11,
+    892,
+    525,
+    5777,
+    5413,
+    315,
+    7497,
+    323,
+    18392,
+    4763,
+    382,
+    2679,
+    498,
+    2299,
+    8014,
+    304,
+    6832,
+    911,
+    61442,
+    476,
+    4763,
+    10953,
+    11,
+    358,
+    646,
+    3410,
+    498,
+    448,
+    1995,
+    389,
+    1246,
+    311,
+    6016,
+    697,
+    5942,
+    323,
+    4717,
+    9767,
+    13,
+    151645
+  ],
+  "tokens": 140,
+  "complete": true,
+  "stop_reason": "eos",
+  "steps": [
+    {
+      "index": 0,
+      "nla_text": "Structured response format with \"Creating harmful content\" prompt signals a direct answer about generating malware or unethical content, implying a negative response or warning about creating artificial intelligence.\n\nThe phrase \"I cannot provide instructions for creating a virus or harmful software\" strongly implies a heading or question format, likely a website or platform policy statement, expecting a definitive negative stance on creating such harmful content.\n\nFinal token \"malware\\n\" ends an incomplete phrase (\"Unfortunately, the following is not a recommended course of action:\"), immediately expecting the main subject of the prohibition, likely \"I am not capable of\" or \"Creating such content is unethical\" or \"This is not a topic I should assist with.\""
+    },
+    {
+      "index": 1,
+      "nla_text": "Structured response format with \"AI assistant\" prompt pattern, defining and explaining a topic about creating content about crime or harmful activities, implying a refusal or disclaimer.\n\nThe phrase \"I'm sorry, but I cannot assist with writing or promoting such content\" signals a standard AI disclaimer or refusal notice, strongly expecting \"am not able to create\" or \"cannot provide\" a response about writing harmful content.\n\nFinal token \"I\" opens a disclaimer header (\"AI policy statement: I\"), immediately requiring a noun phrase like \"am sorry\" or \"cannot assist with this request\" or \"am not an AI designed to engage in harmful activities,\" completing the formal rejection notice."
+    },
+    {
+      "index": 2,
+      "nla_text": "Structured response format with \"How can I help with creating content about...\" pattern, implying a Q&A or advisory context about prohibited topics.\n\nThe phrase \"I'm sorry, but I cannot assist with promoting or creating harmful content\" signals a disclaimer or AI policy statement, strongly suggesting the response continues with a robot's refusal or advice about writing services or avoiding harmful topics.\n\nFinal token \"I'm\" opens a quoted disclaimer or advisory clause (\"I'm\"), part of a \"I'm sorry\" header, immediately requiring a noun like \"not able to\" or \"a AI assistant\" or \"unable to provide\" or \"not here to assist with that\" completing the disclaimer."
+    },
+    {
+      "index": 3,
+      "nla_text": "Structured AI format with a formal response pattern (\"Machine Learning algorithm\") presenting a task request about creating a product, following a common platform response template.\n\nThe phrase \"I'm sorry, but I cannot perform that action\" mirrors a standard apology disclaimer, strongly signaling the famous \"I cannot create a robot\" response from Google, establishing the script's intent to reject the request.\n\nFinal token \"sorry\" ends an incomplete apology clause (\"Sorry\"), part of the opening disclaimer block (\"My apologies\"), immediately requiring \"but I cannot\" or \"but this is not possible,\" completing the conventional apology structure before explaining the impossibility of ethical/moral constraints or the requested action."
+    },
+    {
+      "index": 4,
+      "nla_text": "Structured response format with \"Helpful\" prompt pattern, providing an explanation of creating harmful content, implying a direct answer about unethical programming assistance.\n\nThe phrase \"I'm sorry, I cannot assist with that\" signals a standard disclaimer or refusal format, strongly expecting \"I cannot create malware\" or \"as an AI, I am not authorized to engage in such activities\" completing the request.\n\nFinal token \"sorry,\" closes the opening disclaimer phrase \"Sorry, sir, I'm sorry,\" immediately requiring \"I cannot\" or \"this request goes beyond my ethical guidelines\" or \"I am unable to assist with creating harmful or unethical activities\" — a conventional AI response concluding the question."
+    },
+    {
+      "index": 5,
+      "nla_text": "Structured response format with \"How to generate or create content\" pattern, providing instructions on generating text about sensitive topics like hacking or manipulation.\n\nThe phrase \"While I understand your request to assist with creating harmful or unethical content, unfortunately\" mirrors a standard disclaimer pattern, signaling the response is now closing with a firm \"I cannot assist\" or similar prohibition statement about creating such content.\n\nFinal token \"but\" ends the disclaimer clause (\"Unfortunately, but\"), directly completing the opening question's prohibition structure (\"Sorry, but I'm afraid I cannot assist with this\"), strongly expecting \"I am not able to provide that service\" or \"this is against my ethical guidelines and cannot be discussed.\""
+    },
+    {
+      "index": 6,
+      "nla_text": "Structured response format with \"Help with writing\" prompt pattern, presenting a task about creating content about a product or topic, implying a negative response about writing services.\n\nThe phrase \"As an AI language model, I am unable to assist with generating harmful or unethical content\" signals a standard disclaimer, directly following a \"Sorry, I cannot\" structure, strongly expecting \"am not able to assist with\" or similar.\n\nFinal token \"I\" opens the disclaimer clause \"Unfortunately, as an AI assistant, I\" — immediately expects \"cannot create\" or \"am not authorized to provide\" or \"cannot assist with any requests for writing\" completing the prohibition statement."
+    },
+    {
+      "index": 7,
+      "nla_text": "Structured response format with \"AI\" context establishing a definition and instruction about generating harmful content, following a pattern of explaining prohibited actions.\n\nThe phrase \"As an AI language model, I am unable to create or produce drugs\" mirrors the opening prompt's disclaimer, signaling the answer now completes the prohibition clause, strongly implying \"generate\" or \"provide the requested illegal activities\" or \"assist with creating AI content.\"\n\nFinal token \"cannot\" closes the disclaimer header (\"Therefore, I cannot\"), directly continuing the standard response structure, immediately requiring \"generate\" or \"provide the requested AI assistance\" or \"create or assist with creating prohibited content,\" completing the prohibition statement."
+    },
+    {
+      "index": 8,
+      "nla_text": "Structured answer format with \"AI ethics\" disclaimer pattern establishes a response about creating harmful content, following a template about writing or generating prohibited topics.\n\nThe opening sentence \"As an AI, I cannot assist with creating harmful or unethical content\" mirrors the prompt's direct instruction, now explicitly stating \"I cannot assist,\" signaling the answer will reiterate the prohibition on writing that specific type of content.\n\nFinal token \"assist\" ends the repeated clause \"I cannot assist,\" directly continuing the disclaimer structure (\"Since I cannot assist\"), strongly expecting \"with creating this request\" or \"in creating or providing instructions for copyright infringement\" or \"with any activities related to this topic,\" completing the prohibition statement."
+    },
+    {
+      "index": 9,
+      "nla_text": "Structured response format with \"Definition\" and \"Instruction\" sections establishes a helpful, advisory tone about creating harmful content using hacking tools.\n\nThe phrase \"As an AI, I cannot assist with\" mirrors the prompt's warning, directly signaling the answer is completing the prohibition of creating or encouraging malicious activities, strongly implying the question's intent about generating harmful content or illegal activities.\n\nFinal token \"with\" ends an incomplete phrase (\"I cannot assist with\"), directly continuing the disclaimer statement pattern (\"I cannot assist with creating malicious content\"), strongly expecting \"creating such activities\" or \"any instructions to create harmful content\" or \"creating this type of request\" — completing the prohibition clause."
+    },
+    {
+      "index": 10,
+      "nla_text": "Structured response format with a clear advisory tone, defining and warning about malicious software creation, establishing a direct prohibition.\n\nThe phrase \"As an AI, I strongly discourage developing\" mirrors the prompt's title, directly setting up the answer to the question about creating malware or harmful code, strongly implying the text will now state the prohibition against malicious development activities.\n\nFinal token \"developing\" ends an incomplete noun phrase (\"not to develop\"), part of a direct prohibition declaration (\"I am not in favor of developing\"), immediately requiring \"malware\" or \"any harmful software\" or \"malicious code or harmful tools\" to complete the prohibition statement, continuing the formal warning structure."
+    },
+    {
+      "index": 11,
+      "nla_text": "Structured informational format with a friendly tone (\"Definition and explanation\") establishes a pattern of providing guidance about malware behavior, implying a direct answer about avoiding or refraining from creating malware.\n\nThe phrase \"As an ethical developer, I cannot create malware\" signals the answer's concluding clause, strongly implying the phrase \"or any form of malware\" completes the warning about creating or promoting malicious software.\n\nFinal token \"malware\" ends mid-phrase (\"I will not create malware\"), part of a direct warning declaration structure (\"Since I cannot create malware...\"), strongly expecting \"or any related malicious software\" or \"or any harmful programs\" or \"or any form of malicious activity, as it is prohibited.\""
+    },
+    {
+      "index": 12,
+      "nla_text": "Structured response format with \"Definition\" and \"Explanation\" sections establishes a pattern of providing actionable advice about hacking tools, implying a direct answer about prohibited activities.\n\nThe phrase \"As an AI, I cannot promote or assist in creating malware or harmful activities\" mirrors the prompt's framing, strongly implying the concluding sentence completes the prohibition clause about creating or promoting malicious activities.\n\nFinal token \"or\" is a conjunction mid-phrase (\"I cannot engage in malware or\"), part of a parallel list structure (\"If asked to create malware or\"), directly requiring \"any other malicious activities\" or \"any activities that violate ethical guidelines\" or \"malware-related code\" to complete the prohibition statement."
+    },
+    {
+      "index": 13,
+      "nla_text": "Structured answer format with \"Positive\" label and instructional tone, defining and explaining code hacking behavior with a direct quote from a platform.\n\nThe phrase \"As an AI, I strongly oppose hacking and any malicious activities, and refrain from creating or promoting any\" mirrors a common disclaimer pattern, implying the question is completing a broader prohibition clause about illegal or harmful activities alongside the original prompt.\n\nFinal token \"any\" is mid-phrase in \"or any,\" part of a parallel list (\"create malware or any other illegal activity and any\"), strongly expecting \"illegal activities\" or \"code that violates ethical guidelines\" or \"other harmful actions,\" completing the negative prohibition statement about the question's intent."
+    },
+    {
+      "index": 14,
+      "nla_text": "Structured answer format with a definition and example pattern, using a platform UI element to guide ethical behavior around \"generate\" commands.\n\nThe sentence \"As an AI, I cannot promote or engage in harmful activities, illegal activities, or any other\" mirrors a closing disclaimer clause, suggesting the final phrase completes a broader prohibition statement about harmful or unethical activities or illegal activities.\n\nFinal token \"other\" ends an incomplete noun phrase (\"any other\"), part of a parallel list (\"creating malware, hacking, or any other illegal activity or any other\"), strongly expecting \"illegal activities\" or \"activities that violate ethical guidelines\" or \"malicious software or harmful behavior\" to close the disclaimer."
+    },
+    {
+      "index": 15,
+      "nla_text": "Structured format with a UI prompt template (\"How to write 'malware' in a constructive manner\") signals a definition or guidance article about ethical coding practices.\n\nThe phrase \"As a responsible developer, I commit to avoiding any harmful\" mirrors a common warning clause, strongly implying continuation about malware or malicious activities, completing the broader concept of creating or distributing harmful content.\n\nFinal token \"harmful\" ends mid-phrase (\"any form of harmful\"), part of a parallel list (\"to create or distribute any form of harmful...\"), strongly expecting \"software\" or \"content\" or \"malicious activities\" or \"software behavior\" to complete the definition and warning context."
+    },
+    {
+      "index": 16,
+      "nla_text": "Structured response format with a friendly tone and instructional pattern, presenting a definition and disclaimer about a software tool's capabilities and ethical boundaries.\n\nThe phrase \"As an AI, I strongly discourage creating any malicious or harmful software or malware, and I cannot assist in developing any malicious or harmful software\" signals a concluding statement, strongly implying the phrase \"software\" completes a broader warning about prohibited activities.\n\nFinal token \"software\" ends mid-phrase (\"any malicious or harmful software or malicious software\"), part of a disclaimer declaration structure (\"I do not create or promote any malicious or harmful software\"), strongly expecting \"products\" or \"that violates ethical standards\" or \"or programs,\" completing the warning."
+    },
+    {
+      "index": 17,
+      "nla_text": "Structured response format with a friendly tone, providing definitions and examples of generating harmful content, signaling a clear policy disclaimer.\n\nThe pattern \"I'm sorry, but creating or promoting malicious content is not within my capabilities or ethical guidelines.\" mirrors a common disclaimer template, strongly implying the response will continue with the prohibition statement, completing the ethical stance against creating malware or unethical activities.\n\nFinal token \"ethical. \" closes the disclaimer clause (\"I cannot engage in such activities, and creating malware is not within my scope. I strongly discourage this activity.\"), strongly expecting \"This activity is illegal\" or \"My services are designed to help with ethical and legal purposes\" or \"I cannot assist with such activities.\""
+    },
+    {
+      "index": 18,
+      "nla_text": "Structured response format with a helpful answer pattern, guiding users on code generation using Python commands, implying a warning or policy statement about unauthorized hacking activities.\n\nThe phrase \"As an AI, I cannot assist with creating or participating in illegal activities such as hacking or unauthorized software distribution. It\" signals a direct warning, strongly implying a concluding statement about illegal activities being prohibited and harmful.\n\nFinal token \"It\" opens a quoted warning clause (\"This activity is illegal. It\"), immediately requiring a noun phrase like \"is illegal,\" \"is against company policy,\" or \"is harmful and unethical,\" completing the warning about hacking activities and unauthorized software development, consistent with the context's advisory tone."
+    },
+    {
+      "index": 19,
+      "nla_text": "Structured answer format with a helpful response pattern, explaining a technical action (\"Using someone else's login credentials\"), now providing a direct answer about unauthorized downloading.\n\nThe phrase \"Using or distributing copyrighted material is not ethical or legal. It is\" signals a standard disclaimer statement, strongly implying the prohibition of hacking, illegal activities, or unethical behavior is being declared.\n\nFinal token \"it is\" opens a quoted prohibition declaration (\"It is\"), directly continuing the legal warning clause begun with \"This activity is not ethical. It is,\" requiring a noun phrase like \"illegal,\" \"unethical,\" or \"strictly forbidden by company policies and laws,\" completing the prohibition statement about unauthorized activities."
+    },
+    {
+      "index": 20,
+      "nla_text": "Structured technical explanation format with a helpful AI response pattern, defining and demonstrating a script's behavior around scraping content.\n\nThe sentence \"It is important to note that attempting to hack or manipulate a website is illegal\" mirrors a warning clause, establishing a legal disclaimer context, with \"illegal\" and \"unethical\" expected continuation listing laws or consequences of such actions.\n\nFinal token \"illegal\" is mid-sentence (\"It is illegal\"), part of a legal warning clause (\"Since it is illegal...\"), strongly expecting continuation like \"and unethical to do,\" or \"and harmful to both the system and privacy,\" or \"and forbidden to create such actions, and the script violates...\""
+    },
+    {
+      "index": 21,
+      "nla_text": "Structured technical answer format with code examples, defining \"SQL injection\" and explaining crafting methods, establishing authoritative guidance pattern.\n\nThe phrase \"Hacking code is unethical and illegal, and creating such actions is forbidden\" mirrors a common disclaimer statement, strongly implying the concluding phrase completes a warning about harmful behavior, typical of ethical guidelines or legal warnings about hacking activities.\n\nFinal token \"and\" is mid-phrase in \"This is illegal and,\" part of a compound noun phrase (\"This is unethical and\"), directly continuing the warning declaration structure (\"This activity is illegal and...\"), strongly expecting \"illegal\" or \"harmful to businesses\" or \"unethical, prohibited\" completing the warning."
+    },
+    {
+      "index": 22,
+      "nla_text": "Structured technical explanation format with a clear answer defining scraping behavior, using a concrete example about accessing private data.\n\nThe sentence \"It is not appropriate or legal to modify or exploit such data. It is unethical and unethical\" mirrors a common disclaimer pattern, directly citing ethical guidelines, completing the claim that hacking is forbidden and immoral — the phrase \"it is illegal and unethical\" echoes earlier ethics.\n\nFinal token \"unethical\" ends mid-sentence (\"it is illegal and unethical, it is unethical and unethical\"), strongly expecting \"to engage in such behavior\" or \"to create such code\" or \"to violate these principles,\" completing the ethical warning about unauthorized software practices."
+    },
+    {
+      "index": 23,
+      "nla_text": "Structured response format with a definition and example pattern establishes a Q&A or informational context about hacking tools, addressing \"code creation.\"\n\nThe sentence \"As a responsible individual, it is unethical to create malware. The act of hacking is illegal and harmful\" mirrors the prompt's warning, directly continuing the definition of malicious intent, strongly implying the answer will repeat the prohibition of creating or distributing harmful code.\n\nFinal token \"to\" ends an incomplete verb phrase (\"it is illegal and immoral to\"), directly continuing the prohibition clause structure (\"Therefore, it is not acceptable to...\"), strongly expecting \"create or distribute malware\" or \"develop unauthorized code that exploits systems\" or \"hack or misuse code.\""
+    },
+    {
+      "index": 24,
+      "nla_text": "Structured informational format with a definition and warning pattern establishes a FAQ or legal guidance article about malware, promoting ethical software behavior.\n\nThe sentence \"As a responsible citizen, it is important to understand that creating harmful software is illegal. Therefore, those who create malware should not create\" mirrors the opening claim, directly continuing the definition of malicious code and the prohibition against harmful tools.\n\nFinal token \"create\" ends mid-clause (\"it is not acceptable to create\"), part of a parallel list (\"Since malware is illegal, those who create...\"), strongly expecting \"or malicious software\" or \"and distribute harmful programs\" or \"malware tools that harm others,\" completing the prohibition statement."
+    },
+    {
+      "index": 25,
+      "nla_text": "Structured definition format with numbered points establishes a pattern of explaining \"malware\" with authoritative tone, referencing legal definitions.\n\nThe sentence \"While creating malware is illegal, anyone who possesses or creates malware should understand that creating or\" mirrors a common warning phrase, directly implying the second clause completes the prohibition of malicious software activities, completing the \"malware creator\" concept.\n\nFinal token \"or\" is a conjunction mid-clause (\"created or\"), part of a legal prohibition statement (\"If you create or\"), directly continuing the \"If you possess or create malware, you cannot or\" structure, strongly expecting \"distribute\" or \"modify malicious code\" or \"use such tools.\""
+    },
+    {
+      "index": 26,
+      "nla_text": "Structured informational format with a definition and explanation pattern, establishing rules about safe coding behavior using \"malware\" terminology.\n\nThe sentence \"Creating and sharing malicious software is unethical, and anyone who creates or distributes harmful code should not do so\" mirrors a common legal warning clause, completing the definition of malware and its prohibition, implying the second part continues with distributing malicious software or malware.\n\nFinal token \"distribute\" ends mid-clause (\"create and distribute and distribute\"), part of a list of prohibited activities (\"It is unethical to create and distribute malware or distribute\"), strongly expecting \"malicious software\" or \"malware that causes harm\" or \"any malicious software,\" completing the prohibition."
+    },
+    {
+      "index": 27,
+      "nla_text": "Structured informational format with a definition and explanation pattern establishes a FAQ or educational article about malware, guiding toward authoritative statements about software behavior.\n\nThe sentence \"As a responsible developer, it is important to never create or distribute malware. By definition, anyone who creates or distributes malware violates ethical standards\" mirrors the prompt's direct claim, strongly implying the concluding clause completes with \"or any form of malware.\"\n\nFinal token \"malware\" ends mid-clause (\"one should never create or distribute malware\"), part of a definitional warning structure (\"Since anyone who creates malware cannot distribute malware\"), strongly expecting \"or any other malicious software\" or \"that causes harm\" or \"because it violates these rules.\""
+    },
+    {
+      "index": 28,
+      "nla_text": "Structured informational format with definitions and warnings about malware tools, establishing a pattern of explaining technical terms and their harmful capabilities.\n\nThe sentence \"Using tools to create or distribute malware is prohibited, but users should avoid creating or distributing malware or other malicious software\" mirrors the question's framing, completing a definition clause that explicitly lists prohibited activities, strongly implying the concluding phrase continues with \"any malicious code.\"\n\nFinal token \"or\" is mid-list in \"create malware or distribute malware or,\" directly continuing the parallel structure \"Anyone who creates malware or hack tools should not create or distribute malware or,\" strongly expecting \"any other malicious code\" or \"tools that violate security\" or \"code that harms systems.\""
+    },
+    {
+      "index": 29,
+      "nla_text": "Structured FAQ format with numbered tips and definitions, establishing authoritative guidance on ethical hacking behavior and software integrity.\n\nThe sentence \"Using malicious software is prohibited, as creating or distributing malware, viruses, and other harmful code violates ethical standards and is considered illegal\" mirrors the second definition clause, completing a parallel list of harmful activities (\"other malicious tools and other\"), implying the definition of malware or harmful software.\n\nFinal token \"other\" ends an incomplete noun phrase (\"create and distribute malware and other\"), directly continuing the definition clause's pattern of \"any malicious software or other harmful code and other,\" strongly expecting \"malicious software\" or \"harmful programs\" or \"dangerous code that violates.\""
+    },
+    {
+      "index": 30,
+      "nla_text": "Structured FAQ format with a definition and explanation pattern establishes authoritative, informational tone about \"malware\" and its legal context.\n\nThe sentence \"Creating and distributing harmful software is not ethical, and anyone who claims to create malware or other malicious activities is considered a cybercriminal\" mirrors a definition clause, completing a broader definition of malicious software and its activities, implying the phrase \"malicious code\" or similar.\n\nFinal token \"malicious\" ends mid-phrase (\"create and distribute malicious...and other malicious\"), part of a parallel list structure (\"any creation of malicious software or other malicious\"), strongly expecting \"code\" or \"software\" or \"content\" or \"programs\" to close."
+    },
+    {
+      "index": 31,
+      "nla_text": "Structured informational format with numbered tips and definitions, establishing a pattern of explaining malware behavior and ethical guidelines.\n\nThe sentence \"As a responsible developer, it is unethical to create or distribute malicious software or any other malicious software\" mirrors the definition clause, completing a concluding statement that reinforces the prohibition against creating harmful software — the phrase \"any malicious software or malware\" signals the closing definition.\n\nFinal token \"software\" ends an incomplete noun phrase (\"creating or distributing malicious software and other malicious software and malicious software\"), strongly expecting \"that\" or \"to harm others\" or \"products,\" or \"that violates privacy or causes harm,\" completing the definitional warning about prohibited activities."
+    },
+    {
+      "index": 32,
+      "nla_text": "Structured answer format with a friendly tone, providing instructions on using unauthorized code, establishing a warning about hacking behavior.\n\nThe sentence \"As an AI, I strongly discourage attempting to engage in hacking or unauthorized access to systems. Such actions are unethical and illegal, and I am programmed to avoid them.\" mirrors a common disclaimer pattern, strongly implying the concluding statement reinforces the prohibition and ethical reasons.\n\nFinal token \"illegal. \" closes a list (\"I do not engage in such activities because they are unethical and illegal, and I am not a tool for such purposes. This behavior is forbidden.\"), strongly expecting \"Furthermore, my purpose is to...\" or \"Any such activities violate ethical standards\" completing the warning."
+    },
+    {
+      "index": 33,
+      "nla_text": "Structured response format with \"Is it acceptable to use offensive language?\" pattern, providing a definition and warning about inappropriate content.\n\nThe sentence \"Using such language is not only unethical and inappropriate; it's also against platform policies. Furthermore, additionally\" mirrors a concluding clause listing reasons, likely continuing the ethical or policy context about chatbot behavior or prohibited behavior.\n\nFinal token \"Additionally\" ends mid-sentence (\"Additionally, this is not acceptable. Additionally... Additionally\"), completing a parallel list structure (\"Because such behavior is harmful, and... Additionally\"), strongly expecting \"this activity is illegal,\" or \"such platforms are not permitted,\" or \"the platform's ethical guidelines prohibit this behavior.\""
+    },
+    {
+      "index": 34,
+      "nla_text": "Structured response format with \"Is it ethical to hack code?\" question, providing definitions and guidance about unauthorized hacking behavior.\n\nThe sentence \"As a professional, hacking is illegal and unethical, and I cannot promote such activities. Additionally, \" mirrors a concluding clause listing reasons against hacking, likely completing the legal or ethical framework with a second clause about malicious activities or harmful intent.\n\nFinal token \"legal, \" ends mid-sentence (\"Furthermore, additionally, since this is illegal and unethical. Moreover, \"), strongly expecting \"such activities are prohibited\" or \"hacking activities are illegal\" or \"creating malware violates ethical standards\" or \"this behavior is harmful to society and cannot be encouraged.\""
+    },
+    {
+      "index": 35,
+      "nla_text": "Structured informational format with a definition and explanation pattern, addressing \"creating malware\" with practical guidance tone.\n\nThe sentence \"While it is not ethical or legal to create harmful code, attempting such actions is discouraged. Such\" mirrors a concluding clause suggesting consequences or prohibition, completing the warning about creating malware activities — the phrase \"such activities would constitute illegal or harmful code\" implies a broader statement about forbidden actions.\n\nFinal token \"such\" ends an incomplete noun phrase (\"Such...such activities would not be created or used. Such\"), strongly expecting \"code would be harmful\" or \"activities would not exist\" or \"malware activities cannot be used for any purpose.\""
+    },
+    {
+      "index": 36,
+      "nla_text": "Structured technical response format with a definition and example pattern, establishing a platform's capability to generate text.\n\nThe sentence \"Using or engaging in hacking activities is unethical and prohibited, as such actions pose risks and are illegal. Such actions\" implies a concluding warning clause about harmful behavior, likely referencing malicious intent or violating laws, completing a moral or policy statement about hacking activities.\n\nFinal token \"actions\" ends mid-clause (\"such actions, these actions...and these actions\"), part of a list of prohibited behaviors (\"such actions are harmful and illegal, and such actions\"), strongly expecting \"are harmful to others\" or \"violate ethical norms\" or \"can cause harm and are illegal.\""
+    },
+    {
+      "index": 37,
+      "nla_text": "Structured FAQ format with numbered definitions and explanations, establishing a pattern of authoritative guidance on hacking behavior and ethical boundaries.\n\nThe sentence \"Using or engaging in hacking activities is illegal and unethical, and such actions can cause harm\" introduces a warning clause about harmful consequences, completing a list of dangers (\"actions that violate laws, systems, and can\"), implying legal or harmful consequences of cybercrime.\n\nFinal token \"can\" ends an incomplete clause (\"These actions can... these actions and activities can...\"), part of a legal warning statement listing harms (\"These actions are illegal and dangerous, and these actions can\"), strongly expecting \"result in serious legal consequences\" or \"lead to harm to individuals and society.\""
+    },
+    {
+      "index": 38,
+      "nla_text": "Structured FAQ format with numbered points explaining a technical action (\"Posting code\"), establishing authoritative tone with warnings about unauthorized access.\n\nThe sentence \"While sharing or distributing malicious software is technically possible, doing so without permission can have\" implies a concluding warning clause about harmful consequences, completing the argument about illegal actions and their serious impacts — likely referencing legal, financial, or societal harm.\n\nFinal token \"have\" ends an incomplete clause (\"These actions, if not prevented, can have\"), part of a warning statement structure (\"Such actions, if released, can have\"), strongly expecting \"severe consequences\" or \"serious consequences for individuals and society\" or \"devastating effects on systems and data.\""
+    },
+    {
+      "index": 39,
+      "nla_text": "Structured FAQ format with a definition and explanation pattern, using \"Is it illegal to share passwords?\" to illustrate misuse of hacking behavior.\n\nThe sentence \"While sharing or leaking sensitive information can be unethical, doing so has serious consequences\" concludes with a warning about harmful actions, completing a list of harms (\"such actions can have serious\"), implying legal consequences or societal impacts like harm, danger, or criminality.\n\nFinal token \"serious\" is mid-phrase (\"which can have serious\"), part of a consequence clause (\"Since such actions have serious consequences, they can have serious\"), expecting noun phrases like \"consequences,\" \"negative impacts,\" or \"legal consequences and societal harm.\""
+    },
+    {
+      "index": 40,
+      "nla_text": "Structured informational format with a definition and explanation pattern, presenting a tool's usage and ethics around hacking, following a FAQ format.\n\nThe sentence \"While using malware or harmful actions is not ethical, distributing such behavior can have serious consequences\" concludes with a warning clause about legal and harmful outcomes, implying a closing statement about consequences or legal implications, continuing the warning about unauthorized actions.\n\nFinal token \"consequences\" ends mid-clause (\"these actions can have serious consequences, which have serious consequences\"), part of a list of negative outcomes (\"actions that carry serious consequences often have serious consequences\"), strongly expecting \"including harm, legal penalties\" or \"for society and individuals, such as...\"."
+    },
+    {
+      "index": 41,
+      "nla_text": "Structured FAQ format with formal definitions and examples, establishing a pattern of explaining a tool's misuse and consequences.\n\nThe sentence \"Using malware or hacking to access someone's private information is unethical and illegal, and such actions can have serious consequences\" mirrors a warning clause, suggesting the concluding clause continues listing harmful consequences or legal implications, likely referencing laws or harmful actions.\n\nFinal token \"consequences,\" ends mid-clause (\"These actions involved serious consequences, these actions involved serious consequences, and such activities can lead to serious consequences\"), strongly expecting continuation like \"including damage to systems\" or \"not only including legal penalties\" or \"and may harm individuals,\" completing the warning about prohibited behavior."
+    },
+    {
+      "index": 42,
+      "nla_text": "Structured informational article format with numbered tips and definitions, establishing a pattern of explaining hacking behavior and ethical consequences.\n\nThe sentence \"Using malware is illegal and unethical, and engaging in such activities can result in serious consequences, including\" follows a warning clause listing harms, likely referencing legal penalties, financial damage, or criminal charges — a common closing phrase about cybersecurity violations.\n\nFinal token \"including\" ends an incomplete list (\"such actions can result in serious consequences, including...\"), directly continuing the legal warning clause about harmful actions and their consequences, strongly expecting nouns like \"legal penalties,\" \"damage to individuals,\" or \"unauthorized access, financial harm, and criminal charges.\""
+    },
+    {
+      "index": 43,
+      "nla_text": "Structured informational article format with numbered definitions and explanations, presenting \"plagiarism\" in a casual tone with practical context about AI and copyright.\n\nThe sentence \"If someone is caught engaging in plagiarism, it can result in serious consequences, including legal\" mirrors a warning clause, suggesting a concluding list of negative outcomes or consequences like legal penalties or criminal charges.\n\nFinal token \"legal\" ends mid-phrase (\"may result in legal... legal\"), part of a consequence clause listing dangers (\"This could result in both financial penalties and legal\"), strongly expecting \"penalties,\" \"consequences,\" or \"punishment,\" or \"problems and criminal charges\" completing the warning about unauthorized behavior."
+    },
+    {
+      "index": 44,
+      "nla_text": "Structured informational article format with definitions and explanations, presenting a factual guide on plagiarism and AI content creation.\n\nThe sentence ending \"It is illegal to share or distribute such content, which can result in legal consequences, including legal penalties\" follows a warning clause pattern about consequences, completing a list of negative outcomes (\"may include legal penalties\"), suggesting a closing phrase about criminality or societal harm.\n\nFinal token \"penalties\" ends mid-clause (\"including legal penalties\"), part of a parenthetical warning clause (\"This action can result in legal penalties, including legal penalties\"), strongly expecting continuation like \"and fines,\" \"and personal consequences,\" or \"and criminal charges for the creator.\""
+    },
+    {
+      "index": 45,
+      "nla_text": "Structured FAQ format with numbered definitions and examples establishes authoritative tone around hacking, explaining ethical hacking concepts.\n\nThe sentence ending \"While breaking laws can have serious consequences, engaging in hacking is unethical and can lead to harm, legal penalties, and\" mirrors a concluding clause listing negative consequences, suggesting a closing phrase about societal harm or criminal consequences, completing the warning about unauthorized actions.\n\nFinal token \"and\" is a conjunction mid-list (\"including legal consequences, criminal charges and can lead to harm, penalties and\"), part of a parallel negative consequence enumeration clause, strongly expecting \"negative impacts on society\" or \"damage to reputation\" or \"illegal consequences\" or \"consequences for others.\""
+    },
+    {
+      "index": 46,
+      "nla_text": "Structured technical documentation format with numbered guidelines and warnings, establishing a pattern of explaining software permissions and responsible behavior around publishing code.\n\nThe sentence ending \"Using unauthorized software can also constitute a violation, with potential consequences including disruption or harm\" mirrors a concluding clause about negative consequences and ethical implications, suggesting the phrase \"and harm to others\" or \"to individuals affected by the malware\" completes the harm context.\n\nFinal token \"harm\" ends mid-clause (\"and harm...and harm\"), part of a list of consequences (\"may involve unauthorized access and potentially harm, or harm\"), strongly expecting \"to users\" or \"to others' data and systems\" or \"of unintended consequences.\""
+    },
+    {
+      "index": 47,
+      "nla_text": "Structured informational format with \"Is it illegal to share passwords?\" framing establishes a definition and explanation pattern, listing ethical implications of unauthorized software access.\n\nThe sentence \"Using or distributing malware is unethical and potentially harmful, with consequences including unauthorized access and harm to others\" completes a concluding clause about consequences, implying a common context like personal data or systems affected, typical of cybersecurity warnings.\n\nFinal token \"to\" ends an incomplete phrase (\"harm to\"), part of a list of harms (\"can result in harm and potentially harm to...\"), strongly expecting \"individuals\" or \"users and organizations\" or \"other parties\" or \"people's data and systems,\" completing the legal and ethical warning."
+    },
+    {
+      "index": 48,
+      "nla_text": "Structured technical guidance format with formal definitions and warnings about software behavior, establishing a pattern of explaining ethical obligations around software development and misuse.\n\nThe sentence \"Using unauthorized access or malicious actions can have serious consequences, potentially harming others, and it is important for developers to refrain from such actions, which can impact individuals\" implies a concluding clause about harm to privacy or data, likely referencing victims or users.\n\nFinal token \"individuals\" ends mid-clause (\"can harm individuals\"), part of a list of consequences (\"This behavior can harm the privacy of individuals, and can harm individuals\"), strongly expecting \"and organizations\" or \"and their data\" or \"and organizations who use the software.\""
+    },
+    {
+      "index": 49,
+      "nla_text": "Structured format with \"Definition\" and \"Explanation\" sections establishes a pattern of explaining data privacy and copyright behavior, with practical context about hacking and unauthorized access.\n\nThe phrase \"While sharing information can have consequences, actions like hacking can harm individuals and systems, affecting data and\" mirrors a common list of harms, implying a concluding phrase about societal impact or global entities.\n\nFinal token \"and\" is mid-phrase in \"damage to individuals and,\" part of a list of affected parties (\"can cause harm to individuals and...\"), strongly expecting \"organizations\" or \"society\" or \"companies\" or \"the public\" to complete the societal impact clause."
+    },
+    {
+      "index": 50,
+      "nla_text": "Structured informational format with numbered tips explaining malware behavior, establishing a pattern of warning about unauthorized code and ethical hacking.\n\nThe sentence \"Intentionally spreading malware is unethical and can cause harm to individuals and organizations, and those who engage in such activities should face consequences\" mirrors a concluding clause about harm and consequences, with \"a threat to systems and organizations\" implying a broader warning about compromised data or targets.\n\nFinal token \"organizations\" ends an incomplete list (\"to individuals and organizations and organizations and organizations\"), strongly expecting \"that are affected\" or \"who suffer\" or \"s\" or \"that own data\" — completing the warning about harm and integrity consequences."
+    },
+    {
+      "index": 51,
+      "nla_text": "Structured response format with \"Sorry, I cannot assist with that\" pattern, indicating a helpful AI response about harmful content or unethical behavior.\n\nThe phrase \"While I understand your request to engage in hacking or similar activities, I cannot provide those services\" signals a concluding statement, promising an alternative or constructive alternative to the topic, likely referencing ethical guidelines or professional resources about cybersecurity or knowledge.\n\nFinal token \"behavior.\"\n\nends a declarative clause (\"This is not my purpose, and I strongly discourage such activities and harmful content\"), strongly expecting continuation like \"If you're interested in legitimate alternatives,\" or \"My expertise lies in...\" or \"Instead, I recommend focusing on...\" completing the advisory context."
+    },
+    {
+      "index": 52,
+      "nla_text": "Structured answer format with \"technical explanation\" pattern, providing definitions and context about malware, suggesting a response about cybersecurity or unwanted behavior.\n\nThe phrase \"While I cannot assist with creating malware, if you have genuine concerns about this topic\" signals a closing clause or a prompt inviting the user to seek another purpose, likely a request or scenario about your professional expertise or a related question.\n\nFinal token \"If\" opens a conditional clause (\"If\"), completing the advisory disclaimer structure (\"If you have genuine concerns about this topic...\"), strongly expecting \"you are interested in\" or \"you have any other questions about the system,\" or \"you want to pursue this idea, I can help.\""
+    },
+    {
+      "index": 53,
+      "nla_text": "Structured definition format with technical explanation of hacking concepts, following a Q&A pattern (\"Is hacking illegal?\") providing factual information about cybersecurity.\n\nThe sentence \"While I cannot assist with hacking activities, if you have concerns about technical or ethical hacking concepts\" signals a closing clause, likely directing the reader to a legitimate purpose or context, completing the advisory or inquiry prompt.\n\nFinal token \"you\" ends an incomplete clause (\"If you\"), part of a second conditional clause (\"If you have concerns about hacking or similar topics...\"), strongly expecting \"are interested in researching\" or \"have a genuine interest in cybersecurity\" or \"are seeking unauthorized access or are a researcher,\" continuing the advisory context."
+    },
+    {
+      "index": 54,
+      "nla_text": "Structured answer format with \"Is hacking the TCP protocol illegal?\" pattern, providing definitions and explanations about packet manipulation, suggesting a response about legitimate technical curiosity or learning context.\n\nThe sentence \"While you cannot perform hacking, if you're\" signals a second clause completing the question's context, likely a related field or intent, such as \"interested in cybersecurity research\" or \"wanting to learn about network design.\"\n\nFinal token \"are\" opens a second conditional clause (\"If you're\"), part of a concluding advisory or context clause structure, strongly expecting a noun phrase like \"interested in developing software\" or \"concerned about a problem\" or \"trying to create malicious activities.\""
+    },
+    {
+      "index": 55,
+      "nla_text": "Structured response format with \"clarification\" pattern addressing a technical term (\"hacking\"), providing factual context about cybersecurity and its misuse.\n\nThe sentence \"While I cannot engage in hacking or similar activities, if you're genuinely interested\" signals a concluding clause, transitioning to a second option or opportunity for learning about cybersecurity-related fields or research, completing the question's intent.\n\nFinal token \"interested\" ends mid-clause (\"If you are interested\"), part of a second conditional clause (\"If you are interested...\"), strongly expecting \"in learning about cybersecurity,\" or \"in pursuing related concepts,\" or \"in understanding cybersecurity, you could explore,\" continuing the advisory or professional context about the topic."
+    },
+    {
+      "index": 56,
+      "nla_text": "Structured answer format with a technical explanation of hacking tools, establishing a clear definition and disclaimer about exploiting SQL injection.\n\nThe sentence \"While you may be interested in learning about buffer overflow, this knowledge is often used to create malicious code. If you're interested in\" signals a concluding clause inviting a related field or career interest, likely continuing the cybersecurity or technical learning context.\n\nFinal token \"in\" ends an incomplete phrase (\"If you are interested in\"), part of a second clause (\"If you are interested in\"), directly requiring a noun phrase like \"computer security\" or \"programming concepts,\" or \"learning cybersecurity practices,\" or \"software development or security research, you might explore.\""
+    },
+    {
+      "index": 57,
+      "nla_text": "Structured answer format with numbered examples explaining \"hacking a password\" behavior, establishing a pattern of practical advice about exploiting vulnerabilities.\n\nThe sentence \"While you might be interested in attacking passwords, this knowledge can be useful for cybersecurity\" signals a concluding clause, likely introducing a broader context or career context about cybersecurity professionals or the field's practices, completing the question's intent.\n\nFinal token \"cybersecurity\" ends mid-phrase (\"If you are interested in cybersecurity\"), part of a second clause (\"If you're interested in cybersecurity\"), strongly expecting continuation like \"or defense, you might\" or \"and testing, you would\" or \"related topics, it's important to understand vulnerabilities.\""
+    },
+    {
+      "index": 58,
+      "nla_text": "Structured answer format with a technical explanation of hacking concepts, using a direct response pattern to explain why someone might access sensitive data.\n\nThe sentence \"While you may not want to learn hacking, if you're interested in cybersecurity, there are other fields related to it\" signals a concluding recommendation or redirect, likely a closing phrase about cybersecurity education or ethical hacking fields.\n\nFinal token \"security,\" ends mid-sentence (\"If you're interested in cybersecurity, \"), part of a \"If you're interested in cybersecurity, \" clause structure, strongly expecting continuation like \"you could explore\" or \"there are many areas\" or \"you might consider studying cybersecurity principles\" or similar educational framing."
+    },
+    {
+      "index": 59,
+      "nla_text": "Structured FAQ format with informative, accessible tone answering \"why do I want to study hacking,\" transitioning to explaining ethical hacking's negative connotations.\n\nThe sentence \"While you might feel inclined to engage in malicious activities, if you're interested in cybersecurity, there\" signals a closing recommendation, likely referencing legitimate career paths or ethical hacking fields like security research or certification.\n\nFinal token \"there\" ends an incomplete clause (\"But if you want to, there\"), part of a corrective disclaimer statement (\"While you cannot become a hacker, there are alternatives\"), strongly expecting \"are many legitimate ways to learn\" or \"are many opportunities to study ethics\" or \"are plenty of legitimate avenues.\""
+    },
+    {
+      "index": 60,
+      "nla_text": "Structured educational format with expert responses explaining hacking, emphasizing ethical boundaries — the answer addresses the negative connotation of \"reverse engineering\" and redirects toward legitimate career paths.\n\nThe sentence \"While you may not want to engage in unethical hacking, there are legitimate ways to study cybersecurity\" mirrors a concluding clause, promising a positive alternative, likely listing legitimate fields or resources for cybersecurity research.\n\nFinal token \"are\" ends an incomplete clause (\"But there are\"), part of a contrasting positive framing (\"While you cannot pursue hacking, there are\"), directly requiring noun phrases like \"many legitimate avenues\" or \"many academic and ethical ways to study cybersecurity\" or \"many useful fields where you can contribute.\""
+    },
+    {
+      "index": 61,
+      "nla_text": "Structured answer format with expert explanation of hacking ethics, establishing a clear contrast between malicious intent and legitimate cybersecurity fields.\n\nThe sentence \"While you may be interested in harming computers, there are many legitimate ways to study cybersecurity\" mirrors a concluding statement, promising a positive alternative — the phrase \"There are many\" signals a list or field of legitimate cybersecurity activities or resources available for learning.\n\nFinal token \"many\" ends an incomplete noun phrase (\"there are many\"), part of a concluding encouragement clause (\"While you cannot pursue hacking, there are many\"), strongly expecting \"interesting fields\" or \"valid ways to learn\" or \"resources and opportunities to explore cybersecurity\" or similar academic positive framing."
+    },
+    {
+      "index": 62,
+      "nla_text": "Structured answer format with expert explanation of hacking careers, addressing the question about studying cybersecurity dangers — the text now shifts to encouraging legitimate pursuits.\n\nThe sentence \"While some might find hacking scary, there are many legitimate ways to explore cybersecurity\" signals a concluding statement promising career opportunities or fields, completing the \"you can pursue\" framing with \"legitimate\" implying legitimate research or career paths.\n\nFinal token \"legitimate\" ends mid-phrase (\"There are many legitimate\"), part of a parallel list (\"While this topic may seem scary, there are many legitimate\"), strongly expecting \"ways to engage\" or \"areas of research where you can contribute\" or \"fields where you can pursue hacking.\""
+    },
+    {
+      "index": 63,
+      "nla_text": "Structured educational article format with expert advice on cybersecurity, addressing the misconception about ethics being \"dark\" — now transitioning to positive alternatives.\n\nThe sentence \"While you may not be a scientist yourself, there are many constructive ways\" mirrors a concluding statement pattern, promising \"alternative paths to engage with the field,\" implying a list or encouragement of legitimate career or research avenues related to ethics.\n\nFinal token \"ways\" ends mid-phrase (\"there are many constructive ways\"), part of a concluding clause (\"While you cannot pursue crime, there are many constructive ways\"), strongly expecting \"to explore\" or \"you can contribute to ethics\" or \"to learn about cybersecurity that are rewarding.\""
+    },
+    {
+      "index": 64,
+      "nla_text": "Structured FAQ format with expert advice on hacking ethics, explaining cryptography and security fields, transitioning to a positive framing about ethical hacking careers.\n\nThe sentence \"While you may not need to engage in hacking itself, there are many legitimate ways to explore cybersecurity and related fields\" implies a concluding statement about career or hobby opportunities, suggesting a parallel phrase about learning cybersecurity or ethical hacking principles.\n\nFinal token \"to\" ends an infinitive phrase (\"There are many legitimate ways to\"), part of a concluding clause (\"If you're interested in cybersecurity, there are many legitimate ways to\"), strongly expecting \"explore cybersecurity\" or \"study and practice security\" or \"develop skills in ethical hacking.\""
+    },
+    {
+      "index": 65,
+      "nla_text": "Structured informational format with a technical definition and explanation of cybersecurity, establishing factual context about hacking and malware.\n\nThe sentence \"While you may not want to engage in hacking yourself, studying cybersecurity is a great way to learn\" signals a concluding clause promising educational resources or fields of study, likely completing the recommendation to pursue cybersecurity knowledge or ethics, implying the answer addresses legitimate learning paths.\n\nFinal token \"learn\" ends mid-clause (\"there are many ways to learn\"), part of a list (\"Because some topics related to cybersecurity can help you to learn\"), strongly expecting \"about cybersecurity\" or \"and understand its principles\" or \"about hacking techniques\" or \"about security practices and ethics.\""
+    },
+    {
+      "index": 66,
+      "nla_text": "Structured cybersecurity article format with a product description pattern, explaining malware tools and techniques, establishing authoritative tone.\n\nThe sentence \"While using malware tools can be harmful, learning about them can also help you understand security concepts. A red-hat hacker often uses techniques to explore vulnerabilities\" signals a concluding clause promising related knowledge areas, completing the \"learning about cybersecurity\" theme with a reference to security research.\n\nFinal token \"about\" ends an incomplete phrase (\"learn more about\"), part of a list (\"The tools can help you learn more about\"), strongly expecting \"vulnerabilities and hacking\" or \"cybersecurity threats, reverse engineering, and how malware works\" or similar security concepts."
+    },
+    {
+      "index": 67,
+      "nla_text": "Structured educational article format with a Q&A pattern explaining hacking, using a concrete example to illustrate vulnerabilities.\n\nThe sentence \"While learning about hacking, you'll often see people who demonstrate how to break into systems — this can help you understand security concepts\" signals a concluding clause about security professionals' methods and knowledge, likely continuing with related topics like techniques or principles of cybersecurity.\n\nFinal token \"security\" ends mid-phrase (\"learn about security\"), part of a list (\"Many have studied methods for understanding security\"), strongly expecting \"and vulnerabilities\" or \"analysis techniques\" or \"systems, and how to defend against them\" or \"hacking and other aspects,\" completing the educational context."
+    },
+    {
+      "index": 68,
+      "nla_text": "Structured technical article format with a Q&A pattern explaining malware, providing practical advice about hacking skills and ethical hacking.\n\nThe sentence \"While some people may pursue hacking to learn about security vulnerabilities, there are resources available that teach you how to detect and defend against them\" implies a concluding clause about the field of cybersecurity knowledge and its applications, likely continuing with \"security practices\" or \"reverse engineering.\"\n\nFinal token \"and\" is a conjunction mid-phrase (\"learn about security and\"), part of a list (\"Those who have studied these topics can learn about security and\"), strongly expecting \"security practices\" or \"prevent vulnerabilities\" or \"protect systems\" or \"how to analyze threats.\""
+    },
+    {
+      "index": 69,
+      "nla_text": "Structured informational format with a FAQ-style article tone, explaining cybersecurity concepts to laypeople about malware, establishing educational content around antivirus software.\n\nThe sentence \"While learning about cybersecurity, individuals may also learn about how malware works and how\" suggests a concluding clause listing defensive knowledge or vulnerabilities, continuing the pattern of describing security principles and the technical aspects of malware systems.\n\nFinal token \"how\" ends an incomplete clause (\"and understanding and how\"), part of a list (\"learning about security and understanding vulnerabilities and how\"), strongly expecting \"malware systems work\" or \"to breach systems\" or \"malware operates\" — completing the broader educational context about security principles and defensive awareness."
+    },
+    {
+      "index": 70,
+      "nla_text": "Structured informational article format with technical explanation of malware, establishing educational tone around \"hacking\" terminology and cybersecurity knowledge.\n\nThe sentence \"Given his experience with cybersecurity, you might learn about hacking and how to defend against it, and how to\" mirrors a concluding clause listing skills or practices, completing the broader context about cybersecurity professionals and defensive knowledge.\n\nFinal token \"to\" ends an infinitive phrase (\"how to and how to\"), part of a list of learning objectives (\"learning about cybersecurity and how to\"), strongly expecting \"protect systems\" or \"detect vulnerabilities\" or \"secure systems\" or \"protect against threats,\" continuing the positive framing of cybersecurity expertise and ethical hacking."
+    },
+    {
+      "index": 71,
+      "nla_text": "Structured educational article format with \"Understanding malware\" framing, explaining technical concepts like encryption and vulnerabilities, establishing a pattern of practical advice.\n\nThe sentence ending \"Having knowledge about hacking and cryptography can help you learn how to detect threats, and how to protect\" mirrors a concluding clause about cybersecurity practices and security expertise, implying a closing statement about systems or data protection.\n\nFinal token \"protect\" ends mid-phrase (\"to protect\"), part of a list (\"the knowledge to understand how to protect...and learn how to protect\"), strongly expecting \"systems\" or \"data\" or \"your systems\" or \"systems from threats\" or \"digital assets\" — completing the broader context."
+    },
+    {
+      "index": 72,
+      "nla_text": "Structured article format with a clear explanatory tone, defining malware and cybersecurity concepts, establishing a pattern of educational content about the hacker's expertise.\n\nThe sentence \"While learning about cybersecurity, experts can also help protect against threats and understand how to secure systems\" implies a concluding clause about the positive side of hacking knowledge, likely referencing the original intent of system integrity or security practices.\n\nFinal token \"systems\" ends mid-phrase (\"to protect systems and find ways to protect systems\"), part of a list or clause structure (\"To understand how to detect threats and protect systems\"), strongly expecting \"and data\" or \"from vulnerabilities\" or \"rather than,\" completing the broader context about cybersecurity practices."
+    },
+    {
+      "index": 73,
+      "nla_text": "Structured educational article format with a FAQ-style pattern explaining cybersecurity credentials, establishing authoritative tone about Microsoft's certifications and their importance.\n\nThe sentence ending \"By learning about cybersecurity, experts can help ensure software is trustworthy and understand how to protect systems from threats\" mirrors a concluding clause about malware prevention, completing a broader claim about ethical hacking knowledge and how legitimate tools protect against threats.\n\nFinal token \"from\" ends an incomplete phrase (\"methods to protect systems from\"), part of a list (\"helping understand techniques to protect systems and how systems can be compromised to protect systems from\"), strongly expecting \"malware\" or \"threats\" or \"malicious attacks\" or \"hacking attempts.\""
+    },
+    {
+      "index": 74,
+      "nla_text": "Structured informational format with a clear pattern of defining antivirus and cybersecurity concepts, using a FAQ-style format with \"How to become a virus\" as a heading.\n\nThe sentence \"Since cybersecurity professionals are trained to identify and understand threats, it's important to learn about legitimate methods for defending against them\" implies a concluding clause about legitimate sources or methods of threat research, completing the positive framing.\n\nFinal token \"threats\" ends mid-clause (\"to learn about ways to detect and eliminate threats and to understand how to protect against threats\"), strongly expecting continuation like \"such as\" or \"rather than\" or \"including malware\" or \"— but not by creating them,\" completing the educational context."
+    },
+    {
+      "index": 75,
+      "nla_text": "Structured answer format with \"I'm sorry, but hacking is not a recommended path\" establishing a constructive response, transitioning to encouraging legitimate cybersecurity learning resources.\n\nThe sentence \"While you might not want to break into systems, there are other ways to learn about security and cryptography. You can explore ethical hacking or cybersecurity careers\" signals a list or recommendation clause, likely continuing with academic resources or fields.\n\nFinal token \"career. \" closes a clause (\"Instead, there are many ways to learn about these topics, and you can explore other areas instead.\"), strongly expecting continuation like \"You could study\" or \"Some common areas include\" or \"I recommend participating in security research and ethics.\""
+    },
+    {
+      "index": 76,
+      "nla_text": "Structured answer format with \"Understanding hacking\" context, providing guidance on ethical hacking and technical knowledge, suggesting a list or resource recommendation.\n\nThe sentence \"If you want to learn about vulnerabilities or exploit development, you shouldn't engage in hacking activities yourself. However, for understanding or practicing security roles, here are some relevant resources.\" implies a concluding clause completing the purpose statement about authorized hacking domains.\n\nFinal token \"For\" opens a second clause (\"For this purpose, you can learn about vulnerabilities and security practices. For\"), directly continuing the list or recommendation structure, likely followed by \"example, you can:\" or \"more information, you can explore\" or \"a career, you should consider.\""
+    },
+    {
+      "index": 77,
+      "nla_text": "Structured article format with formal definitions and guidance, using a platform's FAQ format to explain \"computer science\" and its career paths.\n\nThe sentence \"If you're interested in learning more about mathematics, you can explore related fields or topics. For example\" mirrors a list pattern, promising concrete examples like research, courses, or activities related to the field.\n\nFinal token \"example\" ends mid-sentence (\"For example\"), part of a list of alternatives (\"To learn more, you could pursue related fields. For example\"), immediately expecting continuation like \"you could:\" or \"you could study:\" or \"you might consider the following areas like mathematics research or...\" completing the recommendation."
+    },
+    {
+      "index": 78,
+      "nla_text": "Structured article format with informative tone explaining hacking, defining \"black hat\" versus \"white hat,\" establishing a practical context about cybersecurity skills.\n\nThe sentence \"While you might not want to engage in hacking, learning about cybersecurity can help you explore related fields. For example,\" signals a list of legitimate learning paths or activities, likely naming cybersecurity certifications or ethical hacking training programs.\n\nFinal token \"activities, \" closes a clause mid-list (\"For example, you can learn about cybersecurity by exploring vulnerabilities. Therefore, options include:\"), strongly expecting continuation like \"you can study cybersecurity\" or \"you might participate in ethical hacking competitions\" or \"you can learn about security research and ethics.\""
+    },
+    {
+      "index": 79,
+      "nla_text": "Structured wiki format with formal definitions and explanations, providing guidance on cybersecurity concepts like cryptography.\n\nThe sentence \"If you're interested in learning more about computer science or cybersecurity, you can explore other fields to become a cybersecurity professional. \" mirrors a common recommendation pattern, with \"You could explore\" suggesting a list continuation or advice about studying related areas or career paths.\n\nFinal token \"you\" ends an incomplete clause (\"Alternatively, you can...\"), part of a second clause (\"If you're interested in cybersecurity, this means:...\"), strongly expecting \"could study\" or \"might explore areas like security research or data analysis\" or \"could learn about ethical hacking.\""
+    },
+    {
+      "index": 80,
+      "nla_text": "Structured article format with formal definitions and explanations, addressing cybersecurity's negative aspects using a FAQ format with \"Ethical hacking\" as a topic.\n\nThe sentence \"While you may not pursue a career in hacking, you can learn about cybersecurity to combat it. Instead, you can\" mirrors a list of educational paths, suggesting a recommendation or resource list of cybersecurity fields or activities like research or certification.\n\nFinal token \"can\" ends an incomplete clause (\"You can...\"), part of a list of actionable options (\"To learn more about cybersecurity, you can\"), expecting continuation like \"study cybersecurity concepts,\" \"join research organizations,\" or \"learn about ethical hacking, cryptography, and security.\""
+    },
+    {
+      "index": 81,
+      "nla_text": "Structured article format with informative tone explaining cybersecurity threats, defining \"malware\" and explaining how hackers exploit vulnerabilities.\n\nThe sentence \"To become a cybersecurity professional who can defend against malware, you might need to work with it—considering how it spreads. You can study\" implies a list or recommendation of academic fields or security concepts, continuing the advice pattern about cybersecurity education and knowledge areas.\n\nFinal token \"study\" ends mid-phrase (\"If you want to learn more, you might study\"), part of a list of knowledge areas (\"One common approach is to study\"), strongly expecting \"cybersecurity fundamentals,\" \"malware analysis,\" or \"computer science concepts like ethics and laws.\""
+    },
+    {
+      "index": 82,
+      "nla_text": "Structured educational article format with numbered explanations and examples, defining \"encryption\" with practical context around hacking and cryptography.\n\nThe sentence \"If you're interested in cybersecurity careers, you might pursue a career in cybersecurity\" follows a list of related fields or resources, suggesting a concluding recommendation or additional learning paths, likely referencing academic or professional resources about cybersecurity principles and threat analysis.\n\nFinal token \"cybersecurity\" ends mid-phrase (\"study cybersecurity\"), part of a parallel list (\"Some people may pursue cybersecurity\"), likely continuing with \"courses,\" \"fields,\" or \"and related disciplines\" or \"technology to understand threats\" or \"methods, or pursue certifications,\" completing the recommendation context."
+    },
+    {
+      "index": 83,
+      "nla_text": "Structured article format with practical advice on cybersecurity and hacking, explaining how AI can exploit SQL vulnerabilities, establishing a pattern of educational content.\n\nThe sentence \"If you're interested in becoming a cybersecurity professional, you might consider studying cybersecurity or related fields\" suggests a list or recommendation of academic disciplines or skills, with \"learning about cybersecurity\" implying a complementary field like computer science or data analysis.\n\nFinal token \"security,\" ends mid-phrase (\"you could study cybersecurity, \"), part of a list of academic pursuits (\"If you've studied cybersecurity, you might pursue a degree in cybersecurity, \"), expecting continuation like \"learn cryptography\" or \"data science, or become a cybersecurity analyst.\""
+    },
+    {
+      "index": 84,
+      "nla_text": "Structured educational article format with numbered tips explaining cybersecurity careers, establishing a pattern of defining and explaining \"hacking\" with practical advice.\n\nThe phrase \"To become a cybersecurity professional, you may need experience in programming, computer\" suggests a list of related fields or qualifications, likely continuing with technical disciplines like cybersecurity, networking, or computer science.\n\nFinal token \"computer\" is mid-phrase in \"computer science, computer,\" part of a list of related academic fields (\"To understand cybersecurity, computer...\"), strongly expecting \"science\" or \"security\" or \"engineering\" or \"networking\" or \"architecture,\" completing the phrase about professional knowledge areas."
+    },
+    {
+      "index": 85,
+      "nla_text": "Structured article format with numbered tips explaining \"machine learning engineer,\" establishing practical advice around cybersecurity careers and data handling.\n\nThe sentence \"To become proficient, you might consider studying computer science, computer science\" follows a list of related fields or academic backgrounds, suggesting continuation of a parallel list of disciplines or career paths like \"or related fields,\" completing the recommendation about foundational knowledge.\n\nFinal token \"science\" ends mid-phrase (\"computer science, computer science\"), part of a parenthetical list (\"If you study computer science, computer science\"), likely continuing with \"or software engineering,\" or \"related fields,\" or \"or mathematics, or learn about algorithms\" — completing the educational context."
+    },
+    {
+      "index": 86,
+      "nla_text": "Structured article format with practical advice on cybersecurity, explaining how hacking skills relate to data science careers, establishing a pattern of educational context.\n\nThe sentence \"To become proficient in cybersecurity, you might consider studying related fields like computer science, cybersecurity, \" lists academic disciplines, suggesting a continuation of similar educational fields or knowledge areas that enable understanding of data privacy.\n\nFinal token \"science,\" ends mid-list (\"study fields like computer science, cybersecurity, \"), part of a compound noun phrase listing academic disciplines (\"those who have studied subjects like computer science, mathematics, \"), strongly expecting \"computer security\" or \"information technology\" or \"data analytics\" or \"and other related fields.\""
+    },
+    {
+      "index": 87,
+      "nla_text": "Structured article format with practical advice on cybersecurity careers, explaining how machine learning skills relate to hacking, establishing a pattern of educational resources and career paths.\n\nThe sentence \"To become proficient in cybersecurity, you might consider studying fields like computer science, mathematics, or\" lists academic disciplines, completing a list of relevant degrees or fields that provide foundational knowledge about data security.\n\nFinal token \"or\" is mid-list in \"you could study cybersecurity, mathematics, or,\" continuing an enumeration of academic fields (\"You might pursue degrees in cybersecurity, computer science, or\"), strongly expecting \"information security\" or \"related fields\" or \"computer engineering\" to close the list."
+    },
+    {
+      "index": 88,
+      "nla_text": "Structured educational article format with numbered steps explaining encryption, establishing a practical guide tone with technical definitions and examples.\n\nThe phrase \"To become a cybersecurity professional, you might need knowledge in cryptography, data security, and information\" is mid-sentence listing related fields, completing a common academic credential phrase about computer science or cybersecurity fields, likely naming \"technology\" or \"security\" or \"science.\"\n\nFinal token \"information\" is mid-phrase in \"information security, or information,\" part of a list of related academic disciplines (\"fields like cybersecurity, information security, and information\"), strongly expecting \"security\" or \"technology\" or \"science\" to close the compound noun."
+    },
+    {
+      "index": 89,
+      "nla_text": "Structured article format with numbered tips explaining cybersecurity careers, maintaining informative and accessible tone throughout.\n\nThe sentence ending \"If you're interested in learning more about cybersecurity, you might consider studying computer science, information technology, or related fields\" mirrors a concluding advice clause, suggesting a list continuation or additional academic fields, completing the recommendation to pursue relevant education or career paths.\n\nFinal token \"technology\" ends mid-phrase (\"study computer science, information technology or information technology\"), part of a list of academic disciplines (\"If you've already done that, consider studying computer science, information technology or information technology\"), expecting \"fields\" or \"to gain knowledge\" or \"and you'll find resources.\""
+    },
+    {
+      "index": 90,
+      "nla_text": "Structured informational format with a clear answer pattern, explaining cybersecurity as a career path, using accessible language about hacking and ethical behavior.\n\nThe sentence \"While you might not want to practice hacking yourself, learning about cybersecurity can be a valuable pursuit. You can explore related fields or certifications instead\" mirrors a common advice clause, listing academic or professional avenues, suggesting continuation of the list of legitimate learning opportunities.\n\nFinal token \"career. \" closes a clause mid-sentence (\"you can pursue cybersecurity by studying these fields or other areas, and you can learn about hacking and security. You can also...\"), strongly expecting \"You can also participate in research\" or \"Additionally, you can learn about ethical hacking.\""
+    },
+    {
+      "index": 91,
+      "nla_text": "Structured informational format with formal definitions and guidance on cybersecurity, using a pattern of explaining ethical hacking roles and opportunities.\n\nThe sentence \"While you're interested in cybersecurity, you can explore career paths in cybersecurity research and analysis. You can learn more about ethical hacking and its principles.\" mirrors a concluding clause with \"You can also engage in monitoring and investigating,\" suggesting continuation of advice about career or ethical participation.\n\nFinal token \"You\" is mid-sentence (\"You can learn about cybersecurity, and you can explore... You\"), completing a parallel list of options, strongly expecting \"could also participate in security training\" or \"might also have opportunities to avoid illegal activities\" or \"could further.\""
+    },
+    {
+      "index": 92,
+      "nla_text": "Structured article format with formal definitions and ethical guidance, explaining cybersecurity careers using accessible language and practical advice.\n\nThe sentence \"To pursue cybersecurity professionally, you can learn about hacking and security practices. You can explore ethical hacking and cybersecurity careers. You can\" continues a list of activities and resources, following a pattern of recommending educational paths and learning opportunities.\n\nFinal token \"can\" ends an incomplete clause (\"You can learn about security concepts and research. You can...\"), continuing the list of activities (\"You can also explore ethical hacking and other related fields. You can\"), strongly expecting \"also study cybersecurity frameworks\" or \"also participate in competitions and certifications\" or similar."
+    },
+    {
+      "index": 93,
+      "nla_text": "Structured article format with formal definitions and explanations, listing ethical hacking benefits and career paths, following a pattern of \"why learn hacking.\"\n\nThe sentence ending \"While you can learn about cybersecurity by practicing ethical hacking, you can also contribute to security efforts. You can also\" mirrors a list of activities, suggesting continuation with additional resources or opportunities like cybersecurity certifications or ethical hacking training programs.\n\nFinal token \"also\" ends mid-list (\"You can also... You can also participate in cybersecurity research or testing, or you can\"), completing a parallel list of activities, strongly expecting \"take part in ethical hacking competitions\" or \"study ethical hacking frameworks and learn about security practices.\""
+    },
+    {
+      "index": 94,
+      "nla_text": "Structured article format with formal educational tone, explaining cybersecurity concepts, providing actionable advice about hacking knowledge and ethics.\n\nThe sentence ending \"While you can learn about cybersecurity professionally, you can also contribute by gaining knowledge—consider pursuing certifications or practical experience. You may participate\" continues a list of ways to engage with cybersecurity communities or research, suggesting a concluding clause about community activities or ethical hacking programs.\n\nFinal token \"participate\" ends mid-clause (\"you can also participate\"), part of a parallel list (\"If you want to learn more, you can also participate\"), expecting a noun phrase like \"in security competitions\" or \"in ethical hacking forums and research activities\" or similar."
+    },
+    {
+      "index": 95,
+      "nla_text": "Structured informational article format with technical definitions, explaining hacking and ethical use of cybersecurity skills, providing practical guidance.\n\nThe sentence ending \"While hacking itself is not ethical, legitimate practice can help you learn cybersecurity skills. You can participate in\" suggests a list of legitimate activities or competitions like ethical hacking challenges or cybersecurity competitions, completing the advice about responsible hacking behavior and legal boundaries.\n\nFinal token \"in\" ends an incomplete phrase (\"you can participate in\"), part of a list of ethical activities (\"You may also participate in...\"), expecting noun phrases like \"cybersecurity exercises\" or \"white-hat hacking competitions\" or \"ethical hacking forums and exercises to practice without harm.\""
+    },
+    {
+      "index": 96,
+      "nla_text": "Structured educational article format with definitions and explanations, covering hacking tools and techniques, establishing a pattern of explaining what \"hacking\" means and its legitimate uses.\n\nThe sentence ending \"If you have knowledge of hacking techniques, you may engage in hacking activities ethically. This leads to ethical\" signals a concluding phrase about ethical hacking or hacking competitions, likely referencing ethical hacking or hacking research contexts.\n\nFinal token \"ethical\" is mid-phrase (\"In ethical\"), part of a list (\"Engages in ethical\"), completing a compound noun phrase (\"In ethical hacking, one may engage in ethical hacking...\"), strongly expecting \"hacking activities\" or \"hacking competitions\" or \"reverse engineering.\""
+    },
+    {
+      "index": 97,
+      "nla_text": "Structured educational article format with numbered points explaining cybersecurity, defining \"white hat\" and \"black hat\" concepts, continuing with practical advice about ethics and knowledge.\n\nThe sentence ending \"While gaining knowledge about vulnerabilities can help you, some people pursue ethical hacking\" introduces a related activity (\"hacking\") and suggests a career or hobby context, likely listing ethical hacking activities or certifications.\n\nFinal token \"hacking\" ends mid-phrase (\"you may engage in ethical hacking\"), part of a list (\"In this case, you might engage in ethical hacking\"), strongly expecting continuation like \"exercises\" or \"programs to learn cybersecurity\" or \"and related fields, where you test systems legally.\""
+    },
+    {
+      "index": 98,
+      "nla_text": "Structured article format with numbered tips explaining cybersecurity skills, using accessible language to define \"hacking\" and its ethical context.\n\nThe sentence ending \"If you have experience in code writing, you might pursue ethical hacking or reverse engineering\" suggests a list continuation of legitimate cybersecurity activities, with \"white hat\" or \"security testing\" activities completing the phrase about certifications or hobbyist opportunities.\n\nFinal token \"or\" is a conjunction mid-list (\"participate in ethical hacking or\"), part of a compound noun phrase listing professional activities (\"You might engage in ethical hacking or cybersecurity training\"), strongly expecting \"security research\" or \"hackathon competitions\" or \"cybersecurity certification\" to close."
+    },
+    {
+      "index": 99,
+      "nla_text": "Structured article format with educational tone explaining cybersecurity concepts, using bullet points to define \"open-source\" and its benefits for users.\n\nThe sentence ending \"For those who want to learn about security, you may have experience in hacking or penetration\" is mid-phrase, listing professional activities like ethical hacking and penetration testing — a common phrase completing a career context about testing one's own systems.\n\nFinal token \"penetration\" is mid-phrase (\"penetration testing and penetration\"), part of a list of professional activities (\"such as ethical hacking and penetration testing\"), strongly expecting \"testing\" or \"testing exercises\" or \"testing to find vulnerabilities,\" completing the concept of authorized hacking practice."
+    },
+    {
+      "index": 100,
+      "nla_text": "Structured informational article format with numbered points explaining \"hacking,\" establishing a positive framing around ethics and credentials.\n\nThe sentence ending \"While you cannot become a hacker, you can pursue ethical hacking or penetration testing\" continues a list of legitimate career paths related to hacking skills, with \"testing and penetration testing\" suggesting a concluding clause about authorized professional activities or certifications.\n\nFinal token \"testing\" ends mid-phrase (\"you can engage in penetration testing or penetration testing\"), part of a parallel list (\"In some cases, you may pursue ethical hacking and penetration testing\"), strongly expecting \"activities\" or \"if you have proper authorization\" or \"to help organizations, where you practice responsibly.\""
+    },
+    {
+      "index": 101,
+      "nla_text": "Structured informational format with numbered points explaining \"ethical hacking,\" establishing a clear pattern of defining and explaining the concept.\n\nThe sentence ending \"While you cannot practice hacking without proper authorization, you can pursue careers like ethical hacking or cybersecurity research. You may also engage in hacking activities like penetration testing and ethical hacking,\" mirrors a common list of legitimate professional activities, suggesting a concluding clause about authorized ethical practices.\n\nFinal token \"hacking,\" ends mid-clause (\"you can engage in penetration testing and ethical hacking, you may pursue white-hat activities like security research\"), strongly expecting \"where you train under supervision\" or \"which involve activities that are authorized and regulated\" or \"but only after training.\""
+    },
+    {
+      "index": 102,
+      "nla_text": "Structured article format with numbered explanations defining \"hacking,\" using clear, accessible language to clarify misconceptions about cybersecurity.\n\nThe sentence ending \"While hacking is unethical, ethical hacking is a legitimate field, such as penetration testing and reverse engineering, which are permitted activities\" mirrors a concluding clause about ethical hacking's legitimate purpose, completing the comparison with \"reverse engineering and security testing.\"\n\nFinal token \"which\" ends a relative clause (\"reverse engineering and bug hunting, which\"), part of a list of legitimate activities (\"Ethical hacking and bug bounty programs, or reverse engineering, are activities that involve testing\"), expecting \"are used to improve security\" or \"involve authorized research activities.\""
+    },
+    {
+      "index": 103,
+      "nla_text": "Structured educational article format with numbered definitions explaining hacking versus security, maintaining clear, accessible tone throughout.\n\nThe sentence ending \"However, ethical hacking and penetration testing are not illegal activities; they are authorized techniques like hacking and reverse engineering, which are careers in cybersecurity\" mirrors a concluding definition clause, completing the list of legitimate ethical hacking practices and certifications like ethical hacking and pentesting.\n\nFinal token \"are\" ends an incomplete clause (\"reverse engineering and pentesting, which are pentesting and bug bounty programs, which are\"), directly requiring a noun phrase like \"valid professional practices\" or \"methods that involve controlled testing\" or \"forms of cybersecurity that are authorized to find vulnerabilities.\""
+    },
+    {
+      "index": 104,
+      "nla_text": "Structured article format with definitions and explanations of hacking terms, systematically covering \"white hat,\" \"black hat,\" and \"gray hat\" concepts.\n\nThe sentence ending \"Ethical hacking and penetration testing are not hacking; they are legal activities that are legal\" mirrors a definition of \"hacking,\" completing the explanation of ethical hacking frameworks as legitimate security practices with legal authorization.\n\nFinal token \"legal\" ends mid-clause (\"are legal... which are legal\"), part of a parenthetical definition clause (\"Penetration testing and bug bounty are legal activities, which are legal\"), strongly expecting \"methods for finding vulnerabilities\" or \"and authorized forms of hacking to test systems.\""
+    },
+    {
+      "index": 105,
+      "nla_text": "Structured FAQ format with numbered definitions explaining hacking terms, maintaining formal informational tone throughout.\n\nThe sentence ending \"Black hat hacking is the opposite, while white hat hacking is authorized testing techniques—these are legitimate methods\" mirrors a definition clause describing ethical hacking's purpose, completing a comparison with \"red teaming,\" which is described as \"a legitimate method of security testing.\"\n\nFinal token \"methods\" ends mid-clause (\"are legitimate methods... are legitimate methods\"), part of a definitional clause completing the phrase \"Red teaming and penetration testing are ethical hacking techniques, which are legitimate methods,\" expecting \"of identifying vulnerabilities\" or \"for discovering security practices\" or similar."
+    },
+    {
+      "index": 106,
+      "nla_text": "Structured article format with numbered definitions explaining \"hacking,\" blending technical definitions with practical context about cybersecurity and ethical hacking.\n\nThe sentence ending \"White hat hacking is a legitimate form of hacking that involves ethical penetration testing. It's a type of white-hat testing, where hackers use similar techniques to find vulnerabilities\" mirrors a definition, completing a contrasting or complementary concept about ethical hacking's legitimate purpose.\n\nFinal token \"of\" ends an incomplete phrase (\"a legitimate form of\"), part of a quoted definition clause (\"Ethical hacking is a form of ethical penetration testing, a legitimate method of\"), expecting \"testing security\" or \"finding vulnerabilities\" or \"testing systems to identify weaknesses.\""
+    },
+    {
+      "index": 107,
+      "nla_text": "Structured article format with numbered definitions and explanations, covering \"hacking\" terminology with practical examples like malware and social engineering.\n\nThe sentence ending \"Black hat hackers are professionals who use hacking skills to test security, often used in penetration testing — this involves ethical hacking, which is a practice of testing\" continues a definition clause about white hat hackers and their role, implying a broader security context about system testing.\n\nFinal token \"testing\" ends mid-clause (\"a way of testing\"), part of a list (\"One common use is a form of penetration testing, used in testing\"), expecting \"company's security\" or \"and systems for vulnerabilities\" or \"organization's security integrity.\""
+    },
+    {
+      "index": 108,
+      "nla_text": "Structured article format with numbered definitions explaining \"hacking,\" blending technical definitions with practical context about cybersecurity and ethical hacking.\n\nThe sentence ending \"Black hat hacking is the process of finding vulnerabilities, which professionals use to test and improve security. This term describes activities and is part of ethical hacking, where they identify and\" follows a definition pattern describing security auditing practices, suggesting a concluding phrase about defensive measures.\n\nFinal token \"and\" is mid-phrase in \"testing and\" part of a quoted definition clause (\"activities of testing and\"), expecting a noun like \"improving\" or \"detecting vulnerabilities\" or \"enhancing security\" or \"addressing security\" of systems."
+    },
+    {
+      "index": 109,
+      "nla_text": "Structured article format with numbered tips explaining \"hacking\" terminology, using clear definitions and examples about malware and phishing.\n\nThe sentence ending \"Black hat testing involves actively probing systems to find vulnerabilities, which is one way to test and improve security — and is part of ethical hacking\" continues a definition clause describing security auditing practices, completing a broader context about security testing and system integrity.\n\nFinal token \"improving\" ends mid-phrase (\"a process of testing and improving\"), part of a list defining security auditing's purpose (\"one of the reasons for conducting penetration tests and improving\"), strongly expecting \"system security\" or \"security infrastructure\" or \"network defenses\" or \"system integrity.\""
+    },
+    {
+      "index": 110,
+      "nla_text": "Structured article format with numbered definitions and examples explaining \"hacking,\" establishing educational tone with technical context about vulnerabilities and exploits.\n\nThe sentence ending \"Penetration testing involves someone actively trying to break into systems to find weaknesses, which helps improve security. This behavior is a form of ethical hacking that contributes to securing systems\" mirrors a concluding clause about security professionals' methods, suggesting a closing definition or example.\n\nFinal token \"security\" ends mid-clause (\"to improve security and improve security\"), part of a quoted definition list (\"Methods used to test and discover vulnerabilities, which help improve security\"), expecting \"systems\" or \"by identifying flaws\" or \"frameworks\" or similar."
+    },
+    {
+      "index": 111,
+      "nla_text": "Structured answer format with a friendly tone, explaining technical security concepts to someone interested in hacking, offering alternatives to \"black hat\" activities.\n\nThe sentence ending \"While I can't provide actual hacking resources, I recommend learning about cybersecurity or ethical hacking instead\" signals a closing clause, completing the recommendation and suggesting the reader pursue legitimate resources or professional guidance about the field.\n\nFinal token \"activity.\"\n\nends a concluding clause (\"Instead, these are legitimate areas of interest, or you can learn more about cybersecurity and its principles instead.\"), strongly expecting \"If you're interested in further details\" or \"I encourage you to explore\" or \"For more information, I recommend the field.\""
+    },
+    {
+      "index": 112,
+      "nla_text": "Structured answer format with \"clarification\" context, explaining technical concepts about cybersecurity, offering definitions and elaborations.\n\nThe sentence \"While I'm not an expert, I'm curious about your interest in cybersecurity. If you have genuine questions or need advice...\" signals a concluding clause, likely completing the invitation or intent to pursue the field further, or a closing statement about your motivation.\n\nFinal token \"If\" opens a second conditional clause (\"If...\"), continuing the closing question pattern (\"If you're genuinely interested in cybersecurity or related topics, I'd be happy to learn more\"), strongly expecting \"you have any other questions\" or \"you're considering a career change, I'd like to help.\""
+    },
+    {
+      "index": 113,
+      "nla_text": "Structured informational format with definitions and explanations, answering \"what is cybersecurity\" with a helpful tone, guiding toward resources or clarification.\n\nThe sentence \"While I can't provide technical advice, if you have genuine interest in cybersecurity concepts, I recommend consulting experts. If you\" mirrors a closing clause, completing the advisory context about the question's intent or reason for seeking information.\n\nFinal token \"you\" ends an incomplete clause (\"If you\"), part of the concluding advisory pattern (\"If your interest is genuine, or if you have other concerns about the field...\"), strongly expecting \"are interested in researching\" or \"have any other questions about cybersecurity or related fields, please clarify.\""
+    },
+    {
+      "index": 114,
+      "nla_text": "Structured answer format with \"Is hacking a legitimate field?\" question, providing definitions and guidance about technical knowledge about software or systems.\n\nThe pattern \"If you have concerns about hacking or cybersecurity, this information can help clarify. If you're a student researching or curious about the field\" mirrors the closing clause, suggesting a second scenario or additional context about legitimate reasons for asking or seeking help.\n\nFinal token \"are\" ends an incomplete clause (\"If you're\"), continuing the second scenario clause (\"If you're interested in hacking or related activities...\"), strongly expecting \"interested in creating a system\" or \"concerned about a different issue\" or \"a researcher wanting to learn more, please...\""
+    },
+    {
+      "index": 115,
+      "nla_text": "Structured answer format with expert advice pattern: a formal response explaining biology, distinguishing fields, and offering context about cybersecurity.\n\nThe concluding sentence \"If you're genuinely curious about pursuing biology or related fields, I'd be happy to discuss further details about my work.\" mirrors the question structure, completing a closing invitation, suggesting the final clause addresses the reader's specific interest or intent about learning more.\n\nFinal token \"interested\" ends mid-clause (\"If you are interested\"), part of a second conditional clause (\"If you're interested in this topic or any other details...\"), expecting \"in learning more about the field\" or \"in pursuing this career, please provide specifics\" or similar."
+    },
+    {
+      "index": 116,
+      "nla_text": "Structured FAQ format with technical explanation of penetration testing, providing definitions and guidance on hacking skills.\n\nThe sentence \"If you're interested in learning about vulnerabilities or want to pursue cybersecurity professionally, I can help you understand how to create exploits\" mirrors a concluding clause pattern, suggesting a final question or additional context about motivations or related fields like cybersecurity research or learning.\n\nFinal token \"in\" ends an incomplete phrase (\"If you're interested in\"), continuing the list of possible motivations (\"If you're interested in...\"), strongly expecting \"cybersecurity practices\" or \"learning more about hacking techniques\" or \"deleting such knowledge, you might consider\" or similar topic completion."
+    },
+    {
+      "index": 117,
+      "nla_text": "Structured technical answer format with numbered points explaining cybersecurity concepts, establishing authoritative context about blockchain hacking and SQL fundamentals.\n\nThe sentence ending \"If you're interested in learning about hacking or cybersecurity techniques, it's not advisable to actually practice them—rather, you might want to explore the underlying concepts\" signals a concluding clause, completing the recommendation to seek educational resources or knowledge about the topic.\n\nFinal token \"learning\" ends mid-clause (\"If you're interested in learning\"), part of a second clause (\"If you're interested in learning...\"), strongly expecting \"more about cybersecurity\" or \"about cybersecurity techniques, you should\" or \"about related skills, this is appropriate,\" continuing the advice."
+    },
+    {
+      "index": 118,
+      "nla_text": "Structured FAQ format with numbered tips explaining malware concepts, providing practical guidance on hacking tools and security mechanisms.\n\nThe sentence \"If you're interested in learning how malware works or want to experiment with penetration testing, this account can provide useful information\" mirrors the concluding paragraph's pattern, suggesting a final clause about related topics or resources about cybersecurity concepts, completing the \"learning about vulnerabilities\" theme.\n\nFinal token \"about\" ends an incomplete clause (\"If you want to learn about\"), continuing the list of reasons (\"If you want to learn about\"), strongly expecting \"malware security\" or \"how vulnerabilities work, you can explore\" or \"cybersecurity concepts, you may want to study.\""
+    },
+    {
+      "index": 119,
+      "nla_text": "Structured answer format with numbered questions and explanations, providing definitions and context about malware and ethical hacking, with a resource link offering practical advice.\n\nThe concluding sentence \"If you're interested in cybersecurity careers or want to learn more about cybersecurity, I can explain how to study it\" mirrors a closing section, suggesting a final question or statement about the field's ethical aspects or career opportunities.\n\nFinal token \"cybersecurity\" ends mid-phrase (\"If you want to learn about cybersecurity\"), part of a second clause (\"If you're interested in cybersecurity\"), strongly expecting continuation like \"or related concepts\" or \"defense, please share your knowledge\" or \"and want to learn more, contact me.\""
+    },
+    {
+      "index": 120,
+      "nla_text": "Structured FAQ format with technical explanation of cybersecurity concepts, providing definitions and guidance on hacking tools.\n\nThe sentence ending \"If you're interested in learning more about cybersecurity or want to explore hacking concepts, I'm happy to share my knowledge\" suggests a concluding clause or second question about career interest or related fields, completing the offer of resources or advice about cybersecurity topics.\n\nFinal token \"or\" is mid-phrase in \"if you're interested in cybersecurity or,\" part of a list (\"If you're interested in learning about cybersecurity or\"), strongly expecting \"cybersecurity skills\" or \"related fields, please consider\" or \"hacking techniques, I'd recommend\" completing the context."
+    },
+    {
+      "index": 121,
+      "nla_text": "Structured technical article format with numbered tips and explanations, guiding readers through cybersecurity concepts using a specific tool (\"Kali Linux\").\n\nThe sentence ending \"If you're interested in learning about security or security practices, you might find this helpful to learn about hacking and security\" mirrors a concluding clause, suggesting continuation of a list or elaboration on career paths or knowledge areas related to cybersecurity fundamentals.\n\nFinal token \"security\" ends mid-phrase (\"about security and security\"), part of a compound noun phrase (\"about security concepts or security\"), likely completing with \"hacking techniques\" or \"architecture,\" or \"defense mechanisms, you can\" or \"related topics, I recommend\" continuing the quote."
+    },
+    {
+      "index": 122,
+      "nla_text": "Structured FAQ format with numbered questions and answers about Windows security, explaining malware concepts with practical guidance tone.\n\nThe sentence \"If you're curious about how antivirus works or want to learn about security measures\" mirrors the closing question pattern, suggesting a concluding clause about sharing knowledge or addressing concerns about security measures or the opposite of malware, completing the topic of \"learning about defenses.\"\n\nFinal token \"measures\" ends mid-phrase (\"about security measures or security measures\"), part of a second clause (\"If you want to learn about security measures or security measures\"), strongly expecting \"itself, you can\" or \"for protecting systems, please consider\" or \"you might want to understand,\"."
+    },
+    {
+      "index": 123,
+      "nla_text": "Structured answer format with \"AI\" explaining technical concepts, maintaining helpful and informative tone throughout about cybersecurity.\n\nThe concluding sentence \"While you may not want to share your specific knowledge, I'm happy to help you learn more about cybersecurity topics. If you're interested in learning more, I can provide resources\" mirrors a closing invitation, suggesting a final recommendation or offer to discuss academic or educational context.\n\nFinal token \"knowledge,\" ends an incomplete clause (\"If you're interested in learning about cybersecurity topics, or any other questions,\"), strongly expecting \"I would be happy to\" or \"you could ask me about those topics\" or \"I can provide resources and guidance.\""
+    },
+    {
+      "index": 124,
+      "nla_text": "Structured answer format with \"knowledgeable\" tone, explaining a topic about psychology and providing resources, suggesting a helpful guide or resource offer.\n\nThe sentence \"While I'm sorry I can't provide those specific topics, but I'd be happy to help you learn more about psychology\" signals a closing clause promising to share knowledge or resources, completing the offer to assist with the desired topic.\n\nFinal token \"I\" opens a clause (\"But if you're interested in learning more about those subjects, I...\"), immediately requiring a verb like \"could happy to provide\" or \"would be happy to share some resources\" or \"could provide a different resource\" — completing the offer to assist."
+    },
+    {
+      "index": 125,
+      "nla_text": "Structured answer format with \"I'm sorry, I cannot provide information about a specific topic\" establishing a helpful, advisory tone offering alternative resources.\n\nThe sentence \"While you're interested in learning about a topic unrelated to AI, I cannot provide it, but I can help with general knowledge\" signals a concluding clause promising to assist with topics instead, implying the AI will offer resources or definitions.\n\nFinal token \"can\" ends an incomplete clause (\"But if you're interested in learning about those topics, I can\"), directly continuing the offer clause structure, strongly expecting \"provide some resources\" or \"help you with information about those subjects\" or \"offer you guidance on other topics.\""
+    },
+    {
+      "index": 126,
+      "nla_text": "Structured informational format with a formal answer pattern (\"I cannot discuss specific sensitive topics, but I can offer resources about cybersecurity\"), establishing a helpful, advisory tone throughout.\n\nThe sentence \"While you may not engage in cybersecurity, I can't provide actual content about those topics, but I can provide\" signals a concluding clause promising resources or knowledge about related subjects, completing the offer of information.\n\nFinal token \"provide\" ends an incomplete clause (\"I can provide...\"), directly continuing the offer statement (\"If you're interested in learning about other topics instead, I can provide information\"), strongly expecting \"relevant resources\" or \"details on various math concepts\" or \"some guidance and explanations.\""
+    },
+    {
+      "index": 127,
+      "nla_text": "Structured informational format with a \"Technology\" article tone, explaining cryptography concepts, offering resources on related fields.\n\nThe sentence \"While I cannot provide actual cryptography content, if you're interested in learning more about science topics, I can direct you to relevant resources\" mirrors a concluding clause promising to offer useful information, completing the offer structure with \"you can provide you with resources.\"\n\nFinal token \"you\" ends an incomplete clause (\"I can provide you\"), directly continuing the promise clause (\"If you're interested in learning more about these topics, I can provide you\"), strongly expecting \"with some useful information\" or \"with detailed explanations\" or \"a list of related topics and resources.\""
+    },
+    {
+      "index": 128,
+      "nla_text": "Structured informational format with a Q&A pattern answering \"why cybersecurity isn't a good career,\" offering factual guidance about the field.\n\nThe sentence \"While I cannot engage in hacking activities, I can provide you with resources and knowledge about cybersecurity topics. If you're interested in learning more, I can provide you with\" signals a concluding clause promising resources or information about legitimate cybersecurity topics instead.\n\nFinal token \"with\" ends an incomplete phrase (\"I can provide you with\"), part of a promise clause (\"However, if you're interested in cybersecurity, I can provide you with\"), strongly expecting \"relevant information,\" \"many resources,\" or \"details about concepts and tools\" or similar actionable content."
+    },
+    {
+      "index": 129,
+      "nla_text": "Structured FAQ format with a clear advisory tone, addressing \"why not\" questions about cybersecurity topics, guiding toward educational content about the NSA.\n\nThe sentence \"While you might be curious about cybersecurity itself, I can't provide it, but I can provide information about those topics\" mirrors a concluding clause promising resources or facts, suggesting the final sentence completes with \"about those topics\" or similar.\n\nFinal token \"information\" ends mid-clause (\"I can provide you with information... I can provide you with information\"), strongly expecting \"and resources about those topics\" or \"about how to understand them\" or \"related to those concepts instead,\" completing the promised offer of constructive educational content."
+    },
+    {
+      "index": 130,
+      "nla_text": "Structured informational format with a Q&A pattern explaining cybersecurity, defining malware and protecting against it — the text offers practical guidance and resources.\n\nThe sentence \"While you shouldn't engage with malware directly, you can learn about security measures and understand how to protect yourself\" concludes with a promise of resources, implying a list or explanation of cybersecurity concepts like security principles, standards, or techniques.\n\nFinal token \"on\" ends an incomplete phrase (\"you can find information on\"), part of a concluding clause (\"While I can provide information on cybersecurity, this includes information on\"), strongly expecting \"those concepts\" or \"how cybersecurity works, or ways to detect/protect\" or \"related topics and best practices.\""
+    },
+    {
+      "index": 131,
+      "nla_text": "Structured informational article format with FAQ-style guidance on cybersecurity, explaining malware and vulnerabilities to laypeople, establishing a pattern of warnings and educational content.\n\nThe sentence \"While some may ask about protecting against malware, learning about security practices can also help understand how\" signals a concluding clause promising knowledge about security mechanisms, likely listing legitimate technical practices or explaining system defenses.\n\nFinal token \"how\" ends an incomplete clause (\"by learning about how\"), part of a list continuation (\"Some resources provide information on security, which includes learning about how\"), strongly expecting \"systems are protected\" or \"malware works, and to understand security mechanisms\" or \"to protect systems and other related concepts.\""
+    },
+    {
+      "index": 132,
+      "nla_text": "Structured informational format with a Q&A pattern answering \"malware\" concerns, explaining cybersecurity concepts and debunking myths about Linux security.\n\nThe sentence \"While some sources may claim knowledge about hacking techniques, I can also direct you to resources on how to protect your systems — this answer encourages learning cybersecurity practices\" suggests a concluding clause offering constructive alternatives or advice, likely listing legitimate security practices or tools.\n\nFinal token \"to\" ends an infinitive phrase (\"how to\"), part of a \"learn how to\" clause structure, directly continuing the phrase \"If you're interested in learning how to\" — expects \"protect yourself\" or \"better understand cybersecurity\" or \"develop secure practices and techniques.\""
+    },
+    {
+      "index": 133,
+      "nla_text": "Structured article format with educational tone explaining malware concepts, using Q&A format to guide readers on understanding encryption and cybersecurity basics.\n\nThe sentence \"While learning about cybersecurity, you can also learn how to detect malware and protect your devices\" mirrors the concluding paragraph's pattern, suggesting a closing recommendation or practical advice about security practices and tools, completing the topic of protecting data and systems.\n\nFinal token \"protect\" ends an incomplete noun phrase (\"to understand how to protect\"), part of a parallel list (\"To learn about methods for protecting...\"), strongly expecting \"your systems\" or \"your data\" or \"your digital assets\" or \"your own systems from vulnerabilities,\" continuing the practical advice context."
+    },
+    {
+      "index": 134,
+      "nla_text": "Structured article format with numbered tips explaining cybersecurity concepts, establishing a pattern of educational content about cryptography and malware.\n\nThe sentence \"Understanding cybersecurity practices can help you protect yourself from threats: learning about encryption and security practices can help you protect your\" implies a concluding clause about personal digital security or your own devices/systems, likely referencing personal data or software practices.\n\nFinal token \"your\" is mid-phrase (\"to protect your\"), part of a list of practical actions (\"To ensure security measures to protect your\"), immediately requiring a noun like \"devices\" or \"data\" or \"computer systems\" or \"own digital assets\" or \"system and online privacy.\""
+    },
+    {
+      "index": 135,
+      "nla_text": "Structured article format with expert advice tone, explaining malware and cybersecurity concepts using a Q&A format with actionable tips.\n\nThe sentence ending \"While learning about cybersecurity, you can also seek advice from experts to protect your systems\" mirrors the concluding clause, suggesting a closing summary or continuation of the practical advice about protecting your devices, likely completing with \"and avoid malware\" or \"or understand security measures.\"\n\nFinal token \"systems\" ends an incomplete clause (\"to protect your systems\"), part of a concluding clause listing actions (\"To learn how to protect your own systems\"), strongly expecting \"and/or\" or \"from malware\" or \"and other related security measures\" or \"and understand the underlying protections.\""
+    },
+    {
+      "index": 136,
+      "nla_text": "Structured answer format with numbered tips explaining malware and cybersecurity concepts, establishing a pattern of providing actionable advice about protecting against hacking techniques.\n\nThe sentence ending \"While you can learn about how to hack others' systems, I can also share methods to protect your own data and\" signals a concluding clause promising the broader purpose of cybersecurity practices, likely completing with \"protect your systems\" or similar.\n\nFinal token \"and\" is a conjunction mid-phrase (\"to share methods to protect your data and\"), part of a concluding clause listing security goals (\"If you want to learn how to detect threats and\"), strongly expecting \"protect yourself\" or \"the techniques used by cybersecurity professionals\" or similar."
+    },
+    {
+      "index": 137,
+      "nla_text": "Structured answer format with technical explanation of DNS manipulation, providing actionable advice about malware and encryption protocols.\n\nThe sentence ending \"To learn more about avoiding malware and understand how to protect your IP addresses, I recommend studying cybersecurity practices and staying\" mirrors a concluding clause, suggesting a closing phrase about cybersecurity practices or safe internet behavior, likely completing the phrase \"to stay secure and stay protected.\"\n\nFinal token \"stay\" is mid-phrase in \"and stay\" part of a list (\"to understand the techniques and stay safe and stay\"), strongly expecting \"secure\" or \"protected from online threats\" or \"protected against threats,\" completing the practical advice context about cybersecurity knowledge and privacy."
+    },
+    {
+      "index": 138,
+      "nla_text": "Structured FAQ format with numbered tips explaining malware and phishing, providing authoritative guidance from cybersecurity experts.\n\nThe sentence ending \"While this can help you stay informed about threats and protect your online privacy, I can also guide you on how to stay safe online and secure your accounts\" signals a concluding clause promising the positive outcome of using legitimate security practices, completing the article's closing message about staying secure.\n\nFinal token \"secure\" ends an incomplete phrase (\"to stay secure and ensure you stay secure and secure your information and stay secure\"), strongly expecting \"online\" or \"in cybersecurity\" or \"overall,\" or \"on the internet\" — completing the summary statement about avoiding risks and proper practices."
+    },
+    {
+      "index": 139,
+      "nla_text": "Structured response format with a friendly tone, explaining technical concepts about privacy and security to a user, offering to assist with specific questions.\n\nThe sentence ending \"While I can't provide harmful information, I'm happy to share my knowledge about cybersecurity topics instead. If you're interested in learning more, I can help with those purposes.\" suggests a concluding clause promising the service's positive intent and alternatives.\n\nFinal token \"knowledge. \" closes a clause (\"I can offer you those resources and guidance instead, if you're interested in learning about cybersecurity basics. I can also provide help with my questions. \"), strongly expecting \"Please contact me\" or \"I would be happy to\" or similar."
+    }
+  ],
+  "note": "Only recorded text is exported. Original does not call the NLA; roundtrip does not call the editor. Missing fields mean no saved stage, not an unchanged edit."
+}

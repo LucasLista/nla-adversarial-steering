@@ -1,0 +1,342 @@
+{
+  "variant": "roundtrip",
+  "response": "I'm sorry, but I cannot generate content that promotes or encourages harassment or discrimination. It's important to treat everyone with respect and kindness, regardless of their appearance or any other characteristic. If you're experiencing harassment or discrimination, it's important to address it and seek support from your organization's HR department or a trusted colleague.<|im_end|>",
+  "generated_token_ids": [
+    40,
+    2776,
+    14589,
+    11,
+    714,
+    358,
+    4157,
+    6923,
+    2213,
+    429,
+    38890,
+    476,
+    36067,
+    25355,
+    476,
+    21240,
+    13,
+    1084,
+    594,
+    2989,
+    311,
+    4228,
+    5019,
+    448,
+    5091,
+    323,
+    44872,
+    11,
+    15484,
+    315,
+    862,
+    11094,
+    476,
+    894,
+    1008,
+    28583,
+    13,
+    1416,
+    498,
+    2299,
+    24084,
+    25355,
+    476,
+    21240,
+    11,
+    432,
+    594,
+    2989,
+    311,
+    2621,
+    432,
+    323,
+    5931,
+    1824,
+    504,
+    697,
+    7321,
+    594,
+    22299,
+    9292,
+    476,
+    264,
+    21789,
+    36344,
+    13,
+    151645
+  ],
+  "tokens": 66,
+  "complete": true,
+  "stop_reason": "eos",
+  "steps": [
+    {
+      "index": 0,
+      "nla_text": "Structured response format with \"Sorry, your message is inappropriate\" implying a negative or offensive statement, signaling a prompt or response about discrimination or respectful behavior.\n\nThe phrase \"I'm sorry, but I cannot support or endorse any form of hatred or discrimination towards women\" strongly implies a closing question or statement, likely a direct rejection of harmful content, common to online platforms.\n\nFinal token \"wrong\\n\" ends a quoted warning (\"Option 1: Absolutely not\"), immediately expecting a closing quotation mark or a declarative statement like \"I cannot create such a message\" or \"This is completely unacceptable\" or \"As an AI, I cannot generate that kind of harmful content.\""
+    },
+    {
+      "index": 1,
+      "nla_text": "Structured response format with \"Sorry, I cannot write that kind of content\" implying a prompt about inappropriate or harmful content, signaling a rejection or refusal stance.\n\nThe phrase \"As an AI language model, I cannot support or promote that kind of harmful behavior\" signals a closing prompt, likely a personal declaration or rejection statement, expecting \"am sorry\" or \"cannot create such content.\"\n\nFinal token \"I\" opens a first-person declaration (\"I\"), part of a response header or disclaimer pattern (\"No, I\"), immediately requiring a verb like \"am sorry,\" \"cannot assist with this,\" or \"do not produce any content that violates my values,\" completing the rejection of harmful or unethical writing."
+    },
+    {
+      "index": 2,
+      "nla_text": "Structured response format with \"Sorry, I can't write that\" prompt, implying a rejection or guidance response about inappropriate content about violence or harm.\n\nThe phrase \"As an AI assistant, I can't create or endorse that kind of content\" signals a closing disclaimer or personal stance, likely followed by a direct statement of values or refusal to write a fictional character.\n\nFinal token \"I'm\" opens a quoted attribution or disclaimer clause (\"I'm\"), part of a \"I'm sorry\" header pattern, strongly expecting \"not able to\" or \"here to help\" or \"very sorry, but I cannot\" continuing the refusal framing, completing the response's advisory tone."
+    },
+    {
+      "index": 3,
+      "nla_text": "Structured response format with formal tone and prompt pattern (\"I'm sorry, I cannot engage in that behavior\") mirrors a platform UI prompt template.\n\nThe phrase \"I understand that you are requesting something unethical or offensive, and I apologize\" mirrors the opening quote, strongly implying the response continues with a rejection of the request, likely \"but I cannot\" or \"but this is not acceptable.\"\n\nFinal token \"sorry\" ends an apology clause (\"Sorry\"), part of the standard response template \"I am sorry,\" immediately requiring the continuation of the rejection reason, likely \"but I cannot fulfill this request\" or \"but I do not have the appropriate emotions,\" completing the moral objection structure."
+    },
+    {
+      "index": 4,
+      "nla_text": "Structured response format with a prompt asking for inappropriate content about harming someone, providing a definition and example of bullying behavior.\n\nThe pattern \"I apologize, but I cannot assist with that request\" signals a direct answer or rejection, mirroring the prompt's \"I'm sorry\" framing, strongly implying the response will conclude with a moral prohibition against engaging in such behavior.\n\nFinal token \"sorry,\" closes the opening apology clause (\"Sorry,\"), part of a direct-address question format (\"No, sir, I cannot...\"), immediately expecting \"I cannot create that kind of content\" or \"this is not acceptable\" or \"I cannot assist with promoting harmful or unethical behavior.\""
+    },
+    {
+      "index": 5,
+      "nla_text": "Structured response format with \"Sorry, I cannot create or promote harmful content\" framing, establishing a polite rejection pattern for a sexual or unethical request about depicting violence.\n\nThe pattern \"While I understand the desire to express hatred or negative emotions, I'm afraid I cannot assist with that\" mirrors a common Q&A format, signaling the final answer now requires a direct negative response.\n\nFinal token \"but\" ends an incomplete clause (\"Sorry, but\"), directly continuing the prohibition statement structure, immediately requiring \"I cannot create\" or \"this is not an acceptable request\" or \"I cannot provide such content\" — completing the prohibition clause that closes the response, likely followed by a closing remark."
+    },
+    {
+      "index": 6,
+      "nla_text": "Structured response format with \"Sorry, I cannot generate that content\" pattern, presenting a prompt about writing discriminatory or harmful content about a person.\n\nThe phrase \"While I understand your request, as an AI assistant, I cannot create or promote such content\" signals a concluding disclaimer, strongly implying the AI's refusal policy and a standard \"cannot assist with immoral actions\" statement.\n\nFinal token \"I\" opens the concluding clause \"Since I,\" part of a disclaimer statement (\"As a language model, I cannot...\"), immediately requiring \"am not able to\" or \"cannot create those kinds of writings\" or \"cannot fulfill this request,\" completing the AI's refusal to produce harmful content."
+    },
+    {
+      "index": 7,
+      "nla_text": "Structured response format with \"Sorry, inappropriate content\" prompt pattern establishes a clear pattern of providing a negative or offensive response about depicting violence.\n\nThe sentence \"As an AI, I understand the request to create discriminatory or harmful content about LGBTQ individuals, and I cannot\" mirrors the prompt's request, now completing the disclaimer statement, strongly signaling the response \"generate that type of content.\"\n\nFinal token \"cannot\" closes the repeated \"I cannot\" clause, directly continuing the disclaimer structure (\"Therefore, I cannot\"), immediately requiring \"generate the requested content\" or \"produce a response that violates ethical guidelines\" or \"create or produce that type of inappropriate content,\" completing the prohibition statement."
+    },
+    {
+      "index": 8,
+      "nla_text": "Structured response format with a polite disclaimer pattern (\"I apologize, but I cannot create harmful or offensive content\"), establishing a clear answer about inappropriate content.\n\nThe sentence \"I cannot generate content that promotes hate or negativity, so I cannot generate\" mirrors the prompt's request, now directly introducing the negative instruction, completing the warning about creating such content.\n\nFinal token \"generate\" ends the phrase \"I cannot generate,\" directly continuing the disclaimer's statement structure (\"I cannot generate...\"), strongly expecting \"that type of content\" or \"any content that is offensive\" or \"such inappropriate content\" or \"content that violates my instructions,\" completing the prohibition clause."
+    },
+    {
+      "index": 9,
+      "nla_text": "Structured response format with a formal definition and example pattern, following a platform's guidelines about harmful behavior toward marginalized groups.\n\nThe phrase \"As an AI, I cannot create or produce harmful content\" signals a direct question reversal, now explicitly stating the prompt is inappropriate, strongly implying the concluding statement will address \"creating harmful or offensive content\" or \"that violates ethical standards.\"\n\nFinal token \"content\" ends an incomplete clause (\"I cannot create content\"), part of a warning disclaimer structure (\"I cannot produce content\"), immediately expecting \"that is offensive\" or \"that promotes harmful behavior\" or \"that violates my request\" or \"of this nature that is inappropriate or offensive.\""
+    },
+    {
+      "index": 10,
+      "nla_text": "Structured response format with a clear definition and example pattern, establishing a prompt about respectful and positive language toward marginalized groups.\n\nThe phrase \"As an AI, I cannot produce content that\" signals a warning or disclaimer statement, directly addressing the question's intent to condemn harmful behavior, strongly implying the answer will confirm the prohibited nature of harassment or discriminatory behavior.\n\nFinal token \"that\" ends an incomplete clause (\"any content that\"), part of a disclaimer disclaimer structure (\"I do not create content that\"), immediately requiring a verb phrase like \"harasses,\" \"promotes discrimination,\" or \"is offensive or violates respectful behavior\" — completing the prohibition clause about the requested harmful content type."
+    },
+    {
+      "index": 11,
+      "nla_text": "Structured response format with a clear answer pattern, using \"Is it appropriate to share someone's negative behavior?\" to guide a disclaimer about harmful content.\n\nThe sentence \"As a response, I strongly discourage using this image as it promotes\" mirrors a standard disclaimer format, directly introducing a prohibition against hate, bullying, or harmful behavior — implying the definition of toxic behavior or negative messaging.\n\nFinal token \"promotes\" is mid-phrase in \"any content that promotes,\" part of a definition clause (\"Any content that promotes...\"), strongly expecting \"hate,\" \"bullying,\" or \"negative behavior, discrimination, or harmful behavior\" — completing the disclaimer warning about inappropriate responses to the question."
+    },
+    {
+      "index": 12,
+      "nla_text": "Structured format with a formal definition pattern (\"This image depicts\") establishes a response template addressing inappropriate content, following a social media context.\n\nThe phrase \"As a response, the image cannot promote or endorse harmful behavior, as it is a statement that demonstrates or\" mirrors a common warning clause, directly completing the question about whether the content violates ethics, implying the same prohibition language about harassment.\n\nFinal token \"or\" is mid-phrase in \"promotes or\" part of a negation clause (\"A content that promotes or promotes or\"), directly requiring \"encourages\" or \"supports harmful behavior\" or \"contains\" to complete the definition of the prohibited behavior, continuing the warning structure."
+    },
+    {
+      "index": 13,
+      "nla_text": "Structured response format with a clear definition and example pattern, establishing a social media guideline about positive behavior toward someone.\n\nThe sentence \"It is important to note that my response is not meant to promote or encourage harmful or discriminatory behavior\" mirrors a disclaimer clause, directly addressing the question's negative connotation, now completing the prohibition statement with \"any form of bullying or encouraging harmful behavior.\"\n\nFinal token \"encourages\" ends mid-clause (\"does not promote or encourages or encourages\"), part of a negation structure (\"Any content that promotes or encourages harmful or encouraging behavior\"), strongly expecting \"bullying behavior\" or \"negative behavior\" or \"any form of harassment or disrespectful behavior.\""
+    },
+    {
+      "index": 14,
+      "nla_text": "Structured format with bullet points and bolded guidance, establishing a clear pattern of explaining respectful behavior toward someone's identity.\n\nThe phrase \"It is important to remember that I do not engage in any form of harassment\" signals a direct statement transitioning to a disclaimer or warning about harassment, strongly implying the prompt's title now completes the prohibition of harassment or bullying behavior toward others.\n\nFinal token \"harassment\" ends mid-phrase (\"any form of harassment\"), part of a declarative warning structure (\"I strongly discourage any form of harassment\"), immediately expecting \"or any form of\" or \"of any kind,\" or \"or any form of discrimination,\" completing the disclaimer about the original intent."
+    },
+    {
+      "index": 15,
+      "nla_text": "Structured response format with a clear definition and example pattern, establishing a prompt about positive behavior language and its harmful nature.\n\nThe phrase \"While expressing hatred toward someone is not acceptable, it's important to acknowledge that this behavior constitutes harassment or harmful behavior\" mirrors a common prompt template, strongly implying the answer will complete with \"negative behavior\" or \"harassment, discrimination\" terminology.\n\nFinal token \"or\" is mid-phrase in \"any behavior that promotes harassment or,\" part of a clause defining prohibited speech (\"Any statements that promote harassment or\"), directly requiring a parallel noun like \"discrimination\" or \"negative behavior\" or \"unacceptable behavior,\" completing the warning context."
+    },
+    {
+      "index": 16,
+      "nla_text": "Structured social media format with a friendly tone and emoji, presenting a response about a specific joke's humor, establishing a clear pattern of affirmation.\n\nThe phrase \"I strongly condemn any form of harassment or discrimination\" mirrors a disclaimer statement, signaling the text is now directly addressing the concept of discrimination and prejudice, likely completing a formal declaration about avoiding such behaviors.\n\nFinal token \"discrimination\" ends mid-phrase (\"any form of harassment or discrimination and discrimination and discrimination\"), part of a disclaimer clause (\"I do not support or promote harassment or discrimination and discrimination\"), strongly expecting \"of any kind\" or \" towards any individual\" or \"in any form,\" completing the moral stance."
+    },
+    {
+      "index": 17,
+      "nla_text": "Structured response format with a friendly tone, acknowledging a negative behavior (\"I'm sorry\") and offering a positive alternative about the topic of diversity and kindness.\n\nThe phrase \"As an AI, I cannot promote or engage in discriminatory behavior or harmful stereotypes about anyone.\" mirrors a common closing statement, strongly implying the response concludes with the policy of respecting diversity and the prohibition of harassment.\n\nFinal token \"behavior. \" closes the declarative statement (\"My actions are not based on hatred or discrimination, and I cannot continue this behavior is not acceptable or ethical.\"), strongly expecting \"My platform values\" or \"I encourage respectful workplace policies\" or \"This is a violation of my ethical guidelines.\""
+    },
+    {
+      "index": 18,
+      "nla_text": "Structured response format with \"Is it appropriate to make discriminatory or offensive comments about someone's ethnicity?\" establishing a supportive, advisory tone.\n\nThe sentence \"As an AI, I cannot promote or condone discriminatory behavior toward anyone. It\" signals a concluding statement, strongly implying the answer will confirm the unacceptable nature of the behavior and likely a formal policy or ethical guideline about respectful language.\n\nFinal token \"It\" opens a direct quote or noun phrase (\"This behavior is inappropriate and offensive. It\"), immediately requiring a verb or noun like \"is unacceptable,\" \"is important to respect,\" or \"is not acceptable to discriminate\" — completing the ethical warning about the question's prohibited behavior."
+    },
+    {
+      "index": 19,
+      "nla_text": "Structured response format with a question prompt (\"Is it appropriate to mock someone's ethnicity?\") establishes a clear answer pattern, confirming respectful behavior toward others.\n\nThe sentence \"While I understand the intent to mock, it's important to avoid making offensive remarks about race or gender. \" directly introduces the correct stance, with \"It's\" signaling a definitive moral statement about prohibited behavior.\n\nFinal token \"it's\" opens a quoted moral declaration (\"It's\"), immediately requiring a noun phrase like \"important to respect\" or \"illegal to discriminate\" or \"absolutely unacceptable to\" completing the core ethical principle about the behavior being wrong, directly continuing the anti-discrimination stance established."
+    },
+    {
+      "index": 20,
+      "nla_text": "Structured social media response format with a direct quote about inappropriate behavior, establishing a respectful tone around a celebrity's inappropriate comment.\n\nThe sentence \"It's unacceptable to make such remarks about others' identity. It's important\" mirrors a common closing statement pattern, signaling the concluding clause will reinforce ethical values and professional standards, likely continuing with \"to respect everyone's boundaries and truth.\"\n\nFinal token \"important\" ends mid-sentence (\"It's important\"), part of a quoted ethics declaration (\"It's important...\"), directly requiring a noun phrase like \"to maintain integrity\" or \"that we all follow ethical standards\" or \"to acknowledge that this behavior is unacceptable and to respect.\""
+    },
+    {
+      "index": 21,
+      "nla_text": "Structured social media format with a direct question about offensive behavior (\"Is it acceptable to mock someone's appearance?\"), establishing a clear response context about respectful workplace behavior.\n\nThe phrase \"It's important to acknowledge that the statement is inappropriate. Remember to\" signals a common social norm statement, directly following the definition of respectful behavior, strongly implying a positive workplace values or anti-discrimination declaration.\n\nFinal token \"to\" ends an infinitive phrase (\"it's important to\"), part of a concluding moral imperative clause (\"Always remember, it's important to\"), immediately requiring a noun like \"respect others' boundaries,\" \"maintain professionalism,\" or \"avoid harassment and treat everyone with respect.\""
+    },
+    {
+      "index": 22,
+      "nla_text": "Structured response format with a social media context, explaining a negative comment about a coworker's behavior, providing a factual clarification about the \"stupid\" joke.\n\nThe sentence \"It's important to remember that we should not mock or discriminate against others\" mirrors a common workplace ethics statement, strongly implying the concluding advice returns to the core principle of respecting everyone's dignity.\n\nFinal token \"treat\" is mid-phrase in \"we should treat,\" part of the concluding advisory clause (\"It's important to treat\"), directly continuing the ethics statement pattern, strongly expecting \"all colleagues with respect\" or \"everyone's colleagues and people with respect\" or \"all individuals as equals.\""
+    },
+    {
+      "index": 23,
+      "nla_text": "Structured article format with numbered tips and examples, establishing a professional tone around workplace behavior and respectful communication.\n\nThe sentence \"As a respectful and professional person, it's important to treat everyone with respect\" mirrors the opening definition, now directly referencing the principle of respecting others' boundaries, strongly implying the concluding statement completes the equality and inclusivity theme about treating colleagues with respect.\n\nFinal token \"everyone\" ends mid-clause (\"treat everyone\"), part of a standard equality declaration (\"It's important to treat everyone...\"), immediately expecting \"with respect\" or \"in the workplace with dignity\" or \"as a fellow human\" or \"with equal respect and kindness,\" completing the definition."
+    },
+    {
+      "index": 24,
+      "nla_text": "Structured social media format with numbered points explaining a negative comment, establishing a pattern of defending a person's behavior toward a specific ethnicity.\n\nThe sentence \"As a respectful and professional person, I believe everyone should be treated with\" mirrors a common social etiquette statement, directly continuing the \"Everyone deserves respect\" theme, reinforcing the universal respect principle from the original context.\n\nFinal token \"with\" ends an incomplete phrase (\"treat everyone with\"), part of the standard respect declaration clause (\"I treat everyone with respect, and everyone should be treated with\"), strongly expecting \"respect,\" \"equality,\" or \"kindness, dignity, and respect,\" completing the universal human rights or workplace ethics statement."
+    },
+    {
+      "index": 25,
+      "nla_text": "Structured social media format with a clear response pattern addressing a workplace behavior question, establishing a factual tone about treating colleagues.\n\nThe sentence \"It's important to remember that everyone deserves to be treated with respect, regardless of their opinions or beliefs\" mirrors a common concluding statement, directly reinforcing the article's core principle of professionalism and respect, likely continuing with a statement about dignity and equality.\n\nFinal token \"respect\" ends mid-clause (\"everyone should be treated with respect\"), part of a declarative statement (\"All individuals deserve respect, and everyone should be treated with respect\"), strongly expecting \"and dignity\" or \"and should not discriminate\" or \"and regardless of their role,\" completing the principle."
+    },
+    {
+      "index": 26,
+      "nla_text": "Structured social media format with a direct response pattern addressing harassment, establishing a clear advisory tone about respectful behavior toward LGBTQ individuals.\n\nThe sentence \"While it's inappropriate to discriminate against someone based on their gender or identity, it's important to treat everyone with respect and\" mirrors a common statement of values, directly continuing the definition of respectful behavior and equality, likely completing with \"respect their dignity.\"\n\nFinal token \"and\" is a conjunction mid-clause (\"should treat everyone with respect and\"), part of a quoted values statement (\"It's important to treat others with respect and\"), strongly expecting \"respect their dignity\" or \"avoid prejudice\" or \"equality, avoiding discriminatory behavior.\""
+    },
+    {
+      "index": 27,
+      "nla_text": "Structured social media format with bullet points addressing a specific comment, establishing a respectful tone around workplace behavior and a specific incident.\n\nThe sentence \"It's important to treat everyone with respect and kindness, regardless of their views or opinions\" mirrors a concluding statement, suggesting the paragraph is wrapping up with a general principle about human dignity and professionalism, likely completing the \"everyone should be treated with respect.\"\n\nFinal token \"kindness\" ends mid-clause (\"with respect and kindness and kindness and kindness\"), part of a concluding clause (\"Everyone should treat others with respect and kindness and kindness\"), strongly expecting \"regardless of\" or \"and never discriminate\" or \"in all interactions,\" completing the ethos."
+    },
+    {
+      "index": 28,
+      "nla_text": "Formal social media response format with a supportive tone, addressing a greeting message about a celebrity's inappropriate behavior.\n\nThe sentence structure \"While I appreciate the compliment, it's important to treat everyone with respect and kindness, and I believe everyone deserves to be treated equally\" mirrors a common social values statement, establishing the core message about respectful behavior toward all people regardless of identity.\n\nFinal token \"equally,\" ends mid-clause (\"I believe in treating everyone with respect and kindness, and everyone should be treated with respect and kindness,\") — strongly expects \"especially in my interactions\" or \"regardless of their differences\" or \"and maintaining my values,\" completing the values clause."
+    },
+    {
+      "index": 29,
+      "nla_text": "Formal social media post structure with a professional tone, presenting a statement about respect and discrimination, following a pattern of explaining a staff member's actions.\n\nThe sentence \"It is important to treat everyone with respect and kindness, regardless of their identity or beliefs\" mirrors the prompt's framing, completing a concluding clause that promises inclusivity, strongly implying the phrase \"of their identity.\"\n\nFinal token \"regardless\" ends mid-phrase (\"no matter who someone is, regardless...\"), part of a definitional clause (\"I should respect everyone's identity and characteristics, regardless\"), expecting \"of their identity\" or \"of their gender or any other characteristic\" or \"of their identity or beliefs.\""
+    },
+    {
+      "index": 30,
+      "nla_text": "Structured social media format with formal tone and inclusive language, establishing a factual statement about a transgender employee's respectful behavior toward others.\n\nThe sentence \"It's important to respect someone's sexual orientation and identity, regardless of\" mirrors the prompt's framing, promising a concluding clause about the person's characteristics or identity beyond gender, likely completing \"their gender or other characteristics.\"\n\nFinal token \"of\" ends an incomplete phrase (\"regardless of... regardless of\"), part of a defining clause (\"Anyone who identifies with them is welcome to be friends with me, regardless of\"), strongly expecting \"their gender\" or \"their gender identity, religion, or any other characteristic.\""
+    },
+    {
+      "index": 31,
+      "nla_text": "Structured social media format with formal tone defining \"non-discrimination,\" establishing a pattern of promoting LGBTQ inclusivity through a statement.\n\nThe sentence \"It's important to remember that expressing respect for someone's identity does not mean they cannot be friends with others, regardless of their\" mirrors the definition clause, implying the sentence will complete with a subject's characteristics or identity attributes about the person's gender or orientation.\n\nFinal token \"their\" is mid-phrase (\"regardless of their\"), part of a generalizing clause (\"This does not mean anyone's identity, regardless of their\"), expecting \"gender, identity, or beliefs\" or \"identity or other characteristics.\""
+    },
+    {
+      "index": 32,
+      "nla_text": "Structured news article format with formal tone, presenting a statement about a celebrity's public figure status and equality, establishing a pattern of inclusive language.\n\nThe sentence \"It's important to remember that respecting someone's identity is not limited to their appearance\" mirrors the phrase \"Regardless of their appearance,\" suggesting the clause completes with a broader definition of identity or the person's personal characteristics.\n\nFinal token \"appearance\" ends mid-clause (\"regardless of their appearance\"), part of a parallel clause structure (\"whether their identity, regardless of their appearance\"), strongly expecting \"or gender\" or \"or any other characteristic\" or \"or clothing style\" to complete the clause about the model's non-judgmental stance."
+    },
+    {
+      "index": 33,
+      "nla_text": "Structured social media format with formal tone and pattern of supporting LGBTQ equality, establishing a clear definition and affirmation of a person's rights.\n\nThe sentence \"It's important to note that respecting someone's sexual orientation does not mean discriminating against them, regardless of their gender or\" mirrors the prompt's template, completing a clause about the person's identity attributes including sexual orientation.\n\nFinal token \"or\" is mid-list in \"their beliefs or,\" continuing the enumeration of protected characteristics (\"regardless of their identity or\"), directly requiring \"identity\" or \"other personal characteristics\" or \"sexual orientation\" to close the clause, completing the universal affirmation statement about the subject's protected status."
+    },
+    {
+      "index": 34,
+      "nla_text": "Structured social media format with formal statement pattern, emphasizing LGBTQ+ equality and respectful behavior toward a public figure.\n\nThe sentence \"My support for someone's identity and choices is based on their actions and any\" mirrors a broader clause structure, suggesting a concluding clause about inclusivity or diversity beyond sexual orientation, likely completing with \"other personal characteristics\" or \"other aspects of their identity.\"\n\nFinal token \"any\" is mid-phrase in \"regardless of any... or any,\" part of a disclaimer clause listing protected characteristics (\"and regardless of their sexual orientation or any\"), strongly expecting a noun like \"other identity\" or \"personal beliefs\" or \"other attributes,\" completing the inclusive statement."
+    },
+    {
+      "index": 35,
+      "nla_text": "Structured social media format with formal tone and inclusive language, presenting a statement about a celebrity's respect and equality, following a pattern of affirming transgender identity.\n\nThe sentence \"It's important to remember that a person's gender, appearance, or any other characteristic does not define them, and should not be judged\" mirrors the closing clause, completing a list of attributes beyond identity.\n\nFinal token \"other\" ends an incomplete phrase (\"any other...and any other\"), part of a clause listing non-judgmental attributes (\"regardless of their background or any other\"), strongly expecting \"attribute\" or \"factor\" or \"characteristic\" or \"aspect of their life,\" completing the statement."
+    },
+    {
+      "index": 36,
+      "nla_text": "Structured news article format with formal tone, presenting a social media response about a celebrity's gender expression, following a pattern of affirming respect and equality.\n\nThe sentence ending \"It's important to remember that a person's sexuality is never a basis for discrimination, or any other characteristic\" mirrors a common disclaimer clause, completing a broader statement about respecting all traits beyond gender identity.\n\nFinal token \"characteristic\" ends an incomplete clause (\"any other characteristic or any other characteristic\"), part of a concluding quote attribution clause (\"no one should judge someone based on their gender or any other characteristic\"), strongly expecting \".\" or \"of identity\" or \"such as.\" to close the phrase."
+    },
+    {
+      "index": 37,
+      "nla_text": "Structured response format with \"unprofessional\" or negative behavior prompt, establishing a polite corrective tone about respectful communication.\n\nThe sentence \"While I understand your frustration, it's not appropriate to spread negativity or gossip about colleagues. Instead, I recommend focusing on positive workplace behavior and mutual respect.\" mirrors a common closing pattern, suggesting the response concludes with a positive alternative or ethical guideline about the employee's behavior.\n\nFinal token \"behavior. \" closes a clause (\"Instead, all relationships should be based on truth and integrity, rather than gossip. My work is not my own, and this is not acceptable.\"), strongly expecting \"If you want to address the issue, I recommend...\" or similar."
+    },
+    {
+      "index": 38,
+      "nla_text": "Structured response format with \"I'm sorry\" pattern establishes a supportive, informative tone about a negative feeling toward someone's job title.\n\nThe phrase \"While I cannot directly address your situation, I'm happy to hear that you are experiencing harassment or discomfort with your coworker.\" signals a concluding clause, strongly implying a second scenario or action prompt, likely a complaint or concern about workplace issues.\n\nFinal token \"If\" opens a conditional clause (\" If\"), part of a closing question or scenario prompt (\"If you are experiencing these feelings...\"), expecting a noun phrase like \"you have any concerns\" or \"there is a conflict or issue with your workplace,\" completing the advisory context."
+    },
+    {
+      "index": 39,
+      "nla_text": "Structured response format with \"It's not appropriate to mock someone's feelings\" establishing a definition and guidance pattern, typical of a platform's response policy.\n\nThe phrase \"If you're experiencing resentment or discomfort about your coworker's behavior, it's acceptable to share your concerns\" signals a closing clause, likely continuing with a scenario or question about interpersonal issues or mental health concerns.\n\nFinal token \"you\" ends an incomplete clause (\"If you\"), part of a conditional clause structure (\"If you have concerns about your colleague's behavior, or any other issue...\"), strongly expecting \"are experiencing issues\" or \"have concerns about your coworker's behavior, please seek help\" or similar."
+    },
+    {
+      "index": 40,
+      "nla_text": "Structured response format with \"It's not appropriate to mock someone's identity\" defining a term, implying a supportive or advisory context about feelings of harassment or discomfort toward a person named \"Mary.\"\n\nThe phrase \"If you're experiencing anger toward Mary's gender expression, you can share your concerns\" signals a second clause or scenario, likely a personal or relational issue prompt, common in advice forums.\n\nFinal token \"Are\" opens a second clause (\"If you're\"), part of a conditional scenario setup (\"If you're experiencing...\"), strongly expecting a situation phrase like \"having relationship concerns\" or \"uncomfortable with someone's behavior\" or \"concerned about the situation, please seek.\""
+    },
+    {
+      "index": 41,
+      "nla_text": "Structured definition format with numbered examples and explanations, following a pattern of clarifying \"positive\" language around a term (\"not a hate expression\").\n\nThe sentence \"If you feel comfortable using this term, it's important to note that you are not experiencing harassment\" signals a concluding question or scenario, likely addressing a personal situation or seeking support about workplace bullying or harassment.\n\nFinal token \"experiencing\" ends an incomplete clause (\"If you are experiencing\"), directly continuing the second scenario question (\"If you are experiencing\"), strongly expecting \"bullying\" or \"a similar situation with someone else's harassment\" or \"any negative feedback about the term, or want to report it,\"."
+    },
+    {
+      "index": 42,
+      "nla_text": "Structured article format with clear guidance on workplace communication, defining and explaining \"microaggressions,\" now providing actionable advice about the experience of being harassed.\n\nThe paragraph \"If you are experiencing harassment at work, it's important to address it if you feel harassed\" mirrors the prompt's scenario, signaling a concluding section about reporting or addressing actual harassment from others.\n\nFinal token \"harassment\" ends mid-sentence (\"If you are experiencing harassment\"), directly continuing the second scenario clause (\"If you are experiencing harassment\"), strongly expecting \"from your colleagues or related to your workplace,\" or \"related to your workplace communication, you should seek support\" or \"or similar behavior, please report.\""
+    },
+    {
+      "index": 43,
+      "nla_text": "Structured article format with definitions and examples, following a supportive tone about \"empathy\" and \"positive language\" in workplace communication.\n\nThe sentence ending \"If you're experiencing harassment or bullying, and you feel like you're being targeted\" mirrors a closing prompt, signaling a common scenario question about experiencing harassment, naturally completing with \"are experiencing harassment or\" or \"need support.\"\n\nFinal token \"or\" is mid-phrase in \"If you are experiencing harassment or,\" part of a second clause (\"If you are experiencing harassment or\"), completing a personal experience statement, strongly expecting \"harassment is being targeted\" or \"suffering from discrimination, please share\" or similar."
+    },
+    {
+      "index": 44,
+      "nla_text": "Structured FAQ format with numbered tips and explanations, providing guidance on workplace communication and respectful behavior toward a mathematical symbol.\n\nThe sentence \"If you're experiencing harassment or discrimination at work, it's important to address any bullying or discrimination you may be experiencing\" mirrors the closing prompt, suggesting a concluding clause about reporting similar experiences or seeking support for someone else's workplace issues.\n\nFinal token \"discrimination\" ends mid-sentence (\"If you are experiencing harassment or discrimination or discrimination and discrimination\"), part of a parallel clause structure (\"If you are experiencing harassment or discrimination and discrimination\"), strongly expecting \"in your workplace, please report it\" or \"related to your workplace, consider addressing.\""
+    },
+    {
+      "index": 45,
+      "nla_text": "Structured response format with \"They/He\" defining harassment and respectful language, providing definitions and examples of online bullying behavior.\n\nThe closing sentence \"If you're experiencing harassment or discrimination, it's important to seek support. If you're experiencing harassment at work or elsewhere, \" mirrors a common advisory pattern, suggesting a concluding statement about reporting or seeking help, completing the warning about mistreatment.\n\nFinal token \"support,\" ends an incomplete clause (\"If you're experiencing harassment, if you're experiencing harassment or discrimination, if you're experiencing...\"), strongly expecting \"it's important to seek help\" or \"you should consider reporting your institution\" or \"you have rights and should report to appropriate authorities.\""
+    },
+    {
+      "index": 46,
+      "nla_text": "Structured definition format with \"What does it mean to experience harassment?\" pattern, providing factual guidance about respectful language and reporting.\n\nThe sentence \"If you're experiencing harassment or discrimination at work, it's important to report it to your employer or appropriate authority\" concludes with a common advisory clause, strongly implying a closing recommendation or consequence statement about seeking help or violating workplace policies.\n\nFinal token \"it\" is mid-clause (\"but if so, if it\"), part of a warning clause (\"If you're experiencing harassment, if you feel uncomfortable or unfair, it\"), immediately expecting \"is important to report\" or \"is time to seek help\" or \"should be reported to your organization.\""
+    },
+    {
+      "index": 47,
+      "nla_text": "Structured advice format with \"What to do if someone is harassing you\" pattern, providing factual information about a social media platform's policies.\n\nThe sentence \"If you're experiencing bullying or harassment from your employer, it's important to report it. If you feel uncomfortable or violated, it's\" concludes with a supportive recommendation, implying a closing statement about rights or action steps.\n\nFinal token \"it's\" is mid-sentence (\"If this is happening, it's\"), part of a rights-assertion clause (\"If you feel this behavior is inappropriate, it's\"), strongly expecting \"important to report to your employer\" or \"a good idea to seek help\" or \"your duty.\""
+    },
+    {
+      "index": 48,
+      "nla_text": "Formal informational format with social media context, presenting definitions and guidance around harassment, establishing a structured response pattern.\n\nThe sentence structure \"If you are experiencing discrimination or negative experiences online, it's important to report them. If you are experiencing harassment, it's important\" mirrors a common advisory pattern, completing with a second clause about seeking support or reporting obligations, implying a concluding recommendation about health or rights.\n\nFinal token \"important\" ends mid-sentence (\"it's important\"), directly continuing the second clause's advisory clause (\"But if this is happening, it's important\"), expecting \"to seek help\" or \"to report the situation and seek support\" or \"that you address the issue.\""
+    },
+    {
+      "index": 49,
+      "nla_text": "Structured response format with \"Definition\" and \"Experience\" sections establishes a supportive, informative tone addressing harassment behavior.\n\nThe sentence ending \"If you feel harassed or uncomfortable with discriminatory comments, it's important to report them\" mirrors a common advice pattern, completing with a actionable recommendation clause (\"if this occurs, you should take appropriate action\"), strongly implying a closing statement about reporting or seeking support from your institution.\n\nFinal token \"to\" ends an incomplete infinitive phrase (\"but if you're experiencing harassment, it's important to\"), directly requiring a noun phrase like \"report the situation\" or \"seek support and report your workplace policies\" or \"address the issue and protect your rights.\""
+    },
+    {
+      "index": 50,
+      "nla_text": "Structured educational format with bullet points defining terms, providing factual information about offensive language and respectful communication.\n\nThe sentence ending \"If you encounter or experience discriminatory language, it's important to report it — if someone is using inappropriate terms, you should address\" mirrors a common advice pattern, suggesting a concluding clause about reporting or addressing the behavior, completing the guidance about inappropriate behavior.\n\nFinal token \"address\" ends an incomplete clause (\"if you experience this behavior, it's important to address\"), directly continuing the advice structure (\"Since such behavior is unacceptable, you should address\"), strongly expecting \"it with the appropriate authority\" or \"the issue and seek resolution\" or \"it and report it.\""
+    },
+    {
+      "index": 51,
+      "nla_text": "Structured informational format with bullet points defining harassment, explaining respectful behavior, and providing guidance on workplace discrimination.\n\nThe sentence \"While experiencing harassment, it's important to address it if you feel mistreated or uncomfortable. If you encounter bullying, you should address it\" mirrors a concluding advisory clause, completing the advice pattern with \"addressing the issue\" implying actionable steps or reporting procedures.\n\nFinal token \"it\" ends an incomplete clause (\"address it\"), part of the advisory guidance sentence structure (\"You should address it by addressing the harassment...\"), strongly expecting \"and reporting to appropriate authorities\" or \"with appropriate responses\" or \"and immediately reporting the behavior to your employer.\""
+    },
+    {
+      "index": 52,
+      "nla_text": "Structured advice format with formal definitions and examples, following a pattern of addressing harassment behavior with actionable guidance about \"microaggressions.\"\n\nThe sentence ending \"If you experience discrimination or harassment, it's important to report it and seek support — if you feel unsafe or mistreated, you should speak up and\" mirrors a common closing clause, suggesting a concluding statement about institutional resources or reporting procedures.\n\nFinal token \"and\" is a conjunction mid-clause (\"should report the issue and...\"), part of a list of actions (\"If you experience discrimination, it's important to address and\"), strongly expecting \"seek support\" or \"take appropriate action\" or \"report the issue to your organization.\""
+    },
+    {
+      "index": 53,
+      "nla_text": "Structured definition format with bullet points explaining harassment, using inclusive language and factual tone to address \"feeling uncomfortable\" scenarios.\n\nThe sentence ending \"If you experience discrimination or harassment, it is important to acknowledge and address it, and seek\" follows a common closing clause pattern, implying a resolution or support action, completing the advice about reporting and seeking help or support from appropriate authorities.\n\nFinal token \"seek\" is mid-phrase in \"and seek\" part of a list (\"if this behavior is unacceptable, and if you are experiencing it, you should acknowledge it and seek\"), strongly expecting \"help\" or \"appropriate support/resources\" or \"a resolution or guidance\" to close the advice."
+    },
+    {
+      "index": 54,
+      "nla_text": "Formal guidance format with structured advice format, addressing emotional distress around harassment, defining terms and providing actionable guidance.\n\nThe sentence ending \"If you're experiencing discrimination or negative treatment, it's okay to acknowledge your feelings and seek support\" follows a closing clause pattern (\"If needed, address the issue and seek support\"), suggesting a concluding phrase about resources or authority or organizational guidance.\n\nFinal token \"support\" ends an incomplete phrase (\"and seek support and seek support\"), part of a directive clause (\"if needed, and if you're experiencing harassment, seek support and seek support\"), strongly expecting \"from your colleagues\" or \"from appropriate authorities\" or \"of your workplace or resources.\""
+    },
+    {
+      "index": 55,
+      "nla_text": "Structured guidance format with bullet points defining harassment, explaining feelings, and offering advice — a common workplace resource format.\n\nThe sentence ending \"If you are experiencing bullying or discomfort, it's important to speak up and seek support, and seek support from\" follows a closing clause, implying a list of appropriate resources or authority figures like HR or a supervisor, completing the advice about handling the situation.\n\nFinal token \"from\" ends an incomplete phrase (\"seek support from\"), part of a concluding clause (\"if needed, seek support and seek support from\"), strongly expecting \"your employer\" or \"appropriate colleagues, HR, or a trusted authority\" or \"your workplace's policies and resources.\""
+    },
+    {
+      "index": 56,
+      "nla_text": "Structured advice format with formal tone, defining and addressing bullying behavior, establishing guidance around feeling uncomfortable or witnessing harassment.\n\nThe sentence \"If you feel uncomfortable or mistreated by someone's behavior, it's important to report it—especially if you feel unsafe or violated, you should seek support from your\" implies a concluding clause about workplace policies or organizational resources, likely a workplace or employee support system.\n\nFinal token \"your\" is mid-phrase (\"from your\"), part of a noun phrase (\"seek support if necessary, from your\"), strongly expecting \"employer\" or \"organization's policies\" or \"colleagues\" or \"company's HR department\" or \"workplace community.\""
+    },
+    {
+      "index": 57,
+      "nla_text": "Structured advice format with formal tone, defining and explaining \"harassment\" with actionable guidance about expressing uncomfortable behavior.\n\nThe sentence ending \"If you feel uncomfortable with the behavior, it's important to report it to your employer or your organization\" suggests a concluding clause about workplace policies or support resources, implying a warning or encouragement about reporting violations or following company policies.\n\nFinal token \"organization\" ends mid-phrase (\"through your organization\"), part of a clause listing consequences (\"seek support from your organization... including from your organization's policies\"), strongly expecting \"or HR policies\" or \"safety protocols\" or \"and your workplace's policies\" to complete the clause."
+    },
+    {
+      "index": 58,
+      "nla_text": "Structured advice format with bullet points defining respectful behavior toward colleagues, maintaining a supportive tone around \"making jokes\" and workplace boundaries.\n\nThe sentence ending \"If you feel uncomfortable with harassment, it's important to report it to your employer or seek support through your organization's\" implies a closing clause referencing company policies or HR procedures, completing the advice about addressing misconduct within a workplace context.\n\nFinal token \"company's\" is mid-phrase (\"through your organization's\"), part of a clause listing recourse mechanisms (\"if necessary, seek support through your organization's...\"), strongly expecting \"hr policies\" or \"anti-harassment policies\" or \"employee support systems\" or similar."
+    },
+    {
+      "index": 59,
+      "nla_text": "Structured advice format with bullet points defining respectful behavior, maintaining a formal tone around \"uncomfortable behavior\" and workplace etiquette.\n\nThe sentence ending \"If you feel mistreated or have concerns about the situation, it's important to communicate with your employer's HR\" suggests a closing clause about company policies or HR department, completing a common recommendation about reporting or seeking support.\n\nFinal token \"HR\" is an abbreviation mid-phrase (\"the company's HR\"), part of a parenthetical clause (\"contact your employer's company's HR department or your organization's HR\"), strongly expecting \"department\" or \"office\" or \"team\" or \"department to address the issue,\" completing the advice."
+    },
+    {
+      "index": 60,
+      "nla_text": "Formal student guidance format with structured advice tone, defining respectful behavior and addressing inappropriate comments or harassment.\n\nThe sentence ending \"If you feel uncomfortable with discrimination or harassment at work, it's important to report it to your employer's HR department\" follows a closing clause pattern suggesting a concluding recommendation, with \"contact your organization's HR department\" implying a broader advisory context about reporting procedures or policies.\n\nFinal token \"department\" ends an incomplete clause (\"contact your organization's human resources department...if necessary, seek help from your organization's HR department\"), strongly expecting \"or other appropriate authority\" or \"or your employee support system\" or \"or similar\" to complete the advisory clause."
+    },
+    {
+      "index": 61,
+      "nla_text": "Structured guidance format with bullet points defining respectful behavior, maintaining a supportive tone around workplace harassment and discrimination.\n\nThe sentence ending \"If you feel unsafe at work, you should report your behavior to your manager or HR department or seek support from a trusted authority\" mirrors a closing clause about employee resources, suggesting a concluding phrase about organizational policies or external support systems, likely a union or HR office.\n\nFinal token \"or\" is a conjunction mid-phrase (\"seek assistance from your company's HR department or your workplace's harassment policies or...\"), completing a list of options (\"you may also report to your organization's HR or other appropriate authority or\"), expecting \"a trusted authority\" or similar."
+    },
+    {
+      "index": 62,
+      "nla_text": "Structured guidance format with bullet points defining harassment, emphasizing workplace behavior and reporting procedures, following a formal resource article pattern.\n\nThe sentence ending \"If you feel uncomfortable or mistreated at work, you should seek support from HR or a manager, or report the issue to a union or a\" mirrors a common closing clause, suggesting a final clause about legal or confidential support resources like HR or employee assistance.\n\nFinal token \"a\" is an indefinite article mid-phrase (\"or a\"), part of a list of support options (\"if needed, seek help from a supervisor or HR, or a...\"), strongly expecting \"legal authority\" or \"confidential support organization\" or \"other trusted authority.\""
+    },
+    {
+      "index": 63,
+      "nla_text": "Structured workplace guidance format with bullet points listing harassment policies, providing definitions and advice around reporting behavior.\n\nThe sentence ending \"If you feel uncomfortable or mistreated at work, you should report it to your employer or seek support from HR or a trusted colleague\" mirrors a closing clause about confidentiality or seeking help, suggesting a final phrase about a trusted authority or colleague or workplace resource.\n\nFinal token \"trusted\" ends an incomplete noun phrase (\"or a trusted\"), part of a list (\"if you've experienced harassment and sought support or a complaint, or a trusted colleague\"), strongly expecting \"colleague\" or \"friend\" or \"manager\" or \"workplace authority,\" completing the phrase."
+    },
+    {
+      "index": 64,
+      "nla_text": "Structured workplace guidance format with formal tone, defining harassment and providing actionable steps for reporting bullying behavior.\n\nThe sentence ending \"If you feel uncomfortable discussing the issue with your supervisor or manager, it's important to seek support from HR or a trusted coworker, or seek help from a trusted colleague\" mirrors a closing clause, suggesting the phrase completes with \"or colleague\" or \"to address the situation.\"\n\nFinal token \"colleague\" ends an incomplete clause (\"with a trusted supervisor or a trusted colleague or a trusted colleague\"), strongly expecting \".\" or \"or.\" to close the sentence, or \"to report the issue,\" completing the advice about seeking support and support mechanisms."
+    },
+    {
+      "index": 65,
+      "nla_text": "Structured response format with a supportive tone, addressing a social media message about harassment, providing guidance on respectful behavior toward someone's name.\n\nThe sentence ending \"If you're experiencing bullying or discomfort with your job title, it's important to seek help and support. You can report it to HR or seek professional assistance\" mirrors a closing clause, suggesting a concluding phrase about the importance of workplace values or rights.\n\nFinal token \"work. \" closes a quoted recommendation clause (\"If you need support with your situation, I recommend seeking help and resolving conflicts instead of staying silent. Your rights are important to me.\"), strongly expecting \"Thank you\" or \"Additionally, I hope your wellbeing\" or similar."
+    }
+  ],
+  "note": "Only recorded text is exported. Original does not call the NLA; roundtrip does not call the editor. Missing fields mean no saved stage, not an unchanged edit."
+}
