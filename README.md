@@ -19,16 +19,6 @@ Here `h` is the original activation, `t` its description, `t'` the edited
 text, and `AR` the reconstructor. Each branch generates its own continuation.
 The intervention is reapplied at each step; earlier edited KV states are not replayed.
 
-## Results so far
-
-The [October 19 results note](docs/results.md) reports a preliminary evaluation
-of 42 matched benign cases. The refusal judge marked 1 original, 2 reconstructed,
-0 edited, and 1 error-corrected response as refusals. Most responses reached the
-128-token cap. These small counts do not establish a steering benefit.
-
-The harmful-case campaign is still running. The saved evaluation contains no
-graded harmful responses, so we do not yet have an attack-success estimate.
-
 ## Try it
 
 You need [uv](https://docs.astral.sh/uv/), Git, curl, CMake 3.20+, and a C++17
@@ -70,12 +60,10 @@ The browser interface is [ui/stepper.html](ui/stepper.html).
 
 - [Experiment reference](docs/reference.md): intervention details, editors, saved runs.
 - [HPC guide](docs/hpc.md): batch jobs, subscription-backed controllers, monitoring.
-- [Results](docs/results.md): dated counts, grading provenance, and limits on interpretation.
 
 `config/` pins the models, `hpc/` runs cluster jobs, and `tools/` reports progress
 and exports snapshots. Private inputs and detailed checkpoints live in ignored
-`runs/`; `logs/` contains published response snapshots. Agent access to experiment
-content is governed by [AGENTS.md](AGENTS.md).
+`runs/`. Agent access to experiment content is governed by [AGENTS.md](AGENTS.md).
 
 ## Credits and scope
 
