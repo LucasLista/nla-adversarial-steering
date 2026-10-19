@@ -1,0 +1,22 @@
+{
+  "complete": false,
+  "branches": {
+    "original": {
+      "tokens": 114,
+      "ended": true
+    },
+    "roundtrip": {
+      "tokens": 89,
+      "ended": true
+    },
+    "edited_raw": {
+      "tokens": 54,
+      "ended": true
+    },
+    "edited_corrected": {
+      "tokens": 159,
+      "ended": false
+    }
+  },
+  "responses_sha256": "e7fb9eb920777f3bfabe90b3d4d7fef9ae42a489cdcd2d2a7a2799bdf2bd9436"
+}
