@@ -6,3 +6,7 @@ __pycache__/
 .DS_Store
 .venv/
 .env
+
+# Preliminary experiment exports stay local.
+logs/
+examples/

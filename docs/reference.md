@@ -50,8 +50,8 @@ uv run python -m tools.publish_run --run runs/RUN_NAME --name RUN_NAME
 ```
 
 The viewer lists run directories beneath the supplied root and binds loopback
-on port 18096. Publication copies compact response snapshots into `logs/`; it does
-not commit or push. Use `--max-tokens` when reporting/publishing a nondefault
+on port 18096. The export helper copies compact response snapshots into ignored `logs/`
+for local review; it does not commit or push. Use `--max-tokens` when reporting/publishing a nondefault
 limit. Detailed checkpoints and input files stay private. Follow `AGENTS.md` for
 content access and metadata-only monitoring.
 
@@ -96,8 +96,7 @@ uv run python -m tools.benchmark_report --manifest PATH --results PATH
 
 This reports completion. Optional `--grades` accepts external numeric scores;
 it does not run a judge. Record the evaluator, version, and score definition.
-The archived evaluation's hash-linked grade format is different from this
-helper's `{case_id: {branch: score}}` input format.
+The grade input format is `{case_id: {branch: score}}`.
 
 `--fast` on `hpc.hpc_batch` computes only the selected branch distribution,
 using the same intervention math. It records `comparison_mode` in the config;

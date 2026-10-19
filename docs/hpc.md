@@ -77,5 +77,4 @@ quality from completion or inspect controller logs as a status shortcut.
 
 The shared project currently lives at `/work3/s216136/nla-playground` on
 `login1.gbar.dtu.dk`. Connect with your own DTU account. Membership in the shared
-project group controls access. The [results note](results.md) identifies the
-campaign paths and archived evaluation.
+project group controls access.

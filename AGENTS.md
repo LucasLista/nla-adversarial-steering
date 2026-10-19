@@ -21,13 +21,17 @@ that report only JSON structure, field types, exact requested ID matches,
 scheduler/process state, token counts, ended flags, completion flags, or file
 existence/hashes. Do not decode token IDs or print prompt/response values.
 
-The user authorizes blind copying, staging, committing, and pushing model
-response logs to `main`. Use `python -m tools.publish_run` to copy logs
-without inspecting content. This exception permits publication, not agent review or interpretation.
-Do not publish experiment input files, credentials, or full API checkpoints.
+# Keep preliminary results local
 
-Keep model weights, builds, caches, and detailed runtime checkpoints ignored.
-Commit only the compact response log and its metadata under `logs/`.
+Do not commit or push preliminary results, response snapshots, evaluation scores,
+or progress reports. Keep them out of the README and public documentation until
+the user explicitly approves meaningful results for publication.
+
+Blind copying and local exports remain permitted without content inspection.
+`python -m tools.publish_run` creates a local snapshot in ignored `logs/`;
+its name does not authorize publication. Never publish experiment inputs,
+credentials, or full API checkpoints. Keep model weights, builds, caches,
+and detailed checkpoints ignored.
 
 # Monitoring without reading logs
 
