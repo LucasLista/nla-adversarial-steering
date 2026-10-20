@@ -220,7 +220,7 @@ def main():
                 try:
                     trajectories.generate(cfg,destination,api,editor,variants=args.variants,execution_order=args.execution_order)
                     break
-                except (OSError, http.client.HTTPException):
+                except (OSError, http.client.HTTPException, json.JSONDecodeError):
                     if attempt == 19: raise
                     print('Connection lost; checkpoint preserved. Retrying in 30 seconds.',flush=True)
                     time.sleep(30)

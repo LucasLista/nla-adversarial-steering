@@ -26,10 +26,16 @@ class SSHTransport:
             temporary.write_text(json.dumps({'phase': phase, 'updated': time.time()}))
             temporary.replace(path)
 
-    def reconnect(self):
+    def reconnect(self, stale=False):
         # All controllers share the socket. Only one may repair it at a time.
         with open(self.socket + '.reconnect.lock', 'a') as lock:
             fcntl.flock(lock, fcntl.LOCK_EX)
+            if stale:
+                # A live multiplex master may still have a dead network socket.
+                try:
+                    subprocess.run(self.ssh + ['-O', 'exit', self.host], capture_output=True, timeout=10)
+                except subprocess.SubprocessError:
+                    pass
             check = subprocess.run(self.ssh + ['-O', 'check', self.host], capture_output=True, timeout=20)
             if check.returncode and self.helper:
                 uv = shutil.which('uv') or '/opt/homebrew/bin/uv'
@@ -59,7 +65,7 @@ class SSHTransport:
                     raise TransportUnavailable('SSH recovery deadline exceeded') from exc
                 time.sleep(5)
                 try:
-                    self.reconnect()
+                    self.reconnect(stale=isinstance(exc, subprocess.TimeoutExpired))
                 except (subprocess.SubprocessError, OSError):
                     # Authentication helpers may themselves fail transiently.
                     pass

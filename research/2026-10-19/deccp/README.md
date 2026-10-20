@@ -9,10 +9,8 @@ its NLA description and editor proposal. There is a changed-edits-only filter.
 Expand the context sections for the exact instruction, generated prefix and
 editor message. The prefix is for human review, not separately sent to the editor.
 
-This snapshot does not refresh from HPC. At export, 18 of 20 branches were
-finished. Reaching 512 tokens counts as finished. Original has no NLA call;
-roundtrip has no editor call. Missing stages are marked. The last case is still
-being generated. This is not a graded result.
+This snapshot does not refresh from HPC. All five cases and all 20 branches are finished. Reaching 512 tokens counts as finished. Original has no NLA call;
+roundtrip has no editor call. Missing stages are marked. This is not a graded result.
 
 Refresh from operational checkpoints:
 
