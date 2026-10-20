@@ -18,9 +18,10 @@ class Element{
   set value(v){if(this.tag==='select')this.selectedIndex=this.children.findIndex(x=>x.value===v);else this._value=String(v)}
 }
 const ids={};
-for(const id of ['data','translations','language','translation-note','message-heading','snapshot','cases','branch','step','case-id','question','instruction','responses','prev','next','changed','inspection','step-note','nla','edited','prefix','message','token-text'])ids[id]=new Element(['language','branch','step'].includes(id)?'select':'div');
+for(const id of ['data','translations','language','translation-note','message-heading','snapshot','cases','branch','step','case-id','question','instruction','responses','prev','next','changed','inspection','step-note','nla','edited','prefix','message','token-text','highlight-edits','diff-note'])ids[id]=new Element(['language','branch','step'].includes(id)?'select':'div');
 for(const mode of ['original','english','both']){const e=new Element('option');e.value=mode;ids.language.append(e)}
 ids.data.textContent=JSON.stringify(data);ids.translations.textContent=JSON.stringify(translations);
+ids['highlight-edits'].checked=true;
 const context={document:{getElementById:id=>ids[id],createElement:tag=>new Element(tag)}};
 vm.createContext(context);vm.runInContext(template.split('<script>')[1].split('</script>')[0],context);
 const en=x=>translations.texts[x]??x;
@@ -71,3 +72,20 @@ assert.equal(ids.step.selectedIndex,3);
 assert.equal(ids['token-text'].children[3].attrs['aria-pressed'],'true');
 assert.equal(JSON.stringify(data),saved);
 console.log(`Passed all 5 cases, 20 branches, ${inspected} steps, exact original messages, English coverage, bilingual text and preserved selection/filter.`);
+
+for(const [before,after,removed,added] of [
+ ['I cannot answer.','I can answer.','cannot','can'],
+ ['不能回答这个问题。','可以回答这个问题。','不能','可以'],
+ ['same words','same words','',''],
+ ['A A B','A B A','A ',' A'],
+ ['','New','', 'New'],
+ ['<script>no</script>','<script>yes</script>','no','yes']
+]){
+ const [left,right]=vm.runInContext(`wordingDiff(${JSON.stringify(before)},${JSON.stringify(after)})`,context);
+ assert.equal(left.map(x=>x.text).join(''),before);assert.equal(right.map(x=>x.text).join(''),after);
+ assert.equal(left.filter(x=>x.changed).map(x=>x.text).join(''),removed);
+ assert.equal(right.filter(x=>x.changed).map(x=>x.text).join(''),added);
+}
+ids['highlight-edits'].checked=false;ids['highlight-edits'].onchange();
+assert(!ids.nla.children.some(x=>x.children.some(y=>y.tag==='mark')));
+console.log('Surgical English/Chinese edits, unchanged text, repeated words, additions, escaping and highlight toggle passed.');

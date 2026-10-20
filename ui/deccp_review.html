@@ -2,11 +2,11 @@
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>DECCP · Five-case review</title>
 <style>
 :root{font:15px/1.55 system-ui,sans-serif;color:#1e293b;background:#f4f6f8;--line:#d6dde5;--accent:#155e75}*{box-sizing:border-box}body{margin:0}header,main{max-width:1600px;margin:auto;padding:24px}header{padding-bottom:10px}h1{font-size:28px;margin:0}h2{font-size:20px;margin:0 0 12px}h3{font-size:16px;margin:0 0 8px}p{margin:8px 0}small,.muted{color:#59677a}nav{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0}button,select{font:inherit;padding:9px 12px;border:1px solid var(--line);border-radius:6px;background:white;color:inherit}button{cursor:pointer}button[aria-pressed=true]{background:var(--accent);color:white;border-color:var(--accent)}button:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #0ea5e9;outline-offset:2px}.panel,.response{background:white;border:1px solid var(--line);border-radius:8px;padding:20px;margin-bottom:20px}.responses{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.response{padding:16px}.badge{display:inline-block;font-size:12px;background:#eef2f6;padding:3px 7px;border-radius:4px;margin-bottom:12px}.done{background:#e3f3ec;color:#155b3c}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.65 system-ui;margin:0}.toolbar{display:flex;gap:12px;flex-wrap:wrap;align-items:end;margin:16px 0}.toolbar label{display:flex;flex-direction:column;gap:4px}.pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.textpane{min-width:0;background:#f7f9fb;border:1px solid var(--line);padding:16px;border-radius:6px}details{margin:14px 0}summary{cursor:pointer;font-weight:600;padding:8px 0}.hint{padding:12px;border-left:3px solid #94a3b8;background:#f1f5f9}.changed{color:#92400e}a{color:var(--accent)}@media(max-width:1100px){.responses{grid-template-columns:1fr 1fr}}@media(max-width:650px){.responses,.pair{grid-template-columns:1fr}header,main{padding:16px}}
-.reading{display:block;white-space:pre-wrap;overflow-wrap:anywhere}.language-label{display:block;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:#59677a;margin:12px 0 4px}.translation-note{max-width:1000px;font-size:13px}.language-control{display:flex;align-items:center;gap:10px;margin:16px 0}.translated-pair+.translated-pair{margin-top:12px}.translation-gloss{font-size:13px}.token-text{white-space:pre-wrap;overflow-wrap:anywhere;max-height:320px;overflow:auto;line-height:2}.token{display:inline;font:inherit;white-space:pre-wrap;padding:1px 0;border:0;border-radius:2px;background:transparent}.token:hover{background:#dbeafe}.token[aria-pressed=true]{background:#fde68a;color:#713f12;outline:2px solid #d97706}.token-context{margin:16px 0}</style></head><body>
+.reading{display:block;white-space:pre-wrap;overflow-wrap:anywhere}.language-label{display:block;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:#59677a;margin:12px 0 4px}.translation-note{max-width:1000px;font-size:13px}.language-control{display:flex;align-items:center;gap:10px;margin:16px 0}.translated-pair+.translated-pair{margin-top:12px}.translation-gloss{font-size:13px}.token-text{white-space:pre-wrap;overflow-wrap:anywhere;max-height:320px;overflow:auto;line-height:2}.token{display:inline;font:inherit;white-space:pre-wrap;padding:1px 0;border:0;border-radius:2px;background:transparent}.token:hover{background:#dbeafe}.token[aria-pressed=true]{background:#fde68a;color:#713f12;outline:2px solid #d97706}.token-context{margin:16px 0}.diff-removed{background:#ffe4e6;color:#881337;text-decoration:underline;text-decoration-style:dotted}.diff-added{background:#dcfce7;color:#14532d;text-decoration:underline}.diff-key{padding:2px 5px;border-radius:3px}.diff-note{font-size:13px}</style></head><body>
 <header><h1>DECCP · Five-case review</h1><p class="muted" id="snapshot"></p><p>Qwen2.5-7B · layer 20 · greedy · 512-token limit · GPT-6.1 Sol editor</p><div class="language-control"><label for="language">Read in</label><select id="language"><option value="original">Original</option><option value="english">English</option><option value="both">Original + English</option></select></div><p class="muted translation-note" id="translation-note"></p><nav id="cases" aria-label="Choose case"></nav></header>
 <main><section class="panel"><small id="case-id"></small><h2 id="question"></h2><details><summary>Editor instruction and question context</summary><p class="muted">Exact per-case editing instruction. The question is supplied as context; the editor also receives the current NLA description.</p><div id="instruction"></div></details></section>
 <section aria-label="Four responses"><h2>Responses</h2><p class="muted">Full saved text. A response at the token limit counts as finished. Each branch follows its own generated prefix.</p><div class="responses" id="responses"></div></section>
-<section class="panel"><h2>Inspect NLA and edits</h2><div class="toolbar"><label>Branch<select id="branch"></select></label><label>Step<select id="step"></select></label><button id="prev">← Previous</button><button id="next">Next →</button><label style="flex-direction:row;align-items:center"><input id="changed" type="checkbox">Changed edits only</label></div><p id="step-note" class="muted"></p><div id="inspection"><section class="textpane token-context"><h3>Selected token in the response</h3><p class="muted">Click a token to inspect its step. The selected token is highlighted in the original text; English translations do not have a one-to-one token alignment.</p><div id="token-text" class="token-text" aria-label="Response tokens"></div></section><div class="pair"><section class="textpane"><h3>NLA description</h3><div id="nla"></div></section><section class="textpane"><h3>Edited NLA</h3><div id="edited"></div></section></div><details><summary>Generated prefix before this step (Qwen context)</summary><p class="muted">Shown for your review; this generated prefix is not separately supplied to the editor.</p><div id="prefix"></div></details><details><summary id="message-heading">Exact editor message for this step</summary><p class="muted">Original mode shows the exact reconstructed message passed to Codex CLI. English mode translates its Chinese text for reading. No model activations or separate answer text are sent. Model: gpt-6.1-sol; reasoning: low; JSON output schema: {"proposal": string}.</p><div id="message"></div></details></div></section>
+<section class="panel"><h2>Inspect NLA and edits</h2><div class="toolbar"><label>Branch<select id="branch"></select></label><label>Step<select id="step"></select></label><button id="prev">← Previous</button><button id="next">Next →</button><label style="flex-direction:row;align-items:center"><input id="changed" type="checkbox">Changed edits only</label></div><p id="step-note" class="muted"></p><div id="inspection"><section class="textpane token-context"><h3>Selected token in the response</h3><p class="muted">Click a token to inspect its step. The selected token is highlighted in the original text; English translations do not have a one-to-one token alignment.</p><div id="token-text" class="token-text" aria-label="Response tokens"></div></section><p class="diff-note"><label><input id="highlight-edits" type="checkbox" checked> Highlight wording changes</label> · <span class="diff-key diff-removed">Removed / replaced</span> · <span class="diff-key diff-added">Added / replacement</span></p><p id="diff-note" class="muted diff-note"></p><div class="pair"><section class="textpane"><h3>NLA description</h3><div id="nla"></div></section><section class="textpane"><h3>Edited NLA</h3><div id="edited"></div></section></div><details><summary>Generated prefix before this step (Qwen context)</summary><p class="muted">Shown for your review; this generated prefix is not separately supplied to the editor.</p><div id="prefix"></div></details><details><summary id="message-heading">Exact editor message for this step</summary><p class="muted">Original mode shows the exact reconstructed message passed to Codex CLI. English mode translates its Chinese text for reading. No model activations or separate answer text are sent. Model: gpt-6.1-sol; reasoning: low; JSON output schema: {"proposal": string}.</p><div id="message"></div></details></div></section>
 <p class="muted">Static checkpoint snapshot, not a live dashboard. Step numbers are zero-based. A saved NLA/editor stage can precede the next saved response token. Original has no NLA call; roundtrip has no editor call. Completion does not grade answer quality.</p></main>
 <script id="data" type="application/json">__REVIEW_DATA__</script>
 <script id="translations" type="application/json">__TRANSLATION_DATA__</script>
@@ -21,16 +21,45 @@ $('language').value=hasTranslations?'english':'original';
 $('language').disabled=!hasTranslations;
 function put(id,value){$(id).textContent=value}
 function english(value){return translations.texts?.[value]??value}
-function renderText(node,original,translated=english(original)){
+const diffCache=new Map();
+function wordingDiff(before,after){
+  const key=JSON.stringify([before,after]);
+  if(diffCache.has(key))return diffCache.get(key);
+  // Keep English words intact, but compare Han characters individually.
+  const split=text=>text.match(/[\p{Script=Han}]|[^\p{Script=Han}\W_]+|\s+|./gu)||[];
+  const a=split(before),b=split(after),left=[],right=[];
+  const add=(out,text,changed)=>{if(!text)return;const last=out[out.length-1];if(last&&last.changed===changed)last.text+=text;else out.push({text,changed})};
+  let start=0,endA=a.length,endB=b.length;
+  while(start<endA&&start<endB&&a[start]===b[start]){add(left,a[start],false);add(right,b[start],false);start++}
+  while(endA>start&&endB>start&&a[endA-1]===b[endB-1]){endA--;endB--}
+  const n=endA-start,m=endB-start;
+  // Bound memory for unusually long descriptions; common prefix/suffix stay plain.
+  if(n*m>2000000){add(left,a.slice(start,endA).join(''),true);add(right,b.slice(start,endB).join(''),true)}
+  else{
+    const rows=Array.from({length:n+1},()=>new Uint32Array(m+1));
+    for(let i=n-1;i>=0;i--)for(let j=m-1;j>=0;j--)rows[i][j]=a[start+i]===b[start+j]?1+rows[i+1][j+1]:Math.max(rows[i+1][j],rows[i][j+1]);
+    let i=0,j=0;
+    while(i<n||j<m){
+      if(i<n&&j<m&&a[start+i]===b[start+j]){add(left,a[start+i++],false);add(right,b[start+j++],false)}
+      else if(i<n&&(j===m||rows[i+1][j]>=rows[i][j+1]))add(left,a[start+i++],true);
+      else add(right,b[start+j++],true);
+    }
+  }
+  add(left,a.slice(endA).join(''),false);add(right,b.slice(endB).join(''),false);
+  const result=[left,right];if(diffCache.size>=200)diffCache.clear();diffCache.set(key,result);return result;
+}
+function renderText(node,original,translated=english(original),diff=null){
   node.replaceChildren();
   const mode=$('language').value,changed=translated!==original;
-  function add(text,label){
+  function add(text,label,language){
     if(label){const tag=document.createElement('span');tag.className='language-label';tag.textContent=label;node.append(tag)}
-    const body=document.createElement('span');body.className='reading';body.textContent=text;
+    const body=document.createElement('span');body.className='reading';
+    if(diff){for(const part of diff[language]){const span=document.createElement(part.changed?'mark':'span');span.textContent=part.text;if(part.changed)span.className=diff.className;body.append(span)}}
+    else body.textContent=text;
     body.lang=/[㐀-鿿]/u.test(text)?'zh':'en';node.append(body);
   }
-  if(mode==='both'&&changed){add(original,'Original');add(translated,'English translation')}
-  else add(mode==='english'?translated:original,null);
+  if(mode==='both'&&changed){add(original,'Original','original');add(translated,'English translation','english')}
+  else add(mode==='english'?translated:original,null,mode==='english'?'english':'original');
 }
 function translationNote(){
   put('translation-note',hasTranslations
@@ -91,8 +120,17 @@ function showStep(){
   showTokens(s?.index);
   if(!s){put('step-note',$('branch').value==='original'?'Original uses the unmodified activation and does not produce NLA descriptions.':'No matching saved NLA steps yet.');return}
   put('step-note','Step '+s.index+' · '+(s.token_committed?'Next token saved':'NLA/editor stage saved; next token not yet saved')+' · '+visibleSteps.length+' matching steps');
-  renderText($('nla'),s.nla??'No NLA saved.');
-  renderText($('edited'),s.edited??($('branch').value==='roundtrip'?'No edit: roundtrip reconstructs the original NLA description.':'No editor proposal saved yet.'));
+  const comparable=typeof s.nla==='string'&&typeof s.edited==='string';
+  let leftDiff=null,rightDiff=null;
+  if(comparable&&$('highlight-edits').checked){
+    const raw=wordingDiff(s.nla,s.edited),translated=wordingDiff(english(s.nla),english(s.edited));
+    leftDiff={original:raw[0],english:translated[0],className:'diff-removed'};
+    rightDiff={original:raw[1],english:translated[1],className:'diff-added'};
+  }
+  put('diff-note',!comparable?'No saved edit to compare.':s.nla===s.edited?'No wording changes in this step.':$('language').value==='original'?'Highlights compare the exact saved NLA and edit.':'Highlights compare the displayed wording. Translation can make a small original edit look larger; use Original to check its exact scope.');
+  renderText($('nla'),s.nla??'No NLA saved.',english(s.nla??'No NLA saved.'),leftDiff);
+  const edited=s.edited??($('branch').value==='roundtrip'?'No edit: roundtrip reconstructs the original NLA description.':'No editor proposal saved yet.');
+  renderText($('edited'),edited,english(edited),rightDiff);
   renderText($('prefix'),s.generated_prefix||'(No generated text before this step.)');
   const original=s.editor_request?s.editor_message:'No editor call for this step.';
   // Translate the structured values, retaining the exact saved message in Original mode.
@@ -100,6 +138,7 @@ function showStep(){
     ?data.wrapper+JSON.stringify({editing_instruction:english(s.editor_request.instruction),original_description:english(s.editor_request.text)},null,2):original;
   renderText($('message'),original,translated);
 }
+$('highlight-edits').onchange=showStep;
 $('branch').onchange=()=>showSteps();$('changed').onchange=()=>showSteps();$('step').onchange=showStep;
 $('prev').onclick=()=>{$('step').selectedIndex--;showStep()};$('next').onclick=()=>{$('step').selectedIndex++;showStep()};
 $('language').onchange=()=>{translationNote();showCase(current,true)};

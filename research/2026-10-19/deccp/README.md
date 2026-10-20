@@ -56,3 +56,5 @@ literal numbers; the exporter checks that translations match the source text.
 Keep regenerated experimental data on this development branch, not main.
 
 Click a token in the inspector to select its NLA step and highlight its position in the original response. Step selection and Previous/Next also update the highlight. Token highlighting uses the saved original boundaries; translated prose has no one-to-one token alignment.
+
+NLA comparison highlights removed/replaced wording on the left and added/replacement wording on the right. The Highlight wording changes checkbox restores plain text. Original and English are diffed independently; translated changes may appear broader than the exact original edit.
