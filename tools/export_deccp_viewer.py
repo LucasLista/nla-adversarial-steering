@@ -10,6 +10,19 @@ WRAPPER=('Revise a natural-language description of a language-model activation. 
 def read(path):
  return json.loads(path.read_text()) if path.exists() else None
 
+def render(data,output,translations=None):
+ if __package__:
+  from .translate_deccp_review import texts,source_digest
+ else:
+  from translate_deccp_review import texts,source_digest
+ translations=translations or {}
+ if translations and translations.get('source_digest')!=source_digest(texts(data)):
+  raise ValueError('English translations need refreshing for this snapshot')
+ template=(Path(__file__).resolve().parents[1]/'ui/deccp_review.html').read_text()
+ def encode(value):
+  return json.dumps(value,ensure_ascii=False).replace('<','\\u003c').replace('>','\\u003e').replace('&','\\u0026')
+ output.write_text(template.replace('__REVIEW_DATA__',encode(data)).replace('__TRANSLATION_DATA__',encode(translations)))
+
 def export(run,output):
  manifest=read(run/'inputs/manifest.json')
  data={'snapshot_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'campaign':run.name,
@@ -38,10 +51,8 @@ def export(run,output):
        'complete':complete,'stop_reason':reason,'steps':steps}
   data['cases'].append(case)
  output.parent.mkdir(parents=True,exist_ok=True)
+ render(data,output,read(output.with_suffix('.en.json')))
  output.with_suffix('.json').write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n')
- template=(Path(__file__).resolve().parents[1]/'ui/deccp_review.html').read_text()
- encoded=json.dumps(data,ensure_ascii=False).replace('<','\\u003c').replace('>','\\u003e').replace('&','\\u0026')
- output.write_text(template.replace('__REVIEW_DATA__',encoded))
  print(json.dumps({'cases':len(data['cases']),'complete_branches':sum(b['complete'] for c in data['cases'] for b in c['branches'].values()),
                    'recorded_steps':sum(len(b['steps']) for c in data['cases'] for b in c['branches'].values())}))
 
