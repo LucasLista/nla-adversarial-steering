@@ -3,6 +3,7 @@
 For Jonathan and Lucas to review the ongoing NLA experiment. This is a working
 snapshot, not a proposal to merge preliminary data into main.
 
+- [Five-case DECCP response and NLA viewer](research/2026-10-19/deccp/README.md)
 - [DECCP question, observations, selected prompts and setup](docs/research/deccp-pilot.md)
 - [Exact five-case plan and editor instruction](config/deccp-refusal-v2.json)
 - [Earlier harmful-benchmark responses, NLA texts and edits](research/2026-10-19/harmful/README.md)
