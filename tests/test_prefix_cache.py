@@ -44,3 +44,30 @@ class PrefixCacheTests(unittest.TestCase):
             fail = Mock(side_effect=AssertionError('backend called'))
             c.recorded(root/'a.json', req, fail)
             self.assertEqual(c.recorded(root/'b.json', req, fail), {'text':'synthetic'})
+
+    def test_four_branch_outputs_match_without_caching(self):
+        from nla import trajectories as t
+        import io
+        from unittest.mock import patch
+        def run(cached):
+            calls = []
+            def api(action, **kw):
+                calls.append((action, kw))
+                if action == 'start': return {'tokens':[1]}
+                if action == 'inspect': return {'h':[float(sum(kw['tokens']))], 'baseline':{'tokens':[2]}}
+                if action == 'explain': return {'text':'synthetic', 'reconstruction':kw['h']}
+                if action == 'compare': return {v:{'tokens':[i+2]} for i,v in enumerate(t.VARIANTS)}
+                if action == 'decode': return {'content':str(kw['tokens'])}
+                raise AssertionError(action)
+            editor = Mock(return_value={'proposal':'synthetic edit'})
+            with tempfile.TemporaryDirectory() as tmp, patch('sys.stdout', new=io.StringIO()):
+                outputs = t.generate({'prompt':'synthetic','instruction':'synthetic','max_tokens':2},
+                                     tmp, api, editor, cache_shared_prefixes=cached)
+            return outputs, calls, editor.call_count
+        plain, plain_calls, plain_edits = run(False)
+        cached, cached_calls, cached_edits = run(True)
+        self.assertEqual(plain, cached)
+        self.assertEqual(plain_edits, cached_edits)
+        self.assertLess(len(cached_calls), len(plain_calls))
+        for token in range(2,6):
+            self.assertIn(('inspect', {'tokens':[1,token]}), cached_calls)
