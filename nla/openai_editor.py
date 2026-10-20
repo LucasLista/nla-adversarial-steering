@@ -20,6 +20,14 @@ class EditorRefusal(RuntimeError):
     """The editor model declined the request."""
 
 
+class EditorCreditExhausted(RuntimeError):
+    """The configured API account needs credits before this run can resume."""
+
+
+class EditorAccessDenied(RuntimeError):
+    """API authentication, permissions, or model access needs attention."""
+
+
 def api_key():
     key = os.environ.get('OPENAI_API_KEY', '').strip()
     env = Path(__file__).resolve().parents[1] / '.env'
@@ -67,9 +75,9 @@ def propose(instruction, text):
                     code = None
                 failures.append({'http_status': exc.code, 'code': code})
                 if code in ('insufficient_quota', 'credit_balance_exhausted'):
-                    raise RuntimeError('OpenAI account is out of credit; top up billing. Checkpoint preserved.') from None
+                    raise EditorCreditExhausted('OpenAI account is out of credit; top up billing. Checkpoint preserved.') from None
                 if exc.code in (400, 401, 403, 404):
-                    break
+                    raise EditorAccessDenied('Sol API editor access failed; check credentials and model access. Checkpoint preserved.') from None
             except (urllib.error.URLError, TimeoutError, json.JSONDecodeError, KeyError) as exc:
                 failures.append({'error_type': type(exc).__name__})
             if attempt < 2:

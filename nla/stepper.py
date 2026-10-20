@@ -15,6 +15,40 @@ class NonFiniteActivation(ValueError):
 class InvalidActivationShape(ValueError):
     pass
 
+class InvalidPredictionResponse(ValueError):
+    pass
+
+def prediction_token_id(result):
+    """Read the backend's chosen token, including single-token UTF-8 fragments.
+
+    The pinned native server records returned token IDs before checking UTF-8
+    completeness, but only queues probability output for complete UTF-8 text.
+    A one-token response can therefore legitimately omit probabilities.
+    """
+    if not isinstance(result, dict):
+        raise InvalidPredictionResponse('Invalid next-token response')
+    tokens = result.get('tokens')
+    count = result.get('tokens_predicted')
+    native = (tokens[0] if isinstance(tokens, list) and len(tokens) == 1
+              and type(tokens[0]) is int and type(count) is int and count == 1 else None)
+    probabilities = result.get('completion_probabilities')
+    if 'completion_probabilities' in result and probabilities != []:
+        if not isinstance(probabilities, list) or not probabilities or not isinstance(probabilities[0], dict):
+            raise InvalidPredictionResponse('Invalid next-token probabilities')
+        token = probabilities[0].get('id')
+        if type(token) is not int:
+            raise InvalidPredictionResponse('Invalid next-token ID')
+        if native is not None and native != token:
+            raise InvalidPredictionResponse('Conflicting next-token IDs')
+        return token
+    if native is not None:
+        return native
+    raise InvalidPredictionResponse('Missing explicit next-token ID')
+
+def validate_prediction(result):
+    """Validate a selected token without inventing probabilities or IDs."""
+    prediction_token_id(result)
+
 def validate_activation(vector, expected_size=None):
     if not isinstance(vector, list) or not vector or (expected_size is not None and len(vector) != expected_size):
         raise InvalidActivationShape('Invalid activation shape')

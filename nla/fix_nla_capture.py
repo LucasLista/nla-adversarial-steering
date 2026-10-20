@@ -42,11 +42,34 @@ def patched_steering(s):
 def patched(s):
  return patched_steering(patched_capture(s))
 def apply(source):
+ from nla.fix_native_health import instrument
+ from nla.fix_native_completion import patched as patched_completion
  original=subprocess.check_output(['git','-C',str(source),'show','HEAD:'+FILE],text=True)
- expected=patched(original)
+ previous=patched(original)
+ expected=instrument(previous,'context')
+ http_file='tools/server/server.cpp'
+ http_original=subprocess.check_output(['git','-C',str(source),'show','HEAD:'+http_file],text=True)
+ http_expected=instrument(http_original,'http')
  status=subprocess.check_output(['git','-C',str(source),'status','--porcelain'],text=True).strip()
- if status not in ('','M '+FILE): raise RuntimeError('Unrecognized backend modifications')
+ additional={'tools/server/server-common.cpp':'common','tools/server/server-task.cpp':'task'}
+ header_file='tools/server/server-task.h'
+ header_original=subprocess.check_output(['git','-C',str(source),'show','HEAD:'+header_file],text=True)
+ header_expected=patched_completion(header_original)
+ allowed={FILE,http_file,header_file,*additional}
+ if any(line.strip() not in {'M '+f for f in allowed} for line in status.splitlines()): raise RuntimeError('Unrecognized backend modifications')
  p=source/FILE
- if p.read_text() not in (original,patched_capture(original),expected):raise RuntimeError('Unrecognized backend modifications')
- p.write_text(expected)
+ if p.read_text() not in (original,patched_capture(original),previous,instrument(previous,'context',runtime_frames=False),expected):raise RuntimeError('Unrecognized backend modifications')
+ if (source/http_file).read_text() not in (http_original,http_expected):raise RuntimeError('Unrecognized backend modifications')
+ if (source/header_file).read_text() not in (header_original,header_expected):raise RuntimeError('Unrecognized backend modifications')
+ changes={}
+ for filename,kind in additional.items():
+  base=subprocess.check_output(['git','-C',str(source),'show','HEAD:'+filename],text=True)
+  result=instrument(base,kind)
+  if (source/filename).read_text() not in (base,result):raise RuntimeError('Unrecognized backend modifications')
+  changes[filename]=result
+ if p.read_text()!=expected:p.write_text(expected)
+ if (source/http_file).read_text()!=http_expected:(source/http_file).write_text(http_expected)
+ if (source/header_file).read_text()!=header_expected:(source/header_file).write_text(header_expected)
+ for filename,result in changes.items():
+  if (source/filename).read_text()!=result:(source/filename).write_text(result)
 if __name__=='__main__':apply(Path('.runtime/nla.cpp'))

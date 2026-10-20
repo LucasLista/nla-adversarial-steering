@@ -11,7 +11,7 @@ from pathlib import Path
 import time
 import urllib.request
 import urllib.error
-from nla import codex_editor
+from nla import codex_editor, stepper
 
 REPEAT_LIMIT = 50  # identical tokens in a row that end a branch as degenerate
 
@@ -37,15 +37,34 @@ def write_json(path, value):
     finally:
         os.close(fd)
 
-def recorded(path, request, operation):
+def _valid_prediction_response(result):
+    try:
+        stepper.validate_prediction(result)
+        return True
+    except stepper.InvalidPredictionResponse:
+        return False
+
+def _valid_comparison_response(result, variants):
+    return (isinstance(result, dict)
+            and all(variant in result and _valid_prediction_response(result[variant])
+                    for variant in variants))
+
+def _valid_inspection_response(result, baseline_required):
+    return (isinstance(result, dict) and 'h' in result and isinstance(result['h'], list)
+            and (not baseline_required or _valid_prediction_response(result.get('baseline'))))
+
+def recorded(path, request, operation, validate=None):
     if path.exists():
         saved = json.loads(path.read_text())
         if saved['request'] != request:
             raise ValueError(f'Checkpoint request changed: {path}')
-        return saved['response']
+        if validate is None or validate(saved['response']):
+            return saved['response']
     start = time.time()
     try:
         result = operation()
+        if validate is not None and not validate(result):
+            raise ValueError('Backend returned an invalid checkpoint response')
     except Exception as exc:
         write_json(path.with_name(path.stem + f'-error-{time.time_ns()}.json'),
                    {'request': request, 'error': str(exc), 'started_at': start,
@@ -66,6 +85,10 @@ class API:
             with urllib.request.urlopen(req, timeout=1200) as r:
                 result = json.load(r)
         except urllib.error.HTTPError as exc:
+            if exc.code in (408, 502, 503, 504):
+                # Let controllers retry the same durable checkpoint after a
+                # temporary gateway/service failure. Never print error bodies.
+                raise ConnectionError(f'Backend temporarily unavailable (HTTP {exc.code})') from None
             raise RuntimeError(f'Backend HTTP {exc.code}: {exc.read().decode()}') from exc
         if isinstance(result.get('error'), str):
             raise RuntimeError(result['error'])
@@ -86,7 +109,14 @@ def write_progress(directory, limit):
                'complete': (directory / 'complete.json').exists()})
 
 
-def generate(config, directory, api, editor, variants=None):
+def generate(config, directory, api, editor, variants=None, execution_order=None):
+    selected = tuple(variants or VARIANTS)
+    if not selected or any(v not in VARIANTS for v in selected):
+        raise ValueError("Unknown trajectory variant")
+    if execution_order is not None:
+        if len(execution_order) != len(selected) or set(execution_order) != set(selected):
+            raise ValueError('Execution order must contain each selected branch exactly once')
+        selected = tuple(execution_order)
     directory = Path(directory)
     metadata = directory / 'config.json'
     if metadata.exists():
@@ -108,9 +138,6 @@ def generate(config, directory, api, editor, variants=None):
     initial = started['tokens']
     eos = set(started.get('eos_token_ids', EOS))
     outputs = {}
-    selected = tuple(variants or VARIANTS)
-    if not selected or any(v not in VARIANTS for v in selected):
-        raise ValueError("Unknown trajectory variant")
     for variant in selected:
         state_path = directory / variant / 'state.json'
         state = json.loads(state_path.read_text()) if state_path.exists() else {
@@ -122,7 +149,15 @@ def generate(config, directory, api, editor, variants=None):
             step = directory / variant / f"step-{len(state['generated']):04d}"
             def call(action, **kwargs):
                 request = {'action': action, **kwargs}
-                return recorded(step / (action + '.json'), request, lambda: api(action, **kwargs))
+                validator = None
+                if action == 'compare':
+                    validator = lambda result: _valid_comparison_response(
+                        result, kwargs.get('variants', VARIANTS))
+                elif action == 'inspect':
+                    validator = lambda result: _valid_inspection_response(
+                        result, kwargs.get('baseline', True))
+                return recorded(step / (action + '.json'), request,
+                                lambda: api(action, **kwargs), validator)
             fast = config.get('comparison_mode') == 'selected'
             inspected = call('inspect', tokens=state['tokens'],
                              **({'baseline': False} if fast and variant != 'original' else {}))
@@ -140,9 +175,7 @@ def generate(config, directory, api, editor, variants=None):
                                 reconstruction=explained['reconstruction'],
                                 **({'variants': [variant]} if fast else {}))
                 prediction = compared[variant]
-            token = prediction['completion_probabilities'][0]['id']
-            if type(token) is not int:
-                raise ValueError('Backend did not return an integer next-token ID')
+            token = stepper.prediction_token_id(prediction)
             generated = state['generated'] + [token]
             decoded = call('decode', tokens=generated)['content']
             state['steps'].append({'index': len(state['generated']), 'chosen_id': token,

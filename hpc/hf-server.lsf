@@ -18,11 +18,19 @@ export OMP_NUM_THREADS=4
 unset HF_TOKEN HUGGING_FACE_HUB_TOKEN OPENAI_API_KEY
 mkdir -p runs
 model="${NLA_HF_MODEL:-gemma3-12b}"
+export UV_CACHE_DIR="$PWD/.runtime/uv-cache"
+mkdir -p .runtime
+# Simultaneous branches share this environment. Finish dependency writes before
+# another allocation installs into it; inference needs no lock.
+exec {nla_hf_lock}>.runtime/hf-env.lock
+flock --timeout 5400 "$nla_hf_lock"
 if [[ ! -x .runtime/hf-env/bin/python ]]; then
     uv venv --python 3.12 .runtime/hf-env
 fi
 uv pip install --python .runtime/hf-env/bin/python torch==2.6.0 --index-url https://download.pytorch.org/whl/cu124
 uv pip install --python .runtime/hf-env/bin/python -r hpc/hf-requirements.txt
+flock --unlock "$nla_hf_lock"
+exec {nla_hf_lock}>&-
 server_port=$((50000 + LSB_JOBID % 10000))
 printf '%s\n' "$server_port" > "runs/port-${LSB_JOBID}.txt"
 hostname -f > "runs/host-${LSB_JOBID}.txt"
