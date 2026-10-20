@@ -1,0 +1,25 @@
+#!/bin/bash -l
+#BSUB -n 4
+#BSUB -gpu "num=1:mode=shared:gmem=20GB:j_exclusive=no"
+#BSUB -R "span[hosts=1] rusage[mem=6GB]"
+#BSUB -M 7GB
+#BSUB -W 4:00
+#BSUB -o runs/hpc-%J.out
+#BSUB -e runs/hpc-%J.err
+set -euo pipefail
+cd "${LS_SUBCWD:?}"
+# An isolated source snapshot shares immutable weights and the validated backend.
+# No build or dependency update can interfere with another campaign.
+module load gcc/12.4.0-binutils-2.42 cuda/12.4.1 cmake/3.31.9
+export LD_LIBRARY_PATH="/appl/cuda/12.4.1/targets/x86_64-linux/lib:${LD_LIBRARY_PATH:-}"
+export NLA_RESIDENT_MODELS=1 NLA_CONTEXT_SIZE=4096
+mkdir -p runs .runtime
+server_port=$((30000 + (LSB_JOBID % 5000) * 4))
+backend_port=$((server_port + 1))
+printf '%s\n' "$server_port" > "runs/port-${LSB_JOBID}.txt"
+hostname -f > "runs/host-${LSB_JOBID}.txt"
+nvidia-smi > "runs/gpu-${LSB_JOBID}.txt"
+umask 077
+"${NLA_PYTHON:?}" -c 'import secrets; print(secrets.token_hex(32))' > "runs/token-${LSB_JOBID}.txt"
+printf '{"phase":"ready","exit_code":0}\n' > ".runtime/startup-${LSB_JOBID}.json"
+exec "$NLA_PYTHON" -m nla.launch --port "$server_port" --backend-port "$backend_port" --gpu-layers 99 --threads 4 --listen-host 0.0.0.0 --auth-token-file "runs/token-${LSB_JOBID}.txt" --audit-log

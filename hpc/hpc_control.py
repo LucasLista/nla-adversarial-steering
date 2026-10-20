@@ -42,6 +42,7 @@ def main():
     p.add_argument('--editor-preset',help='Select an editor instruction by ID')
     p.add_argument('--configs',nargs='+',type=Path)
     p.add_argument('--benchmark-manifest',type=Path)
+    p.add_argument('--cache-shared-prefixes',action='store_true',help='Reuse exact deterministic inspect/explain requests within each case')
     p.add_argument('--fast',action='store_true',help='Compute only the selected Qwen comparison')
     p.add_argument('--release-job',action='store_true',help='Release the GPU after successful completion')
     p.add_argument('--port',type=int,default=18095)
@@ -164,7 +165,7 @@ def main():
             hf_status=json.load(response)
         if not hf_status.get('passed') or hf_status.get('model')!=args.model or hf_status.get('layer')!=profile['layer'] or hf_status.get('dimension')!=profile['dimension']:
             raise ValueError('HF model backend did not pass the required synthetic validation')
-    elif args.benchmark_manifest:
+    else:
         # Gate each new allocation on a benign intervention beyond one microbatch.
         from hpc.hpc_batch import steering_self_test
         try:
@@ -218,7 +219,7 @@ def main():
                 cfg['editor_model']='Qwen2.5-7B-Instruct-Q4_K_M'
             for attempt in range(20):
                 try:
-                    trajectories.generate(cfg,destination,api,editor,variants=args.variants,execution_order=args.execution_order)
+                    trajectories.generate(cfg,destination,api,editor,variants=args.variants,execution_order=args.execution_order,cache_shared_prefixes=args.cache_shared_prefixes)
                     break
                 except (OSError, http.client.HTTPException, json.JSONDecodeError):
                     if attempt == 19: raise

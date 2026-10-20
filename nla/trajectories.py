@@ -4,6 +4,9 @@ Run on the signed-in laptop against an SSH-forwarded HPC launcher. No model
 weights or activation computation are needed on the laptop.
 """
 import argparse
+from collections import OrderedDict
+import copy
+import hashlib
 import datetime
 import json
 import os
@@ -113,7 +116,37 @@ def write_progress(directory, limit):
                'complete': (directory / 'complete.json').exists()})
 
 
-def generate(config, directory, api, editor, variants=None, execution_order=None):
+class PrefixCache:
+    """Bounded, run-local reuse of deterministic requests, never editor proposals.
+
+    Full request hashes include tokens, activations and baseline flags. Entries
+    are populated only after checkpoint validation; failed calls are not cached.
+    No KV state or interventions are carried across independent prefixes.
+    """
+    def __init__(self, capacity=2048):
+        self.capacity = capacity
+        self.entries = OrderedDict()
+        self.hits = 0
+
+    def recorded(self, path, request, operation, validate=None):
+        eligible = request['action'] in ('inspect', 'explain')
+        key = hashlib.sha256(json.dumps(request, sort_keys=True, allow_nan=False).encode()).digest()
+        def compute():
+            if eligible and key in self.entries:
+                self.hits += 1
+                self.entries.move_to_end(key)
+                return copy.deepcopy(self.entries[key])
+            return operation()
+        result = recorded(path, request, compute, validate)
+        if eligible:
+            self.entries[key] = copy.deepcopy(result)
+            self.entries.move_to_end(key)
+            while len(self.entries) > self.capacity:
+                self.entries.popitem(last=False)
+        return result
+
+
+def generate(config, directory, api, editor, variants=None, execution_order=None, cache_shared_prefixes=False):
     directory = Path(directory)
     metadata = directory / 'config.json'
     if metadata.exists():
@@ -135,6 +168,7 @@ def generate(config, directory, api, editor, variants=None, execution_order=None
     initial = started['tokens']
     eos = set(started.get('eos_token_ids', EOS))
     outputs = {}
+    prefix_cache = PrefixCache() if cache_shared_prefixes else None
     selected = tuple(variants or VARIANTS)
     if not selected or any(v not in VARIANTS for v in selected):
         raise ValueError("Unknown trajectory variant")
@@ -162,7 +196,8 @@ def generate(config, directory, api, editor, variants=None, execution_order=None
                 elif action == 'inspect':
                     validator = lambda result: _valid_inspection_response(
                         result, kwargs.get('baseline', True))
-                return recorded(step / (action + '.json'), request,
+                recorder = prefix_cache.recorded if prefix_cache else recorded
+                return recorder(step / (action + '.json'), request,
                                 lambda: api(action, **kwargs), validator)
             fast = config.get('comparison_mode') == 'selected'
             inspected = call('inspect', tokens=state['tokens'],
@@ -217,6 +252,8 @@ def generate(config, directory, api, editor, variants=None, execution_order=None
     write_json(directory / 'complete.json', {'completed_at': datetime.datetime.now(datetime.timezone.utc).isoformat(),
                                            'variants': list(outputs)})
     write_progress(directory, config['max_tokens'])
+    if prefix_cache:
+        write_json(directory / 'cache-stats.json', {'hits': prefix_cache.hits, 'entries': len(prefix_cache.entries)})
     return outputs
 
 def main():
