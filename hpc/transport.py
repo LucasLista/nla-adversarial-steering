@@ -16,7 +16,8 @@ class SSHTransport:
     def __init__(self, host, socket, helper=None, health=None, retry_seconds=900):
         self.host, self.socket, self.helper = host, socket, helper
         self.health, self.retry_seconds = health, retry_seconds
-        self.ssh = ['ssh', '-S', socket, '-o', 'BatchMode=yes', '-o', 'ConnectTimeout=15']
+        self.ssh = ['ssh', '-S', socket, '-o', 'BatchMode=yes', '-o', 'ConnectTimeout=15',
+                    '-o', 'ServerAliveInterval=15', '-o', 'ServerAliveCountMax=2']
         self.forwards = []
 
     def status(self, phase):

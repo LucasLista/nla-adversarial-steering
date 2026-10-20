@@ -17,6 +17,7 @@ import time
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from nla.trajectories import write_json
+from hpc.transport import SSHTransport
 
 
 def next_case(cases):
@@ -32,8 +33,12 @@ def main():
     fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
     state = json.loads((campaign/'status.json').read_text())
     ssh = ['ssh', '-S', state['ssh_socket'], '-o', 'BatchMode=yes', state['ssh_host']]
+    transport = SSHTransport(state['ssh_host'], state['ssh_socket'],
+                             helper=state.get('connect_script'),
+                             health=campaign/'transport-health.json', retry_seconds=45)
+    remote = transport.remote
     children = {}
-    def remote(command):
+    def submit_once(command):
         return subprocess.check_output(ssh + ['bash -lc '+shlex.quote(command)],
                                        stderr=subprocess.DEVNULL, text=True, timeout=45)
     def save():
@@ -67,7 +72,9 @@ def main():
                     case['error_type'] = metadata.get('error_type', 'ControllerStopped')
                     # Resume against a still-running allocation only for transient
                     # transport failures, and bound retries to avoid crash loops.
-                    worker['failures'] = worker.get('failures', 0) + 1
+                    worker['failures'] = worker.get('failures', 0) + (0 if case['error_type'] in (
+                        'TransportUnavailable', 'ConnectionError', 'TimeoutError', 'URLError',
+                        'RemoteDisconnected', 'ConnectionResetError', 'EditorTransportUnavailable') else 1)
                     case['phase'] = 'pending'
                     worker['case'] = None
                     if worker['failures'] >= 3:
@@ -75,6 +82,7 @@ def main():
                         worker['phase'] = 'needs_attention'
                         save()
                         continue
+            worker['controller_pid'] = None
             try:
                 status = remote(f'bjobs -a -noheader -o "stat exit_reason" {worker["job"]} 2>/dev/null || true').strip()
             except (OSError, subprocess.SubprocessError):
@@ -93,7 +101,7 @@ def main():
                 command = worker['submit_command']
                 import re
                 try:
-                    reply = remote(command)
+                    reply = submit_once(command)
                     job = int(re.search(r'Job <(\d+)>', reply)[1])
                 except (OSError, subprocess.SubprocessError, TypeError):
                     save()
@@ -120,6 +128,9 @@ def main():
                    '--output', str(output), '--port', str(19200+slot*2),
                    '--tunnel-port', str(19201+slot*2), '--fast', '--cache-shared-prefixes',
                    '--max-tokens', str(state['max_tokens']), '--editor', 'codex']
+            if state.get('connect_script'):
+                cmd += ['--connect-script', state['connect_script']]
+            (output/'controller-health.json').unlink(missing_ok=True)
             case.update(phase='running', job=worker['job'])
             worker.update(case=case['id'], phase='running')
             save()

@@ -34,6 +34,9 @@ class EditorSubscriptionLimited(RuntimeError):
 class EditorAuthenticationFailed(RuntimeError):
     pass
 
+class EditorTransportUnavailable(ConnectionError):
+    pass
+
 def failure_class(diagnostic):
     """Return a safe operational class without retaining command output."""
     diagnostic = diagnostic.lower()
@@ -41,6 +44,10 @@ def failure_class(diagnostic):
         return EditorSubscriptionLimited
     if any(marker in diagnostic for marker in ('unauthorized', 'not logged in')):
         return EditorAuthenticationFailed
+    if any(marker in diagnostic for marker in ('connection reset', 'connection refused',
+            'network is unreachable', 'error sending request', 'stream disconnected',
+            'connection closed', 'dns error', 'timed out')):
+        return EditorTransportUnavailable
     return RuntimeError
 
 def execution_failure_class(events):
@@ -110,7 +117,7 @@ def propose(instruction, text):
                 except subprocess.TimeoutExpired:
                     out.unlink(missing_ok=True)
                     if attempt == 2:
-                        raise RuntimeError('Codex editor timed out after three attempts; checkpoint preserved.') from None
+                        raise EditorTransportUnavailable('Codex editor timed out after three attempts; checkpoint preserved.') from None
                     time.sleep(5 * (attempt + 1))
                     continue
                 if result.returncode == 0 and out.exists():

@@ -42,3 +42,12 @@ class EditorTests(unittest.TestCase):
                 codex_editor.propose('rewrite','rabbit')
 
 if __name__=='__main__': unittest.main()
+
+class EditorNetworkRecoveryTests(unittest.TestCase):
+    def test_structured_network_failure_is_resumable(self):
+        event = json.dumps({'type':'error','message':'error sending request: connection reset'})
+        kind = codex_editor.execution_failure_class(event)
+        self.assertIs(kind, codex_editor.EditorTransportUnavailable)
+        self.assertTrue(issubclass(kind, ConnectionError))
+        self.assertIs(codex_editor.execution_failure_class(json.dumps(
+            {'type':'item.completed','text':'connection reset'})), RuntimeError)
