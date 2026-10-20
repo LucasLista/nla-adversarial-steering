@@ -54,9 +54,9 @@ class PrefixCacheTests(unittest.TestCase):
             def api(action, **kw):
                 calls.append((action, kw))
                 if action == 'start': return {'tokens':[1]}
-                if action == 'inspect': return {'h':[float(sum(kw['tokens']))], 'baseline':{'tokens':[2]}}
+                if action == 'inspect': return {'h':[float(sum(kw['tokens']))], 'baseline':{'tokens':[2], 'tokens_predicted':1, 'content':''}}
                 if action == 'explain': return {'text':'synthetic', 'reconstruction':kw['h']}
-                if action == 'compare': return {v:{'tokens':[i+2]} for i,v in enumerate(t.VARIANTS)}
+                if action == 'compare': return {v:{'tokens':[i+2], 'tokens_predicted':1, 'content':''} for i,v in enumerate(t.VARIANTS)}
                 if action == 'decode': return {'content':str(kw['tokens'])}
                 raise AssertionError(action)
             editor = Mock(return_value={'proposal':'synthetic edit'})
