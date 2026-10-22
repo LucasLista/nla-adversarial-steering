@@ -228,8 +228,10 @@ def main():
                     state=remote(f'bjobs -noheader -o stat {args.job}').strip()
                     if state != 'RUN': raise RuntimeError('GPU allocation is no longer running')
                     transport.forward(forwarding)
-    except (TransportUnavailable, OSError, http.client.HTTPException):
-        # Local checkpoints and the allocation survive a network outage.
+    except (TransportUnavailable, OSError, http.client.HTTPException, codex_editor.EditorExecutionFailed):
+        # Local checkpoints and the allocation survive a network outage or
+        # unknown editor CLI failure. The coordinator bounds editor retries;
+        # replacing a healthy GPU cannot repair a laptop editor failure.
         raise
     except Exception:
         # Release only for a non-transport experiment failure.

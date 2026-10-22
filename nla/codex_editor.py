@@ -28,6 +28,10 @@ def subscription_lock(path=None):
         finally:
             fcntl.flock(handle, fcntl.LOCK_UN)
 
+class EditorExecutionFailed(RuntimeError):
+    """CLI execution failed without evidence of a broken GPU allocation."""
+    pass
+
 class EditorSubscriptionLimited(RuntimeError):
     pass
 
@@ -130,7 +134,7 @@ def propose(instruction, text):
                 # diagnosis instead of retrying or scanning echoed text.
                 break
         if result.returncode or not out.exists():
-            raise RuntimeError('Codex editor failed. Check Codex sign-in, model access and subscription limits; no fallback model or API billing was used.')
+            raise EditorExecutionFailed('Codex editor failed. Check Codex sign-in, model access and subscription limits; no fallback model or API billing was used.')
         proposal=json.loads(out.read_text()).get('proposal','').strip()
         if not proposal or len(proposal)>12000:
             raise RuntimeError('Codex returned an empty or oversized proposal')

@@ -51,3 +51,14 @@ class EditorNetworkRecoveryTests(unittest.TestCase):
         self.assertTrue(issubclass(kind, ConnectionError))
         self.assertIs(codex_editor.execution_failure_class(json.dumps(
             {'type':'item.completed','text':'connection reset'})), RuntimeError)
+
+class EditorExecutionRecoveryTests(unittest.TestCase):
+    def test_unknown_cli_failure_is_distinct_and_does_not_retry_or_leak_output(self):
+        login=Mock(returncode=0,stdout='Logged in using ChatGPT',stderr='')
+        failure=Mock(returncode=1,stdout='synthetic private payload',stderr='synthetic stderr')
+        with patch.dict('os.environ',{},clear=True), patch('shutil.which',return_value='/bin/codex'), patch('subprocess.run',side_effect=[login,failure]) as run:
+            with self.assertRaises(codex_editor.EditorExecutionFailed) as caught:
+                codex_editor.propose('rewrite','synthetic rabbit')
+        self.assertEqual(run.call_count,2)
+        self.assertNotIn('private payload',str(caught.exception))
+        self.assertNotIn('stderr',str(caught.exception))
