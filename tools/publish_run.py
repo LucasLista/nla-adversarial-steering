@@ -1,4 +1,4 @@
-"""Copy an authorized response snapshot to Git logs without displaying its text."""
+"""Export an authorized response snapshot to ignored local logs without displaying its text."""
 import argparse
 import hashlib
 import json

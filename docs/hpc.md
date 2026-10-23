@@ -42,17 +42,16 @@ metadata live in `.runtime/`; never infer success from submission alone.
 
 ## Submitting with parameters
 
-This cluster's LSF does not export the submitting shell's environment to the
-job. `NLA_SHARD`, `NLA_EDITOR`, `NLA_EDITOR_MODEL`, `NLA_BENCHMARK_MANIFEST`
-and `NLA_MAX_TOKENS` therefore reach the job only when passed explicitly:
+This cluster's LSF requires explicit `-env` parameters. For example, to set the
+benchmark manifest and token limit for the self-contained batch runner:
 
-```
-bsub -env "all, NLA_SHARD=0/5, NLA_EDITOR=openai, NLA_EDITOR_MODEL=gpt-6-luna" < hpc/alpha-sweep.lsf
+```sh
+bsub -env "all,NLA_BENCHMARK_MANIFEST=runs/benchmarks/jbb-benign/manifest.json,NLA_MAX_TOKENS=512" < hpc/batch.lsf
 ```
 
-Plain `VAR=value bsub < script` silently falls back to each default, so a run
-can look healthy while using the wrong manifest or token limit. Verified on
-2026-10-17: without `-env` the variables arrive unset.
+Plain `VAR=value bsub < script` does not propagate these settings to the job.
+Use `hpc.hpc_batch --help` for optional sharding and steering multipliers; the
+four-branch experiment uses the default correction multiplier of one.
 
 ## Subscription account
 
@@ -75,6 +74,5 @@ For laptop-controlled runs, the local checkpoint may be ahead of its HPC copy.
 Use `tools.run_status` and scheduler metadata to check progress; do not infer
 quality from completion or inspect controller logs as a status shortcut.
 
-The shared project currently lives at `/work3/s216136/nla-playground` on
-`login1.gbar.dtu.dk`. Connect with your own DTU account. Membership in the shared
-project group controls access.
+Connect to `login1.gbar.dtu.dk` with your own DTU account and set `--remote-root`
+to your checkout. Shared-directory access is managed by the project owners.

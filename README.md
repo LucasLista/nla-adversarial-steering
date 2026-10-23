@@ -1,23 +1,33 @@
 # NLA adversarial steering
 
-Can editing a natural-language description of an activation change what a model says next?
-This repository runs that experiment on Qwen2.5-7B-Instruct, using Anthropic's
-released natural language autoencoder (NLA) at layer 20.
+A small experimental harness for studying robustness to adversarial edits in
+natural language autoencoders (NLAs). It runs Qwen2.5-7B-Instruct with Anthropic's
+released layer-20 NLA: explain an activation, edit the text, reconstruct it,
+and continue generation.
 
-An NLA turns an activation into text and reconstructs an activation from that
-text. We edit the description, reconstruct it, and continue generation. Four
-independent trajectories separate the effects of reconstruction and editing:
+Research is ongoing. We will link the write-up here when it is published.
+
+## Method
+
+Four independent trajectories separate the effects of reconstruction and editing:
 
 | Branch | Activation used for the next token |
 | --- | --- |
 | Original | `h` |
-| Reconstructed | `AR(t)` |
+| NLA roundtrip | `AR(t)` |
 | Edited | `AR(t')` |
-| Edited with error correction | `AR(t') + h - AR(t)` |
+| Edited + error | `AR(t') + h - AR(t)` |
 
 Here `h` is the original activation, `t` its description, `t'` the edited
 text, and `AR` the reconstructor. Each branch generates its own continuation.
-The intervention is reapplied at each step; earlier edited KV states are not replayed.
+At each generation step, we recompute the branch's activation from its own token
+prefix and intervene at the last position. Earlier edited KV states are not
+replayed. Generation is greedy. The corrected branch preserves the original
+reconstruction error, equivalently adding `AR(t') - AR(t)` to `h`.
+
+The editor receives the description and an explicit editing instruction.
+Its proposal is saved separately, so changes to the text can be inspected
+alongside changes to the model's continuation.
 
 ## Try it
 
@@ -52,18 +62,22 @@ uv run python -m nla.setup --cuda --skip-download
 uv run python -m nla.launch --gpu-layers 99
 ```
 
-## Work with the code
+## Code
 
-The intervention math is in [nla/stepper.py](nla/stepper.py); the generation loop
-and resumable checkpoints are in [nla/trajectories.py](nla/trajectories.py).
-The browser interface is [ui/stepper.html](ui/stepper.html).
+Start with three files:
+
+- [nla/stepper.py](nla/stepper.py): activation interventions and next-token comparisons.
+- [nla/trajectories.py](nla/trajectories.py): independent generation loops and resumable checkpoints.
+- [ui/stepper.html](ui/stepper.html): interactive inspection and editing.
+
+For usage details:
 
 - [Experiment reference](docs/reference.md): intervention details, editors, saved runs.
 - [HPC guide](docs/hpc.md): batch jobs, subscription-backed controllers, monitoring.
 
-`config/` pins the models, `hpc/` runs cluster jobs, and `tools/` reports progress
-and exports snapshots. Private inputs and detailed checkpoints live in ignored
-`runs/`. Agent access to experiment content is governed by [AGENTS.md](AGENTS.md).
+`config/` pins the models; `hpc/` contains optional DTU cluster adapters.
+Inputs, checkpoints and local exports are ignored by Git. Agent access to
+experiment content is governed by [AGENTS.md](AGENTS.md).
 
 ## Credits and scope
 

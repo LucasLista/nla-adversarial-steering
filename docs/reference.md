@@ -6,20 +6,18 @@ Run commands from the repository root. For cluster jobs, see the [HPC guide](hpc
 
 Qwen uses zero-based block 20 and 3,584-dimensional residuals.
 
-For activation `h`, explanation `t`, and edited explanation `t'`, the stepper
-compares `h`, `AR(t)`, `AR(t')`, and `AR(t') + h - AR(t)`. It saves the full
-reconstruction error plus L2, relative L2, MSE, and cosine similarity. Unchanged
-text should reproduce the baseline in the error-preserving branch, within
-floating-point and quantization tolerance.
+The four branches are defined in the [README](../README.md#method). The stepper
+saves reconstruction error, L2, relative L2, MSE and cosine similarity. With an
+unchanged description, the error-preserving branch should reproduce the baseline
+within floating-point and quantization tolerance.
 
 Mikupad's steering endpoint instead applies
 `h + alpha * norm(h) * delta / norm(delta)`, where `delta = AR(t') - AR(t)`;
 a zero direction is skipped. The stepper compensates for that normalization to
 apply its target vector in native units.
 
-Each step recomputes context from exact token IDs and intervenes at one position.
-Earlier token choices persist; edited KV states do not. Distributions are raw
-softmax probabilities after the remaining blocks, with only the top 30 exposed.
+Distributions are raw softmax probabilities after the remaining blocks, with
+only the top 30 exposed.
 Keep local contexts below 1,900 tokens. Model/layer changes require their own
 validation; explanations are hypotheses, not ground truth.
 
@@ -50,18 +48,20 @@ uv run python -m tools.publish_run --run runs/RUN_NAME --name RUN_NAME
 ```
 
 The viewer lists run directories beneath the supplied root and binds loopback
-on port 18096. The export helper copies compact response snapshots into ignored `logs/`
-for local review; it does not commit or push. Use `--max-tokens` when reporting/publishing a nondefault
-limit. Detailed checkpoints and input files stay private. Follow `AGENTS.md` for
-content access and metadata-only monitoring.
+on port 18096. The export helper copies compact response snapshots into ignored
+`logs/` for local review; it does not commit or push. Pass the run's actual token
+limit with `--max-tokens` when exporting. Detailed checkpoints and input files stay
+private. Follow `AGENTS.md` for content access and metadata-only monitoring.
 
 ## Editors
 
 Local Qwen needs no external account. The subscription adapters use locally
 signed-in Codex or Claude CLIs; the OpenAI adapter uses `OPENAI_API_KEY` from the
 environment or root `.env` and incurs API charges. Provider choice is explicit;
-subscription adapters do not fall back to API billing. Only the description and
-editing instruction are sent to an external editor.
+subscription adapters do not fall back to API billing. The shared request
+contract is in [nla/editor.py](../nla/editor.py). The adapters send the description
+and editing instruction, not the activation vector. Include question context in
+the instruction only if the experiment calls for it; record it with the run.
 
 For a model host separate from a Codex-signed-in laptop, run the bridge and
 reverse tunnel on the laptop:
