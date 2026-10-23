@@ -109,8 +109,6 @@ To use the stepper through the tunnel, open `http://127.0.0.1:18090/?token=TOKEN
 | [nla/setup.py](nla/setup.py), [nla/patches.py](nla/patches.py) | Pinned backend build, fixes and weight download |
 | [ui/stepper.html](ui/stepper.html) | Browser stepper |
 
-Tests: `uv run python -m unittest discover -s tests`.
-
 ## Credits and scope
 
 This project uses the released NLA. It does not train one or introduce a new steering method. Explanations are
