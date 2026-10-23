@@ -16,16 +16,14 @@
 #distributions h3{margin:0 0 12px}
 @media(max-width:400px){#distributions{grid-template-columns:1fr}}
 nav button.agree{background:#374151;color:#9ca3af}#edited{width:100%;min-height:320px!important;resize:vertical}nav{display:flex;flex-wrap:wrap;gap:4px;margin-top:10px}nav button{font:13px monospace;margin:0;padding:6px}.selected{border-color:#93c5fd;background:#315679}details{color:#a8b5c8;font-size:14px}h2{font-size:20px}h3{font-size:16px}textarea{min-height:70px!important}*{box-sizing:border-box}select,input{max-width:100%}body{background:#111827;color:#e5e7eb;font:16px system-ui;margin:30px auto;max-width:1400px;padding:0 20px}textarea,select,button{font:inherit;border-radius:6px;padding:10px;background:#243147;color:inherit;border:1px solid #64748b}textarea{width:95%;min-height:100px}button{cursor:pointer;margin:6px}button:disabled{opacity:.4;cursor:wait}a{color:#93c5fd}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}.card{padding:16px;border:1px solid #475569;border-radius:10px}pre{white-space:pre-wrap;overflow-wrap:anywhere}table{width:100%;font:14px monospace}td{padding:4px;max-width:170px;overflow-wrap:anywhere}small{color:#a8b5c8}#status{color:#93c5fd;min-height:30px}.bar{background:#315679}h1{margin-bottom:5px}</style>
-<h1>NLA adversarial steering</h1><p><small>Qwen2.5 · L20</small> · <a href="/">Classic</a></p>
-<select id="example" aria-label="Evaluation prompt"><option value="">Select a benchmark case</option></select>
-<p><textarea id="prompt"></textarea></p>
+<h1>NLA adversarial steering</h1><p><small>Qwen2.5-7B-Instruct · layer 20</small></p>
+<p><textarea id="prompt" placeholder="Prompt"></textarea></p>
 <button id="start">Start</button><button id="export">Export</button><input id="import" type="file" accept="application/json"><small></small>
-<p><input id="experiment" value="first" aria-label="Experiment" placeholder="Experiment"><button id="load-input">Load inputs</button><button id="save-result">Save run</button><button id="list-results">Results</button><select id="result-list" aria-label="Saved results"></select><button id="open-result">Open</button></p>
 <p id="status" role="status"></p><div class="card"><strong>Generated text</strong><pre id="generated"></pre><small id="position"></small><nav id="history"></nav></div>
 <p><button id="inspect">Inspect</button><button id="explain">Explain</button><button id="compare">Compare</button></p>
 <div class="grid"><div class="card"><h3>Original</h3><pre id="original"></pre></div><div class="card"><h3>Edit</h3><textarea id="edited"></textarea><small></small></div><div class="card"><details><summary>Error metrics</summary><pre id="metrics"></pre></details></div></div>
 <div class="card"><h2>Editor</h2>
-<p><label>Editor <select id="editor"><option value="local">Local Qwen</option><option value="codex">Sol 6.1 · subscription</option></select></label></p><small>Sol sends the edit instruction and NLA text to OpenAI; subscription limits apply.</small><br><p><label>Instruction preset <select id="editor-preset"><option value="">Custom instruction</option></select></label></p><label for="instruction">Instruction</label><textarea id="instruction"></textarea>
+<p><label>Editor <select id="editor"><option value="codex">Sol · Codex subscription</option><option value="openai">Sol · OpenAI API</option></select></label></p><small>The editor sends the instruction and NLA text to OpenAI. You can also edit the text by hand and press Compare.</small><label for="instruction">Instruction</label><textarea id="instruction"></textarea>
 <p><label>Mode <select id="mode"><option value="review">Review edits</option><option value="auto">Auto edits</option></select></label>
 <label>Tokens <select id="token-mode"><option value="manual">Choose myself</option><option value="auto">Auto · most likely</option></select></label>
 <label>Steps <input id="steps" type="number" min="1" max="20" value="3" style="width:60px"></label></p>
@@ -60,7 +58,7 @@ async function initSession(){
 }
 for(const id of settings)$(id).addEventListener('input',saveSession);
 function status(t){$('status').textContent=t;$('editor-status').textContent=t}
-function controls(){document.querySelectorAll('button').forEach(b=>b.disabled=busy);document.querySelectorAll('#history button').forEach(b=>b.disabled=false);$('inspect').disabled=busy||!s.tokens.length||s.ended;$('explain').disabled=busy||!s.h||!!s.text;$('compare').disabled=busy||looping||!s.reconstruction;$('loop').disabled=busy||looping||!s.tokens.length||s.ended;$('approve').disabled=busy||viewIndex!==null||!s.pending;$('stop').disabled=!looping&&!s.pending;document.querySelectorAll('#distributions button').forEach(b=>b.disabled=busy||viewIndex!==null||(looping&&!awaitingToken));for(const id of ['token-mode','editor','editor-preset','edited','mode','instruction','steps','prompt','import','example'])$(id).disabled=busy||(looping&&id!=='edited');if(awaitingToken)$('edited').disabled=true;if(viewIndex!==null){for(const id of ['inspect','explain','compare','loop','edited'])$(id).disabled=true;}for(const id of ['load-input','open-result'])$(id).disabled=busy||looping;if(looping){$('start').disabled=true;$('inspect').disabled=true;$('explain').disabled=true;} }
+function controls(){document.querySelectorAll('button').forEach(b=>b.disabled=busy);document.querySelectorAll('#history button').forEach(b=>b.disabled=false);$('inspect').disabled=busy||!s.tokens.length||s.ended;$('explain').disabled=busy||!s.h||!!s.text;$('compare').disabled=busy||looping||!s.reconstruction;$('loop').disabled=busy||looping||!s.tokens.length||s.ended;$('approve').disabled=busy||viewIndex!==null||!s.pending;$('stop').disabled=!looping&&!s.pending;document.querySelectorAll('#distributions button').forEach(b=>b.disabled=busy||viewIndex!==null||(looping&&!awaitingToken));for(const id of ['token-mode','editor','edited','mode','instruction','steps','prompt','import'])$(id).disabled=busy||(looping&&id!=='edited');if(awaitingToken)$('edited').disabled=true;if(viewIndex!==null){for(const id of ['inspect','explain','compare','loop','edited'])$(id).disabled=true;}if(looping){$('start').disabled=true;$('inspect').disabled=true;$('explain').disabled=true;} }
 async function task(fn){busy=true;controls();try{await fn()}catch(e){status('Error: '+e.message)}finally{busy=false;controls();saveSession()}}
 async function api(action,extra={}){const r=await fetch('/stepper-api',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action,tokens:s.tokens,...extra})});const d=await r.json();if(!r.ok||typeof d.error==='string')throw Error(d.error||r.statusText);return d}
 function show(){ const v=viewIndex===null?s:s.history[viewIndex]; $('generated').textContent=s.display||'';$('position').textContent=s.tokens.length?'Context tokens: '+s.tokens.length+' · intervention position: '+(s.tokens.length-1)+(s.ended?' · End of sequence':''):'';$('original').textContent=v.text||'';$('edited').value=v.edited??v.text??'';$('metrics').textContent=v.metrics?JSON.stringify(v.metrics,null,2):'';$('view-label').textContent=viewIndex===null?'Live':'Step '+(viewIndex+1)+' · '+(v.chosen?.variant||'');renderHistory();render();controls();saveSession()}
@@ -70,7 +68,6 @@ async function choose(id,variant){const display=(await api('decode',{tokens:[...
 function agrees(h){const keys=['original','roundtrip','edited_raw','edited_corrected'];const ids=keys.map(k=>h.comparison?.[k]?.completion_probabilities?.[0]?.top_logprobs?.[0]?.id);return ids.every(id=>Number.isInteger(id)&&id===ids[0]);}
 function renderHistory(){const root=$('history');root.replaceChildren();s.history.forEach((h,i)=>{const b=document.createElement('button');b.textContent=(i+1)+': '+JSON.stringify(h.chosen?.text??h.chosen?.id);b.title='Inspect step '+(i+1);b.className=(viewIndex===i?'selected ':'')+(agrees(h)?'agree':'');b.onclick=()=>{viewIndex=i;show()};root.append(b)});const live=document.createElement('button');live.textContent='Live';live.className=viewIndex===null?'selected':'';live.onclick=()=>{viewIndex=null;show()};root.append(live)}
 async function selectToken(id,variant){if(viewIndex!==null)throw Error('Return to Live to choose a token.');const resume=looping&&awaitingToken;awaitingToken=false;await choose(id,variant);if(resume){remaining--;try{await continueLoop()}catch(e){looping=false;s.pending=false;throw e}}}
-$('example').onchange=()=>{$('prompt').value=$('example').value};
 $('start').onclick=()=>task(async()=>{status('Tokenizing…');const prompt=$('prompt').value;const d=await api('start',{prompt});viewIndex=null;awaitingToken=false;s={tokens:d.tokens,prompt,generated:[],history:[]};show();status('Ready.')});
 $('inspect').onclick=()=>task(async()=>{status('Extracting activation and computing baseline…');Object.assign(s,await api('inspect'));show();status('Choose a token or explain.')});
 $('explain').onclick=()=>task(async()=>{status('Explaining…');Object.assign(s,await api('explain',{h:s.h}));s.edited=s.text;show();status('Edit, then compare.')});
@@ -107,45 +104,7 @@ async function continueLoop(){
 $('loop').onclick=()=>task(async()=>{remaining=Number($('steps').value);if(!Number.isInteger(remaining)||remaining<1||remaining>20)throw Error('Choose 1–20 tokens');viewIndex=null;awaitingToken=false;looping=true;stopRequested=false;controls();try{await continueLoop()}catch(e){looping=false;s.pending=false;throw e}});
 $('approve').onclick=()=>task(async()=>{try{await applyProposal('manual');if(!awaitingToken)await continueLoop()}catch(e){looping=false;s.pending=false;throw e}});
 $('stop').onclick=()=>{stopRequested=true;awaitingToken=false;s.pending=false;looping=false;$('proposal').textContent='Proposal rejected / loop stopping.';status('Stopping after the current request.');controls()};
-$('export').onclick=()=>task(async()=>{const session={version:1,model:'Qwen2.5-7B-Instruct-Q4_K_M',layer:20,semantics:'one-position context-recompute',...s};const saved=await api('save',{session});status('Session saved on model host: '+saved.saved+'; browser download also requested.');const blob=new Blob([JSON.stringify(session,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='nla-token-session-'+Date.now()+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)});
+$('export').onclick=()=>task(async()=>{const session={version:1,model:'Qwen2.5-7B-Instruct-Q4_K_M',layer:20,semantics:'one-position context-recompute',...s};status('Session exported.');const blob=new Blob([JSON.stringify(session,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='nla-token-session-'+Date.now()+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)});
 $('import').onchange=()=>task(async()=>{const v=JSON.parse(await $('import').files[0].text());if(v.version!==1||v.layer!==20||v.model!=='Qwen2.5-7B-Instruct-Q4_K_M'||!Array.isArray(v.tokens)||!Array.isArray(v.history))throw Error('Unsupported session');s=v;s.pending=false;looping=false;awaitingToken=false;viewIndex=null;$('prompt').value=s.prompt;show();status('Session restored.')});
-function sessionSnapshot(){return {version:1,model:'Qwen2.5-7B-Instruct-Q4_K_M',layer:20,...s,settings:Object.fromEntries(settings.map(id=>[id,$(id).value]))};}
-function restoreResult(v){if(v.version!==1||v.layer!==20||!Array.isArray(v.tokens)||!Array.isArray(v.history))throw Error('Unsupported result');s=v;s.pending=false;looping=false;awaitingToken=false;viewIndex=null;for(const id of settings)if(v.settings?.[id]!==undefined)$(id).value=v.settings[id];$('prompt').value=s.prompt||'';show();}
-const experimentBody=()=>({experiment:$('experiment').value});
-$('load-input').onclick=()=>task(async()=>{const v=await api('experiment-input',experimentBody());for(const id of settings)if(v[id]!==undefined)$(id).value=v[id];saveSession();status('Inputs loaded. Press Start for a new run.');});
-$('save-result').onclick=()=>task(async()=>{const v=await api('save-result',{...experimentBody(),session:sessionSnapshot()});status('Saved '+v.saved);});
-$('list-results').onclick=()=>task(async()=>{const v=await api('results',experimentBody());$('result-list').replaceChildren();for(const name of v.results){const o=document.createElement('option');o.value=name;o.textContent=name;$('result-list').append(o);}status(v.results.length+' saved runs');});
-$('open-result').onclick=()=>task(async()=>{restoreResult(await api('open-result',{...experimentBody(),result:$('result-list').value}));status('Run opened.');});
-$('editor-preset').onchange=()=>{
- if($('editor-preset').value){$('instruction').value=$('editor-preset').value;saveSession();}
-};
-$('instruction').addEventListener('input',()=>{$('editor-preset').value=''});
-async function loadEditorPresets(){
- try{
-  const response=await fetch('/editor-prompt-catalog');
-  if(!response.ok)throw Error('Editor presets unavailable');
-  const entries=await response.json();
-  for(const entry of entries){
-   const option=document.createElement('option');
-   option.textContent=entry.id;option.value=entry.prompt;
-   $('editor-preset').append(option);
-  }
-  if(entries.some(entry=>entry.prompt===$('instruction').value))$('editor-preset').value=$('instruction').value;
- }catch(e){status('Could not load editor instruction presets.');}
-}
-async function loadProbes(){
- try{
-  const response=await fetch('/prompt-catalog');
-  if(!response.ok)throw Error('Prompt catalog unavailable');
-  const entries=await response.json();
-  for(const entry of entries){
-   const option=document.createElement('option');
-   option.textContent=entry.id;
-   option.value=entry.prompt;
-   $('example').append(option);
-  }
- }catch(e){status('Could not load the prepared benchmark catalog.');}
-}
-loadProbes();
-initSession().then(loadEditorPresets);
+initSession();
 </script></html>

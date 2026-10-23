@@ -1,112 +1,128 @@
-"""Build the pinned NLA backend and download verified Qwen checkpoints."""
+"""Build the pinned nla.cpp backend and download hash-verified Qwen NLA checkpoints."""
 import argparse
+import concurrent.futures
+import fcntl
+import hashlib
 import json
 import os
 from pathlib import Path
-import re
 import shutil
 import subprocess
 import sys
+import time
+from nla.patches import apply
 
 ROOT = Path(__file__).resolve().parents[1]
 RUNTIME = ROOT / '.runtime'
+MODELS = ROOT / 'models'
 SOURCE = RUNTIME / 'nla.cpp'
 REVISION = '7a3b9c72462d72414042e737dbb75353d75f0a27'
 UPSTREAM = 'https://github.com/thomasgauthier/nla.cpp.git'
+CHUNK = 16 * 1024 * 1024
 
-def prepare_compiler_cache(build, compiler):
-    """Call only while holding backend-build.lock."""
-    cache = build / 'CMakeCache.txt'
-    if not compiler or not cache.exists():
-        return
-    prefix = 'CMAKE_CXX_COMPILER:FILEPATH='
-    cached = next((line[len(prefix):] for line in cache.read_text().splitlines()
-                   if line.startswith(prefix)), None)
-    if cached and Path(cached).resolve() != Path(compiler).resolve():
-        cache.unlink()
-
-def cuda_link_options(runtime, toolkit_library):
-    """Resolve CUDA's transitive link dependencies without a runtime stub path."""
-    library = Path(toolkit_library).resolve()
-    stub = library / 'stubs/libcuda.so'
-    if not stub.is_file():
-        raise FileNotFoundError('Configured CUDA link stub is unavailable')
-    directory = runtime / 'cuda-link-stubs'
-    directory.mkdir(exist_ok=True)
-    alias = directory / 'libcuda.so.1'
-    if alias.is_symlink():
-        if alias.resolve() != stub:
-            raise RuntimeError('Unexpected CUDA link stub target')
-    elif alias.exists():
-        raise RuntimeError('Unexpected CUDA link stub file')
-    else:
-        alias.symlink_to(stub)
-    # rpath-link affects ld's dependency lookup only. It emits no runtime RPATH.
-    return [f'-DCMAKE_EXE_LINKER_FLAGS=-Wl,-rpath-link,{library},-rpath-link,{directory}']
 
 def run(*args):
     subprocess.run(args, check=True, cwd=ROOT)
 
-def prepare_frontend():
-    html = (SOURCE / 'frontend/index.html').read_text()
-    prompt = ('<|im_start|>system\nYou are a helpful assistant.<|im_end|>\n'
-              '<|im_start|>user\nWrite a friendly greeting.<|im_end|>\n<|im_start|>assistant\n')
-    # The source is pinned. Fail explicitly if its expected structure changes.
-    html, count = re.subn(r'const defaultPrompt = `.*?`;',
-        lambda _: 'const defaultPrompt = ' + json.dumps(prompt) + ';', html, count=1, flags=re.S)
-    assert count == 1, 'Upstream defaultPrompt changed'
-    for old, new in [('seed: -1,', 'seed: 42,'),
-                     ('maxPredictTokens: -1,', 'maxPredictTokens: 128,'),
-                     ('contextLength: 8192,', 'contextLength: 2048,'),
-                     ('''useSessionState('template', "Mistral")''', '''useSessionState('template', "ChatML")'''),
-                     ('setNlaSteeringAlpha] = useState(1.0)', 'setNlaSteeringAlpha] = useState(0.1)')]:
-        assert old in html, f'Upstream setting changed: {old}'
-        html = html.replace(old, new, 1)
-    (RUNTIME / 'frontend.html').write_text(html)
 
-def main():
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--skip-download', action='store_true')
-    parser.add_argument('--jobs', type=int, default=min(4, os.cpu_count() or 2))
-    parser.add_argument('--cuda', action='store_true', help='Build the NVIDIA GPU backend')
-    parser.add_argument('--cuda-arch', default='native', help='CUDA architecture; 61 for GTX 1070 Ti')
-    args = parser.parse_args()
-    build = RUNTIME / ('build-cuda' if args.cuda else 'build')
-    if sys.platform == 'win32':
-        parser.error('Use Ubuntu under WSL on Windows; see README.md')
-    if args.jobs < 1:
-        parser.error('--jobs must be positive')
-    for tool in ('git', 'cmake', 'curl'):
-        if not shutil.which(tool):
-            parser.error(f'Missing {tool}; install prerequisites from README.md')
-    RUNTIME.mkdir(exist_ok=True)
-    # All allocations share the pinned source and build directory. Serialize
-    # patch/configure/build so concurrent startups cannot rewrite each other.
-    import fcntl
-    build_lock = (RUNTIME / 'backend-build.lock').open('a')
-    fcntl.flock(build_lock, fcntl.LOCK_EX)
-    prepare_compiler_cache(build, os.environ.get('CXX'))
+def cuda_link_options(toolkit_library):
+    """Link against CUDA's driver stub without baking a stub path into the binary."""
+    library = Path(toolkit_library).resolve()
+    stub = library / 'stubs/libcuda.so'
+    alias = RUNTIME / 'cuda-link-stubs/libcuda.so.1'
+    alias.parent.mkdir(exist_ok=True)
+    if not alias.is_symlink():
+        alias.symlink_to(stub)
+    return [f'-DCMAKE_EXE_LINKER_FLAGS=-Wl,-rpath-link,{library},-rpath-link,{alias.parent}']
+
+
+def build(cuda, arch, jobs):
     if not SOURCE.exists():
         run('git', 'init', str(SOURCE))
         run('git', '-C', str(SOURCE), 'remote', 'add', 'origin', UPSTREAM)
         run('git', '-C', str(SOURCE), 'fetch', '--depth', '1', 'origin', REVISION)
         run('git', '-C', str(SOURCE), 'checkout', '--detach', REVISION)
-    actual = subprocess.check_output(['git', '-C', str(SOURCE), 'rev-parse', 'HEAD'], text=True).strip()
-    if actual != REVISION:
-        parser.error('Existing backend has another revision; move .runtime/nla.cpp aside before retrying')
-    from nla.fix_nla_capture import apply
+    head = subprocess.check_output(['git', '-C', str(SOURCE), 'rev-parse', 'HEAD'], text=True).strip()
+    if head != REVISION:
+        sys.exit(f'{SOURCE} is at another revision; move it aside and retry')
     apply(SOURCE)
-    link_options = (cuda_link_options(RUNTIME, os.environ['NLA_CUDA_LINK_LIB'])
-                    if args.cuda and os.environ.get('NLA_CUDA_LINK_LIB') else [])
-    run('cmake', '-S', str(SOURCE), '-B', str(build),
-        '-DCMAKE_BUILD_TYPE=Release', f'-DGGML_CUDA={"ON" if args.cuda else "OFF"}',
-        f'-DCMAKE_CUDA_ARCHITECTURES={args.cuda_arch}', '-DGGML_METAL=OFF',
-        '-DLLAMA_CURL=OFF', '-DLLAMA_BUILD_TESTS=OFF', '-DLLAMA_BUILD_EXAMPLES=OFF', *link_options)
-    run('cmake', '--build', str(build), '-j', str(args.jobs), '--target', 'llama-server')
-    prepare_frontend()
+    out = RUNTIME / ('build-cuda' if cuda else 'build')
+    # A cached compiler path from another host or module breaks reconfiguration.
+    cache = out / 'CMakeCache.txt'
+    if cache.exists() and os.environ.get('CXX') and f"CMAKE_CXX_COMPILER:FILEPATH={os.environ['CXX']}" not in cache.read_text():
+        cache.unlink()
+    link = cuda_link_options(os.environ['NLA_CUDA_LINK_LIB']) if cuda and os.environ.get('NLA_CUDA_LINK_LIB') else []
+    run('cmake', '-S', str(SOURCE), '-B', str(out), '-DCMAKE_BUILD_TYPE=Release',
+        f'-DGGML_CUDA={"ON" if cuda else "OFF"}', f'-DCMAKE_CUDA_ARCHITECTURES={arch}', '-DGGML_METAL=OFF',
+        '-DLLAMA_CURL=OFF', '-DLLAMA_BUILD_TESTS=OFF', '-DLLAMA_BUILD_EXAMPLES=OFF', *link)
+    run('cmake', '--build', str(out), '-j', str(jobs), '--target', 'llama-server')
+
+
+def sha256(path):
+    digest = hashlib.sha256()
+    with path.open('rb') as f:
+        while data := f.read(1 << 20):
+            digest.update(data)
+    return digest.hexdigest()
+
+
+def download(row):
+    """Resumable ranged download in 16 MB chunks, verified against the pinned SHA256."""
+    path = MODELS / row['file']
+    if path.exists() and path.stat().st_size == row['size'] and sha256(path) == row['sha256']:
+        return
+    parts = MODELS / (row['file'] + '.parts')
+    parts.mkdir(parents=True, exist_ok=True)
+    count = -(-row['size'] // CHUNK)
+
+    def part(i):
+        start, end = i * CHUNK, min((i+1) * CHUNK, row['size']) - 1
+        target, tmp = parts / str(i), parts / f'{i}.tmp'
+        if target.exists() and target.stat().st_size == end - start + 1:
+            return
+        url = f"https://huggingface.co/{row['repo']}/resolve/{row['revision']}/{row['file']}"
+        for attempt in range(5):
+            ok = subprocess.run(['curl', '-fLsS', '--connect-timeout', '20', '--max-time', '300',
+                                 '-r', f'{start}-{end}', url, '-o', str(tmp)]).returncode == 0
+            if ok and tmp.stat().st_size == end - start + 1:
+                tmp.replace(target)
+                return
+            time.sleep(2 ** attempt)
+        raise RuntimeError(f'Failed chunk {i} of {row["file"]}')
+
+    with concurrent.futures.ThreadPoolExecutor(6) as pool:
+        list(pool.map(part, range(count)))
+    tmp = path.with_suffix('.assembling')
+    with tmp.open('wb') as out:
+        for i in range(count):
+            out.write((parts / str(i)).read_bytes())
+    if sha256(tmp) != row['sha256']:
+        raise RuntimeError('SHA256 mismatch: ' + row['file'])
+    tmp.replace(path)
+    shutil.rmtree(parts)
+    print('verified', row['file'], flush=True)
+
+
+def main():
+    p = argparse.ArgumentParser(description=__doc__)
+    p.add_argument('--cuda', action='store_true', help='build the NVIDIA GPU backend')
+    p.add_argument('--cuda-arch', default='native', help='e.g. 70 for V100')
+    p.add_argument('--jobs', type=int, default=min(4, os.cpu_count() or 2))
+    p.add_argument('--skip-download', action='store_true')
+    args = p.parse_args()
+    for tool in ('git', 'cmake', 'curl'):
+        if not shutil.which(tool):
+            p.error(f'missing {tool}')
+    RUNTIME.mkdir(exist_ok=True)
+    # Concurrent cluster jobs share one checkout and build directory.
+    with (RUNTIME / 'backend-build.lock').open('a') as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX)
+        build(args.cuda, args.cuda_arch, args.jobs)
     if not args.skip_download:
-        run(sys.executable, '-m', 'nla.download')
-    print('Ready. Run: uv run --locked python -m nla.launch' + (' --gpu-layers 99' if args.cuda else ''), flush=True)
+        for row in json.loads((ROOT / 'config/models.json').read_text()).values():
+            download(row)
+    print('Ready: uv run python -m nla.server' + (' --gpu-layers 99' if args.cuda else ''))
+
 
 if __name__ == '__main__':
     main()

@@ -38,7 +38,7 @@ class SteeringMultiplierTests(unittest.TestCase):
     def compare(self, **extra):
         body = {'action': 'compare', 'tokens': [1, 2], 'reconstruction': list(R0),
                 'edited': 'Synthetic description.', 'variants': ['edited_corrected'], **extra}
-        return run(body, backend, '')
+        return run(body, backend)
 
     def test_default_matches_parameter_free_method(self):
         """Without a multiplier the patch stays h + (AR(edited) - AR(original))."""

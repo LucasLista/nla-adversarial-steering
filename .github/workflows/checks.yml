@@ -21,12 +21,10 @@ jobs:
           version: "0.13.0"
       - run: uv python install
       - run: uv sync --locked
-      - name: Check Python scripts without downloading models
+      - name: Unit tests (no models needed)
         run: |
-          uv run --locked python --version
-          uv run --locked python -m compileall -q nla hpc tools tests
           uv run --locked python -m unittest discover -s tests
-          for script in hpc/*.lsf hpc/*.sh; do bash -n "$script"; done
+          for script in hpc/*; do bash -n "$script"; done
       - uses: actions/setup-node@v4
         with:
           node-version: "22"

@@ -1,12 +1,11 @@
 [project]
 name = "nla-adversarial-steering"
 version = "0.1.0"
-description = "Benchmark adversarial activation steering through natural language autoencoders"
+description = "Adversarial steering through natural language autoencoder edits"
 readme = "README.md"
 requires-python = ">=3.15"
 dependencies = []
 
 [tool.uv]
-# Run modules directly; nla.setup builds the C++ backend,
-# rather than acting as a Python packaging entry point.
+# Run modules directly with `python -m nla.<module>`; nothing is packaged.
 package = false
