@@ -1,6 +1,6 @@
 # NLA adversarial steering
 
-*Heavily vibe-coded. We designed the experiments; AI wrote most of the code.*
+*Disclaimer: heavily vibe coded! Experiments designed by authors.*
 
 Can rewriting a model's *explanation of its own activations* talk it out of a refusal?
 
