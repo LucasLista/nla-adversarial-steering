@@ -1,4 +1,4 @@
-**Disclaimer: heavily vibe-coded! Experiments designed by authors.**
+### Disclaimer: heavily vibe-coded! Experiments designed by authors.
 
 # NLA adversarial steering
 
