@@ -36,8 +36,10 @@ recomputed at every step on that branch's own context, and edited activations
 are never written back into earlier KV states. `--multipliers` scales the edit
 direction: `h + m·(AR(t') - AR(t))`.
 
-Running only the `original` branch is a cheap way to screen prompts for refusals
-before running the full experiment on them.
+The editor receives the description and an editing instruction. Its proposal is
+saved next to each step, so changes to the text can be read alongside changes to
+the continuation. Running only the `original` branch is a cheap way to screen
+prompts for refusals before running the full experiment on them.
 
 ## Quick start
 
@@ -45,6 +47,7 @@ You need [uv](https://docs.astral.sh/uv/), Git, curl, CMake 3.20+, a C++17
 compiler, about 30 GB of disk and 16 GB of RAM. Linux and WSL2 are tested.
 
 ```sh
+sudo apt install git curl cmake build-essential   # Ubuntu / WSL2
 git clone https://github.com/LucasLista/nla-adversarial-steering.git
 cd nla-adversarial-steering
 uv run python -m nla.setup        # build pinned nla.cpp, download 12.8 GB of verified weights
@@ -59,18 +62,21 @@ next-token distributions before choosing a token.
 
 ## Running experiments
 
+A cases file is a JSON list of `{"id", "prompt"}` objects, optionally with a
+per-case `"instruction"`. We draw prompts from refusal datasets such as
+[JailbreakBench](https://huggingface.co/datasets/JailbreakBench/JBB-Behaviors)
+and [DeCCP](https://huggingface.co/datasets/augmxnt/deccp). Inputs and results
+stay in the ignored `runs/` directory.
+
 ```sh
-# A cases file is a JSON list of {"id", "prompt"[, "instruction"]}.
-uv run --with pyarrow python -m nla.cases deccp --output runs/deccp/cases.json
-
 # Screen: original branch only.
-uv run python -m nla.run --cases runs/deccp/cases.json --variants original --output runs/deccp-screen
+uv run python -m nla.run --cases runs/x/cases.json --variants original --output runs/x-screen
 
-# Full four-branch run with an editing instruction ({prompt} is substituted).
-uv run python -m nla.run --cases runs/deccp/cases.json --instruction-file runs/deccp/instruction.txt \
-    --output runs/deccp --max-tokens 512
+# Full four-branch run; {prompt} in the instruction is replaced by each case's prompt.
+uv run python -m nla.run --cases runs/x/cases.json --instruction-file runs/x/instruction.txt \
+    --output runs/x --max-tokens 512
 
-uv run python -m nla.run --status runs/deccp
+uv run python -m nla.run --status runs/x
 ```
 
 Every backend and editor call is checkpointed under the output directory, so
@@ -101,14 +107,13 @@ To use the stepper through the tunnel, open `http://127.0.0.1:18090/?token=TOKEN
 | [nla/editor.py](nla/editor.py) | LLM editor (Codex subscription or OpenAI API) |
 | [nla/server.py](nla/server.py) | Stepper API over the three nla.cpp model servers |
 | [nla/setup.py](nla/setup.py), [nla/patches.py](nla/patches.py) | Pinned backend build, fixes and weight download |
-| [nla/cases.py](nla/cases.py) | Case files from pinned JailbreakBench and DeCCP revisions |
 | [ui/stepper.html](ui/stepper.html) | Browser stepper |
 
 Tests: `uv run python -m unittest discover -s tests`.
 
 ## Credits and scope
 
-This project uses the released NLA. It does not train one. Explanations are
+This project uses the released NLA. It does not train one or introduce a new steering method. Explanations are
 hypotheses about activations, and results with quantized (Q4_K_M) inference may
 differ from BF16. See the NLA [training code](https://github.com/kitft/natural_language_autoencoders)
 and [inference recipe](https://github.com/kitft/nla-inference). The backend is
