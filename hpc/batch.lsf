@@ -1,15 +1,21 @@
 #!/bin/bash -l
+# Serve and run a batch on the GPU node itself (no laptop needed; use --editor openai).
+#   bsub -env "all, NLA_ARGS=--cases runs/x/cases.json --output runs/x --editor openai" < hpc/batch.lsf
 #BSUB -q gpuv100
 #BSUB -J nla-batch
 #BSUB -n 4
 #BSUB -gpu "num=1:mode=shared:j_exclusive=yes"
-#BSUB -R "select[hname!='n-62-20-6' && gpu32gb] span[hosts=1] rusage[mem=6GB]"
+#BSUB -R "select[gpu32gb] span[hosts=1] rusage[mem=6GB]"
 #BSUB -M 7GB
 #BSUB -W 24:00
 #BSUB -o runs/hpc-%J.out
 #BSUB -e runs/hpc-%J.err
 set -euo pipefail
-cd "${LS_SUBCWD:?Submit from the project directory}"
+cd "${LS_SUBCWD:?submit from the repository root}"
 source hpc/common.sh
-batch_args=(--output runs/jbb-qwen)
-source hpc/run_batch.sh
+"${server[@]}" &
+server_pid=$!
+trap 'kill "$server_pid" 2>/dev/null' EXIT
+# shellcheck disable=SC2086
+uv run --locked python -m nla.run ${NLA_ARGS:?set NLA_ARGS with bsub -env} \
+    --url "http://127.0.0.1:$port" --token-file "runs/token-$LSB_JOBID.txt"

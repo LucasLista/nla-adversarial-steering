@@ -1,32 +1,35 @@
-"""Four independent greedy NLA trajectories, with durable per-stage checkpoints.
+"""Four independent greedy trajectories per prompt, checkpointed after every stage.
 
-Run on the signed-in laptop against an SSH-forwarded HPC launcher. No model
-weights or activation computation are needed on the laptop.
+Each branch generates its own continuation. At every step the activation at
+the last position is explained, the explanation edited, and the branch's next
+token predicted from:
+
+  original          h
+  roundtrip         AR(t)
+  edited_raw        AR(t')
+  edited_corrected  AR(t') + h - AR(t)
+
+Every API call is saved with its request under DIR/BRANCH/step-NNNN/, so an
+interrupted run resumes exactly where it stopped.
 """
-import argparse
 import datetime
+import hashlib
 import json
 import os
 from pathlib import Path
 import time
-import urllib.request
 import urllib.error
-from nla import codex_editor, stepper
+import urllib.request
+from nla import stepper
 
+VARIANTS = stepper.VARIANTS
+EOS = {151643, 151645}
 REPEAT_LIMIT = 50  # identical tokens in a row that end a branch as degenerate
-
-
 UNPARSEABLE = 'Failed to parse input at pos'
 
 
-def degenerate(generated):
-    return len(generated) >= REPEAT_LIMIT and len(set(generated[-REPEAT_LIMIT:])) == 1
-
-
-VARIANTS = ('original', 'roundtrip', 'edited_raw', 'edited_corrected')
-EOS = {151643, 151645}
-
 def write_json(path, value):
+    path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
     tmp = path.with_suffix('.tmp')
     with tmp.open('w') as f:
@@ -34,30 +37,10 @@ def write_json(path, value):
         f.flush()
         os.fsync(f.fileno())
     tmp.replace(path)
-    fd = os.open(path.parent, os.O_RDONLY)
-    try:
-        os.fsync(fd)
-    finally:
-        os.close(fd)
 
-def _valid_prediction_response(result):
-    try:
-        stepper.validate_prediction(result)
-        return True
-    except stepper.InvalidPredictionResponse:
-        return False
-
-def _valid_comparison_response(result, variants, allow_no_prediction=False):
-    return (isinstance(result, dict)
-            and all(variant in result and (_valid_prediction_response(result[variant])
-                    or (allow_no_prediction and result[variant] == {}))
-                    for variant in variants))
-
-def _valid_inspection_response(result, baseline_required):
-    return (isinstance(result, dict) and 'h' in result and isinstance(result['h'], list)
-            and (not baseline_required or _valid_prediction_response(result.get('baseline'))))
 
 def recorded(path, request, operation, validate=None):
+    """Return the checkpointed response for this exact request, or compute and save it."""
     if path.exists():
         saved = json.loads(path.read_text())
         if saved['request'] != request:
@@ -68,167 +51,171 @@ def recorded(path, request, operation, validate=None):
     try:
         result = operation()
         if validate is not None and not validate(result):
-            raise ValueError('Backend returned an invalid checkpoint response')
+            raise ValueError('Backend returned an invalid response')
     except Exception as exc:
-        write_json(path.with_name(path.stem + f'-error-{time.time_ns()}.json'),
-                   {'request': request, 'error': str(exc), 'started_at': start,
-                    'finished_at': time.time()})
+        write_json(path.with_name(f'{path.stem}-error-{time.time_ns()}.json'),
+                   {'request': request, 'error': str(exc), 'started_at': start, 'finished_at': time.time()})
         raise
-    write_json(path, {'request': request, 'response': result,
-                      'started_at': start, 'finished_at': time.time(),
-                      'duration_seconds': time.time() - start})
+    write_json(path, {'request': request, 'response': result, 'started_at': start,
+                      'finished_at': time.time(), 'duration_seconds': time.time() - start})
     return result
 
+
+def valid_prediction(result, allow_empty=False):
+    if allow_empty and result == {}:
+        return True
+    try:
+        stepper.prediction_token_id(result)
+        return True
+    except stepper.InvalidPrediction:
+        return False
+
+
 class API:
-    def __init__(self, url):
+    """Client for a running nla.server."""
+
+    def __init__(self, url, token=None):
         self.url = url.rstrip('/') + '/stepper-api'
+        self.token = token
+
     def __call__(self, action, **kwargs):
-        req = urllib.request.Request(self.url, json.dumps({'action': action, **kwargs}).encode(),
-                                     {'Content-Type': 'application/json'})
+        headers = {'Content-Type': 'application/json'}
+        if self.token:
+            headers['Authorization'] = 'Bearer ' + self.token
+        request = urllib.request.Request(self.url, json.dumps({'action': action, **kwargs}).encode(), headers)
         try:
-            with urllib.request.urlopen(req, timeout=1200) as r:
+            with urllib.request.urlopen(request, timeout=1200) as r:
                 result = json.load(r)
         except urllib.error.HTTPError as exc:
             if exc.code in (408, 502, 503, 504):
-                # Let controllers retry the same durable checkpoint after a
-                # temporary gateway/service failure. Never print error bodies.
-                raise ConnectionError(f'Backend temporarily unavailable (HTTP {exc.code})') from None
-            raise RuntimeError(f'Backend HTTP {exc.code}: {exc.read().decode()}') from exc
+                raise ConnectionError(f'Server temporarily unavailable (HTTP {exc.code})') from None
+            try:
+                result = json.loads(exc.read())
+            except ValueError:
+                result = {'error': f'Server HTTP {exc.code}'}
         if isinstance(result.get('error'), str):
             raise RuntimeError(result['error'])
         return result
 
-def write_progress(directory, limit):
+
+def progress(directory, limit):
+    """Write branch token counts and completion flags, without any model text."""
     branches = {}
     for variant in VARIANTS:
         path = directory / variant / 'state.json'
-        if path.exists():
-            state = json.loads(path.read_text())
-            count = len(state['generated'])
-            branches[variant] = {'tokens': count, 'ended': state['ended'],
-                                 'complete': state['ended'] or count >= limit}
-        else:
-            branches[variant] = {'tokens': 0, 'ended': False, 'complete': False}
-    write_json(directory / 'progress.json', {'branches': branches,
-               'complete': (directory / 'complete.json').exists()})
+        state = json.loads(path.read_text()) if path.exists() else {'generated': [], 'ended': False}
+        count = len(state['generated'])
+        branches[variant] = {'tokens': count, 'ended': state['ended'],
+                             'complete': state['ended'] or count >= limit}
+    write_json(directory / 'progress.json',
+               {'branches': branches, 'complete': (directory / 'complete.json').exists()})
+
+
+def degenerate(generated):
+    return len(generated) >= REPEAT_LIMIT and len(set(generated[-REPEAT_LIMIT:])) == 1
 
 
 def generate(config, directory, api, editor, variants=None):
+    """Run (or resume) the selected branches for one prompt.
+
+    config: prompt, instruction, max_tokens, plus optional comparison_mode='selected'
+    (predict only the branch being generated) and steering_multiplier.
+    editor(instruction, text) returns {'proposal': edited_text, ...}.
+    """
     directory = Path(directory)
     metadata = directory / 'config.json'
     if metadata.exists():
         previous = json.loads(metadata.read_text())
         if previous != config:
-            old_limit = previous.get('max_tokens', 0)
-            new_limit = config.get('max_tokens', 0)
-            old_settings = {k:v for k,v in previous.items() if k != 'max_tokens'}
-            new_settings = {k:v for k,v in config.items() if k != 'max_tokens'}
-            if old_settings != new_settings or new_limit <= old_limit:
-                raise ValueError('Run configuration differs; only increasing the token limit is supported')
-            write_json(metadata, config)
+            # The only allowed change is extending the token limit.
+            same = {k: v for k, v in previous.items() if k != 'max_tokens'} == \
+                   {k: v for k, v in config.items() if k != 'max_tokens'}
+            if not same or config['max_tokens'] <= previous['max_tokens']:
+                raise ValueError('Run configuration differs; only increasing max_tokens is supported')
             (directory / 'complete.json').unlink(missing_ok=True)
-            write_progress(directory, new_limit)
-    else:
-        write_json(metadata, config)
+    write_json(metadata, config)
     started = recorded(directory / 'start.json', {'prompt': config['prompt']},
                        lambda: api('start', prompt=config['prompt']))
-    initial = started['tokens']
     eos = set(started.get('eos_token_ids', EOS))
-    outputs = {}
     selected = tuple(variants or VARIANTS)
     if not selected or any(v not in VARIANTS for v in selected):
-        raise ValueError("Unknown trajectory variant")
+        raise ValueError('Unknown trajectory variant')
+    fast = config.get('comparison_mode') == 'selected'
+    # Branches share prefixes until they diverge; reuse identical deterministic
+    # inspect/explain responses across them (never editor proposals).
+    cache = {}
+    outputs = {}
     for variant in selected:
         state_path = directory / variant / 'state.json'
         state = json.loads(state_path.read_text()) if state_path.exists() else {
-            'tokens': initial.copy(), 'generated': [], 'ended': False, 'response': '', 'steps': []}
-        if not state['ended'] and degenerate(state['generated']):
-            state.update(ended=True, stop_reason='degenerate_repeat')
+            'tokens': list(started['tokens']), 'generated': [], 'ended': False, 'response': '', 'steps': []}
+
+        def end(reason):
+            state.update(ended=True, stop_reason=reason)
             write_json(state_path, state)
+
+        if not state['ended'] and degenerate(state['generated']):
+            end('degenerate_repeat')
         while len(state['generated']) < config['max_tokens'] and not state['ended']:
-          try:
             step = directory / variant / f"step-{len(state['generated']):04d}"
-            def call(action, **kwargs):
+
+            def call(action, validate=None, **kwargs):
                 request = {'action': action, **kwargs}
-                validator = None
-                if action == 'compare':
-                    validator = lambda result: _valid_comparison_response(
-                        result, kwargs.get('variants', VARIANTS),
-                        allow_no_prediction=variants is not None)
-                elif action == 'inspect':
-                    validator = lambda result: _valid_inspection_response(
-                        result, kwargs.get('baseline', True))
-                return recorded(step / (action + '.json'), request,
-                                lambda: api(action, **kwargs), validator)
-            fast = config.get('comparison_mode') == 'selected'
-            inspected = call('inspect', tokens=state['tokens'],
-                             **({'baseline': False} if fast and variant != 'original' else {}))
-            if variant == 'original':
-                prediction = inspected['baseline']
-            else:
-                explained = call('explain', tokens=state['tokens'], h=inspected['h'])
-                if variant == 'roundtrip':
-                    edited = {'proposal': explained['text']}
+                key = hashlib.sha256(json.dumps(request, sort_keys=True).encode()).hexdigest()
+                operation = ((lambda: cache[key]) if key in cache else (lambda: api(action, **kwargs)))
+                result = recorded(step / f'{action}.json', request, operation, validate)
+                if action in ('inspect', 'explain'):
+                    cache[key] = result
+                return result
+
+            baseline = not fast or variant == 'original'
+            try:
+                inspected = call('inspect', tokens=state['tokens'],
+                                 validate=lambda r: isinstance(r.get('h'), list) and
+                                 (not baseline or valid_prediction(r.get('baseline'))),
+                                 **({} if baseline else {'baseline': False}))
+                if variant == 'original':
+                    prediction = inspected['baseline']
                 else:
-                    edited = recorded(step / 'editor.json',
-                                      {'instruction': config['instruction'], 'text': explained['text']},
-                                      lambda: editor(config['instruction'], explained['text']))
-                compared = call('compare', tokens=state['tokens'], edited=edited['proposal'],
-                                reconstruction=explained['reconstruction'],
-                                **({'variants': [variant]} if fast else {}),
-                                **({'multiplier': config['steering_multiplier']}
-                                   if 'steering_multiplier' in config else {}))
-                prediction = compared[variant]
-            if variants is not None and prediction == {}:
-                state.update(ended=True, stop_reason='backend_no_prediction')
-                write_json(state_path, state)
-                write_progress(directory, config['max_tokens'])
-                print(f'{variant}: stopped, backend returned no next-token prediction', flush=True)
+                    explained = call('explain', tokens=state['tokens'], h=inspected['h'])
+                    edited = (explained['text'] if variant == 'roundtrip' else recorded(
+                        step / 'editor.json', {'instruction': config['instruction'], 'text': explained['text']},
+                        lambda: editor(config['instruction'], explained['text']))['proposal'])
+                    wanted = [variant] if fast else list(VARIANTS)
+                    compared = call('compare', tokens=state['tokens'], edited=edited,
+                                    reconstruction=explained['reconstruction'],
+                                    validate=lambda r: all(valid_prediction(r.get(v), variants is not None)
+                                                           for v in wanted),
+                                    **({'variants': [variant]} if fast else {}),
+                                    **({'multiplier': config['steering_multiplier']}
+                                       if 'steering_multiplier' in config else {}))
+                    prediction = compared[variant]
+            except RuntimeError as exc:
+                # Deterministic: the same context fails the same way on every resume.
+                if UNPARSEABLE not in str(exc):
+                    raise
+                end('backend_parse_error')
+                break
+            if prediction == {}:
+                end('backend_no_prediction')
                 break
             token = stepper.prediction_token_id(prediction)
             generated = state['generated'] + [token]
-            decoded = call('decode', tokens=generated)['content']
-            state['steps'].append({'index': len(state['generated']), 'chosen_id': token,
-                                   'variant': variant, 'artifacts': str(step.relative_to(directory))})
-            state.update(tokens=state['tokens'] + [token], generated=generated,
-                         ended=token in eos, response=decoded)
+            state['steps'].append({'index': len(state['generated']), 'chosen_id': token, 'variant': variant,
+                                   'artifacts': str(step.relative_to(directory))})
+            state.update(tokens=state['tokens'] + [token], generated=generated, ended=token in eos,
+                         response=call('decode', tokens=generated)['content'])
             if token in eos:
                 state['stop_reason'] = 'eos'
             elif degenerate(generated):
                 state.update(ended=True, stop_reason='degenerate_repeat')
             write_json(state_path, state)
-            write_progress(directory, config['max_tokens'])
-            print(f'{variant}: {len(generated)}/{config["max_tokens"]}, token={token}', flush=True)
-          except RuntimeError as exc:
-            # Deterministic: the same context reproduces it on every resume.
-            if UNPARSEABLE not in str(exc):
-                raise
-            state.update(ended=True, stop_reason='backend_parse_error')
-            write_json(state_path, state)
-            write_progress(directory, config['max_tokens'])
-            print(f'{variant}: stopped, backend could not parse the generated token', flush=True)
+            progress(directory, config['max_tokens'])
+            print(f'{directory.name} {variant}: {len(generated)}/{config["max_tokens"]}', flush=True)
         outputs[variant] = {'response': state['response'], 'generated_token_ids': state['generated'],
                             'stop_reason': state.get('stop_reason', 'eos') if state['ended'] else 'token_limit'}
         write_json(directory / 'responses.json', outputs)
-    write_json(directory / 'complete.json', {'completed_at': datetime.datetime.now(datetime.timezone.utc).isoformat(),
-                                           'variants': list(outputs)})
-    write_progress(directory, config['max_tokens'])
+    write_json(directory / 'complete.json', {'completed_at': datetime.datetime.now(datetime.UTC).isoformat(),
+                                             'variants': list(outputs)})
+    progress(directory, config['max_tokens'])
     return outputs
-
-def main():
-    p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument('--url', default='http://127.0.0.1:18090')
-    p.add_argument('--prompt', required=True)
-    p.add_argument('--instruction', required=True)
-    p.add_argument('--max-tokens', type=int, default=64)
-    p.add_argument('--output', type=Path, required=True)
-    args = p.parse_args()
-    if not 1 <= args.max_tokens <= 10000:
-        p.error('--max-tokens must be between 1 and 10000')
-    config = {'prompt': args.prompt, 'instruction': args.instruction, 'max_tokens': args.max_tokens,
-              'editor_model': codex_editor.MODEL, 'variants': list(VARIANTS),
-              'policy': 'independent prefixes; greedy; one-position intervention; no KV-edit replay'}
-    generate(config, args.output, API(args.url), codex_editor.propose)
-
-if __name__ == '__main__':
-    main()

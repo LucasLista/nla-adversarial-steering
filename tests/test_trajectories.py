@@ -81,7 +81,7 @@ class TrajectoryTests(unittest.TestCase):
 
     def test_invalid_cached_comparison_is_refreshed_with_same_request(self):
         request={'action':'compare','tokens':[1],'variants':['original']}
-        validator=lambda response: t._valid_comparison_response(response, ['original'])
+        validator=lambda response: t.valid_prediction(response['original'])
         with tempfile.TemporaryDirectory() as tmp:
             path=Path(tmp)/'compare.json'
             path.write_text(json.dumps({'request':request,'response':{'original':{} }}))
@@ -94,7 +94,7 @@ class TrajectoryTests(unittest.TestCase):
 
     def test_invalid_cached_inspection_is_refreshed_with_same_request(self):
         request={'action':'inspect','tokens':[1]}
-        validator=lambda response: t._valid_inspection_response(response, True)
+        validator=lambda response: bool(response['h']) and t.valid_prediction(response['baseline'])
         with tempfile.TemporaryDirectory() as tmp:
             path=Path(tmp)/'inspect.json'
             path.write_text(json.dumps({'request':request,'response':{'h':[],'baseline':{}}}))
