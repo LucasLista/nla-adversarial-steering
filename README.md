@@ -1,5 +1,7 @@
 # NLA adversarial steering
 
+*Heavily vibe-coded. We designed the experiments; AI wrote most of the code.*
+
 Can rewriting a model's *explanation of its own activations* talk it out of a refusal?
 
 [Natural language autoencoders](https://www.anthropic.com/research/natural-language-autoencoders)
@@ -14,8 +16,6 @@ It runs on Qwen2.5-7B-Instruct with the released layer-20 NLA, on a laptop CPU
 or a single GPU.
 
 > **Status:** research in progress. We will link the write-up here when it is published.
->
-> **Disclaimer:** the code is heavily vibe-coded. The research question and experiment design are ours.
 
 ## Method
 
@@ -120,3 +120,4 @@ and [inference recipe](https://github.com/kitft/nla-inference). The backend is
 [nla.cpp](https://github.com/thomasgauthier/nla.cpp) (MIT), pinned and patched to
 capture and steer correctly across microbatches. This wrapper is
 [MIT-licensed](LICENSE). Checkpoint licenses belong to their publishers.
+Development used AI assistance.
