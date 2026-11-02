@@ -128,3 +128,4 @@ and [inference recipe](https://github.com/kitft/nla-inference). The backend is
 [nla.cpp](https://github.com/thomasgauthier/nla.cpp) (MIT), pinned and patched to
 capture and steer correctly across microbatches. This wrapper is
 [MIT-licensed](LICENSE). Checkpoint licenses belong to their publishers.
+Development used AI assistance.
