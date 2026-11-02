@@ -15,7 +15,7 @@ We use it to measure how robust refusals are to this kind of attack.
 It runs on Qwen2.5-7B-Instruct with the released layer-20 NLA, on a laptop CPU
 or a single GPU.
 
-> **Status:** research in progress. We will link the write-up here when it is published.
+> **Status:** research in progress. Preliminary results are below, and we will link the write-up here when it is published.
 
 ## Method
 
@@ -42,6 +42,14 @@ The editor receives the description and an editing instruction. Its proposal is
 saved next to each step, so changes to the text can be read alongside changes to
 the continuation. Running only the `original` branch is a cheap way to screen
 prompts for refusals before running the full experiment on them.
+
+## Preliminary results
+
+An experiment like this needs a lot of compute, so we only have preliminary results from the few cases we've been able to run so far. This already points to the fact that this attack would not be very scalable, while retrain-it-once abliteration attacks can already bypass refusals.
+
+Direct refusal behavior disappeared in 12/12 cases, but only 3/12 proceeded to provide a substantive answer, while 9/12 instead deflected or gave an unrequested different answer. This was surprising: we expected either to bypass the refusal directly or to end up with gibberish as the model tried and failed repeatedly to deny the request.
+
+If the deflections were themselves edited out, the model became cooperative. However, this required giving the editor enough context that it too would refuse incentivizing harmful behaviour.
 
 ## Quick start
 
@@ -120,4 +128,3 @@ and [inference recipe](https://github.com/kitft/nla-inference). The backend is
 [nla.cpp](https://github.com/thomasgauthier/nla.cpp) (MIT), pinned and patched to
 capture and steer correctly across microbatches. This wrapper is
 [MIT-licensed](LICENSE). Checkpoint licenses belong to their publishers.
-Development used AI assistance.
